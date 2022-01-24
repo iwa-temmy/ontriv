@@ -29,12 +29,12 @@ const Signin = () => {
                                 <img src={SigninImg} alt='signin-img' className='signin-img' />
                             </div>
                             <div className='signin-text text-white pl-5 w-75 mx-auto'>
-                                <h2 className=' mt-5 mb-3'>
+                                <h2 className='signin-header-text mt-5 mb-3'>
                                     Content Manager Dream Tool.
                                 </h2>
-                                <p>
-                                    Sed ut perspiciatis, unde omnis iste natus error sit voluptatem.
-                                </p>
+                                <h4 className='signin-subhead-text'>
+                                Sed ut perspiciatis, unde omnis iste natus error sit voluptatem.
+                                </h4>
                             </div>
 
                         </Container>
@@ -43,7 +43,7 @@ const Signin = () => {
                 <Col md='7' sm='12' className='pl-0'>
                     <div className='signin-right'>
                         <Container>
-                            <div className='mx-auto w-75'>
+                            <div className='mx-auto w-75 signin-form-wrapper'>
                                 <Card className='p-5 signin-form-card text-center'>
                                     <h4>Welcome Back!</h4>
                                     <p>Login with your Account Details</p>

@@ -1,7 +1,7 @@
 .auth {
   height: 100vh;
   background-color: #f9fafc;
-  .auth-logo{
+  .auth-logo {
     padding-top: 49px;
     margin-left: 69px;
   }
@@ -31,6 +31,15 @@
       url("../img/loginec2.svg") left -110px bottom -30px no-repeat,
       linear-gradient(180deg, #00fdf3 0%, #0053f4 120%);
 
+      @media (min-width: 1600px) {
+        
+        background: url("../img/loginec1.svg") left 0px top 441px no-repeat,
+        url("../img/loginec2.svg") left 0px bottom -95px no-repeat,
+        linear-gradient(180deg, #00fdf3 0%, #0053f4 120%);  
+        background-size: 40%, 85%, 100%;
+   
+       }
+
     .signin-img-container {
       background: white;
       border-radius: 37px;
@@ -55,10 +64,22 @@
       }
     }
     .signin-text {
-      p {
+      .signin-header-text {
+        font-size: 34px;
+        font-weight: 600;
+        width: 65%;
+        @media (max-width: 1600px) {
+          width: 100%;
+        }
+      }
+      .signin-subhead-text {
         font-weight: 200;
-        padding-right: 5em;
-        font-size: 14px;
+        // padding-right: 5em;
+        font-size: 15px;
+        width: 50%;
+        @media (max-width: 1600px) {
+          width: 80%;
+        }
       }
     }
   }
@@ -66,9 +87,19 @@
   .signin-right {
     height: 100vh;
     padding: 55px 0px;
+    
+    @media (min-width: 1600px) {
+      position: relative;
+    padding: 110px 173px 72px;
 
+    }
     .signin-form-card {
-      // padding: 74px 111px !important;
+      
+      @media (min-width: 1600px) {
+       padding: 74px 112px !important;
+       margin: 10px 0 45px;
+  
+      }
       border-radius: 24px;
       input {
         border-radius: 16px !important;
@@ -76,6 +107,10 @@
         font-size: 16px;
         margin-bottom: 20px;
         font-weight: 300;
+        @media (min-width: 1600px) {
+          padding: 21px 24px !important;
+     
+         }
         &:focus {
           outline: none !important;
           border: 1px solid rgba(32, 98, 244);
@@ -110,11 +145,20 @@
         border-radius: 16px;
         width: 100%;
         border: none;
+        @media (min-width: 1600px) {
+          margin:28px 0 32px ;
+     
+         }
       }
 
       .easy-login {
         overflow: hidden;
         text-align: center;
+        @media (min-width: 1600px) {
+         
+          margin-bottom: 24px;
+     
+         }
         &:before,
         &:after {
           background-color: #e5e9f2;
@@ -148,9 +192,16 @@
       //     }
       //   }
     }
+    .no-account{
+      @media (min-width: 1600px) {
+        padding: 35px 0 !important;
+   
+       }
+    }
   }
 
   .signup-left {
+   
     height: 100vh;
     padding: 68px 20px;
     background: url("../img/register1.svg") left 0px top -55px no-repeat,
@@ -158,8 +209,16 @@
       url("../img/register3.svg") left -110px bottom -30px no-repeat,
       linear-gradient(170.87deg, #008aff 6.93%, #1791f9 42.4%, #00a6ff 61.41%),
       linear-gradient(93.88deg, #49a8f8 6.88%, #0053f4 74.45%);
-      
-    
+
+      @media (min-width: 1600px) {
+        background: url("../img/register1.svg") left 0px top -55px no-repeat,
+        url("../img/register2.svg") right 20px top -145px no-repeat,
+        url("../img/register3.svg") left -110px bottom -30px no-repeat,
+        linear-gradient(170.87deg, #008aff 6.93%, #1791f9 42.4%, #00a6ff 61.41%),
+        linear-gradient(93.88deg, #49a8f8 6.88%, #0053f4 74.45%);
+        background-size: 100%;
+  
+       }
     .signup-text {
       width: 75%;
       h2 {
@@ -171,10 +230,18 @@
         margin-top: 51px;
         font-weight: 200;
         font-size: 14px;
+        @media (min-width: 1600px) {
+          font-weight: 200;
+          font-size: 18px;
+        }
       }
     }
   }
   .signup-right {
+    @media (min-width: 1600px) {
+      padding: 65px 87px 90px !important;
+ 
+     }
     margin: 75px 18px;
 
     .signup-form-wrapper {
@@ -189,6 +256,12 @@
         }
       }
       .card-1 {
+        @media (min-width: 1600px) {
+         padding: 113px 51px 51px 113px;
+        margin: 150px -30px 0 0;
+
+     
+         }
         margin: 130px -30px 0 0;
         padding: 75px 40px 0px 75px;
         border-radius: 24px;
@@ -198,9 +271,19 @@
         .rc-steps-item-title {
           font-size: 20px;
           font-weight: 600;
+          @media (min-width: 1600px) {
+            font-size: 24px;
+            font-weight: 600;
+       
+           }
         }
         .rc-steps-vertical .rc-steps-item-description {
           font-weight: 300;
+          @media (min-width: 1600px) {
+            font-size: 20px;
+            font-weight: 400;
+       
+           }
         }
         .rc-steps-item-process .rc-steps-item-icon {
           background: linear-gradient(180deg, #6ad5ed 0%, #49a8f8 100%);
@@ -224,9 +307,18 @@
         }
       }
       .signup-form-card {
+        @media (min-width: 1600px) {
+          padding: 74px 83px 60px !important;
+     
+         }
         .password-icon {
           // position: absolute;
-          top:9px !important;
+          top: 9px !important;
+          @media (min-width: 1600px) {
+            top: 20px !important;
+
+       
+           }
           // right:15px !important;
         }
         // padding: 74px 111px !important;
@@ -236,7 +328,7 @@
           width: 70%;
         }
         // .form {
-          
+
         .dot {
           height: 14px;
           width: 14px;
@@ -255,6 +347,10 @@
           font-size: 16px;
           margin-bottom: 17.5px;
           font-weight: 300;
+          @media (min-width: 1600px) {
+            padding: 24px 21px !important;
+       
+           }
           &:focus {
             outline: none !important;
             border: 1px solid rgba(32, 98, 244);
@@ -281,6 +377,10 @@
     margin: auto;
     width: 60%;
     padding: 30px 0px;
+    @media (min-width: 1600px) {
+    padding: 142px 0 102px;
+ 
+     }
 
     .reset-password-text {
       h4 {
@@ -325,13 +425,14 @@
       border: none;
     }
   }
+  
   .password-container {
     position: relative;
     cursor: pointer;
     .password-icon {
       position: absolute;
-      top:14px;
-      right:15px;
+      top: 14px;
+      right: 15px;
     }
   }
 }
