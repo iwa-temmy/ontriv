@@ -31,17 +31,29 @@ export const TopRightModal = ({ modalState, setModalState, size, children }) => 
         setModalState(!modalState);
     }
 
+    if (modalState === false) {
+        return null
+    }
+
+    // const [show,setShow]=useState(modalState);
+
+
     return (
-        <div>
+        <div className='top-right-modal' onClick={toggle}>
+            <div className='top-right-modal-content'>
+                <div className='top-right-modal-body'>
+                    {children}
+                </div>
+            </div>
             {/* <Button color="danger" onClick={toggle}>{buttonLabel}</Button> */}
-            <Modal
+            {/* <Modal
                 isOpen={modalState}
                 toggle={toggle}
                 modalClassName='modal-dialog-topRight'
                 size={size}
                 className={`modal-dialog-topRight`} >
                 {children}
-            </Modal>
+            </Modal> */}
         </div>
     );
 }
