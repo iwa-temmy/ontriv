@@ -1,12 +1,19 @@
 import React, { useState } from "react"
-import { FaSearch } from 'react-icons/fa'
-import chat from '../../../../assets/img/chat.svg'
+import {Button} from 'reactstrap';
+import { FaSearch, FaAward } from 'react-icons/fa'
+import { AiFillQuestionCircle } from "react-icons/ai"
+import { IoMdSettings } from "react-icons/io"
+import { RiLogoutBoxRFill } from "react-icons/ri"
 import Notification from '../../../../assets/img/notification.svg'
 import userProfilePic from '../../../../assets/img/userPic.png'
+import notificationIcon from '../../../../assets/img/icon.png'
+import chat from '../../../../assets/img/chat.svg'
 import { TopRightModal } from '../../../Modal'
 
 const TopNav = () => {
     const [userProfileState, updateUserProfileState] = useState(false)
+    const [notificationState, updateNotificationState] = useState(false)
+
     return (
         <React.Fragment>
             <div className="navbar-static-top topbar">
@@ -27,8 +34,8 @@ const TopNav = () => {
 
                                 <div className="d-flex topnav-user">
                                     <img src={chat} alt='chat-icon' width='23%' />
-                                    <img src={Notification} alt='notification-icon' className="mx-1" width='33%' />
-                                    <div className="userProfile-img" onClick={()=>updateUserProfileState(!userProfileState)}>
+                                    <img src={Notification} alt='notification-icon' className="mx-1" width='33%' onClick={() => updateNotificationState(!notificationState)} />
+                                    <div className="userProfile-img" onClick={() => updateUserProfileState(!userProfileState)}>
                                         <img src={userProfilePic} alt='user-dp' />
                                     </div>
                                 </div>
@@ -38,13 +45,97 @@ const TopNav = () => {
                     </div>
                 </div>
             </div>
+
             <TopRightModal
                 modalState={userProfileState}
                 setModalState={updateUserProfileState}
             >
-                <h2>
-                    testing
-                </h2>
+                <div className="user-menu-modal">
+                    <div className="user-menu-img mb-3 d-flex justify-content-between align-items-center" onClick={() => updateUserProfileState(!userProfileState)}>
+                        <p>{' '}</p>
+                        <img src={userProfilePic} alt='user-dp' />
+                    </div>
+                    <div className="user-menu">
+                        <div className="user-menu-header">
+                            <h1 className="user-name mb-0">James John</h1>
+                            <h6 className="user-email mb-0">james@gmail.com</h6>
+                        </div>
+                        <div className="user-menu-items">
+                            <div className="d-flex user-menu-item align-items-center">
+                                <AiFillQuestionCircle size='20px' className='user-menu-icon' />
+                                <h5 className="pl-3 user-menu-text mb-0">Help</h5>
+                            </div>
+
+                            <div className="d-flex user-menu-item align-items-center">
+                                <FaAward size='18px' className='user-menu-icon' />
+                                <h5 className="pl-3 user-menu-text mb-0">Subscription</h5>
+                            </div>
+
+                            <div className="d-flex user-menu-item align-items-center">
+                                <IoMdSettings size='20px' className='user-menu-icon' />
+                                <h5 className="pl-3 user-menu-text mb-0">Settings</h5>
+                            </div>
+
+                            <div className="d-flex user-menu-item align-items-center">
+                                <RiLogoutBoxRFill size='20px' className='user-menu-icon' />
+                                <h5 className="pl-3 user-menu-text mb-0">Logout</h5>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </TopRightModal>
+
+            <TopRightModal
+                modalState={notificationState}
+                setModalState={updateNotificationState}
+            >
+                <div className="notification-modal">
+                    <div className="notification-img mb-3 d-flex justify-content-between align-items-center" onClick={() => updateUserProfileState(!userProfileState)}>
+                        <p>{' '}</p>
+                        <img src={notificationIcon} alt='user-dp' className=" notification-icon" />
+                    </div>
+                    <div className="notifications-wrapper">
+                        <div className="notification-header">
+                            <h1 className="notification-header-text mb-0">NOTIFICATIONS</h1>
+                            <hr />
+                        </div>
+                        <div className="notification-items ">
+                            <div className="notification-item unread">
+                                <h1 className="notification-title">SUCCESS RATE</h1>
+                                <h6 className="notification-description">
+                                    Photo must be 500px by 500px and nothing more than 180kb nothing more than 180kb
+                                </h6>
+                            </div>
+                            <div className="notification-item">
+                                <h1 className="notification-title">SUCCESS RATE</h1>
+                                <h6 className="notification-description">
+                                    Photo must be 500px by 500px and nothing more than 180kb nothing more than 180kb
+                                </h6>
+                            </div>
+                            <div className="notification-item">
+                                <h1 className="notification-title">SUCCESS RATE</h1>
+                                <h6 className="notification-description">
+                                    Photo must be 500px by 500px and nothing more than 180kb nothing more than 180kb
+                                </h6>
+                            </div>
+                            <div className="notification-item">
+                                <h1 className="notification-title">SUCCESS RATE</h1>
+                                <h6 className="notification-description">
+                                    Photo must be 500px by 500px and nothing more than 180kb nothing more than 180kb
+                                </h6>
+                            </div>
+                            <div className="w-50 mt-1 text-center mx-auto notification-button-wrapper">
+                            <Button className='notification-button'>
+                                View All
+                            </Button>
+                        </div>
+                        </div>
+                       
+                    </div>
+                </div>
+
             </TopRightModal>
         </React.Fragment >
     )

@@ -1,4 +1,6 @@
-
+.modal {
+  backdrop-filter: blur(3px) !important;
+}
 .modal-backdrop {
   background: rgba(29, 30, 44, 0.32) !important;
   // opacity:0.9em;
@@ -8,20 +10,37 @@
   border-radius: 40px !important;
   padding: 32px 49px;
 }
-.modal-cstm-button{
-    padding-right: 8px;
-    position:absolute;
-    top:32px;
-    right:32px;
-    width:25px;
-    height: 25px;
-    border-radius:50%;
-    background: #C0CCDA;
-    color:#fff;
+.modal-cstm-button {
+  padding-right: 8px;
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #c0ccda;
+  color: #fff;
 }
 
+.top-right-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  background: rgba(29, 30, 44, 0.32) !important;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+  backdrop-filter: blur(4px) !important;
 
-.modal-dialog.modal-dialog-topRight{
-// top:10px;
-// right:-630px;
+  .top-right-modal-content {
+    // background-color: #fff;
+    position: absolute;
+    right: 98px;
+    top: 39px;
+    // border-radius: 40px !important;
+    // padding: 50px 45px;
+  }
 }
