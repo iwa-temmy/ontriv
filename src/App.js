@@ -1,5 +1,5 @@
 import './App.css';
-import Router from './Router'
+import Router from './Router';
 import './assets/css/index.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 

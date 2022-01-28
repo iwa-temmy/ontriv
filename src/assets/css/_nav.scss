@@ -252,12 +252,14 @@
   margin-bottom: 17px;
   background: white;
   .active-menu {
-    font-size: 33px;
+    font-size: 24px;
     font-weight: 700;
   }
   .search-input-wrapper {
     position: relative;
     margin-right: 120px;
+    font-size: 14px;
+    font-weight: 700;
     .search-icon {
       position: absolute;
       top: 5px;
@@ -399,10 +401,10 @@
           color: rgba(17, 19, 23, 1);
         }
       }
-      .notification-button{
+      .notification-button {
         background: transparent;
-        color:#2062F4;
-        border:2px solid #2062F4;
+        color: #2062f4;
+        border: 2px solid #2062f4;
       }
     }
   }
