@@ -1,9 +1,9 @@
-import React,{ useState }  from 'react';
+import React, { useState } from 'react';
 import {
     Container,
     Row,
     Card,
-    Input,
+    // Input,
     Form,
     Col,
     Button
@@ -12,12 +12,15 @@ import SigninImg from '../../assets/img/sign2.png';
 import { AiFillApple, AiFillTwitterCircle } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
-import { TiEye } from 'react-icons/ti'
-import { IoMdEyeOff } from 'react-icons/io'
+import { TiEye } from 'react-icons/ti';
+import { IoMdEyeOff } from 'react-icons/io';
+import { useForm } from 'react-hook-form';
 
 
 const Signin = () => {
     const [inputType, setInputType] = useState('password')
+    const { handleSubmit, register, formState: { errors } } = useForm();
+    const loginUser = values => console.log(values);
 
     return (
         <div className='auth'>
@@ -33,7 +36,7 @@ const Signin = () => {
                                     Content Manager Dream Tool.
                                 </h2>
                                 <h4 className='signin-subhead-text'>
-                                Sed ut perspiciatis, unde omnis iste natus error sit voluptatem.
+                                    Sed ut perspiciatis, unde omnis iste natus error sit voluptatem.
                                 </h4>
                             </div>
 
@@ -44,35 +47,64 @@ const Signin = () => {
                     <div className='signin-right'>
                         <Container>
                             <div className='mx-auto w-75 signin-form-wrapper'>
-                                <Card className='p-5 signin-form-card text-center'>
-                                    <h4>Welcome Back!</h4>
-                                    <p>Login with your Account Details</p>
-                                    <Form>
-                                        <Input type='email' placeholder='Email Address' className='' />
+                                <Card className='p-5 signin-form-card '>
+                                    <h4 className='text-center'>Welcome Back!</h4>
+                                    <p className='text-center'>Login with your Account Details</p>
+                                    <Form onSubmit={handleSubmit(loginUser)}>
+                                        {errors.email && <span className='text-danger text-left'>Enter a vailid Email</span>}
+                                        <input
+                                            type='email'
+                                            name='email'
+                                            placeholder='Email Address'
+                                            className={`w-100 ${errors.email? 'border-danger' : ""}`}
+                                            {...register('email'
+                                                , {
+                                                    required: true,
+                                                    pattern: {
+                                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                                        message: "invalid email"
+                                                    }
+                                                }
+                                            )}
+                                        />
+                                            {errors.password && <span className='text-danger text-left'>Enter your password</span>}
                                         <div className='password-container'>
                                             <div className='password-icon'>
-                                            {
-                                            inputType === 'password' ?
-                                                <TiEye
-                                                    color='#E5E9F2'
-                                                    size='30px'
-                                                    onClick={() => { setInputType('text') }}
-                                                /> :
-                                                <IoMdEyeOff
-                                                    color='#000'
-                                                    size='25px'
-                                                    onClick={() => { setInputType('password') }}
-                                                />
+                                                {
+                                                    inputType === 'password' ?
+                                                        <TiEye
+                                                            color='#E5E9F2'
+                                                            size='30px'
+                                                            onClick={() => { setInputType('text') }}
+                                                        /> :
+                                                        <IoMdEyeOff
+                                                            color='#000'
+                                                            size='25px'
+                                                            onClick={() => { setInputType('password') }}
+                                                        />
 
 
-                                        }
+                                                }
                                             </div>
-                                            <Input type={inputType} placeholder='Create password' />
+                                            <input
+                                                className={`w-100 ${errors.password ? 'border-danger' : ""}`}
+                                                type={inputType}
+                                                name='password'
+                                                placeholder='Create password'
+                                                {...register('password'
+                                                    , {
+                                                        required: true,
+                                                    }
+                                                )}
+
+                                            />
+
+
                                         </div>
                                         <div className='d-flex justify-content-between align-items-center '>
                                             <div className='d-flex  align-items-center'>
                                                 <div className='input-check'>
-                                                    <input type="checkbox" id="forgotPassword" name="forgotPassword" value="forgotPassword" className='mb-0' />
+                                                    <input classname='border-dark' type="checkbox" id="forgotPassword" name="forgotPassword" value="forgotPassword" className='mb-0' />
                                                 </div>
                                                 <div className='ml-3 '>
                                                     <p className='mb-0'>Remember me</p>
@@ -86,11 +118,11 @@ const Signin = () => {
                                                 </p>
                                             </div>
                                         </div>
-                                        <div>
-                                            <Button className='py-3'>
-                                                Log in
-                                            </Button>
-                                        </div>
+
+                                        <Button className='py-3' type='submit'>
+                                            Log in
+                                        </Button>
+
                                         <div className='py-3 mx-auto w-75'>
                                             <p className='easy-login'>Easy Login</p>
                                         </div>

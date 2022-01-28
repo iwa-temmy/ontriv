@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import classnames from "classnames"
 import sideBarMenu from "../../../../utils/sidebarMenu"
@@ -6,65 +6,63 @@ import { ChevronRight } from "react-feather"
 
 
 
-class SideMenuContent extends Component {
+const SideMenuContent = (props) => {
 
+    // Loop over sidebar menu
+    // eslint-disable-next-line
+    const menuItems = sideBarMenu.map((item, i) => {
+        let renderItem = (
+            <li
+                className={classnames("nav-item", {
+                    active: props.hoverIndex === item.navLink
+                })}
+                key={item.id}
+            >
+                <Link
+                    to={item.navLink}
+                    onClick={e => {
+                        e.stopPropagation()
 
-    render() {
-        // Loop over sidebar menu
-        // eslint-disable-next-line
-        const menuItems = sideBarMenu.map((item, i) => {
-            let renderItem = (
-                <li
-                    className={classnames("nav-item", {
-                        active: this.props.hoverIndex === item.navLink
-                    })}
+                        props.handleSidebarMouseEnter(item.id, item.navLink)
+
+                    }}
+                    href=""
+                    className={`d-flex justify-content-start align-items-center`}
+
                     key={item.id}
                 >
-                    <Link
-                        to={item.navLink}
-                        onClick={e => {
-                            e.stopPropagation()
+                    <div className="menu-text">
+                        <span className={classnames(`menu-icon-${i % 2 === 0 ? 'even' : 'odd'}`, {
+                            active: props.hoverIndex === item.navLink
+                        })}>
+                            {item.icon}
+                        </span>
+                        <span className={classnames("menu-title", {
+                            active: props.hoverIndex === item.navLink
+                        })}>
+                            {item.title}
+                        </span>
+                    </div>
+                    {(props.hoverIndex === item.navLink && item.type === "item")
 
-                            this.props.handleSidebarMouseEnter(item.id, item.navLink)
+                        ?
+                        <p className="pr-5  mb-0">
+                            <ChevronRight className="menu-toggle-icon font-weight-bold " size={20} />
 
-                        }}
-                        href=""
-                        className={`d-flex justify-content-start align-items-center`}
+                        </p>
+                        : (
+                            ''
+                        )}
+                </Link>
+            </li>
+        )
 
-                        key={item.id}
-                    >
-                        <div className="menu-text">
-                            <span className={classnames(`menu-icon-${i % 2 === 0 ? 'even' : 'odd'}`, {
-                                active: this.props.hoverIndex === item.navLink
-                            })}>
-                                {item.icon}
-                            </span>
-                            <span className={classnames("menu-title", {
-                                active: this.props.hoverIndex === item.navLink
-                            })}>
-                                {item.title}
-                            </span>
-                        </div>
-                        {(this.props.hoverIndex === item.navLink && item.type === "item")
+        return renderItem
+    })
 
-                            ?
-                            <p className="pr-5  mb-0">
-                                <ChevronRight className="menu-toggle-icon font-weight-bold " size={20} />
+    return <React.Fragment>
+        {menuItems}
+    </React.Fragment>
 
-                            </p>
-                            : (
-                                ''
-                            )}
-                    </Link>
-                </li>
-            )
-
-            return renderItem
-        })
-
-        return <React.Fragment>
-            {menuItems}
-        </React.Fragment>
-    }
 }
 export default SideMenuContent

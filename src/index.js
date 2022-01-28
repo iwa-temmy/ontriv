@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { NavProvider } from './utils/context';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store'
@@ -8,7 +9,10 @@ import store from './redux/store'
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <App />
+      <NavProvider>
+        <App />
+      </NavProvider>
+
     </React.StrictMode>
   </Provider>,
   document.getElementById('root')

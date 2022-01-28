@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import {Button} from 'reactstrap';
+import { Button } from 'reactstrap';
 import { FaSearch, FaAward } from 'react-icons/fa'
 import { AiFillQuestionCircle } from "react-icons/ai"
 import { IoMdSettings } from "react-icons/io"
@@ -8,11 +8,13 @@ import Notification from '../../../../assets/img/notification.svg'
 import userProfilePic from '../../../../assets/img/userPic.png'
 import notificationIcon from '../../../../assets/img/icon.png'
 import chat from '../../../../assets/img/chat.svg'
-import { TopRightModal } from '../../../Modal'
+import { TopRightModal } from '../../../Modal';
+import { useNav } from '../../../../utils/context';
 
 const TopNav = () => {
     const [userProfileState, updateUserProfileState] = useState(false)
     const [notificationState, updateNotificationState] = useState(false)
+    const [section] = useNav(useNav)
 
     return (
         <React.Fragment>
@@ -21,7 +23,7 @@ const TopNav = () => {
                     <div className="navbar-container">
                         <div className="navbar-collapse d-flex justify-content-between align-items-center" >
                             <div className="topbar-left-content">
-                                <h2 className="mb-0 active-menu font-weight-bold text-capitalize">{window.location.pathname.split('/')[1]}</h2>
+                                <h2 className="mb-0 active-menu font-weight-bold text-capitalize">{section}</h2>
                             </div>
                             <div className='topbar-right-content d-flex ml-auto justify-content-between'>
 
@@ -127,12 +129,12 @@ const TopNav = () => {
                                 </h6>
                             </div>
                             <div className="w-50 mt-1 text-center mx-auto notification-button-wrapper">
-                            <Button className='notification-button'>
-                                View All
-                            </Button>
+                                <Button className='notification-button'>
+                                    View All
+                                </Button>
+                            </div>
                         </div>
-                        </div>
-                       
+
                     </div>
                 </div>
 

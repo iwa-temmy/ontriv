@@ -15,7 +15,7 @@ const sideBarMenu = [
   },
 
   {
-    id: "client-management",
+    id: "Client Management",
     title: "Client Management",
     type: "item",
     icon: <FaUserFriends size={20} />,
