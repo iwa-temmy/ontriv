@@ -6,6 +6,8 @@ import Signin from './views/Auth/Login';
 import ForgotPassword from './views/Auth/ForgotPassword';
 import Dashboard from './views/Dashboard';
 import ClientManagement from './views/ClientManagement';
+import Subscription from './views/Subscription';
+import SetUpBussiness from './views/Bussiness';
 
 
 
@@ -17,6 +19,8 @@ const RouterConfig = () => {
                 <Route exact path='/' element={<ProtectedRoutes />}>
                     <Route exact path='/overview' element={<Dashboard />} />
                     <Route exact path='/client-management' element={<ClientManagement />} />
+                    <Route exact path='/Subscriptions' element={<Subscription />} />
+                    <Route exact path='/Reports' element={<SetUpBussiness />} />
 
                 </Route>
                 <Route exact path='/auth/register' element={<Signup />} />
