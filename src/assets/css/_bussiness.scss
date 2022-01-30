@@ -1,0 +1,82 @@
+.business {
+  &__right-section {
+    border-right: 1px solid #E0E6ED;
+    padding-top: 5rem;
+    &__image-upload-placeholder {
+      border: 3px dashed #E5E9F2;
+      border-radius: 24px;
+      cursor: pointer;
+      &__title {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 28px;
+        letter-spacing: 0.35px;
+        color: #111317;
+      }
+      &__image-upload-blue {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 1.25px;
+        color: #2062F4;
+      }
+    }
+  }
+  &__address-title {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0.35px;
+    color: #17151E;
+  }
+  &__left-section {
+    &__input {
+      border: 1px solid #49A8F8;
+      box-sizing: border-box;
+      border-radius: 16px;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.5px;
+      color: #6E7191;
+    }
+    &__social-container {
+      background: #F9FAFC;
+      border-radius: 10px;
+      &__text {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.25px;
+        color: #6E7191;
+      }
+    }
+    &__done-btn {
+      background: #E5ECF2;
+      border-radius: 16px;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 21px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      letter-spacing: 1.25px;
+      color: #2062F4;
+      border-style: none;
+    }
+  }
+}
+
+.text-left {
+  text-align: left;
+}
