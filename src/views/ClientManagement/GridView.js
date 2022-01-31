@@ -320,6 +320,7 @@ const GridView = () => {
 
 
             <DatatablePagination
+            position='center'
                 page={0}
                 pages={8}
                 canPrevious={true}

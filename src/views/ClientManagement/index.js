@@ -6,10 +6,10 @@ import { MdOutlineFileDownload } from 'react-icons/md';
 import { HiPlus } from 'react-icons/hi';
 import AddNewClient from './AddClient.js';
 import GridView from './GridView.js'
-// import ListView from './ListView.js';
+import ListView from './ListView.js';
 
 const ClientManagement = () => {
-    const [view, setView] = useState('list');
+    const [view, setView] = useState('');
     const [addClient, setAddClient] = useState(false);
 
 
@@ -76,7 +76,7 @@ const ClientManagement = () => {
                 </div>
                 {view === 'grid' ?
                     <GridView /> : 
-                    // view === 'list' ? <ListView /> :
+                    view === 'list' ? <ListView /> :
                         <div className='client-inactive-state text-center'>
                             <Card className='client-inactive-state-card mx-auto'>
                                 <h3 className='client-inactive-header-text mx-auto'>You currently have no client</h3>

@@ -207,27 +207,7 @@
     opacity: 0.8;
     color: rgba(17, 19, 23, 1);
   }
-  .calendar-header {
-    margin-bottom: 46px;
-  }
-  .react-calendar__navigation button {
-    font-size: 18px;
-    font-weight: 400;
-  }
-  .react-calendar__month-view__days__day--weekend {
-    color: #000;
-  }
-  .react-calendar__tile--now {
-    background: none;
-    abbr {
-      background: linear-gradient(93.88deg, #49a8f8 6.88%, #0053f4 74.45%);
-      width: 27px;
-      height: 27px;
-      padding: 4px;
-      border-radius: 50%;
-      color: #fff;
-    }
-  }
+  
 }
 
 .post {
