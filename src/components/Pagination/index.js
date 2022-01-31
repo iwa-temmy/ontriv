@@ -25,6 +25,7 @@ const DataTablePagination = ({
     onPageChange,
     onPageSizeChange,
     paginationMaxSize,
+    position,
 }) => {
     const [pageState, setPageState] = useState(page);
     const [pageSize, setPageSize] = useState(defaultPageSize);
@@ -103,7 +104,7 @@ const DataTablePagination = ({
 
     return (
         <>
-            <div className="text-center">
+            <div className={`text-${position}`}>
                 {showPageJump && (
                     <div className="float-left pt-2">
                         <span>Page </span>
@@ -133,7 +134,7 @@ const DataTablePagination = ({
                             }}
                             disabled={!canPrevious}
                         >
-                            <MdOutlineKeyboardArrowLeft color='#2062F4' size='20px'/>
+                            <MdOutlineKeyboardArrowLeft color='#2062F4' size='20px' />
                         </PaginationLink>
                     </PaginationItem>
 

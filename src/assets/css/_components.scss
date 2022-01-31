@@ -1,3 +1,44 @@
+.react-calendar {
+  border: none !important;
+}
+.calendar-header {
+  margin-bottom: 46px;
+}
+.react-calendar__tile{
+  font-size: 16px;
+  font-weight: 400;
+}
+.react-calendar__navigation button {
+  font-size: 20px;
+  font-weight: 400;
+  color: #111317;
+}
+.react-calendar__month-view__days__day--weekend {
+  color: #000 !important;
+}
+
+.react-calendar__month-view__weekdays {
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  color: rgba(60, 60, 67, 0.3);
+  abbr {
+    text-decoration: unset !important;
+  }
+}
+.react-calendar__tile--active,
+.react-calendar__tile--now {
+  background: none !important;
+  abbr {
+    background: linear-gradient(93.88deg, #49a8f8 6.88%, #0053f4 74.45%);
+    width: 27px;
+    height: 27px;
+    padding: 4px;
+    border-radius: 50%;
+    color: #fff;
+  }
+}
+
 .modal {
   backdrop-filter: blur(3px) !important;
   border: none;
@@ -47,8 +88,11 @@
   }
 }
 
+table {
+  border-collapse: separate !important;
+}
 .r-table {
-  border: initial;
+  // border: initial;
   th.sortable:hover {
     color: #2062f4 !important;
   }
@@ -79,7 +123,11 @@
     }
 
     th {
-      padding-bottom: 20px;
+      // padding-left: 2em;
+      padding-bottom: 0px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #04004d;
     }
   }
 
@@ -102,6 +150,7 @@
 .table-divided {
   border-collapse: separate;
   border-spacing: 0px 0.6rem;
+  padding-bottom: 29px;
   width: 100% !important;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
@@ -111,10 +160,15 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  th {
+    padding-left: 2em !important;
+  }
 
   td {
     padding-top: 20px;
     padding-bottom: 20px;
+    padding-left: 2em !important;
+
     // border-bottom: 1px solid #d7d7d7;
 
     outline: initial !important;
@@ -123,9 +177,9 @@
   .table-row {
     background: #fff;
     padding: 0 32px !important;
+    margin-bottom: 25px;
     border-radius: 20px;
-    width:100%;
-    margin-bottom: 23px;
+    width: 100%;
   }
   tr:last-of-type td {
     border-bottom: initial;
@@ -146,26 +200,23 @@
     }
 
     tr {
-      // background: #fff;kç
-      margin-bottom: 25px !important;
       border-radius: 20px !important;
-      &.child {
-        td {
-          padding: 0.75rem 2rem;
-          &:first-child:before {
-            border-top: 20px;
-            border-top-left-radius: 20px;
-            border-bottom-left-radius: 20px;
-          }
-          &:last-child:before {
-            border-top: 20px;
-            border-top-right-radius: 20px;
-            border-bottom-right-radius: 20px;
-          }
+      td {
+        padding: 0.75rem 32px;
+        margin-bottom: 30em !important;
+        &:first-child {
+          // border-top: 20px;
+          border-top-left-radius: 20px;
+          border-bottom-left-radius: 20px;
+        }
+        &:last-child {
+          // border-top: 20px;
+          border-top-right-radius: 20px;
+          border-bottom-right-radius: 20px;
+        }
 
-          li {
-            padding: 0 !important;
-          }
+        li {
+          padding: 0 !important;
         }
       }
     }
@@ -181,78 +232,6 @@
     &:before,
     &:after {
       content: "";
-    }
-  }
-
-  .itemCheck {
-    text-align: right;
-    pointer-events: none;
-  }
-}
-
-.order-with-arrow {
-  thead {
-    th {
-      padding-top: 0.6em;
-      padding-bottom: 0.6em;
-      border: initial;
-      &.sorted-asc {
-        box-shadow: initial !important;
-      }
-
-      &.sorted-desc {
-        box-shadow: initial !important;
-      }
-
-      &.sortable {
-        // padding-left: 25px;
-      }
-    }
-
-    .sortable,
-    .sorted-asc,
-    .sorted-desc,
-    .sorted-asc_disabled,
-    .sorted-desc_disabled {
-      cursor: pointer;
-      position: relative;
-    }
-
-    .sortable:before,
-    .sortable:after,
-    .sorted-asc:before,
-    .sorted-asc:after,
-    .sorted-desc:before,
-    .sorted-desc:after,
-    .sorted-asc_disabled:before,
-    .sorted-asc_disabled:after,
-    .sorted-desc_disabled:before,
-    .sorted-desc_disabled:after {
-      position: absolute;
-      top: 0.4em;
-      display: block;
-      opacity: 0.3;
-    }
-    .sorted-asc:before,
-    .sorted-desc:after {
-      opacity: 1;
-    }
-
-    .sortable:before,
-    .sorted-asc:before,
-    .sorted-desc:before,
-    .sorted-asc_disabled:before,
-    .sorted-desc_disabled:before {
-      right: 1em;
-      content: "\2191";
-    }
-    .sortable:after,
-    .sorted-asc:after,
-    .sorted-desc:after,
-    .sorted-asc_disabled:after,
-    .sorted-desc_disabled:after {
-      right: 0.5em;
-      content: "\2193";
     }
   }
 }

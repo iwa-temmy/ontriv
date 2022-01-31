@@ -3,7 +3,6 @@ import { Row, Col, Card, Button } from 'reactstrap';
 import Select from 'react-select';
 import { HiChevronRight, HiPlus, HiArrowRight } from 'react-icons/hi'
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
 import {CenteredModal} from '../../components/Modal'
 import chart from '../../assets/img/chart.png'
 import icon1 from '../../assets/img/calendaric1.svg'
