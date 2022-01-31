@@ -340,7 +340,6 @@
     }
   }
   .client-accounts {
-    
     .account {
       background: #f9fafc;
       border-radius: 10px;
@@ -378,4 +377,38 @@
   font-size: 12px;
   font-weight: 600;
   color: #9da8b6;
+}
+
+.client-details-settings-modal {
+  margin: auto;
+  width: 75%;
+  padding: 110px 0;
+  h1 {
+    font-size: 30px;
+    font-weight: 700;
+  }
+  p {
+    font-size: 13px;
+    font-weight: 400;
+  }
+  input {
+    font-weight: 500;
+    font-size: 14px;
+    color: #6e7191;
+    border-radius: 16px;
+    padding: 21px 24px;
+    width: 100%;
+    margin: 55px 0;
+    border: 1px solid #e5ecf2;
+    &:focus {
+      border-color: 1px solid #2062f4;
+    }
+  }
+  button {
+    background: #2062f4;
+    border-radius: 16px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+  }
 }

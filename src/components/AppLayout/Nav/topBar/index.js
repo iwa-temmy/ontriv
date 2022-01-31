@@ -9,12 +9,12 @@ import userProfilePic from '../../../../assets/img/userPic.png'
 import notificationIcon from '../../../../assets/img/icon.png'
 import chat from '../../../../assets/img/chat.svg'
 import { TopRightModal } from '../../../Modal';
-import { useNav } from '../../../../utils/context';
+// import { useNav } from '../../../../utils/context';
 
-const TopNav = () => {
+const TopNav = ({ currentSection }) => {
     const [userProfileState, updateUserProfileState] = useState(false)
     const [notificationState, updateNotificationState] = useState(false)
-    const [section] = useNav(useNav)
+    // const [section] = useNav(useNav)
 
     return (
         <React.Fragment>
@@ -23,7 +23,7 @@ const TopNav = () => {
                     <div className="navbar-container">
                         <div className="navbar-collapse d-flex justify-content-between align-items-center" >
                             <div className="topbar-left-content">
-                                <h2 className="mb-0 active-menu font-weight-bold text-capitalize">{section}</h2>
+                                <h2 className="mb-0 active-menu font-weight-bold text-capitalize">{currentSection}</h2>
                             </div>
                             <div className='topbar-right-content d-flex ml-auto justify-content-between'>
 

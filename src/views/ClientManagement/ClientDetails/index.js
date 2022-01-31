@@ -1,5 +1,5 @@
-import React from 'react';
-import { Row, Col, Card } from 'reactstrap'
+import React, { useState } from 'react';
+import { Row, Col, Card, Button } from 'reactstrap'
 import { FiArrowRight } from 'react-icons/fi';
 import Table from '../../../components/Table';
 import ontriv from '../../../assets/img/ontriv.png';
@@ -10,8 +10,9 @@ import facebook from '../../../assets/img/facebook.png'
 import twitter from '../../../assets/img/twitter.png'
 import instagram from '../../../assets/img/instagram.png'
 import linkedin from '../../../assets/img/linkedin.png'
-
 import Calendar from 'react-calendar';
+import { CenteredModal as Modal } from '../../../components/Modal'
+
 
 
 
@@ -128,6 +129,10 @@ const clients = [
 
 const ClientDetails = () => {
 
+    const [websiteState, setWebsiteState] = useState(false);
+    const [hashtagState, setHashtagState] = useState(false);
+
+
     const cols = React.useMemo(
         () => [
             {
@@ -203,7 +208,11 @@ const ClientDetails = () => {
                                 <div>
                                     <Row>
                                         <Col sm='6' xl='4' >
-                                            <div className='client-information-item d-flex align-items-center justify-content-between'>
+                                            <div className='client-information-item d-flex align-items-center justify-content-between'
+                                                onClick={() => {
+                                                    setWebsiteState(!websiteState)
+                                                }}
+                                            >
                                                 <h2>Website</h2>
                                                 <IoIosCheckmarkCircle className='information-icon' color='#00D67D' />
                                             </div>
@@ -246,7 +255,11 @@ const ClientDetails = () => {
                                             </div>
                                         </Col>
                                         <Col sm='2' md='4'>
-                                            <div className='client-information-item d-flex align-items-center justify-content-between'>
+                                            <div className='client-information-item d-flex align-items-center justify-content-between'
+                                                onClick={() => {
+                                                    setHashtagState(!hashtagState)
+                                                }}
+                                            >
                                                 <h2>Hashtag Sets</h2>
                                                 {/* <IoIosCheckmarkCircle className='information-icon' color='#00D67D' /> */}
                                                 {' '}
@@ -402,6 +415,41 @@ const ClientDetails = () => {
                     </Row>
                 </Col>
             </Row>
+            <Modal
+                modalState={websiteState}
+                setModalState={setWebsiteState}
+            >
+                <div className='client-details-settings-modal text-center'>
+                    <h1>Website</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <div>
+                        <input placeholder='https://www.website.com' vtype='text' />
+                    </div>
+                    <div>
+                        <Button className='py-4'>
+                            Save
+                        </Button>
+                    </div>
+                </div>
+            </Modal>
+
+            <Modal
+                modalState={hashtagState}
+                setModalState={setHashtagState}
+            >
+                <div className='client-details-settings-modal text-center'>
+                    <h1>Hashtag sets</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <div>
+                        <input placeholder='Hashtag sets' vtype='text' />
+                    </div>
+                    <div>
+                        <Button className='py-4'>
+                            Save
+                        </Button>
+                    </div>
+                </div>
+            </Modal>
         </div>
     )
 }

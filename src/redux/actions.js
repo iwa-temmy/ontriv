@@ -1,3 +1,6 @@
+/*NAV*/
+export const SET_CURRENT_SECTION = 'SET_CURRENT_SECTION';
+
 /* AUTH */
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
@@ -16,3 +19,4 @@ export const FORGOT_PASSWORD_ERROR = 'FORGOT_PASSWORD_ERROR';
 
 
 export * from './Auth/action';
+export * from './Nav/action';

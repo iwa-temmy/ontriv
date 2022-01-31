@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 import auth from './Auth/reducer';
+import nav from './Nav/reducer'
 
 
 const Reducers = combineReducers({
-    auth
+    auth,
+    nav
 });
 
 export default Reducers;

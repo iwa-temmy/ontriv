@@ -3,16 +3,16 @@ import classnames from "classnames"
 import PerfectScrollbar from "react-perfect-scrollbar"
 import SidebarHeader from "./SideBarHeader"
 import SideBar from './SideBar'
-// import { useNav } from '../../../../utils/context';Î
+// import { useNav } from '../../../../utils/context';
 
 
 
-const SideNav = () => {
+const SideNav = ({ setCurrentSection }) => {
 
     const [hoveredMenuItem, setHoveredMenuItem] = useState(window.location.pathname)
     const [activeItem, setActiveItem] = useState('');
     const [menuShadow, setMenuShadow] = useState('');
-    // const [setSection] = useNav(useNav)
+    // const [setSection] = useNav()
 
 
 
@@ -21,7 +21,8 @@ const SideNav = () => {
         if (id !== hoveredMenuItem) {
             setHoveredMenuItem(url);
             setActiveItem(url);
-            // setSection(id);
+            console.log(id);
+            setCurrentSection(id);
 
         } else {
             setHoveredMenuItem(null);

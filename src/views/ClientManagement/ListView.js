@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from "react-router-dom"
 import Table from '../../components/Table';
 import ontriv from '../../assets/img/ontriv.png';
 import tag from '../../assets/img/Tag.svg';
+import { connect } from 'react-redux';
+import { setCurrentSection } from "../../redux/actions";
+
+
 
 import { MdDelete } from 'react-icons/md';
 
@@ -136,7 +141,7 @@ const clients = [
 ];
 
 
-const ClientListView = () => {
+const ClientListView = ({ setCurrentSection }) => {
     const cols = React.useMemo(
         () => [
             {
@@ -144,9 +149,13 @@ const ClientListView = () => {
                 accessor: 'img',
                 cellClass: '',
                 Cell: (props) =>
-                    <a href='/client-details'>
-                        <img src={props.value} alt='client-logo' />
-                    </a>
+                    <Link to='/client-details'
+
+                    >
+                        <img src={props.value} alt='client-logo'
+                            onClick={() => { setCurrentSection('Client Details') }}
+                        />
+                    </Link>
             },
             {
                 Header: 'Name',
@@ -207,4 +216,4 @@ const ClientListView = () => {
 
 
 
-export default ClientListView
+export default connect(null, { setCurrentSection })(ClientListView);

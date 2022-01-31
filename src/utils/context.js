@@ -4,12 +4,11 @@ import React, { createContext, useState, useContext } from 'react';
 const NavContext = createContext();
 const NavProvider = ({ children }) => {
     const [currentSection, setCurrentSection] = useState('Overview');
-
     // const handleSectionChange = (section) => {
-
     //     console.log(section);
     //     setCurrentSection(section);
     // }
+    
     const data = [currentSection, setCurrentSection];
     return (
         <NavContext.Provider value={data}>
