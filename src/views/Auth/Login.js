@@ -15,6 +15,7 @@ import { BsFacebook } from 'react-icons/bs';
 import { TiEye } from 'react-icons/ti';
 import { IoMdEyeOff } from 'react-icons/io';
 import { useForm } from 'react-hook-form';
+import logo from '../../assets/img/logo.png'
 
 
 const Signin = () => {
@@ -25,10 +26,10 @@ const Signin = () => {
     return (
         <div className='auth'>
             <Row className='gx-0'>
-                <Col md='5' sm='12' className='pr-0'>
+                <Col lg='5' sm='12' className='pr-0'>
                     <div className='signin-left'>
                         <Container>
-                            <div className='signin-img-container'>
+                            <div className='signin-img-container '>
                                 <img src={SigninImg} alt='signin-img' className='signin-img' />
                             </div>
                             <div className='signin-text text-white pl-5 w-75 mx-auto'>
@@ -43,10 +44,14 @@ const Signin = () => {
                         </Container>
                     </div>
                 </Col>
-                <Col md='7' sm='12' className='pl-0'>
+                <Col lg='7' sm='12' className='pl-0'>
                     <div className='signin-right'>
                         <Container>
+
                             <div className='mx-auto w-75 signin-form-wrapper'>
+                                <div className='signin-logo text-center my-3 mb-4'>
+                                    <img src={logo} alt='ontriv-logo' />
+                                </div>
                                 <Card className='p-5 signin-form-card '>
                                     <h4 className='text-center'>Welcome Back!</h4>
                                     <p className='text-center'>Login with your Account Details</p>
@@ -56,7 +61,7 @@ const Signin = () => {
                                             type='email'
                                             name='email'
                                             placeholder='Email Address'
-                                            className={`w-100 ${errors.email? 'border-danger' : ""}`}
+                                            className={`w-100 ${errors.email ? 'border-danger' : ""}`}
                                             {...register('email'
                                                 , {
                                                     required: true,
@@ -67,7 +72,7 @@ const Signin = () => {
                                                 }
                                             )}
                                         />
-                                            {errors.password && <span className='text-danger text-left'>Enter your password</span>}
+                                        {errors.password && <span className='text-danger text-left'>Enter your password</span>}
                                         <div className='password-container'>
                                             <div className='password-icon'>
                                                 {
@@ -101,7 +106,7 @@ const Signin = () => {
 
 
                                         </div>
-                                        <div className='d-flex justify-content-between align-items-center '>
+                                        <div className='d-flex justify-content-between align-items-center flex-wrap '>
                                             <div className='d-flex  align-items-center'>
                                                 <div className='input-check'>
                                                     <input classname='border-dark' type="checkbox" id="forgotPassword" name="forgotPassword" value="forgotPassword" className='mb-0' />

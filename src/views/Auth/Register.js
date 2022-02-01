@@ -13,6 +13,8 @@ import "rc-steps/assets/index.css";
 import "rc-steps/assets/iconfont.css";
 import { TiEye } from 'react-icons/ti'
 import { IoMdEyeOff } from 'react-icons/io'
+import logo from '../../assets/img/logo.png'
+
 
 
 
@@ -26,7 +28,7 @@ const Signup = () => {
     return (
         <div className='auth'>
             <Row className='gx-0'>
-                <Col md='3' sm='12' className='pr-0'>
+                <Col lg='3' sm='12' className='pr-0'>
                     <div className='signup-left'>
                         <div className='signup-text text-white  mx-auto'>
                             <Container>
@@ -40,15 +42,17 @@ const Signup = () => {
                             </Container>
 
                         </div>
-
                     </div>
                 </Col>
-                <Col md='9' sm='12' className='pl-0'>
+                <Col lg='9' sm='12' className='pl-0'>
                     <div className='signup-right'>
                         <div className='signup-form-wrapper mx-auto'>
                             {/* <div className='mx-auto w-75 d-flex'> */}
+                            <div className='signin-logo text-center mb-5 mt-5'>
+                                <img src={logo} alt='ontriv-logo' />
+                            </div>
                             <Row className='gx-0' >
-                                <Col>
+                                <Col sm='12' md='6'>
                                     <Card className='card-1'>
                                         <Steps direction='vertical' current={activeState}>
                                             <Step className='' title='Personal Details' description='Lorem ipsum dolor sit amet, cons ectetur adipiscing elit, sed' />
@@ -56,9 +60,15 @@ const Signup = () => {
                                         </Steps>
                                     </Card>
                                 </Col>
-                                <Col>
+                                <Col sm='12' md='6'>
 
                                     <Card className='p-5 signup-form-card text-center'>
+                                        {/* <div >
+                                            <Steps direction='horizontal' current={activeState} className='signup-step text-center mb-4'>
+                                                <Step className='' title='Personal Details' description='Lorem ipsum dolor sit amet, cons ectetur adipiscing elit, sed' />
+                                                <Step title='Business Details' description='Lorem ipsum dolor sit amet, cons ectetur adipiscing elit, sed' />
+                                            </Steps>
+                                        </div> */}
                                         {
                                             activeState === 0 ?
                                                 <Form>

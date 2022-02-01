@@ -24,7 +24,7 @@ const ForgotPassword = () => {
             </div>
             <div className='reset-password'>
                 <Container>
-                    <div className='mx-auto w-50'>
+                    <div className='mx-auto reset-password-wrapper'>
                         <div className='text-center reset-password-text'>
                             <h4>Resest password</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>

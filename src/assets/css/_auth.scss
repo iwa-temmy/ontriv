@@ -1,9 +1,14 @@
 .auth {
-  height: 100vh;
+  height: 100%;
   background-color: #f9fafc;
+  // position: relative;
   .auth-logo {
     padding-top: 49px;
     margin-left: 69px;
+    @media(max-width:600px){
+      padding-top: 30px;
+      margin-left: 30px;
+    }
   }
   .card {
     border: none;
@@ -26,19 +31,23 @@
   }
   .signin-left {
     height: 100vh;
+    position: fixed;
+    width: 41%;
     padding: 50px 0px;
     background: url("../img/loginec1.svg") left -30px top 160px no-repeat,
       url("../img/loginec2.svg") left -110px bottom -30px no-repeat,
       linear-gradient(180deg, #00fdf3 0%, #0053f4 120%);
 
-      @media (min-width: 1600px) {
-        
-        background: url("../img/loginec1.svg") left 0px top 441px no-repeat,
+    @media (max-width: 950px) {
+      display: none;
+    }
+
+    @media (min-width: 1600px) {
+      background: url("../img/loginec1.svg") left 0px top 441px no-repeat,
         url("../img/loginec2.svg") left 0px bottom -95px no-repeat,
-        linear-gradient(180deg, #00fdf3 0%, #0053f4 120%);  
-        background-size: 40%, 85%, 100%;
-   
-       }
+        linear-gradient(180deg, #00fdf3 0%, #0053f4 120%);
+      background-size: 40%, 85%, 100%;
+    }
 
     .signin-img-container {
       background: white;
@@ -85,22 +94,40 @@
   }
 
   .signin-right {
-    height: 100vh;
+    height: 100%;
     padding: 55px 0px;
-    
+    // position: relative;
+
+    .signin-logo {
+      display: none;
+      @media (max-width: 1000px) {
+        display: block;
+      }
+    }
     @media (min-width: 1600px) {
       position: relative;
-    padding: 110px 173px 72px;
-
+      padding: 110px 173px 72px;
+    }
+    .signin-form-wrapper {
+      // position: absolute;
+      // top: 50%;
+      // left: 50%;
+      // transform: translate(-50%, -50%);
     }
     .signin-form-card {
-      
-      @media (min-width: 1600px) {
-       padding: 74px 112px !important;
-       margin: 10px 0 45px;
-  
-      }
       border-radius: 24px;
+      @media (max-width: 380px) {
+        padding: 24px !important;
+        // margin: 10px 0 45px;
+        h4 {
+          font-size: 25px;
+          font-weight: 400;
+        }
+      }
+      @media (min-width: 1600px) {
+        padding: 74px 112px !important;
+        margin: 10px 0 45px;
+      }
       input {
         border-radius: 16px !important;
         padding: 18px 20px;
@@ -112,8 +139,7 @@
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
         @media (min-width: 1600px) {
           padding: 21px 24px !important;
-     
-         }
+        }
         &:focus {
           outline: none !important;
           border: 1px solid rgba(32, 98, 244);
@@ -126,6 +152,9 @@
       .forgot-password {
         font-size: 16px;
         font-weight: 300;
+        @media (max-width: 380px) {
+          margin-top: 8px;
+        }
         .forgot-password-link {
           text-decoration: none;
           color: rgba(45, 202, 115, 1);
@@ -149,19 +178,19 @@
         width: 100%;
         border: none;
         @media (min-width: 1600px) {
-          margin:28px 0 32px ;
-     
-         }
+          margin: 28px 0 32px;
+        }
       }
 
       .easy-login {
         overflow: hidden;
         text-align: center;
         @media (min-width: 1600px) {
-         
           margin-bottom: 24px;
-     
-         }
+        }
+        @media (min-width: 325px) {
+          margin-bottom: 0;
+        }
         &:before,
         &:after {
           background-color: #e5e9f2;
@@ -195,17 +224,17 @@
       //     }
       //   }
     }
-    .no-account{
+    .no-account {
       @media (min-width: 1600px) {
         padding: 35px 0 !important;
-   
-       }
+      }
     }
   }
 
   .signup-left {
-   
     height: 100vh;
+    position: fixed;
+    width: 25%;
     padding: 68px 20px;
     background: url("../img/register1.svg") left 0px top -55px no-repeat,
       url("../img/register2.svg") right 20px top 0px no-repeat,
@@ -213,15 +242,18 @@
       linear-gradient(170.87deg, #008aff 6.93%, #1791f9 42.4%, #00a6ff 61.41%),
       linear-gradient(93.88deg, #49a8f8 6.88%, #0053f4 74.45%);
 
-      @media (min-width: 1600px) {
-        background: url("../img/register1.svg") left 0px top -55px no-repeat,
+    @media (max-width: 991px) {
+      display: none;
+    }
+
+    @media (min-width: 1600px) {
+      background: url("../img/register1.svg") left 0px top -55px no-repeat,
         url("../img/register2.svg") right 20px top -145px no-repeat,
         url("../img/register3.svg") left -110px bottom -30px no-repeat,
         linear-gradient(170.87deg, #008aff 6.93%, #1791f9 42.4%, #00a6ff 61.41%),
         linear-gradient(93.88deg, #49a8f8 6.88%, #0053f4 74.45%);
-        background-size: 100%;
-  
-       }
+      background-size: 100%;
+    }
     .signup-text {
       width: 75%;
       h2 {
@@ -241,11 +273,29 @@
     }
   }
   .signup-right {
+    // position: absolute;
+    // left: 0;
+    // top: 0;
+    // transform: translate(-50%, -50%);
+    margin: 75px 18px;
+
+    .signin-logo {
+      display: none;
+      @media (max-width: 991px) {
+        display: block;
+      }
+    }
     @media (min-width: 1600px) {
       padding: 65px 87px 90px !important;
- 
-     }
-    margin: 75px 18px;
+    }
+    @media (max-width: 767px) {
+      margin: auto;
+      width: 75%;
+    }
+    @media (max-width: 450px) {
+      margin: auto;
+      width: 90%;
+    }
 
     .signup-form-wrapper {
       width: 90%;
@@ -259,12 +309,13 @@
         }
       }
       .card-1 {
+        @media (max-width: 767px) {
+          display: none;
+        }
         @media (min-width: 1600px) {
-         padding: 113px 51px 51px 113px;
-        margin: 150px -30px 0 0;
-
-     
-         }
+          padding: 113px 51px 51px 113px;
+          margin: 150px -30px 0 0;
+        }
         margin: 130px -30px 0 0;
         padding: 75px 40px 0px 75px;
         border-radius: 24px;
@@ -277,21 +328,16 @@
           @media (min-width: 1600px) {
             font-size: 24px;
             font-weight: 600;
-       
-           }
+          }
         }
         .rc-steps-vertical .rc-steps-item-description {
           font-weight: 300;
           @media (min-width: 1600px) {
             font-size: 20px;
             font-weight: 400;
-       
-           }
+          }
         }
-        .rc-steps-item-process .rc-steps-item-icon {
-          background: linear-gradient(180deg, #6ad5ed 0%, #49a8f8 100%);
-          border: none;
-        }
+
         // .rc-steps-item-wait .rc-steps-item-icon {
         //     color: #fff;
         //     background: linear-gradient(180deg, #6ad5ed 0%, #49a8f8 100%);
@@ -310,18 +356,21 @@
         }
       }
       .signup-form-card {
+        @media (max-width: 767px) {
+          padding: 50px 70px !important;
+        }
         @media (min-width: 1600px) {
           padding: 74px 83px 60px !important;
-     
-         }
+        }
+        @media (max-width: 450px) {
+          padding: 30px !important;
+        }
         .password-icon {
           // position: absolute;
           top: 9px !important;
           @media (min-width: 1600px) {
             top: 20px !important;
-
-       
-           }
+          }
           // right:15px !important;
         }
         // padding: 74px 111px !important;
@@ -329,6 +378,9 @@
         border-radius: 24px;
         .wizard-control-buttons {
           width: 70%;
+          @media (max-width: 450px) {
+            width: 100%;
+          }
         }
         // .form {
 
@@ -352,8 +404,16 @@
           font-weight: 300;
           @media (min-width: 1600px) {
             padding: 24px 21px !important;
-       
-           }
+          }
+
+          @media (max-width: 767px) {
+            padding: 20px 21px !important;
+            margin-bottom: 20px;
+          }
+          @media (max-width: 450px) {
+            padding: 10px !important;
+            margin-bottom: 15px;
+          }
           &:focus {
             outline: none !important;
             border: 1px solid rgba(32, 98, 244);
@@ -378,13 +438,26 @@
   .reset-password {
     height: 100vh;
     margin: auto;
-    width: 60%;
     padding: 30px 0px;
-    @media (min-width: 1600px) {
-    padding: 142px 0 102px;
- 
-     }
+    .reset-password-wrapper {
+      width: 50%;
+      @media (max-width: 770px) {
+        width: 60% !important;
+      }
 
+      @media (max-width: 530px) {
+        width: 70% !important;
+      }
+
+      @media (max-width: 440px) {
+        width: 80% !important;
+      }
+    
+    
+    }
+    @media (min-width: 1600px) {
+      padding: 142px 0 102px;
+    }
     .reset-password-text {
       h4 {
       }
@@ -397,7 +470,9 @@
     }
 
     .signin-form-card {
-      // padding: 74px 111px !important;
+      @media (max-width: 375px) {
+             padding:40px 25px !important;
+      }
       border-radius: 24px;
       input {
         border-radius: 16px !important;
@@ -428,7 +503,7 @@
       border: none;
     }
   }
-  
+
   .password-container {
     position: relative;
     cursor: pointer;
@@ -436,6 +511,24 @@
       position: absolute;
       top: 14px;
       right: 15px;
+    }
+  }
+  .signup-text {
+    margin: auto;
+    width: 50%;
+  }
+  .rc-steps-item-process .rc-steps-item-icon {
+    background: linear-gradient(180deg, #6ad5ed 0%, #49a8f8 100%);
+  }
+
+  .rc-steps-horizontal .rc-steps-item-description {
+    display: none;
+  }
+
+  .rc-steps-item-title {
+    @media (max-width: 767px) {
+      font-size: 20px;
+      font-weight: 400;
     }
   }
 }
