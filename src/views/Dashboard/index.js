@@ -3,7 +3,7 @@ import { Row, Col, Card, Button } from 'reactstrap';
 import Select from 'react-select';
 import { HiChevronRight, HiPlus, HiArrowRight } from 'react-icons/hi'
 import Calendar from 'react-calendar';
-import {CenteredModal} from '../../components/Modal'
+import { CenteredModal } from '../../components/Modal'
 import chart from '../../assets/img/chart.png'
 import icon1 from '../../assets/img/calendaric1.svg'
 import icon2 from '../../assets/img/calendarIc2.svg'
@@ -15,11 +15,11 @@ const Dashboard = () => {
     const [eventState, updateEventState] = useState(false)
     const [postState, updatePostState] = useState(false)
 
-    const toggleEventState=()=>{
+    const toggleEventState = () => {
         updateEventState(!eventState)
     }
 
-    const togglePostState=()=>{
+    const togglePostState = () => {
         updatePostState(!postState)
     }
 
@@ -33,7 +33,7 @@ const Dashboard = () => {
                                 <div className='dashboard-analytics'>
                                     <Card className='analytics-card'>
                                         <Row>
-                                            <Col md='4' >
+                                            <Col sm='12' md='4'>
                                                 <Card className='card-sm revenue'>
                                                     <h4 className='text-white'>
                                                         Revenue
@@ -43,20 +43,20 @@ const Dashboard = () => {
                                                     </h5>
                                                 </Card>
                                             </Col>
-                                            <Col md='4' className='px-0'>
+                                            <Col sm='12' md='4' className='card-sm-2'>
                                                 <Card className='card-sm posts'>
                                                     <h4 className=''>
-                                                        No scheduled posts
+                                                        <span className='first-text'>No scheduled </span>posts
                                                     </h4>
                                                     <h5 className=''>
                                                         0
                                                     </h5>
                                                 </Card>
                                             </Col>
-                                            <Col md='4' >
+                                            <Col sm='12' md='4'  >
                                                 <Card className='card-sm clients'>
                                                     <h4 className=''>
-                                                        Number of clients
+                                                        <span className='first-text'>Number of</span> clients
                                                     </h4>
                                                     <h5 className=''>
                                                         0
@@ -144,49 +144,49 @@ const Dashboard = () => {
                     </div>
                 </Col>
                 <Col md='12' lg='12' sm='12' xxl='4' className='mb-3'>
-                    <Card className='calendar-card'>
+                    <Card className='calendar-card overflow-auto'>
                         <div className='d-flex align-items-center calendar-header'>
                             <img src={icon1} width='16px' alt='calendar' />
                             <h4 className='mx-3 card-header-text mb-0'>Calendar</h4>
                         </div>
-                        <Calendar 
-                        className='customize-calendar'
-                        onClickDay={togglePostState}
-                        
+                        <Calendar
+                            className='customize-calendar'
+                            onClickDay={togglePostState}
+
                         />
                         <hr className='my-3' />
                         <div>
                             <h4 className='mx-3 upcoming-events-header  mb-0'>Upcoming Events</h4>
-                            <div className='upcoming-event mb-2 d-flex justify-content-between align-items-center'>
-                                <div className='event-icon p-4'>
+                            <div className='upcoming-event mb-2 d-flex justify-content-between flex-wrap align-items-center'>
+                                <div className='event-icon'>
                                     <img src={icon1} width='30px' alt='icon' />
                                 </div>
                                 <div>
                                     <h4>April Fools day</h4>
                                     <p className='mb-0'>01/04/2021</p>
                                 </div>
-                                <div>
-                                    <HiArrowRight 
-                                    color='#49A8F8' 
-                                    size='25px' 
-                                    className='font-weight-bold'
-                                    onClick={toggleEventState} />
+                                <div className='event-arrow-icon'>
+                                    <HiArrowRight
+                                        color='#49A8F8'
+                                        size='25px'
+                                        className='font-weight-bold'
+                                        onClick={toggleEventState} />
                                 </div>
                             </div>
-                            <div className='upcoming-event mb-2 d-flex justify-content-between align-items-center'>
-                                <div className='event-icon p-4'>
+                            <div className='upcoming-event mb-2 d-flex justify-content-between flex-wrap align-items-center'>
+                                <div className='event-icon '>
                                     <img src={icon2} width='30px' alt='icon' />
                                 </div>
                                 <div>
                                     <h4>Good Friday</h4>
                                     <p className='mb-0'>02/04/2021</p>
                                 </div>
-                                <div>
-                                    <HiArrowRight 
-                                    color='#49A8F8' 
-                                    size='25px' 
-                                    className='font-weight-bold'
-                                    onClick={toggleEventState} />
+                                <div className='event-arrow-icon'>
+                                    <HiArrowRight
+                                        color='#49A8F8'
+                                        size='25px'
+                                        className='font-weight-bold'
+                                        onClick={toggleEventState} />
                                 </div>
                             </div>
                         </div>

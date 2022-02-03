@@ -4,7 +4,7 @@
 .calendar-header {
   margin-bottom: 46px;
 }
-.react-calendar__tile{
+.react-calendar__tile {
   font-size: 16px;
   font-weight: 400;
 }
@@ -12,6 +12,9 @@
   font-size: 20px;
   font-weight: 400;
   color: #111317;
+  @media (max-width: 500px) {
+    font-size: 12px;
+  }
 }
 .react-calendar__month-view__days__day--weekend {
   color: #000 !important;
@@ -82,7 +85,14 @@
     // background-color: #fff;
     position: absolute;
     right: 98px;
-    top: 39px;
+    top: 25px;
+    @media (max-width: 800px) {
+      right: 55px;
+      top: 18px;
+    }
+    @media (max-width: 500px) {
+      right: 35px;
+    }
     // border-radius: 40px !important;
     // padding: 50px 45px;
   }

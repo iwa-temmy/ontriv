@@ -208,7 +208,7 @@ const ClientListView = ({ setCurrentSection }) => {
         []
     );
     return (
-        <div className="mb-0 mt-2">
+        <div className="mb-0 mt-2 overflow-auto">
             <Table columns={cols} data={clients} divided defaultPageSize={6} pagePosition='center' />
         </div>
     );

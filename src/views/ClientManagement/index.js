@@ -18,15 +18,17 @@ const ClientManagement = () => {
     return (
         <>
             <div className='client-management'>
-                <div className="d-flex justify-content-between align-items-center">
+                <div className="d-flex justify-content-between align-items-center flex-wrap">
                     <Card className='py-3 client-analytics-card'>
-                        <div className="client-analytics d-flex justify-content-between align-items-center">
-                            <h4 className='mb-0 client-analytics-text'>Number of Clients</h4>
+                        <div className="client-analytics d-flex justify-content-between align-items-center flex-wrap">
+                            <h4 className='mb-0 client-analytics-text'>
+                                <span className='first-text'>Number of </span>Clients
+                                </h4>
                             <h4 className='mb-0 client-count'>0</h4>
                         </div>
                     </Card>
 
-                    <div className="d-flex justify-content-between align-items-center">
+                    <div className="d-flex justify-content-between align-items-center client-management-control">
                         <div>
                             {
                                 view === 'list' ?

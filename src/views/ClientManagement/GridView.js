@@ -9,7 +9,7 @@ const GridView = () => {
     return (
         <div className='grid-view'>
             <Row>
-                <Col sm='12' md='3' className='mb-4' >
+                <Col xs='12' sm='6' md='4' xl='3' className='mb-4' >
                     <Card className='grid-view-card'>
                         <div className='client-details d-flex  align-items-center'>
                             <div className='client-logo-wrapper'>
@@ -47,7 +47,7 @@ const GridView = () => {
 
                         </div>
                     </Card>
-                </Col> <Col sm='12' md='3' className='mb-4' >
+                </Col> <Col xs='12' sm='6' md='4' xl='3' className='mb-4' >
                     <Card className='grid-view-card'>
                         <div className='client-details d-flex  align-items-center'>
                             <div className='client-logo-wrapper'>
@@ -85,7 +85,7 @@ const GridView = () => {
 
                         </div>
                     </Card>
-                </Col> <Col sm='12' md='3' className='mb-4' >
+                </Col> <Col xs='12' sm='6' md='4' xl='3' className='mb-4' >
                     <Card className='grid-view-card'>
                         <div className='client-details d-flex  align-items-center'>
                             <div className='client-logo-wrapper'>
@@ -123,7 +123,7 @@ const GridView = () => {
 
                         </div>
                     </Card>
-                </Col> <Col sm='12' md='3' className='mb-4' >
+                </Col> <Col xs='12' sm='6' md='4' xl='3' className='mb-4' >
                     <Card className='grid-view-card'>
                         <div className='client-details d-flex  align-items-center'>
                             <div className='client-logo-wrapper'>
@@ -161,7 +161,7 @@ const GridView = () => {
 
                         </div>
                     </Card>
-                </Col> <Col sm='12' md='3' className='mb-4' >
+                </Col> <Col xs='12' sm='6' md='4' xl='3' className='mb-4' >
                     <Card className='grid-view-card'>
                         <div className='client-details d-flex  align-items-center'>
                             <div className='client-logo-wrapper'>
@@ -199,7 +199,7 @@ const GridView = () => {
 
                         </div>
                     </Card>
-                </Col> <Col sm='12' md='3' className='mb-4' >
+                </Col> <Col xs='12' sm='6' md='4' xl='3' className='mb-4' >
                     <Card className='grid-view-card'>
                         <div className='client-details d-flex  align-items-center'>
                             <div className='client-logo-wrapper'>
@@ -237,7 +237,7 @@ const GridView = () => {
 
                         </div>
                     </Card>
-                </Col> <Col sm='12' md='3' className='mb-4' >
+                </Col> <Col xs='12' sm='6' md='4' xl='3' className='mb-4' >
                     <Card className='grid-view-card'>
                         <div className='client-details d-flex  align-items-center'>
                             <div className='client-logo-wrapper'>
@@ -275,7 +275,7 @@ const GridView = () => {
 
                         </div>
                     </Card>
-                </Col> <Col sm='12' md='3' className='mb-4' >
+                </Col> <Col xs='12' sm='6' md='4' xl='3' className='mb-4' >
                     <Card className='grid-view-card'>
                         <div className='client-details d-flex  align-items-center'>
                             <div className='client-logo-wrapper'>

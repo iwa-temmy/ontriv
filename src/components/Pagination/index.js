@@ -64,7 +64,7 @@ const DataTablePagination = ({
         let endPage = pages;
         const currentPage = pageState;
         let startPage = 0;
-        const maxSize = paginationMaxSize;
+        const maxSize = 4;
 
         if (maxSize) {
             if (endPage > maxSize) {

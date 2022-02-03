@@ -14,6 +14,7 @@ import { TopRightModal } from '../../../Modal';
 const TopNav = ({ currentSection }) => {
     const [userProfileState, updateUserProfileState] = useState(false)
     const [notificationState, updateNotificationState] = useState(false)
+    const [mobileSearch, setMobileSearch] = useState(false);
     // const [section] = useNav(useNav)
 
     return (
@@ -22,25 +23,41 @@ const TopNav = ({ currentSection }) => {
                 <div className="navbar-wrapper">
                     <div className="navbar-container">
                         <div className="navbar-collapse d-flex justify-content-between align-items-center" >
-                            <div className="topbar-left-content">
+                            <div className="topbar-left-content mr-auto">
                                 <h2 className="mb-0 active-menu font-weight-bold text-capitalize">{currentSection}</h2>
                             </div>
                             <div className='topbar-right-content d-flex ml-auto justify-content-between'>
 
-                                <div className="search-input-wrapper ">
+                                <div className={`search-input-wrapper `}>
                                     <div className="search-icon">
                                         <FaSearch color='#dfe1e6' size="16px" />
                                     </div>
                                     <input type='text' className="topbar-search-input" placeholder="Search" />
                                 </div>
 
-                                <div className="d-flex topnav-user">
+                                <div className={`d-flex topnav-user ${mobileSearch ? 'd-none' : 'd-block'}`}>
+                                    <div className="my-1 mx-2">
+                                        <FaSearch color='#00119D' size="18px" className="mobile-search-icon"
+                                            onClick={() => {
+                                                setMobileSearch(true)
+                                            }} />
+                                    </div>
                                     <img src={chat} alt='chat-icon' width='23%' />
-                                    <img src={Notification} alt='notification-icon' className="mx-1" width='33%' onClick={() => updateNotificationState(!notificationState)} />
+                                    <img src={Notification} alt='notification-icon' className="mx-1" width='40%' onClick={() => updateNotificationState(!notificationState)} />
                                     <div className="userProfile-img" onClick={() => updateUserProfileState(!userProfileState)}>
                                         <img src={userProfilePic} alt='user-dp' />
                                     </div>
                                 </div>
+
+                                {
+                                    mobileSearch && <div className={`mobile-search-input-wrapper `}>
+                                        <div className="search-icon">
+                                            <FaSearch color='#dfe1e6' size="16px" />
+                                        </div>
+                                        <input type='text' className="topbar-search-input" placeholder="Search" />
+                                    </div>
+                                }
+
                             </div>
                             {/* <TopBar/> */}
                         </div>
