@@ -44,7 +44,7 @@ const sideBarMenu = [
     title: "Reports",
     type: "item",
     icon: <AiFillFileText size={20} />,
-    navLink:'/Reports'
+    navLink:'/report'
   },
 
   {
