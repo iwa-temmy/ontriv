@@ -128,7 +128,7 @@
         padding: 74px 112px !important;
         margin: 10px 0 45px;
       }
-      input:not([type="checkbox"]) {
+      input:not([type="checkbox"]):not([type="button"]) {
         border-radius: 16px !important;
         padding: 18px 20px;
         font-size: 16px;
@@ -146,15 +146,15 @@
           box-shadow: unset;
         }
       }
-      a.login-link {
-        padding-top: 1rem !important;
-        padding-bottom: 1rem !important;
-        text-decoration: none !important;
-        color: #fff !important;
-        text-align:center !important;
-        background: linear-gradient(93.88deg, #49a8f8 6.88%, #0053f4 74.45%) !important;
-        border-radius: 16px !important;
-      }
+      // a.login-link {
+      //   padding-top: 1rem !important;
+      //   padding-bottom: 1rem !important;
+      //   text-decoration: none !important;
+      //   color: #fff !important;
+      //   text-align:center !important;
+      //   background: linear-gradient(93.88deg, #49a8f8 6.88%, #0053f4 74.45%) !important;
+      //   border-radius: 16px !important;
+      // }
 
       .input-check {
         margin-right: 10px;
@@ -170,7 +170,6 @@
           color: rgba(45, 202, 115, 1);
           font-size: 16px;
           margin-left: 5px;
-       
 
           //   font-weight: 500;
         }

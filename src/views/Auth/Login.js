@@ -6,7 +6,7 @@ import {
     Input,
     Form,
     Col,
-    // Button
+    Button
 } from 'reactstrap';
 import SigninImg from '../../assets/img/sign2.png';
 import { AiFillApple, AiFillTwitterCircle } from 'react-icons/ai';
@@ -136,11 +136,11 @@ const Signin = ({ setAuthState }) => {
                                                 setAuthState(true);
                                             }}
                                         >
-                                            {/* <Button className='py-3' type='submit'
-                                            > */}
+                                            <Button className='py-3' type='submit'
+                                            >
                                                 Log in
 
-                                            {/* </Button> */}
+                                            </Button>
                                         </Link>
 
 
