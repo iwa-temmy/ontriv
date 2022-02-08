@@ -15,10 +15,14 @@ import { BsFacebook } from 'react-icons/bs';
 import { TiEye } from 'react-icons/ti';
 import { IoMdEyeOff } from 'react-icons/io';
 import { useForm } from 'react-hook-form';
-import logo from '../../assets/img/logo.png'
+import logo from '../../assets/img/logo.png';
+import { connect } from 'react-redux';
+import { setAuthState } from "../../redux/actions";
+import { Link } from 'react-router-dom'
 
 
-const Signin = () => {
+
+const Signin = ({ setAuthState }) => {
     const [inputType, setInputType] = useState('password')
     const { handleSubmit, register, formState: { errors } } = useForm();
     const loginUser = values => console.log(values);
@@ -124,9 +128,21 @@ const Signin = () => {
                                             </div>
                                         </div>
 
-                                        <Button className='py-3' type='submit'>
-                                            Log in
-                                        </Button>
+
+                                        <Link
+                                            className='w-100' type='submit'
+                                            to='/overview'
+                                            onClick={() => {
+                                                setAuthState(true);
+                                            }}
+                                        >
+                                            <Button className='py-3' type='submit'
+                                            >
+                                                Log in
+
+                                            </Button>
+                                        </Link>
+
 
                                         <div className='py-3 mx-auto w-75'>
                                             <p className='easy-login'>Easy Login</p>
@@ -175,10 +191,12 @@ const Signin = () => {
 
 
                     </div>
-                </Col>
-            </Row>
+                </Col >
+            </Row >
 
-        </div>
+        </div >
     )
 }
-export default Signin
+
+
+export default connect(null, { setAuthState })(Signin);
