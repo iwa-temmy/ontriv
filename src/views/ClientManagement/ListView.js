@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom"
 import Table from '../../components/Table';
 import ontriv from '../../assets/img/ontriv.png';
@@ -205,6 +205,7 @@ const ClientListView = ({ setCurrentSection }) => {
                 </>,
             },
         ],
+        // eslint-disable-next-line 
         []
     );
     return (

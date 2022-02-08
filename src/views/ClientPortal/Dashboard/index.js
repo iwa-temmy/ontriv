@@ -19,7 +19,7 @@ const Dashboard = () => {
                 <Card className='text-center '>
                     <div className='client-info-container'>
                         <div className='client-logo-wrapper'>
-                            <img src={logo} />
+                            <img alt='icon' src={logo} />
                         </div>
                         <div>
                             <h1 className='client-brandname'>10X Socials</h1>
@@ -37,7 +37,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div className='tag-container d-flex'>
-                        <img src={Tag} alt='tag-icon' />
+                        <img  src={Tag} alt='tag-icon' />
                         <p className='tag-container-text mb-0'>Content Calendar</p>
                     </div>
                 </Card>
@@ -50,7 +50,7 @@ const Dashboard = () => {
                             <Link to='/client/posts'>
                                 <Card className='h-100  text-center dashboard-nav-card'>
                                     <div className=''>
-                                        <img src={post} />
+                                        <img alt='icon' src={post} />
                                     </div>
                                     <div>
                                         <h1>POSTS</h1>
@@ -65,7 +65,7 @@ const Dashboard = () => {
                             <Link to='/client/calendar'>
                                 <Card className='h-100  text-center dashboard-nav-card'>
                                     <div className=''>
-                                        <img src={calendar} />
+                                        <img alt='icon' src={calendar} />
                                     </div>
                                     <div>
                                         <h1>CONTENT CALENDAR</h1>
@@ -79,7 +79,7 @@ const Dashboard = () => {
                             <Link to='/client/invoices'>
                                 <Card className='h-100  text-center dashboard-nav-card'>
                                     <div className=''>
-                                        <img src={invoices} />
+                                        <img alt='icon' src={invoices} />
                                     </div>
                                     <div>
                                         <h1>INVOICES</h1>
@@ -93,7 +93,7 @@ const Dashboard = () => {
                             <Link to='/client/documents'>
                                 <Card className='h-100  text-center dashboard-nav-card'>
                                     <div className=''>
-                                        <img src={doc} />
+                                        <img alt='icon' src={doc} />
                                     </div>
                                     <div>
                                         <h1>Documents</h1>
@@ -108,7 +108,7 @@ const Dashboard = () => {
                             <Link to='/client/messages'>
                                 <Card className='h-100  text-center dashboard-nav-card'>
                                     <div className=''>
-                                        <img src={message} />
+                                        <img alt='icon' src={message} />
                                     </div>
                                     <div>
                                         <h1>Messages</h1>
@@ -123,7 +123,7 @@ const Dashboard = () => {
                             <Link to='/client/settings'>
                                 <Card className='h-100  text-center dashboard-nav-card'>
                                     <div className=''>
-                                        <img src={settings} />
+                                        <img alt='icon' src={settings} />
                                     </div>
                                     <div>
                                         <h1>Settings</h1>

@@ -27,7 +27,7 @@ const Billing = () => {
                 <Col xl='6'>
                     <Card className="account-setup-card  ">
                         <div className="billing-info-card mb-3 d-flex align-items-center justify-content-evenly ">
-                            <img src={MasterCard} />
+                            <img src={MasterCard} alt='mastercard' />
                             <p className="card-info mb-0 semi-bold">Master card</p>
                             <p className="card-info mb-0 semi-bold">4620</p>
                             <p className="card-info mb-0">0722</p>
@@ -37,7 +37,7 @@ const Billing = () => {
                         </div>
 
                         <div className="billing-info-card mb-3 d-flex align-items-center justify-content-evenly">
-                            <img src={visa} />
+                            <img src={visa} alt='visa-card' />
                             <p className="card-info mb-0 semi-bold">vis card</p>
                             <p className="card-info mb-0 semi-bold">4620</p>
                             <p className="card-info mb-0">0722</p>

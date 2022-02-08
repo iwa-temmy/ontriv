@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import {
     Card,
-    TabContent,
-    TabPane,
+    // TabContent,
+    // TabPane,
     Nav,
     NavItem,
 } from 'reactstrap';
@@ -22,6 +22,7 @@ const Posts = () => {
                         onClick={() => {
                             window.history.back()
                         }}
+                        alt='back-icon'
                     />
                     <h1 className='mb-0'>Posts</h1>
                 </div>

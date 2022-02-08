@@ -171,7 +171,7 @@ export const ClientTopNav = () => {
                     <div className="navbar-container">
                         <div className="navbar-collapse d-flex justify-content-between align-items-center flex-wrap" >
                             <div className="topbar-left-content mr-auto">
-                                <img src={ClientLog} />
+                                <img src={ClientLog} alt='navbrand'/>
                             </div>
                             <div className='topbar-right-content '>
                                 <Button className="">

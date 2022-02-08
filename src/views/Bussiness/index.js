@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import { Row, Col, Card, Button } from 'reactstrap';
+import { Row, Col, Card,
+  //  Button
+   } from 'reactstrap';
 import 'react-calendar/dist/Calendar.css';
 import {CenteredModal} from '../../components/Modal'
-import greenMark from '../../assets/img/green-icon.svg'
-import greyMark from '../../assets/img/gray-icon-mark.svg'
+// import greenMark from '../../assets/img/green-icon.svg'
+// import greyMark from '../../assets/img/gray-icon-mark.svg'
 import paystackIcon from '../../assets/img/paystack-icon.svg'
 import paymentForward from '../../assets/img/payment-forward-arrow.svg'
 import stripeIcon from '../../assets/img/strip-icon.svg'
@@ -26,6 +28,7 @@ const SetUpBussiness = () => {
     const [payState, updatePayState] = useState(false)
     const [paymentStatus, updatePaymentStatus] = useState(false)
     const [durationState, updateDurationState] = useState("month")
+        // eslint-disable-next-line 
     const [pricing, updatePricingState] = useState({
       plan: {
         basic: 0,
@@ -58,19 +61,19 @@ const SetUpBussiness = () => {
     alert('closed')
   }
   const initializePayment = usePaystackPayment(config)
-
+        // eslint-disable-next-line 
     const togglePayState=()=>{
       updatePayState(!payState)
     }
-
+        // eslint-disable-next-line 
     const togglePaymentStatus=()=>{
       updatePaymentStatus(!paymentStatus)
     }
-
+        // eslint-disable-next-line 
     const togglePlanState=(newPlan)=>{
       updatePlanState(newPlan)
     }
-
+        // eslint-disable-next-line 
     const toggleDurationState=(newDuration)=>{
       updateDurationState(newDuration)
     }
@@ -193,6 +196,7 @@ const SetUpBussiness = () => {
                 setModalState={updatePostState}
             >
                 <div className='post'>
+                {/* eslint-disable-next-line  */}
                     <h2 className='post-title'></h2>
                     <div className='py-5'>
 

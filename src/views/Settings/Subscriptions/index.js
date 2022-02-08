@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Table from '../../../components/Table';
 import { Button, Card, Col, Row } from 'reactstrap'
 import { GoPrimitiveDot } from 'react-icons/go';
