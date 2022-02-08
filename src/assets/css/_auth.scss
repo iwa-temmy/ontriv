@@ -5,7 +5,7 @@
   .auth-logo {
     padding-top: 49px;
     margin-left: 69px;
-    @media(max-width:600px){
+    @media (max-width: 600px) {
       padding-top: 30px;
       margin-left: 30px;
     }
@@ -123,13 +123,12 @@
           font-size: 25px;
           font-weight: 400;
         }
-        
       }
       @media (min-width: 1600px) {
         padding: 74px 112px !important;
         margin: 10px 0 45px;
       }
-      input {
+      input:not([type="checkbox"]) {
         border-radius: 16px !important;
         padding: 18px 20px;
         font-size: 16px;
@@ -147,9 +146,16 @@
           box-shadow: unset;
         }
       }
-      a{
-        
+      .login-link {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+        text-decoration: none;
+        color: #fff;
+        text-align:center;
+        background: linear-gradient(93.88deg, #49a8f8 6.88%, #0053f4 74.45%);
+        border-radius: 16px;
       }
+
       .input-check {
         margin-right: 10px;
       }
@@ -164,6 +170,8 @@
           color: rgba(45, 202, 115, 1);
           font-size: 16px;
           margin-left: 5px;
+       
+
           //   font-weight: 500;
         }
       }
@@ -456,8 +464,6 @@
       @media (max-width: 440px) {
         width: 80% !important;
       }
-    
-    
     }
     @media (min-width: 1600px) {
       padding: 142px 0 102px;
@@ -475,7 +481,7 @@
 
     .signin-form-card {
       @media (max-width: 375px) {
-             padding:40px 25px !important;
+        padding: 40px 25px !important;
       }
       border-radius: 24px;
       input {

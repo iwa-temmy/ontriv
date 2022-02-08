@@ -3,10 +3,10 @@ import {
     Container,
     Row,
     Card,
-    // Input,
+    Input,
     Form,
     Col,
-    Button
+    // Button
 } from 'reactstrap';
 import SigninImg from '../../assets/img/sign2.png';
 import { AiFillApple, AiFillTwitterCircle } from 'react-icons/ai';
@@ -113,7 +113,7 @@ const Signin = ({ setAuthState }) => {
                                         <div className='d-flex justify-content-between align-items-center flex-wrap '>
                                             <div className='d-flex  align-items-center'>
                                                 <div className='input-check'>
-                                                    <input classname='border-dark' type="checkbox" id="forgotPassword" name="forgotPassword" value="forgotPassword" className='mb-0' />
+                                                    <Input classname='border-dark' type="checkbox" id="forgotPassword" name="forgotPassword" value="forgotPassword" className='mb-0' />
                                                 </div>
                                                 <div className='ml-3 '>
                                                     <p className='mb-0'>Remember me</p>
@@ -130,17 +130,17 @@ const Signin = ({ setAuthState }) => {
 
 
                                         <Link
-                                            className='w-100' type='submit'
+                                            className='w-100 login-link' type='submit'
                                             to='/overview'
                                             onClick={() => {
                                                 setAuthState(true);
                                             }}
                                         >
-                                            <Button className='py-3' type='submit'
-                                            >
+                                            {/* <Button className='py-3' type='submit'
+                                            > */}
                                                 Log in
 
-                                            </Button>
+                                            {/* </Button> */}
                                         </Link>
 
 
