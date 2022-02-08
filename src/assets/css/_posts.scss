@@ -1,0 +1,44 @@
+.client-posts-section {
+  .top-section-card {
+    padding: 12px 89px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border: none;
+    h1 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-left: 8px !important;
+    }
+  }
+
+  .nav-item {
+    margin-bottom: 10px !important;
+    margin-right: 69px !important;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 400;
+
+    a {
+      text-decoration: none !important;
+      color: #000 !important;
+      &.active-tab {
+        color: #49a8f8 !important;
+        // padding-left: 10px;
+        position: relative;
+        &::before {
+          content: " ";
+          background: #49a8f8;
+          border-radius: 10px;
+          position: absolute;
+          margin: 0 auto;
+          width: 105%;
+          height: 2.3px;
+          //   left: -12px;
+          bottom: 0;
+          top: 30px;
+          transform: initial;
+        }
+      }
+    }
+  }
+}

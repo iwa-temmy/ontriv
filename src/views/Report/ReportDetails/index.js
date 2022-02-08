@@ -39,7 +39,7 @@ const ReportDetails = () => {
                     </Button>
                 </div>
             </div>
-            <Card className='report-details-card '>
+            <Card className='report-details-card'>
                 <div>
                     <Nav className='border-bottom mb-3' >
                         <NavItem>
@@ -74,8 +74,8 @@ const ReportDetails = () => {
                     <TabContent activeTab={activeTab}>
                         <TabPane tabId="Twitter">
                             <Row className='mt-1 mb-3'>
-                                <Col sm='12' lg='4' className='h-100'>
-                                    <Card className='avg-engagement-card'>
+                                <Col sm='12' lg='4' >
+                                    <Card className='avg-engagement-card h-100'>
                                         <div className='card-header-wrapper'>
                                             <p className='card-title'>Average Engagement Rate</p>
                                             <p>24.3%</p>
@@ -88,8 +88,8 @@ const ReportDetails = () => {
 
                                     </Card>
                                 </Col>
-                                <Col sm='12' lg='4' className='h-100'>
-                                    <Card className='links-clicked'>
+                                <Col sm='12' lg='4' className=''>
+                                    <Card className='links-clicked h-100'>
                                         <div className='card-header-wrapper'>
                                             <p className='card-title'>Links Clicked</p>
                                             <p>2,343</p>
@@ -101,8 +101,8 @@ const ReportDetails = () => {
                                         </div>
                                     </Card>
                                 </Col>
-                                <Col sm='12' lg='4' className='h-100'>
-                                    <Card className='likes'>
+                                <Col sm='12' lg='4' className=''>
+                                    <Card className='likes h-100'>
                                         <div className='card-header-wrapper'>
                                             <p className='card-title'>Likes</p>
                                             <p>2,343</p>
@@ -121,27 +121,27 @@ const ReportDetails = () => {
                             <Row className='my-3 gx-3 h-100'>
                                 <Col sm='12' lg='6'>
                                     <Row className='mb-3 gx-3 align-items-stretch'>
-                                        <Col className=''>
+                                        <Col className='mb-3'>
                                             <Card className='impression-card mb-3 h-100'>
                                                 <h3>Impressions</h3>
                                                 <p>100,000</p>
 
                                             </Card>
                                         </Col>
-                                        <Col className=''>
+                                        <Col className='mb-3'>
                                             <Card className='tweet-card mb-3 h-100'>
                                                 <h3>Tweets</h3>
                                                 <p>100,000</p>
                                             </Card>
                                         </Col>
-                                        <Col className=''>
+                                        <Col className='mb-3'>
                                             <Card className='followers-card mb-3 h-100'>
                                                 <h3>New Followers</h3>
                                                 <p>100,000</p>
                                             </Card>
                                         </Col>
                                     </Row>
-                                    <Row className='my-3'>
+                                    <Row className='mb-3'>
                                         <Col>
                                             <Card className='impression-chart-card'>
                                                 <h3 className='mb-3'>Impressions</h3>

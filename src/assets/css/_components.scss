@@ -157,6 +157,97 @@ table {
   }
 }
 
+.table-divided-row {
+  border-collapse: separate;
+  border-spacing: 0px 0.6rem;
+  padding-bottom: 29px;
+  width: 100% !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  th {
+    padding-left: 2em !important;
+    padding-bottom: 9px !important;
+    border-bottom: 1px solid #d7d7d7 !important;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    color: #04004D !important;
+  }
+
+  td {
+    padding-top: 20px;
+    // padding-bottom: 20px;
+    padding-left: 2em !important;
+    border-bottom: 1px solid #d7d7d7;
+    outline: initial !important;
+    background: #fff;
+  }
+  .table-row {
+    background: #fff;
+    border-radius: 20px;
+    width: 100%;
+    border-bottom: 1px solid red;
+
+    &.table-row-shadow {
+      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.05);
+      margin-bottom: 30px;
+    }
+  }
+
+  tr:last-of-type td {
+    border-bottom: initial;
+  }
+
+  p,
+  h6 {
+    margin-bottom: initial;
+  }
+
+  tbody {
+    > tr[role="row"] > td:first-child:before,
+    > tr[role="row"] > th:first-child:before {
+      top: unset;
+      box-shadow: initial;
+      background-color: #2062f4;
+      font-size: 12px;
+    }
+
+    tr {
+      &:last-child {
+        td {
+          border: none !important;
+        }
+      }
+      td {
+        padding: 0.75rem 32px;
+        border-bottom: 1px solid #d7d7d7 !important;
+
+        li {
+          padding: 0 !important;
+        }
+      }
+    }
+  }
+
+  td,
+  th {
+    padding: 1.5rem;
+    border: initial;
+  }
+
+  th.empty {
+    &:before,
+    &:after {
+      content: "";
+    }
+  }
+}
+
 .table-divided {
   border-collapse: separate;
   border-spacing: 0px 0.6rem;
@@ -190,6 +281,10 @@ table {
     margin-bottom: 25px;
     border-radius: 20px;
     width: 100%;
+    &.table-row-shadow {
+      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.05);
+      margin-bottom: 30px;
+    }
   }
   tr:last-of-type td {
     border-bottom: initial;
@@ -213,7 +308,6 @@ table {
       border-radius: 20px !important;
       td {
         padding: 0.75rem 32px;
-        margin-bottom: 30em !important;
         &:first-child {
           // border-top: 20px;
           border-top-left-radius: 20px;
@@ -357,6 +451,11 @@ table {
 .page-item.active .page-link {
   background: #2062f4;
   border-radius: 3px;
+  &:focus {
+    outline: none !important;
+    border: 1px solid rgba(32, 98, 244);
+    box-shadow: unset;
+  }
 }
 
 .page-link:focus {

@@ -81,36 +81,49 @@
     border: none;
     border-radius: 20px;
   }
-  .nav-item {
-    margin-bottom: 12px !important;
-    padding: 0 !important;
-    margin-right: 69px !important;
-    font-size: 14px;
-    font-weight: 400;
 
-    a {
-      text-decoration: none !important;
-      color: #000 !important;
-      &.active-tab {
-        color: #49a8f8 !important;
-        // padding-left: 10px;
-        position: relative;
-        &::before {
-          content: " ";
-          background: #49a8f8;
-          border-radius: 10px;
-          position: absolute;
-          margin: 0 auto;
-          width: 100%;
-          height: 2px;
-          // left: 36px;
-          bottom: 0;
-          top: 32px;
-          transform: initial;
+  .nav {
+    @media (max-width:600px) {
+      display: block !important;
+      
+    }
+    .nav-item {
+      margin-bottom: 12px !important;
+      padding: 0 !important;
+      margin-right: 69px !important;
+      font-size: 14px;
+      font-weight: 400;
+  
+      a {
+        text-decoration: none !important;
+        color: #000 !important;
+        &.active-tab {
+          color: #49a8f8 !important;
+          // padding-left: 10px;
+          position: relative;
+          &::before {
+            content: " ";
+            background: #49a8f8;
+            border-radius: 10px;
+            position: absolute;
+            margin: 0 auto;
+            width: 100%;
+            height: 2px;
+            // left: 36px;
+            bottom: 0;
+            top: 32px;
+            transform: initial;
+            @media (max-width:600px) {
+              background: none;
+              
+            }
+          }
         }
       }
     }
+  
   }
+  
   .avg-engagement-card,
   .links-clicked,
   .likes {

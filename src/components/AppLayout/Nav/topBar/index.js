@@ -9,9 +9,10 @@ import userProfilePic from '../../../../assets/img/userPic.png'
 import notificationIcon from '../../../../assets/img/icon.png'
 import chat from '../../../../assets/img/chat.svg'
 import { TopRightModal } from '../../../Modal';
+import ClientLog from '../../../../assets/img/clientlogo.png'
 // import { useNav } from '../../../../utils/context';
 
-const TopNav = ({ currentSection }) => {
+export const TopNav = ({ currentSection }) => {
     const [userProfileState, updateUserProfileState] = useState(false)
     const [notificationState, updateNotificationState] = useState(false)
     const [mobileSearch, setMobileSearch] = useState(false);
@@ -160,4 +161,28 @@ const TopNav = ({ currentSection }) => {
     )
 }
 
-export default TopNav
+
+
+export const ClientTopNav = () => {
+    return (
+        <React.Fragment>
+            <div className="navbar-static-top topbar">
+                <div className="navbar-wrapper">
+                    <div className="navbar-container">
+                        <div className="navbar-collapse d-flex justify-content-between align-items-center flex-wrap" >
+                            <div className="topbar-left-content mr-auto">
+                                <img src={ClientLog} />
+                            </div>
+                            <div className='topbar-right-content '>
+                                <Button className="">
+                                    Logout
+                                </Button>
+                            </div>
+                            {/* <TopBar/> */}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </React.Fragment >
+    )
+}

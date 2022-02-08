@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import DatatablePagination from '../Pagination';
 
 
-function Table({ columns, data, divided, defaultPageSize, pagePosition }) {
+function Table({ columns, data, divided, dividedRow, shadow, defaultPageSize, pagePosition }) {
     const {
         getTableProps,
         getTableBodyProps,
@@ -31,7 +31,7 @@ function Table({ columns, data, divided, defaultPageSize, pagePosition }) {
         <>
             <table
                 {...getTableProps()}
-                className={`mb-2 r-table table ${classnames({ 'table-divided': divided })}`}
+                className={`mb-2 r-table table ${classnames({ 'table-divided': divided, 'table-divided-row':dividedRow })}`}
             >
                 <thead>
                     {headerGroups.map((headerGroup) => (
@@ -61,7 +61,7 @@ function Table({ columns, data, divided, defaultPageSize, pagePosition }) {
                         prepareRow(row);
                         return (
                             // <div className='table-row'>
-                            <tr {...row.getRowProps()} className='table-row'>
+                            <tr {...row.getRowProps()} className={`table-row ${shadow ? 'table-row-shadow' : ""}`}>
                                 {row.cells.map((cell, cellIndex) => (
                                     <td
                                         key={`td_${cellIndex}`}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectedRoutes from './utils/ProtectedRoute';
+import ClientProtectedRoutes from './utils/ClientProtectedRoute';
 import Signup from './views/Auth/Register';
 import Signin from './views/Auth/Login';
 import ForgotPassword from './views/Auth/ForgotPassword';
@@ -9,6 +10,9 @@ import ClientManagement from './views/ClientManagement';
 import ClientDetails from './views/ClientManagement/ClientDetails';
 import Report from './views/Report'
 import ReportDetails from './views/Report/ReportDetails';
+import Settings from './views/Settings';
+import ClientDashboard from './views/ClientPortal/Dashboard'
+import ClientPost from './views/ClientPortal/Posts'
 
 import Subscription from './views/Subscription';
 import SetUpBussiness from './views/Bussiness';
@@ -28,7 +32,15 @@ const RouterConfig = () => {
                     <Route exact path='/client-report' element={<ReportDetails />} />
                     <Route exact path='/Subscriptions' element={<Subscription />} />
                     <Route exact path='/Reports' element={<SetUpBussiness />} />
+                    <Route exact path='/settings' element={<Settings />} />
                 </Route>
+
+                <Route exact path='/client' element={<ClientProtectedRoutes />}>
+                    <Route exact path='/client/dashboard' element={<ClientDashboard />} />
+                    <Route exact path='/client/posts' element={<ClientPost />} />
+
+                </Route>
+
                 <Route exact path='/auth/register' element={<Signup />} />
                 <Route exact path='/auth/login' element={<Signin />} />
                 <Route exact path='/auth/forgot-password' element={<ForgotPassword />} />

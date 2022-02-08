@@ -10,6 +10,26 @@
   /* position  : absolute; */
 }
 
+.client-app-layout {
+  padding: 16px 42px 0 42px;
+  .topbar-right-content {
+    button {
+      background: #2062f4;
+      border-radius: 10px;
+      border: none;
+      font-size: 20px;
+      padding: 6px 35px;
+      @media (max-width: 500px) {
+        margin: auto;
+        width: 100%;
+        margin-top: 10px;
+      }
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}
 .main-menu {
   z-index: 1031;
   position: absolute;
