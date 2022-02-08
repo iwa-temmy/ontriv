@@ -129,19 +129,19 @@ const Signin = ({ setAuthState }) => {
                                         </div>
 
 
-                                        <Link
-                                            className='w-100 login-link' type='submit'
-                                            to='/overview'
-                                            onClick={() => {
-                                                setAuthState(true);
-                                            }}
-                                        >
-                                            <Button className='py-3' type='submit'
-                                            >
-                                                Log in
 
-                                            </Button>
-                                        </Link>
+                                        <Button className='py-3' type='button'
+                                        >
+                                            <Link
+                                                className='w-100 login-link'
+                                                to='/overview'
+                                                onClick={() => {
+                                                    setAuthState(true);
+                                                }}
+                                            >Log in
+                                            </Link>
+
+                                        </Button>
 
 
                                         <div className='py-3 mx-auto w-75'>
