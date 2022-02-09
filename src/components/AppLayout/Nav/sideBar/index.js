@@ -7,7 +7,7 @@ import SideBar from './SideBar'
 
 
 
-const SideNav = ({ setCurrentSection }) => {
+const SideNav = ({ setCurrentSection, showMobileSideBar, setShowMobileSideBar }) => {
 
     const [hoveredMenuItem, setHoveredMenuItem] = useState(window.location.pathname)
     const [activeItem, setActiveItem] = useState('');
@@ -21,7 +21,9 @@ const SideNav = ({ setCurrentSection }) => {
         if (id !== hoveredMenuItem) {
             setHoveredMenuItem(url);
             setActiveItem(url);
-            console.log(id);
+            // console.log(id);
+            setShowMobileSideBar(false)
+
             setCurrentSection(id);
 
         } else {
@@ -47,12 +49,13 @@ const SideNav = ({ setCurrentSection }) => {
                 style={{
                 }}
                 className={classnames(
-                    `main-menu menu-fixed menu-light menu-accordion menu-shadow`
+                    `main-menu menu-fixed menu-light menu-accordion menu-shadow ${showMobileSideBar ? "show" : ""}`
                 )}
 
             >
                 <SidebarHeader
                     menuShadow={menuShadow}
+                    setShowMobileSideBar={setShowMobileSideBar}
                 />
 
                 <PerfectScrollbar
@@ -73,6 +76,8 @@ const SideNav = ({ setCurrentSection }) => {
                             hoverIndex={hoveredMenuItem}
                             activeItem={activeItem}
                             handleSidebarMouseEnter={handleSidebarMouseEnter}
+                            
+
                         />
                     </ul>
                 </PerfectScrollbar>

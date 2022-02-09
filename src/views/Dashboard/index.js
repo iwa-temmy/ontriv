@@ -34,7 +34,7 @@ const Dashboard = () => {
                                     <Card className='analytics-card'>
                                         <Row>
                                             <Col sm='12' md='4'>
-                                                <Card className='card-sm revenue'>
+                                                <Card className='card-sm revenue h-100'>
                                                     <h4 className='text-white'>
                                                         Revenue
                                                     </h4>
@@ -43,10 +43,10 @@ const Dashboard = () => {
                                                     </h5>
                                                 </Card>
                                             </Col>
-                                            <Col sm='12' md='4' className='card-sm-2'>
-                                                <Card className='card-sm posts'>
+                                            <Col sm='12' md='4' className='card-sm-2 '>
+                                                <Card className='card-sm posts h-100'>
                                                     <h4 className=''>
-                                                        <span className='first-text'>No scheduled </span>posts
+                                                       No scheduled posts
                                                     </h4>
                                                     <h5 className=''>
                                                         0
@@ -54,9 +54,9 @@ const Dashboard = () => {
                                                 </Card>
                                             </Col>
                                             <Col sm='12' md='4'  >
-                                                <Card className='card-sm clients'>
+                                                <Card className='card-sm clients h-100'>
                                                     <h4 className=''>
-                                                        <span className='first-text'>Number of</span> clients
+                                                        Number of clients
                                                     </h4>
                                                     <h5 className=''>
                                                         0

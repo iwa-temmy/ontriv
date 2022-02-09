@@ -10,9 +10,10 @@ import notificationIcon from '../../../../assets/img/icon.png'
 import chat from '../../../../assets/img/chat.svg'
 import { TopRightModal } from '../../../Modal';
 import ClientLog from '../../../../assets/img/clientlogo.png'
+import { HiOutlineMenuAlt2 } from 'react-icons/hi'
 // import { useNav } from '../../../../utils/context';
 
-export const TopNav = ({ currentSection }) => {
+export const TopNav = ({ currentSection, setShowMobileSideBar }) => {
     const [userProfileState, updateUserProfileState] = useState(false)
     const [notificationState, updateNotificationState] = useState(false)
     const [mobileSearch, setMobileSearch] = useState(false);
@@ -24,7 +25,14 @@ export const TopNav = ({ currentSection }) => {
                 <div className="navbar-wrapper">
                     <div className="navbar-container">
                         <div className="navbar-collapse d-flex justify-content-between align-items-center" >
-                            <div className="topbar-left-content mr-auto">
+                            <div className="topbar-left-content mr-auto d-flex align-items-center">
+                                <div className="mobile-menu mr-4"
+                                    onClick={() => {
+                                        setShowMobileSideBar(true)
+                                    }}
+                                >
+                                    <HiOutlineMenuAlt2 size='26px' />
+                                </div>
                                 <h2 className="mb-0 active-menu font-weight-bold text-capitalize">{currentSection}</h2>
                             </div>
                             <div className='topbar-right-content d-flex ml-auto justify-content-between'>
@@ -171,7 +179,7 @@ export const ClientTopNav = () => {
                     <div className="navbar-container">
                         <div className="navbar-collapse d-flex justify-content-between align-items-center flex-wrap" >
                             <div className="topbar-left-content mr-auto">
-                                <img src={ClientLog} alt='navbrand'/>
+                                <img src={ClientLog} alt='navbrand' />
                             </div>
                             <div className='topbar-right-content '>
                                 <Button className="">

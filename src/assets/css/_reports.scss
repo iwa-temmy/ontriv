@@ -6,6 +6,10 @@
     margin-bottom: 18px;
     .report-card-header {
       margin-bottom: 30px;
+      @media (max-width:520px) {
+        display: block!important;
+        
+      }
       .client-name {
         font-size: 30px;
         font-weight: 600;
