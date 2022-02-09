@@ -18,6 +18,11 @@
       .client-name {
         font-size: 30px;
         font-weight: 600;
+        @media (max-width:520px) {
+          font-size: 1.3em;
+          // display: block!important;
+          
+        }
       }
       .report-link {
         background: #2062f4;
