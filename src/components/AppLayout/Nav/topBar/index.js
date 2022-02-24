@@ -11,6 +11,8 @@ import chat from '../../../../assets/img/chat.svg'
 import { TopRightModal } from '../../../Modal';
 import ClientLog from '../../../../assets/img/clientlogo.png'
 import { HiOutlineMenuAlt2 } from 'react-icons/hi'
+import Router from "../../../../Router";
+import {Link} from "react-router-dom";
 // import { useNav } from '../../../../utils/context';
 
 export const TopNav = ({ currentSection, setShowMobileSideBar }) => {
@@ -51,7 +53,11 @@ export const TopNav = ({ currentSection, setShowMobileSideBar }) => {
                                                 setMobileSearch(true)
                                             }} />
                                     </div>
-                                    <img src={chat} alt='chat-icon' width='23%' />
+                                  <Link to='/Chat'
+
+                                  >
+                                    <img src={chat} alt='chat-icon' width='100%' height='100%' />
+                                  </Link>
                                     <img src={Notification} alt='notification-icon' className="mx-1" width='40%' onClick={() => updateNotificationState(!notificationState)} />
                                     <div className="userProfile-img" onClick={() => updateUserProfileState(!userProfileState)}>
                                         <img src={userProfilePic} alt='user-dp' />

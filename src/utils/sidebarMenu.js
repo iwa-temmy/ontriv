@@ -36,7 +36,7 @@ const sideBarMenu = [
     title: "Invoices & Financials",
     icon: <RiPieChartFill size={20} />,
     type: "item",
-    navLink: "/Onvoices-&-Financials",
+    navLink: "/invoices-&-financials",
   },
 
   {
@@ -53,7 +53,7 @@ const sideBarMenu = [
     type: "item",
     icon: <RiBookFill size={20} />,
     navLink:'/Templates'
-    
+
   },
 
   {

@@ -16,6 +16,8 @@ import ClientPost from './views/ClientPortal/Posts'
 
 import Subscription from './views/Subscription';
 import SetUpBussiness from './views/Bussiness';
+import Financials from "./views/Financials";
+import Messages from "./views/Messages";
 
 
 
@@ -27,10 +29,12 @@ const RouterConfig = () => {
                 <Route exact path='/' element={<ProtectedRoutes />}>
                     <Route exact path='/overview' element={<Dashboard />} />
                     <Route exact path='/client-management' element={<ClientManagement />} />
+                    <Route exact path='/invoices-&-financials' element={<Financials />} />
                     <Route exact path='/client-details' element={<ClientDetails />} />
                     <Route exact path='/report' element={<Report />} />
                     <Route exact path='/client-report' element={<ReportDetails />} />
                     <Route exact path='/Subscriptions' element={<Subscription />} />
+                    <Route exact path='/Chat' element={<Messages />} />
                     <Route exact path='/Reports' element={<SetUpBussiness />} />
                     <Route exact path='/settings' element={<Settings />} />
                 </Route>
