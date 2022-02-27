@@ -1,80 +1,8 @@
-import { useState } from 'react'
-import {
-  Row, Col, Card,
-  // Button
-} from 'reactstrap';
 import 'react-calendar/dist/Calendar.css';
-import { CenteredModal } from '../../components/Modal'
-import greenMark from '../../assets/img/green-icon.svg'
-import greyMark from '../../assets/img/gray-icon-mark.svg'
-import paystackIcon from '../../assets/img/paystack-icon.svg'
-import paymentForward from '../../assets/img/payment-forward-arrow.svg'
-import stripeIcon from '../../assets/img/strip-icon.svg'
-import bankIcon from '../../assets/img/bank-icon.svg'
 import searchChat from './../../assets/img/search-chat.svg'
 import forwardChat from './../../assets/img/forward-chat.svg'
-import { usePaystackPayment } from 'react-paystack';
-
 
 const Messages = () => {
-  const [postState, updatePostState] = useState(false)
-  const [planState, updatePlanState] = useState("basic")
-  const [payState, updatePayState] = useState(false)
-  const [paymentStatus, updatePaymentStatus] = useState(false)
-  const [durationState, updateDurationState] = useState("month")
-  // eslint-disable-next-line
-  const [pricing, updatePricingState] = useState({
-    plan: {
-      basic: 0,
-      pro: 19,
-      team: 49
-    },
-    billing: {
-      month: 1,
-      year: 12
-    },
-    promo: {
-      month: 1,
-      year: 0.8
-    }
-  })
-  let config = {
-    reference: (new Date()).getTime().toString(),
-    email: "user@example.com",
-    amount: ((pricing.plan[planState] * pricing.billing[durationState]) * pricing.promo[durationState]) * 100,
-    publicKey: 'pk_test_37e4cadaa4625c995cd9ec9b5cebe0fc78c83d82',
-  };
-  const onSuccess = (reference) => {
-    // Implementation for whatever you want to do with reference and after success call.
-    updatePaymentStatus(!paymentStatus)
-  };
-
-  // you can call this function anything
-  const onClose = () => {
-    // implementation for  whatever you want to do when the Paystack dialog closed.
-    alert('closed')
-  }
-  const initializePayment = usePaystackPayment(config)
-  // eslint-disable-next-line
-  const togglePayState = () => {
-    updatePayState(!payState)
-  }
-  // eslint-disable-next-line
-  const togglePaymentStatus = () => {
-    updatePaymentStatus(!paymentStatus)
-  }
-
-  const togglePlanState = (newPlan) => {
-    updatePlanState(newPlan)
-  }
-
-  const toggleDurationState = (newDuration) => {
-    updateDurationState(newDuration)
-  }
-
-  const togglePostState = () => {
-    updatePostState(!postState)
-  }
 
   return (
     <div className='dashboard dashboard-wrapper'>
@@ -96,7 +24,7 @@ const Messages = () => {
                   <div className="d-flex bd-highlight">
                     <div className="img_cont d-flex">
                       <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                           className=" user_img px-2 py-2 my-auto"/>
+                           className=" user_img px-2 py-2 my-auto" alt=''/>
                     </div>
                     <div className="user_info my-auto mt-2 ms-0">
                         <span>Digital Seed</span>
@@ -109,7 +37,7 @@ const Messages = () => {
                   <div className="d-flex bd-highlight">
                     <div className="img_cont d-flex">
                       <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                           className=" user_img px-2 py-2 my-auto"/>
+                           className=" user_img px-2 py-2 my-auto" alt=''/>
                     </div>
                     <div className="user_info my-auto mt-2 ms-0">
                         <span>Digital Seed</span>
@@ -122,7 +50,7 @@ const Messages = () => {
                   <div className="d-flex bd-highlight">
                     <div className="img_cont d-flex">
                       <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                           className=" user_img px-2 py-2 my-auto"/>
+                           className=" user_img px-2 py-2 my-auto" alt=''/>
                     </div>
                     <div className="user_info my-auto mt-2 ms-0">
                         <span>Digital Seed</span>
@@ -135,7 +63,7 @@ const Messages = () => {
                   <div className="d-flex bd-highlight">
                     <div className="img_cont d-flex">
                       <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                           className=" user_img px-2 py-2 my-auto"/>
+                           className=" user_img px-2 py-2 my-auto" alt=''/>
                     </div>
                     <div className="user_info my-auto mt-2 ms-0">
                         <span>Digital Seed</span>
@@ -162,8 +90,8 @@ const Messages = () => {
               <div className="d-flex justify-content-start mb-4">
                 <div className="img_cont_msg">
                   <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                       className="rounded-circle user_img_msg"/>
-                  <span className="online_icon"></span>
+                       className="rounded-circle user_img_msg" alt=''/>
+                  <span className="online_icon"/>
                 </div>
                 <div className="msg_cotainer">
                   <h6 >
@@ -187,8 +115,8 @@ const Messages = () => {
               <div className="d-flex justify-content-start mb-4">
                 <div className="img_cont_msg">
                   <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                       className="rounded-circle user_img_msg"/>
-                  <span className="online_icon"></span>
+                       className="rounded-circle user_img_msg" alt=''/>
+                  <span className="online_icon"/>
                 </div>
                 <div className="msg_cotainer">
                   <h6 >
@@ -212,8 +140,8 @@ const Messages = () => {
               <div className="d-flex justify-content-start mb-4">
                 <div className="img_cont_msg">
                   <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                       className="rounded-circle user_img_msg"/>
-                  <span className="online_icon"></span>
+                       className="rounded-circle user_img_msg" alt=''/>
+                  <span className="online_icon"/>
                 </div>
                 <div className="msg_cotainer">
                   <h6 >
@@ -237,8 +165,8 @@ const Messages = () => {
               <div className="d-flex justify-content-start mb-4">
                 <div className="img_cont_msg">
                   <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                       className="rounded-circle user_img_msg"/>
-                  <span className="online_icon"></span>
+                       className="rounded-circle user_img_msg" alt=''/>
+                  <span className="online_icon"/>
                 </div>
                 <div className="msg_cotainer">
                   <h6 >
@@ -262,8 +190,8 @@ const Messages = () => {
               <div className="d-flex justify-content-start mb-4">
                 <div className="img_cont_msg">
                   <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                       className="rounded-circle user_img_msg"/>
-                  <span className="online_icon"></span>
+                       className="rounded-circle user_img_msg" alt=''/>
+                  <span className="online_icon"/>
                 </div>
                 <div className="msg_cotainer">
                   <h6 >

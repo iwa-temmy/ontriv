@@ -772,10 +772,19 @@
   margin-bottom: auto;
 }
 .card{
-  height: 500px;
   border-radius: 15px !important;
   background-color: white !important;
 }
+
+label {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 28px;
+  letter-spacing: 0.35px;
+  color: #111317;
+}
+
 .contacts_body{
   padding:  0.75rem 0 !important;
   overflow-y: auto;
@@ -1026,4 +1035,130 @@
   .contacts_card{
     margin-bottom: 15px !important;
   }
+}
+
+.bank-select {
+  border: 1px solid #E0E0E0;
+  box-sizing: border-box;
+  border-radius: 16px;
+}
+
+.off-canvas-menu {
+  position: fixed;
+  z-index: 200;
+  right: 0;
+  height: 90vh;
+  width: 83vw;
+  background: rgba(29, 30, 44, 0.32);
+  backdrop-filter: blur(10px);
+  border-top-left-radius: 30px;
+  @media screen and (max-width: 999px) {
+    width: 100vw;
+    border-top-left-radius: 0px;
+  }
+  &__content {
+    background-color: white;
+    min-height: 90vh;
+    overflow-y: scroll;
+    width: 40vw;
+    position: fixed;
+    right: 0;
+  }
+  &__input {
+    border: 1px solid #E0E0E0 !important;
+    box-sizing: border-box !important;
+    border-radius: 16px !important;
+  }
+}
+
+.add-item {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 1.25px;
+  color: #2062F4;
+}
+
+.save-pdf {
+  border: 1px solid #BDBDBD;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 1.25px;
+  color: #BDBDBD;
+}
+
+.send {
+  background: #2062F4;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 21px;
+  display: flex;
+  text-align: center;
+  letter-spacing: 1.25px;
+  color: #F7F7FC;
+}
+
+.blue-btn {
+  border: 1px solid #2062F4;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 21px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 1.25px;
+  color: #2062F4;
+}
+
+.slightly-black {
+  color: #17151E;
+}
+
+.light-blue-bg {
+  background: #E8F7FF;
+  border-radius: 8px;
+}
+
+.more-actions-container {
+  position: relative;
+  top: -20px;
+  left: 30%;
+  background-color: white;
+  width: 50%;
+  border-radius: 8px;
+}
+
+.action-menu {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0.25px;
+  color: #575A65;
+  cursor: pointer;
+}
+
+.action-menu:hover {
+  background: #F9FAFC;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0.25px;
+  color: #2062F4;
+}
+
+.canvas-textarea {
+  border: 1px solid #E0E0E0;
+  box-sizing: border-box;
+  border-radius: 16px;
 }

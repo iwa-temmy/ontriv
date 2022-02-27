@@ -11,15 +11,12 @@ import chat from '../../../../assets/img/chat.svg'
 import { TopRightModal } from '../../../Modal';
 import ClientLog from '../../../../assets/img/clientlogo.png'
 import { HiOutlineMenuAlt2 } from 'react-icons/hi'
-import Router from "../../../../Router";
 import {Link} from "react-router-dom";
-// import { useNav } from '../../../../utils/context';
 
 export const TopNav = ({ currentSection, setShowMobileSideBar }) => {
     const [userProfileState, updateUserProfileState] = useState(false)
     const [notificationState, updateNotificationState] = useState(false)
     const [mobileSearch, setMobileSearch] = useState(false);
-    // const [section] = useNav(useNav)
 
     return (
         <React.Fragment>

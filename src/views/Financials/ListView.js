@@ -1,16 +1,12 @@
 import React from 'react';
-import { Link } from "react-router-dom"
 import Table from '../../components/Table';
-import ontriv from '../../assets/img/ontriv.png';
 import boxIcon from '../../assets/img/box-icon-finance.svg';
 import lightGreen from '../../assets/img/finance-light-green-circle.svg';
-import tag from '../../assets/img/Tag.svg';
 import { connect } from 'react-redux';
 import { setCurrentSection } from "../../redux/actions";
 
 
 
-import { MdDelete } from 'react-icons/md';
 import InvoiceDetails from "./InvoiceDetails";
 
 

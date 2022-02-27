@@ -18,6 +18,7 @@ import Subscription from './views/Subscription';
 import SetUpBussiness from './views/Bussiness';
 import Financials from "./views/Financials";
 import Messages from "./views/Messages";
+import InvoiceDetailsPage from "./views/Financials/InvoiceDetailsPage";
 
 
 
@@ -30,6 +31,7 @@ const RouterConfig = () => {
                     <Route exact path='/overview' element={<Dashboard />} />
                     <Route exact path='/client-management' element={<ClientManagement />} />
                     <Route exact path='/invoices-&-financials' element={<Financials />} />
+                    <Route exact path='/invoices-&-financials/details' element={<InvoiceDetailsPage />} />
                     <Route exact path='/client-details' element={<ClientDetails />} />
                     <Route exact path='/report' element={<Report />} />
                     <Route exact path='/client-report' element={<ReportDetails />} />

@@ -1,10 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom"
 import Table from '../../components/Table';
-import ontriv from '../../assets/img/ontriv.png';
 import boxIcon from '../../assets/img/box-icon-finance.svg';
-import lightGreen from '../../assets/img/finance-light-green-circle.svg';
-import tag from '../../assets/img/Tag.svg';
 import { connect } from 'react-redux';
 import { setCurrentSection } from "../../redux/actions";
 
@@ -165,7 +162,7 @@ const ExpenseListView = ({ setCurrentSection }) => {
                 accessor: 'img',
                 cellClass: '',
                 Cell: (props) =>
-                    <Link to='/client-details'
+                    <Link to='/invoices-&-financials/details'
 
                     >
                         <img src={props.value} alt='client-logo'

@@ -1,5 +1,4 @@
-import { HiUser } from 'react-icons/hi';
-import { Input, Button, Row, Col } from 'reactstrap'
+import { Row, Col } from 'reactstrap'
 import { CenteredModal as Modal } from '../../components/Modal';
 import React, {useState} from "react";
 import boxIcon from '../../assets/img/box-icon-finance.svg';
