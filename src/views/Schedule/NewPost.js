@@ -20,7 +20,6 @@ import TWExample from './../../assets/img/tweet-example.png'
 import LKExample from './../../assets/img/LinkedInExample.png'
 import {Button, Col, Input, Row} from "reactstrap";
 import React, {useState} from "react";
-import {Linkedin} from "react-feather";
 import {CenteredModal as Modal} from "../../components/Modal";
 
 const NewPost = () => {

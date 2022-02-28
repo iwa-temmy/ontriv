@@ -5,7 +5,6 @@ import YellowCircle  from '../../assets/img/finanace-yellow-circle.svg';
 import BluePlus  from '../../assets/img/bg-blue-plust.svg';
 import XCancel  from '../../assets/img/x-cancel.svg';
 import SelectUserImg  from '../../assets/img/select-user-example-img.png';
-import DotOptions  from '../../assets/img/link-three-dot.svg';
 import PlusSign  from '../../assets/img/plus-sign.svg';
 import AddNewClient from './AddClient.js';
 import Select from 'react-select'
