@@ -38,7 +38,7 @@ const Finances = () => {
                   </div>
                   <img onClick={() =>setShow(false)} className='ms-auto' src={XCancel} alt=""/>
                 </div>
-                <h6 className='fw-bold fs-6 my-3'>
+                <h6 className='fw-bold fs-6 my-1'>
                   #11212HHHHH
                 </h6>
                 <label className='text-left w-100'>
@@ -48,71 +48,69 @@ const Finances = () => {
                         value="strawberry"
                         options={options}
                 />
-                <label className='text-left w-100 mt-4'>
+                <label className='text-left w-100 mt-2'>
                   Project/Description
                 </label>
                 <Input type='phone' placeholder='$0.00' className='off-canvas-menu__input py-3 px-3' />
-                <Row className='mt-4'>
-                  <Col xl='6'>
+                <Row className='mt-2'>
+                  <Col md='6'>
                     <label className='text-left w-100'>
                       Issued on
                     </label>
                     <Input type='date' placeholder='14/04/2021' className='off-canvas-menu__input py-3 px-3' />
                   </Col>
-                  <Col xl='6'>
+                  <Col md='6'>
                     <label className='text-left w-100'>
                       Due Date
                     </label>
                     <Input type='date' placeholder='14/04/2021' className='off-canvas-menu__input py-3 px-3' />
                   </Col>
                 </Row>
-                <div className='mt-4 d-inline-flex'>
+                <div className='mt-2 d-inline-flex'>
                   <input type="checkbox" className='my-auto'/>
                   <h6 className='fs-6 my-auto ms-2 fw-light'>This is a recurring invoice (monthly)</h6>
                 </div>
-                <Row className='mt-4'>
-                  <Col xl='5'>
+                <Row className='mt-2'>
+                  <Col md='5'>
                     <label className='text-left w-100'>
                       Issued on
                     </label>
                     <Input type='date' placeholder='14/04/2021' className='off-canvas-menu__input py-3 px-3' />
                   </Col>
-                  <Col xl='1'>
+                  <Col md='1'>
                     <label className='text-left w-100'>
                       QTY
                     </label>
                     <Input type='number' placeholder='2' className='off-canvas-menu__input py-3 px-3' />
                   </Col>
-                  <Col xl='3'>
+                  <Col md='3'>
                     <label className='text-left w-100'>
                       Price
                     </label>
                     <Input type='number' placeholder='$300' className='off-canvas-menu__input py-3 px-3' />
                   </Col>
-                  <Col xl='3'>
+                  <Col md='3'>
                     <label className='text-left w-100'>
                       Total
                     </label>
                     <h6 className='pt-3'>
                       $600
-                      <img src={DotOptions} className='ms-2' alt=""/>
                     </h6>
                   </Col>
                 </Row>
-                <Row className='mt-4'>
-                  <Col xl='5'>
+                <Row className='mt-2'>
+                  <Col md='5'>
                     <Input type='date' placeholder='14/04/2021' className='off-canvas-menu__input py-3 px-3' />
                   </Col>
-                  <Col xl='1'>
+                  <Col md='1'>
                     <Input type='number' placeholder='2' className='off-canvas-menu__input py-3 px-3' />
                   </Col>
-                  <Col xl='3'>
+                  <Col md='3'>
                     <Input type='number' placeholder='$300' className='off-canvas-menu__input py-3 px-3' />
                   </Col>
-                  <Col xl='3'>
+                  <Col md='3'>
                     <h6 className='pt-3'>
                       $600
-                      <img src={DotOptions} className='ms-2' alt=""/>
                     </h6>
                   </Col>
                 </Row>
@@ -122,7 +120,7 @@ const Finances = () => {
                   <h6 className='fw-light ms-auto me-4 my-auto'>Total</h6>
                   <h6 className='fw-bold ms-auto me-4 my-auto'>$1200</h6>
                 </div>
-                <div className='d-inline-flex mt-2 w-100 mb-4'>
+                <div className='d-inline-flex mt-2 w-100 mb-2'>
                   <h6 className='add-item me-auto my-auto'>Preview</h6>
                   <h6 className='save-pdf py-2 px-4'>
                     Save PDF

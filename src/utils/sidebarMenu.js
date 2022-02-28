@@ -57,6 +57,13 @@ const sideBarMenu = [
   },
 
   {
+    id: "Schedule Post",
+    title: "Schedule Post",
+    type: "item",
+    navLink:'/Schedule',
+    icon: <IoSettingsSharp size={20} />,
+  },
+  {
     id: "Settings",
     title: "Settings",
     type: "item",

@@ -1047,7 +1047,7 @@ label {
   position: fixed;
   z-index: 200;
   right: 0;
-  height: 90vh;
+  height: 100vh;
   width: 83vw;
   background: rgba(29, 30, 44, 0.32);
   backdrop-filter: blur(10px);
@@ -1161,4 +1161,285 @@ label {
   border: 1px solid #E0E0E0;
   box-sizing: border-box;
   border-radius: 16px;
+}
+
+.scheduled-post {
+  &__menu {
+    &__container {
+      border-bottom: 1px solid #E5ECF2;
+    }
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.25px;
+    color: #111317;
+    cursor: pointer;
+  }
+  &__active {
+    color: #49A8F8;
+    border-bottom: 3px solid #49A8F8;
+  }
+  &__filters {
+    background: #E8F7FF;
+    border-radius: 5px;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.04px;
+    color: #111317;
+  }
+  &__filters-2 {
+    background: #E5ECF2;
+    border-radius: 5px;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.04px;
+    color: #111317;
+  }
+  &__search {
+    border: 1px solid #C0CCDA;
+    box-sizing: border-box;
+    border-radius: 5px;
+    input {
+      border: none;
+    }
+  }
+  &__table {
+    &__header{
+      &__container {
+        background: #F9FAFC;
+        &__title {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 18px;
+          align-items: center;
+          letter-spacing: 0.04px;
+          color: #111317;
+        }
+      }
+    }
+  }
+  &__post {
+    &__new{
+      &__steps {
+        &__container {
+          border-bottom: 1px solid #E5ECF2;
+        }
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.15px;
+        color: #C0CCDA;
+        opacity: 0.8;
+        &__active {
+          color: #032041;
+        }
+        &_number {
+          background: #C0CCDA;
+          border: 3px solid #FFFFFF;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 13px;
+          line-height: 24px;
+          display: flex;
+          align-items: center;
+          color: #FFFFFF;
+          border-radius: 50%;
+          &__active {
+            background: linear-gradient(180deg, #6AD5ED 0%, #49A8F8 100%) !important;
+            border: 3px solid #FFFFFF !important;
+          }
+        }
+      }
+      &__textarea {
+        background: #FFFFFF;
+        border: 1px solid #C0CCDA;
+        box-sizing: border-box;
+        border-radius: 20px;
+      }
+      &__social_channel {
+        background: #F9FAFC;
+        border-radius: 10px;
+        &__text {
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 22px;
+          display: flex;
+          align-items: center;
+          letter-spacing: 0.25px;
+          color: #6E7191;
+        }
+      }
+    }
+    &__input {
+      &__info-text {
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.25px;
+        color: #2062F4;
+      }
+    }
+    &__title {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: 0.25px;
+      color: rgba(17, 19, 23, 0.8);
+    }
+    &__user {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: 0.25px;
+      color: rgba(17, 19, 23, 0.8);
+    }
+    &__published {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 18px;
+      text-align: center;
+      letter-spacing: 0.04px;
+      color: #57D9A3;
+    }
+    &__date {
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 18px;
+      text-align: left;
+      letter-spacing: 0.04px;
+      color: #111317;
+    }
+  }
+}
+
+.rounded-container {
+  border-radius: 20px;
+}
+
+.gray-bg-button {
+  background: rgba(9, 30, 66, 0.04);
+  mix-blend-mode: normal;
+  border-radius: 3px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  align-items: center;
+  text-align: center;
+  color: #A5ADBA;
+  margin: 0px 10px;
+  cursor: pointer;
+}
+
+
+.blue-bg-button {
+  background: #2062F4;
+  border-radius: 3px;
+  mix-blend-mode: normal;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #FFFFFF;
+  margin: 0px 10px;
+  cursor: pointer;
+}
+
+.green-info-text {
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
+  display: flex;
+  align-items: flex-end;
+  letter-spacing: 0.04px;
+  color: #00D67D;
+}
+
+.social-tabs {
+  background: #FFFFFF;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+  color: #6E7191;
+  cursor: pointer;
+}
+
+.social-tabs-active {
+  background: #E8F7FF;
+  border: 1px solid #49A8F8;
+  border-radius: 10px;
+}
+
+.bg-gray {
+  background: #F9FAFC;
+  border-radius: 10px;
+}
+
+.example-text {
+  background: #E8F7FF;
+  border-radius: 10px;
+  h6 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0.04px;
+    color: #111317;
+  }
+}
+
+.modal-text-description {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.04px;
+  color: #111317;
+  text-align: left;
+}
+
+.blue-gradient-button {
+  background: linear-gradient(93.88deg, #49A8F8 6.88%, #0053F4 74.45%);
+  border-radius: 16px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 28px;
+  text-align: center;
+  letter-spacing: 0.75px;
+  color: #F7F7FC;
+}
+
+.blue-border-btn {
+  background: #FFFFFF;
+  border: 1px solid #2062F4;
+  box-sizing: border-box;
+  border-radius: 16px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 28px;
+  text-align: center;
+  letter-spacing: 0.75px;
+  color: #2062F4;
 }
