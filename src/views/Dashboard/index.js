@@ -121,7 +121,7 @@ const Dashboard = () => {
                                         </div>
                                     </div>
 
-                                    <div className='mx-auto w-75 text-center client-inactive-state py-3'>
+                                    <div className='mx-auto w-75 text-center client-inactive-state '>
                                         <h5>You have no client, pleas invite one to get started</h5>
                                         <p className='py-2 pb-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
 
@@ -146,8 +146,8 @@ const Dashboard = () => {
                 <Col md='12' lg='12' sm='12' xxl='4' className='mb-3'>
                     <Card className='calendar-card overflow-auto'>
                         <div className='d-flex align-items-center calendar-header'>
-                            <img src={icon1} width='16px' alt='calendar' />
-                            <h4 className='mx-3 card-header-text mb-0'>Calendar</h4>
+                            <img src={icon1} width='16px' alt='calendar' className='mb-0' />
+                            <h4 className='mx-3 card-header-text mb-0 mt-1'>Scheduled Posts</h4>
                         </div>
                         <Calendar
                             className='customize-calendar'
