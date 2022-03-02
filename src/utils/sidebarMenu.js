@@ -5,7 +5,7 @@ import {  FaAward,FaUserFriends } from "react-icons/fa"
 import {AiFillFileText} from "react-icons/ai"
 import {RiPieChartFill,RiBookFill} from 'react-icons/ri'
 
-const sideBarMenu = [
+export const sideBarMenu = [
   {
     id: "Overview",
     title: "Overview",
@@ -15,8 +15,8 @@ const sideBarMenu = [
   },
 
   {
-    id: "Client Management",
-    title: "Client Management",
+    id: "Clients",
+    title: "Clients",
     type: "item",
     icon: <FaUserFriends size={20} />,
     navLink: "/client-management"
@@ -24,10 +24,10 @@ const sideBarMenu = [
   },
 
   {
-    id: "Content Calendar",
-    title: "Content Calendar",
+    id: "Post Scheduling",
+    title: "Post Scheduling",
     type: "item",
-    icon: <BsCalendar2MinusFill size={20} />,
+    icon: <BsCalendar2MinusFill size={17} />,
     navLink:"/Content-Calendar"
   },
 
@@ -48,21 +48,50 @@ const sideBarMenu = [
   },
 
   {
-    id: "Templates",
-    title: "Templates",
+    id: "Messages",
+    title: "Messages",
     type: "item",
     icon: <RiBookFill size={20} />,
     navLink:'/Templates'
 
   },
 
+
   {
-    id: "Schedule Post",
-    title: "Schedule Post",
+    id: "Rewards",
     type: "item",
-    navLink:'/Schedule',
-    icon: <IoSettingsSharp size={20} />,
+    title: "Rewards",
+    icon: <FaAward size={18} />,
+    navLink:'/Subscriptions'
   },
+
+  // {
+  //   id: "Schedule Post",
+  //   title: "Schedule Post",
+  //   type: "item",
+  //   navLink:'/Schedule',
+  //   icon: <IoSettingsSharp size={20} />,
+  // },
+  // {
+  //   id: "Settings",
+  //   title: "Settings",
+  //   type: "item",
+  //   navLink:'/Settings',
+  //   icon: <IoSettingsSharp size={20} />,
+  // },
+
+  // {
+  //   id: "Subscriptions",
+  //   type: "item",
+  //   title: "Subscriptions",
+  //   icon: <FaAward size={20} />,
+  //   navLink:'/Subscriptions'
+  // },
+ 
+]
+
+
+export const bottomSideBarMenu=[
   {
     id: "Settings",
     title: "Settings",
@@ -72,11 +101,10 @@ const sideBarMenu = [
   },
 
   {
-    id: "Subscriptions",
+    id: "Help & Support",
     type: "item",
-    title: "Subscriptions",
-    icon: <FaAward size={20} />,
-    navLink:'/Subscriptions'
+    title: "Help & Support",
+    icon: <FaAward size={18} />,
+    navLink:'/help'
   },
 ]
-export default sideBarMenu

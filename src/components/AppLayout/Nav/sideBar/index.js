@@ -3,6 +3,7 @@ import classnames from "classnames"
 import PerfectScrollbar from "react-perfect-scrollbar"
 import SidebarHeader from "./SideBarHeader"
 import SideBar from './SideBar'
+import DownSideBar from './DownSideBar'
 // import { useNav } from '../../../../utils/context';
 
 
@@ -71,16 +72,25 @@ const SideNav = ({ setCurrentSection, showMobileSideBar, setShowMobileSideBar })
                             menuShadow === true &&
                             setMenuShadow(false)
                     })}>
-                    <ul className="navigation navigation-main mt-3">
+                    <ul className="navigation navigation-main mt-3 ">
                         <SideBar
                             hoverIndex={hoveredMenuItem}
                             activeItem={activeItem}
                             handleSidebarMouseEnter={handleSidebarMouseEnter}
-                            
+
 
                         />
                     </ul>
+                    <ul className="navigation navigation-main mt-3 fixed-bottom">
+                    <DownSideBar
+                        hoverIndex={hoveredMenuItem}
+                        activeItem={activeItem}
+                        handleSidebarMouseEnter={handleSidebarMouseEnter}
+                    />
+
+                </ul>
                 </PerfectScrollbar>
+                
             </div>
         </React.Fragment>
     )

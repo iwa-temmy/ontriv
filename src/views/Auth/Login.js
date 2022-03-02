@@ -8,7 +8,7 @@ import {
     Col,
     Button
 } from 'reactstrap';
-import SigninImg from '../../assets/img/sign2.png';
+// import SigninImg from '../../assets/img/sign2.png';
 import { AiFillApple, AiFillTwitterCircle } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
@@ -30,12 +30,12 @@ const Signin = ({ setAuthState }) => {
     return (
         <div className='auth'>
             <Row className='gx-0'>
-                <Col lg='5' sm='12' className='pr-0'>
+                <Col lg='4' sm='12' className='pr-0'>
                     <div className='signin-left'>
                         <Container>
-                            <div className='signin-img-container '>
+                            {/* <div className='signin-img-container '>
                                 <img src={SigninImg} alt='signin-img' className='signin-img' />
-                            </div>
+                            </div> */}
                             <div className='signin-text text-white pl-5 w-75 mx-auto'>
                                 <h2 className='signin-header-text mt-5 mb-3'>
                                     Content Manager Dream Tool.
@@ -48,15 +48,15 @@ const Signin = ({ setAuthState }) => {
                         </Container>
                     </div>
                 </Col>
-                <Col lg='7' sm='12' className='pl-0'>
+                <Col lg='8' sm='12' className='pl-0 mt-2'>
                     <div className='signin-right'>
-                        <Container>
+                        {/* <Container> */}
 
-                            <div className='mx-auto w-75 signin-form-wrapper'>
-                                <div className='signin-logo text-center my-3 mb-4'>
+                            <div className='mx-auto  signin-form-wrapper'>
+                                <div className='signin-logo text-center my-2 mb-4'>
                                     <img src={logo} alt='ontriv-logo' />
                                 </div>
-                                <Card className='p-5 signin-form-card '>
+                                <Card className='px-5 py-4  signin-form-card mb-1'>
                                     <h4 className='text-center'>Welcome Back!</h4>
                                     <p className='text-center'>Login with your Account Details</p>
                                     <Form onSubmit={handleSubmit(loginUser)}>
@@ -187,7 +187,7 @@ const Signin = ({ setAuthState }) => {
                                 </div>
                             </div>
 
-                        </Container>
+                        {/* </Container> */}
 
 
                     </div>

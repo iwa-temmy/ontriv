@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import classnames from "classnames"
-import {sideBarMenu} from "../../../../utils/sidebarMenu"
+import {bottomSideBarMenu} from "../../../../utils/sidebarMenu"
 import { ChevronRight } from "react-feather"
 
 
@@ -10,10 +10,10 @@ const SideMenuContent = (props) => {
 
     // Loop over sidebar menu
     // eslint-disable-next-line
-    const menuItems = sideBarMenu.map((item, i) => {
+    const menuItems = bottomSideBarMenu.map((item, i) => {
         let renderItem = (
             <li
-                className={classnames("nav-item", {
+                className={classnames("nav-item bottom mb-0", {
                     activeNav: props.hoverIndex === item.navLink
                 })}
                 key={item.id}
