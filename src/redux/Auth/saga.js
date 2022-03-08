@@ -7,8 +7,8 @@ import {
     REGISTER_USER,
     LOGOUT_USER,
     FORGOT_PASSWORD,
-    loginUserSuccess,
-    loginUserError,
+    // loginUserSuccess,
+    // loginUserError,
     registerUserSuccess,
     registerUserError,
     forgotPasswordSuccess,
@@ -55,44 +55,48 @@ function* register({ payload }) {
 }
 
 function* login({ payload }) {
+    yield console.log(payload);
     try {
-        const response = yield Axios.post('/auth/login', payload.user);
+        const response = yield Axios.post('auth/user/speciallogin', payload.userDetails);
         console.log(response.data);
-        if (response.data.success) {
-            setCurrentUser(response.data.data)
-            yield put(loginUserSuccess(response.data));
-            if (response.data.data.user.role === 'superadmin') {
-                window.location.href = '/overview';
-            } else {
-                window.location.href = '/overview';
-            }
-            yield put(loginUserError(response.data.message));
-        } else {
-            yield put(loginUserError(response.data.message));
-        }
+        // if (response.data.success) {
+        //     setCurrentUser(response.data.data)
+        //     yield put(loginUserSuccess(response.data));
+        //     if (response.data.data.user.role === 'superadmin') {
+        //         window.location.href = '/overview';
+        //     } else {
+        //         window.location.href = '/overview';
+        //     }
+        //     yield put(loginUserError(response.data.message));
+        // } else {
+        //     yield put(loginUserError(response.data.message));
+        // }
     } catch (error) {
-        console.log(error.response.data.message)
-        // const {message} = erroresponse.data;
-        let message;
-        if (error.response) {
-            message = error.response.data.message;
-            // switch (error.response.status) {
-            //   case 500:
-            //     message = 'Internal Server Error';
-            //     break;
-            //   case 404:
-            //     message = error.response.data.message;
-            //     break;
-            //   case 401:
-            //     message = 'Invalid credentials';
-            //     break;
-            //   default:  
-            //       message= 'Login failed. Try again later...'
-            // }
-        } else if (error.message) {
-            message = 'Login failed. Try again later...';
-        }
-        yield put(loginUserError(message));
+        console.log(error);
+        console.log(error.response);
+
+        // console.log(error.response.data.message)
+        // // const {message} = erroresponse.data;
+        // let message;
+        // if (error.response) {
+        //     message = error.response.data.message;
+        //     // switch (error.response.status) {
+        //     //   case 500:
+        //     //     message = 'Internal Server Error';
+        //     //     break;
+        //     //   case 404:
+        //     //     message = error.response.data.message;
+        //     //     break;
+        //     //   case 401:
+        //     //     message = 'Invalid credentials';
+        //     //     break;
+        //     //   default:  
+        //     //       message= 'Login failed. Try again later...'
+        //     // }
+        // } else if (error.message) {
+        //     message = 'Login failed. Try again later...';
+        // }
+        // yield put(loginUserError(message));
     }
 }
 

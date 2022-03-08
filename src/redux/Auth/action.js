@@ -15,9 +15,9 @@ import {
     FORGOT_PASSWORD_ERROR,
   } from '../actions';
   
-  export const loginUser = (user) => ({
+  export const loginUser = (userDetails) => ({
     type: LOGIN_USER,
-    payload: { user },
+    payload: { userDetails },
   });
   export const loginUserSuccess = (message) => ({
     type: LOGIN_USER_SUCCESS,

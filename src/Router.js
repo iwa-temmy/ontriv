@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectedRoutes from './utils/ProtectedRoute';
+
 import ClientProtectedRoutes from './utils/ClientProtectedRoute';
 import Signup from './views/Auth/Register';
 import Signin from './views/Auth/Login';
@@ -21,6 +22,8 @@ import Messages from "./views/Messages";
 import InvoiceDetailsPage from "./views/Financials/InvoiceDetailsPage";
 import Schedule from "./views/Schedule";
 import NewPost from "./views/Schedule/NewPost";
+
+
 
 
 
@@ -55,6 +58,7 @@ const RouterConfig = () => {
                 <Route exact path='/auth/login' element={<Signin />} />
                 <Route exact path='/auth/forgot-password' element={<ForgotPassword />} />
             </Routes>
+            
         </BrowserRouter >
     )
 

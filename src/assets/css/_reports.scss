@@ -58,13 +58,13 @@
     .avg-engagement-card {
       padding: 32px 0 32px 35px;
 
-      background: #2062f4;
+      background: #2062f4 !important;
     }
     .links-clicked {
-      background: #49a8f8;
+      background: #49a8f8 !important;
     }
     .likes {
-      background: linear-gradient(345deg, #7337fd, #2062f4);
+      background: linear-gradient(345deg, #7337fd, #2062f4) !important;
     }
   }
 }
