@@ -158,10 +158,10 @@ const Dashboard = () => {
                         <div>
                             <h4 className='mx-3 upcoming-events-header  mb-0'>Upcoming Events</h4>
                             <div className='upcoming-event mb-2 d-flex justify-content-between flex-wrap align-items-center'>
-                                <div className='event-icon'>
-                                    <img src={icon1} width='30px' alt='icon' />
-                                </div>
-                                <div>
+                                {/* <div className='event-icon'> */}
+                                    <img src={icon1}  alt='icon' className='event-icon '/>
+                                {/* </div> */}
+                                <div className='event-details'>
                                     <h4>April Fools day</h4>
                                     <p className='mb-0'>01/04/2021</p>
                                 </div>
@@ -174,10 +174,10 @@ const Dashboard = () => {
                                 </div>
                             </div>
                             <div className='upcoming-event mb-2 d-flex justify-content-between flex-wrap align-items-center'>
-                                <div className='event-icon '>
-                                    <img src={icon2} width='30px' alt='icon' />
+                                <div >
+                                    <img src={icon2}  alt='icon' className='event-icon ' />
                                 </div>
-                                <div>
+                                <div className='event-details'>
                                     <h4>Good Friday</h4>
                                     <p className='mb-0'>02/04/2021</p>
                                 </div>
