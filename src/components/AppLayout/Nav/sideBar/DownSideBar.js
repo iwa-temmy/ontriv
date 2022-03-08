@@ -31,7 +31,7 @@ const SideMenuContent = (props) => {
 
                     key={item.id}
                 >
-                    <div className="menu-text">
+                    <div className="menu-text bottom">
                         <span className={classnames(`menu-icon-${i % 2 === 0 ? 'even' : 'odd'}`, {
                             activeNav: props.hoverIndex === item.navLink
                         })}>

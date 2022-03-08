@@ -152,6 +152,10 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         padding: 10px 10px 10px 17px;
+        &.bottom{
+          padding: 2.5px 10px 2.5px 17px;
+
+        }
         @media (max-width: 1000px) {
           padding: 0;
         }

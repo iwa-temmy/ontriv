@@ -81,7 +81,7 @@ const SideNav = ({ setCurrentSection, showMobileSideBar, setShowMobileSideBar })
 
                         />
                     </ul>
-                    <ul className="navigation navigation-main mt-3 fixed-bottom">
+                    <ul className="navigation navigation-main mt-3 mb-4 fixed-bottom">
                     <DownSideBar
                         hoverIndex={hoveredMenuItem}
                         activeItem={activeItem}
