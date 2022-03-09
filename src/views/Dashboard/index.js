@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { Row, Col, Card, Button } from 'reactstrap';
 import Select from 'react-select';
 import { HiChevronRight, HiPlus, HiArrowRight } from 'react-icons/hi'
-import Calendar from 'react-calendar';
+// import Calendar from 'react-calendar';
+import Calendar from '../../components/Calendar'
 import { CenteredModal } from '../../components/Modal'
 import chart from '../../assets/img/chart.png'
 import icon1 from '../../assets/img/calendaric1.svg'
@@ -143,7 +144,7 @@ const Dashboard = () => {
 
                     </div>
                 </Col>
-                <Col md='12' lg='12' sm='12' xxl='4' className='mb-3'>
+                <Col md='5' lg='5' sm='12' xxl='4' className='mb-3'>
                     <Card className='calendar-card overflow-auto'>
                         <div className='d-flex align-items-center calendar-header'>
                             <img src={icon1} width='16px' alt='calendar' className='mb-0' />
