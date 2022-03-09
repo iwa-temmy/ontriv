@@ -10,7 +10,8 @@ import facebook from '../../../assets/img/facebook.png'
 import twitter from '../../../assets/img/twitter.png'
 import instagram from '../../../assets/img/instagram.png'
 import linkedin from '../../../assets/img/linkedin.png'
-import Calendar from 'react-calendar';
+// import Calendar from 'react-calendar';
+import Calendar from '../../../components/Calendar'
 import { CenteredModal as Modal } from '../../../components/Modal'
 
 
@@ -284,12 +285,14 @@ const ClientDetails = () => {
                         <Col sm='12' md='6' >
                             <Card className='content-calendar'>
                                 <Row>
-                                    <Col sm='10' className='first-section'>
-                                        <h2 className=''>Content Calendar</h2>
-                                        <Calendar className='w-100' />
+                                    <Col sm='12' className='first-section'>
+                                        <h2 className=''>Scheduled Post</h2>
+                                        <Calendar
+                    
 
+                        />
                                     </Col>
-                                    <Col sm='2' className='second-section text-center'>
+                                    {/* <Col sm='2' className='second-section text-center'>
                                         <p className='month active'>JAN</p>
                                         <p className='month'>FEB</p>
                                         <p className='month'>MAR</p>
@@ -304,7 +307,7 @@ const ClientDetails = () => {
                                         <p className='month'>DEC</p>
 
 
-                                    </Col>
+                                    </Col> */}
                                 </Row>
                             </Card>
 
