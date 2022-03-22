@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL='https://app.ontriv.com/'
+const BASE_URL='https://ontriv.herokuapp.com'
 
 
 export const Axios = axios.create({
@@ -22,7 +22,7 @@ export const setAuthToken = (token) => {
 export const setCurrentUser = (data) => {
     try {
       if (data) {
-        localStorage.setItem('ontrivUserToken', data.token);
+        localStorage.setItem('ontrivUserToken', data.access_token);
         localStorage.setItem('ontrivCurrentUser', JSON.stringify(data.user));
       } else {
         localStorage.removeItem('ontrivUserToken');

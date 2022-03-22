@@ -1,6 +1,6 @@
 import React, {
     useState,
-    //  useEffect
+     useEffect
 } from 'react';
 import {
     Container,
@@ -9,10 +9,10 @@ import {
     Input,
     Form,
     Col,
-    Button
+    Button,
 } from 'reactstrap';
 // import SigninImg from '../../assets/img/sign2.png';
-// import { ThreeDots } from 'react-loader-spinner';
+import { ThreeDots } from 'react-loader-spinner';
 import { AiFillApple, AiFillTwitterCircle } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
@@ -22,37 +22,37 @@ import { useForm } from 'react-hook-form';
 import logo from '../../assets/img/logo.png';
 import { connect } from 'react-redux';
 import { setAuthState, loginUser } from "../../redux/actions";
-// import createNotification from '../../utils/Notification';
-import { Link } from 'react-router-dom'
+import createNotification from '../../utils/Notification';
+import { NavLink} from 'react-router-dom'
 
 
 
 const Signin = ({
-    setAuthState,
-    // loginUser,
-    // loading,
-    // loginError,
+    // setAuthState,
+    loginUser,
+    loading,
+    loginError,
     message
 
 }) => {
     const [inputType, setInputType] = useState('password')
     const { handleSubmit, register, formState: { errors } } = useForm();
     const signinUser = values => {
-        console.log(values);
-        // loginUser(values);
-        // createNotification()
+        // console.log(values);
+        loginUser(values);
+        // // createNotification()
     }
 
-    // useEffect(() => {
-    //     console.log(loginError, message, loading)
-    //     if (loginError.length > 0) {
-    //         createNotification('error', loginError)
-    //     }
-    //     if (message.length > 0) {
-    //         createNotification('info', loginError)
-    //     }
+    useEffect(() => {
+        console.log(loginError, message, loading)
+        if (loginError.length > 0) {
+            createNotification('error', loginError)
+        }
+        if (message.length > 0) {
+            createNotification('info', loginError)
+        }
 
-    // }, [loginError, message, loading])
+    }, [loginError, message, loading])
 
 
 
@@ -89,7 +89,7 @@ const Signin = ({
                                 <h4 className='text-center'>Welcome Back!</h4>
                                 <p className='text-center'>Login with your Account Details</p>
                                 <Form onSubmit={handleSubmit(signinUser)}>
-                                    {errors.email && <span className='text-danger text-left'>Enter a vailid Email</span>}
+                                    {errors.email && <span className='text-danger text-left'>Enter a valid Email</span>}
                                     <input
                                         type='email'
                                         name='email'
@@ -160,25 +160,24 @@ const Signin = ({
 
 
                                     <Button className='py-3' type='submit'
-                                    // disabled={loading}
+                                    disabled={loading}
                                     >
-                                        <Link
+                                        {/* <Link
                                             className='w-100 login-link'
                                             to='/overview'
                                             onClick={() => {
                                                 setAuthState(true);
                                             }}
-                                        >
-                                            {/* {loading ?
+                                        > */}
+                                            {loading ?
                                             <div className='text-center w-100 align-items-center'>
                                                 <ThreeDots color='white' height={'12px'} wrapperStyle={{display:'block'}}/>
                                             </div>
-                                            : 'Log in'} */}
-                                            Log in
-                                        </Link>
+                                            : 'Log in'}
+                                            {/* Log in */}
+                                        {/* </Link> */}
 
                                     </Button>
-
 
                                     <div className='py-3 mx-auto w-75'>
                                         <p className='easy-login'>Easy Login</p>
@@ -216,7 +215,7 @@ const Signin = ({
                             <div className='no-account my-4 py-4 text-center'>
                                 <p className='mb-0'>Don’t have an account yet?
                                     <span className='register-link'>
-                                        <a href='/auth/register'>Sign Up</a>
+                                        <NavLink to='/auth/register'>Sign Up</NavLink>
                                     </span>
                                 </p>
 

@@ -1,14 +1,14 @@
 import { all, fork, put, takeEvery } from 'redux-saga/effects';
-import { setCurrentUser } from '../../utils/helper';
-import { Axios } from '../../utils/helper';
+// import { setCurrentUser } from '../../utils/helper';
+import { Axios,setAuthToken,setCurrentUser } from '../../utils/helper';
 
 import {
     LOGIN_USER,
     REGISTER_USER,
     LOGOUT_USER,
     FORGOT_PASSWORD,
-    // loginUserSuccess,
-    // loginUserError,
+    loginUserSuccess,
+    loginUserError,
     registerUserSuccess,
     registerUserError,
     forgotPasswordSuccess,
@@ -18,12 +18,14 @@ import {
 
 function* register({ payload }) {
     const { data } = payload;
-    console.log(data);
+    yield console.log(data);
+
     try {
-        const response = yield Axios.post(`/auth/register`, data)
-        if (response.data.success) {
-            yield put(registerUserSuccess(response.data.message));
-            window.location.href = `/auth/verify-token`;
+        const response = yield Axios.post(`/register/api/v1/registration/`, data)
+        console.log(response);
+        if (response.status === 201) {
+            yield put(registerUserSuccess(response.data.detail));
+            window.location.href = `/auth/login`;
         } else {
             yield put(registerUserError(response.data.message));
         }
@@ -32,6 +34,16 @@ function* register({ payload }) {
         console.log(error.response)
         let message;
         if (error.response) {
+            const errorMessage = error.response.data?.country
+                ? error.response.data?.country[0]
+                : error.response.data?.email ?
+                    error.response.data?.email[0] :
+                    error.response.data?.password ? error.response.data?.password[0] :
+                        error.response.data?.fullname ? error.response.data?.fullname[0] :
+                            error.response.data?.buz ? error.response.data?.buz[0].website[0] :
+                                error.response.data?.buz[0].business_name[0]
+
+
             switch (error.response.status) {
                 case 500:
                     message = 'Internal Server Error';
@@ -42,8 +54,11 @@ function* register({ payload }) {
                 case 401:
                     message = 'Invalid credentials';
                     break;
+                case 400:
+                    message = errorMessage;
+                    break;
                 default:
-                    message = 'Operation failed. Try again later...';
+                    message = error.response.statusText;
             }
         }
         else if (error.message) {
@@ -55,48 +70,45 @@ function* register({ payload }) {
 }
 
 function* login({ payload }) {
-    yield console.log(payload);
+    yield console.log(payload.userDetails);
     try {
-        const response = yield Axios.post('auth/user/speciallogin', payload.userDetails);
-        console.log(response.data);
-        // if (response.data.success) {
-        //     setCurrentUser(response.data.data)
-        //     yield put(loginUserSuccess(response.data));
-        //     if (response.data.data.user.role === 'superadmin') {
-        //         window.location.href = '/overview';
-        //     } else {
-        //         window.location.href = '/overview';
-        //     }
-        //     yield put(loginUserError(response.data.message));
-        // } else {
-        //     yield put(loginUserError(response.data.message));
-        // }
+        const response = yield Axios.post('/accounts/api/v1/login/', payload.userDetails);
+        console.log(response);
+        if (response.status === 200) {
+            setAuthToken(response.data?.access_token)
+            setCurrentUser(response.data)
+            yield put(loginUserSuccess(response.data));
+            window.location.href='/overview';
+        } else {
+            yield put(loginUserError('Login Failed, please try again later'));
+        }
     } catch (error) {
-        console.log(error);
-        console.log(error.response);
+        // console.log(error);
+        // console.log(error.response);
 
-        // console.log(error.response.data.message)
+        // console.log(error.response.data.error[0])
+        // console.log(error.message);
         // // const {message} = erroresponse.data;
-        // let message;
-        // if (error.response) {
-        //     message = error.response.data.message;
-        //     // switch (error.response.status) {
-        //     //   case 500:
-        //     //     message = 'Internal Server Error';
-        //     //     break;
-        //     //   case 404:
-        //     //     message = error.response.data.message;
-        //     //     break;
-        //     //   case 401:
-        //     //     message = 'Invalid credentials';
-        //     //     break;
-        //     //   default:  
-        //     //       message= 'Login failed. Try again later...'
-        //     // }
-        // } else if (error.message) {
-        //     message = 'Login failed. Try again later...';
-        // }
-        // yield put(loginUserError(message));
+        let message;
+        if (error.response) {
+            message = error.response.data.message;
+            switch (error.response.status) {
+                case 500:
+                    message = 'Internal Server Error';
+                    break;
+                case 404:
+                    message = error.response.data.message;
+                    break;
+                case 401:
+                    message = 'Invalid credentials';
+                    break;
+                default:
+                    message = error.response.data.error[0]
+            }
+        } else if (error.message) {
+            message = error.message;
+        }
+        yield put(loginUserError(message));
     }
 }
 
@@ -134,7 +146,7 @@ function* forgotPassword({ payload }) {
 function* logout({ payload }) {
     // const { history } = payload;
     yield setCurrentUser();
-    window.location.href = '/app';
+    window.location.href = '/auth/login';
 }
 
 

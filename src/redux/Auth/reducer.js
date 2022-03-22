@@ -12,6 +12,7 @@ import {
 } from '../actions';
 
 const INIT_STATE = {
+    accessToken:localStorage.getItem('ontrivUserToken'),
     currentUser: "",
     loading: false,
     registrationError: '',
@@ -27,13 +28,14 @@ const authReducer = (state = INIT_STATE, action) => {
             return {
                 ...state,
                 loading: true,
+                loginError: ''
             };
         case LOGIN_USER_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                currentUser: action.payload.data.user,
-                message: action.payload.message,
+                currentUser: action.payload.user,
+                message: action.payload?.message,
                 loginError: ''
             };
         case LOGIN_USER_ERROR:
@@ -41,7 +43,7 @@ const authReducer = (state = INIT_STATE, action) => {
                 ...state,
                 loading: false,
                 currentUser: null,
-                loginError: action.payload.message,
+                loginError: action.payload.message?action.payload.message:action.payload.error,
             };
         case FORGOT_PASSWORD:
             return { ...state, loading: true, forgotPasswordError: '' };
