@@ -10,7 +10,7 @@ const INIT_STATE = {
 
 const NavReducer = (state = INIT_STATE, action) => {
     const { type, payload } = action
-    console.log(payload)
+    // console.log(payload)
     switch (type) {
         case SET_CURRENT_SECTION:
             return { ...state, currentSection: payload.section }

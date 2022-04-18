@@ -17,7 +17,7 @@ const INIT_STATE = {
     loading: false,
     registrationError: '',
     loginError: "",
-    resetPasswordError: "",
+    forgotPasswordError: "",
     message: ""
 };
 
@@ -46,7 +46,7 @@ const authReducer = (state = INIT_STATE, action) => {
                 loginError: action.payload.message?action.payload.message:action.payload.error,
             };
         case FORGOT_PASSWORD:
-            return { ...state, loading: true, forgotPasswordError: '' };
+            return { ...state, loading: true, forgotPasswordError: '',message:'' };
         case FORGOT_PASSWORD_SUCCESS:
             return {
                 ...state,

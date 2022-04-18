@@ -3,17 +3,20 @@ import { Navigate, Outlet } from 'react-router-dom';
 import AppLayout from '../components/AppLayout';
 import { connect } from 'react-redux';
 import jwt_decode from "jwt-decode";
+import { setAuthToken} from '../utils/helper';
+
 
 
 const PrivateRoute = ({ accessToken }) => {
     // console.log(accessToken);
     let authorized;
     if (accessToken) {
+        setAuthToken(accessToken);
         let decoded = jwt_decode(accessToken);
-        // console.log(decoded);
-        // console.log(new Date((decoded.iat)*1000).toUTCString())
-        // console.log(new Date((decoded.exp)*1000).toUTCString())
-        // console.log(Date.now());
+        console.log(decoded);
+        console.log((decoded.iat)*1000)
+        console.log((decoded.exp)*1000)
+        console.log(Date.now());
         if( ((decoded.exp)*1000)< Date.now() ){
           authorized=false;
         }
@@ -25,7 +28,7 @@ const PrivateRoute = ({ accessToken }) => {
         authorized=false;
     }
 
-
+console.log(authorized);
     // If authorized, return an outlet that will render child elements
     // If not, return element that will navigate to login page
     return authorized ?

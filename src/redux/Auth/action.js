@@ -29,9 +29,9 @@ import {
   });
   
 
-  export const forgotPassword = (password) => ({
+  export const forgotPassword = (data) => ({
     type: FORGOT_PASSWORD,
-    payload: { password },
+    payload: { data },
   });
   export const forgotPasswordSuccess = (message) => ({
     type: FORGOT_PASSWORD_SUCCESS,

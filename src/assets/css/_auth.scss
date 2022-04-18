@@ -525,6 +525,24 @@
     margin: auto;
     padding: 20px 0px;
     .reset-password-wrapper {
+      input:not([type="checkbox"]):not([type="button"]) {
+        border-radius: 16px !important;
+        padding: 18px 20px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        font-weight: 300;
+        // width:100%;
+        border: 1px solid #ced4da;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        @media (min-width: 1600px) {
+          padding: 21px 24px !important;
+        }
+        &:focus {
+          outline: none !important;
+          border: 1px solid rgba(32, 98, 244);
+          box-shadow: unset;
+        }
+      }
       width: 40%;
       @media (max-width: 770px) {
         width: 60% !important;

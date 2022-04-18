@@ -2,6 +2,7 @@ import { all, fork, put, takeEvery } from 'redux-saga/effects';
 // import { setCurrentUser } from '../../utils/helper';
 import { Axios,setAuthToken,setCurrentUser } from '../../utils/helper';
 
+
 import {
     LOGIN_USER,
     REGISTER_USER,
@@ -11,7 +12,7 @@ import {
     loginUserError,
     registerUserSuccess,
     registerUserError,
-    forgotPasswordSuccess,
+    // forgotPasswordSuccess,
     forgotPasswordError,
 
 } from '../actions';
@@ -113,20 +114,21 @@ function* login({ payload }) {
 }
 
 function* forgotPassword({ payload }) {
-    console.log(payload);
+   yield console.log(payload.data);
+   const {new_password1,new_password2,uid,token}=payload.data;
 
     try {
-        const response = yield Axios.post('/auth/forgot-password', {
-            payload
+        const response = yield Axios.post(`/accounts/api/v1/password-reset/confirm/${uid}/${token}/`, {
+           new_password1,new_password2
         });
         console.log(response);
-        if (response.data.success) {
-            yield put(forgotPasswordSuccess(response.data.message));
-            window.location.href = '/auth/verify-password-token';
+        // if (response.data.success) {
+        //     yield put(forgotPasswordSuccess(response.data.message));
+        //     window.location.href = '/auth/login';
 
-        } else {
-            yield put(forgotPasswordError(response.data.message));
-        }
+        // } else {
+        //     yield put(forgotPasswordError(response.data.message));
+        // }
     } catch (error) {
         console.log(error);
         console.log(error.response);

@@ -171,7 +171,7 @@
     p {
       font-size: 13px;
       font-weight: 400;
-      opacity:0.8;
+      opacity: 0.8;
     }
   }
   input {
@@ -470,5 +470,35 @@
     width: 100%;
     font-size: 16px;
     font-weight: 600;
+  }
+}
+.add-client-wrapper {
+  .css-6j8wv5-Input {
+    margin: 0;
+  }
+  .css-319lph-ValueContainer {
+    padding: 0 8px !important;
+  }
+  .css-tlfecz-indicatorContainer,
+  .css-1okebmr-indicatorSeparator {
+    display: none;
+  }
+  .css-6j8wv5-Input {
+    @media (min-width: 767px) {
+      // padding: 65px 87px 90px !important;
+      padding: 5px !important;
+    }
+    @media (min-width: 4500px) {
+      // padding: 65px 87px 90px !important;
+      padding: 3px !important;
+    }
+  }
+  .css-1s2u09g-control {
+    border-radius: 16px;
+
+    @media (min-width: 1200px) {
+      // padding: 65px 87px 90px !important;
+      padding: 7px !important;
+    }
   }
 }
