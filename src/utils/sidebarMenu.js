@@ -28,7 +28,7 @@ export const sideBarMenu = [
     title: "Post Scheduling",
     type: "item",
     icon: <BsCalendar2MinusFill size={17} />,
-    navLink:"/Content-Calendar"
+    navLink:"/Schedule"
   },
 
   {
