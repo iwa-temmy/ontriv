@@ -1,6 +1,6 @@
 import React, {
     useState,
-     useEffect
+    useEffect
 } from 'react';
 import {
     Container,
@@ -12,31 +12,30 @@ import {
     Button,
 } from 'reactstrap';
 // import SigninImg from '../../assets/img/sign2.png';
-import { ThreeDots } from 'react-loader-spinner';
-import { AiFillApple, AiFillTwitterCircle } from 'react-icons/ai';
-import { FcGoogle } from 'react-icons/fc';
-import { BsFacebook } from 'react-icons/bs';
-import { TiEye } from 'react-icons/ti';
-import { IoMdEyeOff } from 'react-icons/io';
-import { useForm } from 'react-hook-form';
+import {ThreeDots} from 'react-loader-spinner';
+import {AiFillApple, AiFillTwitterCircle} from 'react-icons/ai';
+import {FcGoogle} from 'react-icons/fc';
+import {BsFacebook} from 'react-icons/bs';
+import {TiEye} from 'react-icons/ti';
+import {IoMdEyeOff} from 'react-icons/io';
+import {useForm} from 'react-hook-form';
 import logo from '../../assets/img/logo.png';
-import { connect } from 'react-redux';
-import { setAuthState, loginUser } from "../../redux/actions";
+import {connect} from 'react-redux';
+import {setAuthState, loginUser} from "../../redux/actions";
 import createNotification from '../../utils/Notification';
-import { NavLink} from 'react-router-dom'
-
+import {NavLink} from 'react-router-dom'
 
 
 const Signin = ({
-    // setAuthState,
-    loginUser,
-    loading,
-    loginError,
-    message
+                    // setAuthState,
+                    loginUser,
+                    loading,
+                    loginError,
+                    message
 
-}) => {
+                }) => {
     const [inputType, setInputType] = useState('password')
-    const { handleSubmit, register, formState: { errors } } = useForm();
+    const {handleSubmit, register, formState: {errors}} = useForm();
     const signinUser = values => {
         // console.log(values);
         loginUser(values);
@@ -44,7 +43,7 @@ const Signin = ({
     }
 
     useEffect(() => {
-        console.log(loginError, message, loading)
+        console.log(loginError, message, loading);
         if (loginError.length > 0) {
             createNotification('error', loginError)
         }
@@ -53,7 +52,6 @@ const Signin = ({
         }
 
     }, [loginError, message, loading])
-
 
 
     return (
@@ -83,7 +81,7 @@ const Signin = ({
 
                         <div className='mx-auto  signin-form-wrapper'>
                             <div className='signin-logo text-center my-2 mb-4'>
-                                <img src={logo} alt='ontriv-logo' />
+                                <img src={logo} alt='ontriv-logo'/>
                             </div>
                             <Card className='px-5 py-4  signin-form-card mb-1'>
                                 <h4 className='text-center'>Welcome Back!</h4>
@@ -105,7 +103,8 @@ const Signin = ({
                                             }
                                         )}
                                     />
-                                    {errors.password && <span className='text-danger text-left'>Enter your password</span>}
+                                    {errors.password &&
+                                    <span className='text-danger text-left'>Enter your password</span>}
                                     <div className='password-container'>
                                         <div className='password-icon'>
                                             {
@@ -113,12 +112,16 @@ const Signin = ({
                                                     <TiEye
                                                         color='#E5E9F2'
                                                         size='30px'
-                                                        onClick={() => { setInputType('text') }}
+                                                        onClick={() => {
+                                                            setInputType('text')
+                                                        }}
                                                     /> :
                                                     <IoMdEyeOff
                                                         color='#000'
                                                         size='25px'
-                                                        onClick={() => { setInputType('password') }}
+                                                        onClick={() => {
+                                                            setInputType('password')
+                                                        }}
                                                     />
 
 
@@ -142,7 +145,8 @@ const Signin = ({
                                     <div className='d-flex justify-content-between align-items-center flex-wrap '>
                                         <div className='d-flex  align-items-center'>
                                             <div className='input-check'>
-                                                <Input type="checkbox" id="forgotPassword" name="forgotPassword" value="forgotPassword" className='mb-0 border-dark' />
+                                                <Input type="checkbox" id="forgotPassword" name="forgotPassword"
+                                                       value="forgotPassword" className='mb-0 border-dark'/>
                                             </div>
                                             <div className='ml-3 '>
                                                 <p className='mb-0'>Remember me</p>
@@ -151,16 +155,16 @@ const Signin = ({
                                         <div>
                                             <p className='forgot-password mb-0'>
                                                 {/* <span> */}
-                                                <a className='forgot-password-link' href='/auth/forgot-password'>Forgot Password?</a>
+                                                <a className='forgot-password-link' href='/auth/forgot-password'>Forgot
+                                                    Password?</a>
                                                 {/* </span> */}
                                             </p>
                                         </div>
                                     </div>
 
 
-
                                     <Button className='py-3' type='submit'
-                                    disabled={loading}
+                                            disabled={loading}
                                     >
                                         {/* <Link
                                             className='w-100 login-link'
@@ -169,12 +173,13 @@ const Signin = ({
                                                 setAuthState(true);
                                             }}
                                         > */}
-                                            {loading ?
+                                        {loading ?
                                             <div className='text-center w-100 align-items-center'>
-                                                <ThreeDots color='white' height={'12px'} wrapperStyle={{display:'block'}}/>
+                                                <ThreeDots color='white' height={'12px'}
+                                                           wrapperStyle={{display: 'block'}}/>
                                             </div>
                                             : 'Log in'}
-                                            {/* Log in */}
+                                        {/* Log in */}
                                         {/* </Link> */}
 
                                     </Button>
@@ -226,15 +231,15 @@ const Signin = ({
 
 
                     </div>
-                </Col >
-            </Row >
+                </Col>
+            </Row>
 
-        </div >
+        </div>
     )
 }
 
-const mapStateToProps = ({ auth }) => {
-    const { loginError, message, loading } = auth
-    return ({ loginError, message, loading })
+const mapStateToProps = ({auth}) => {
+    const {loginError, message, loading} = auth;
+    return ({loginError, message, loading})
 }
-export default connect(mapStateToProps, { setAuthState, loginUser })(Signin);
+export default connect(mapStateToProps, {setAuthState, loginUser})(Signin);

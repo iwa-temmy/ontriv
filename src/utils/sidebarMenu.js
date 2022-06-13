@@ -52,7 +52,7 @@ export const sideBarMenu = [
     title: "Messages",
     type: "item",
     icon: <RiBookFill size={20} />,
-    navLink:'/Templates'
+    navLink:'/Chat'
 
   },
 

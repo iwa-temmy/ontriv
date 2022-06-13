@@ -31,8 +31,8 @@ function* register({ payload }) {
             yield put(registerUserError(response.data.message));
         }
     } catch (error) {
-        console.log(error)
-        console.log(error.response)
+        console.log(error);
+        console.log(error.response);
         let message;
         if (error.response) {
             const errorMessage = error.response.data?.country
@@ -76,7 +76,7 @@ function* login({ payload }) {
         const response = yield Axios.post('/accounts/api/v1/login/', payload.userDetails);
         console.log(response);
         if (response.status === 200) {
-            setAuthToken(response.data?.access_token)
+            setAuthToken(response.data?.access_token);
             setCurrentUser(response.data)
             yield put(loginUserSuccess(response.data));
             window.location.href='/overview';
@@ -145,7 +145,7 @@ function* forgotPassword({ payload }) {
 }
 
 
-function* logout({ payload }) {
+function* logout() {
     // const { history } = payload;
     yield setCurrentUser();
     window.location.href = '/auth/login';
