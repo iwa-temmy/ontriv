@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import { setCurrentSection, logoutUser } from "../../redux/actions";
 
 
-const AppLayout = ({ children, setCurrentSection, currentSection, logoutUser }) => {
+const AppLayout = ({ children, setCurrentSection, currentSection, logoutUser, currentUser }) => {
     const [showMobileSideBar, setShowMobileSideBar] = useState(false)
     return (
         <div className='app-layout ' >
@@ -19,6 +19,7 @@ const AppLayout = ({ children, setCurrentSection, currentSection, logoutUser }) 
                     currentSection={currentSection}
                     setShowMobileSideBar={setShowMobileSideBar}
                     logoutUser={logoutUser}
+                    userDetails={currentUser}
                 />
                 <div className="content-wrapper">
                     {children}
@@ -29,9 +30,10 @@ const AppLayout = ({ children, setCurrentSection, currentSection, logoutUser }) 
 
 }
 
-const mapStateToProps = ({ nav }) => {
+const mapStateToProps = ({ nav, auth }) => {
     const { currentSection } = nav;
-    return { currentSection };
+    const {currentUser} = auth;
+    return { currentSection,  currentUser};
 };
 
 export default connect(mapStateToProps, { setCurrentSection, logoutUser })(AppLayout);

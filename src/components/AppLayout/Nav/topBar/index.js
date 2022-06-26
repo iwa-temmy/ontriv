@@ -13,7 +13,7 @@ import ClientLog from '../../../../assets/img/clientlogo.png'
 import {HiOutlineMenuAlt2} from 'react-icons/hi'
 import {Link} from "react-router-dom";
 
-export const TopNav = ({currentSection, setShowMobileSideBar, logoutUser}) => {
+export const TopNav = ({currentSection, setShowMobileSideBar, logoutUser, userDetails}) => {
     const [userProfileState, updateUserProfileState] = useState(false);
     const [notificationState, updateNotificationState] = useState(false);
     const [mobileSearch, setMobileSearch] = useState(false);
@@ -91,8 +91,8 @@ export const TopNav = ({currentSection, setShowMobileSideBar, logoutUser}) => {
                     </div>
                     <div className="user-menu">
                         <div className="user-menu-header">
-                            <h1 className="user-name mb-0">James John</h1>
-                            <h6 className="user-email mb-0">james@gmail.com</h6>
+                            <h1 className="user-name mb-0">{userDetails?.full_name}</h1>
+                            <h6 className="user-email mb-0">{userDetails?.email}</h6>
                         </div>
                         <div className="user-menu-items">
                             <div className="d-flex user-menu-item align-items-center">
