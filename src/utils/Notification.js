@@ -13,7 +13,7 @@ import { NotificationManager } from 'react-notifications';
             NotificationManager.warning(message);
             break;
         case 'error':
-            NotificationManager.error(message)
+            NotificationManager.error(message);
             break;
         default:
             NotificationManager.error('Try Again', 'Error', 3000)

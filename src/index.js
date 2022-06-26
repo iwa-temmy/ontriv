@@ -1,21 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { NavProvider } from './utils/context';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import store from './redux/store'
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { NavProvider } from "./utils/context";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import configureStore from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+
+const configuredStore = configureStore();
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <NavProvider>
-        <App />
-      </NavProvider>
-
-    </React.StrictMode>
+  <Provider store={configuredStore.store}>
+    <PersistGate loading={null} persistor={configuredStore.persistor}>
+        <NavProvider>
+          <App />
+        </NavProvider>
+    </PersistGate>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

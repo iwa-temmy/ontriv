@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Sidebar from "./Nav/sideBar";
 import { TopNav } from "./Nav/topBar";
-import { connect } from 'react-redux';
-import { setCurrentSection } from "../../redux/actions";
+import {connect} from "react-redux";
+import { setCurrentSection, logoutUser } from "../../redux/actions";
 
 
-const AppLayout = ({ children, setCurrentSection, currentSection }) => {
+const AppLayout = ({ children, setCurrentSection, currentSection, logoutUser, currentUser }) => {
     const [showMobileSideBar, setShowMobileSideBar] = useState(false)
     return (
         <div className='app-layout ' >
@@ -18,6 +18,8 @@ const AppLayout = ({ children, setCurrentSection, currentSection }) => {
                 <TopNav
                     currentSection={currentSection}
                     setShowMobileSideBar={setShowMobileSideBar}
+                    logoutUser={logoutUser}
+                    userDetails={currentUser}
                 />
                 <div className="content-wrapper">
                     {children}
@@ -28,10 +30,11 @@ const AppLayout = ({ children, setCurrentSection, currentSection }) => {
 
 }
 
-const mapStateToProps = ({ nav }) => {
+const mapStateToProps = ({ nav, auth }) => {
     const { currentSection } = nav;
-    return { currentSection };
+    const {currentUser} = auth;
+    return { currentSection,  currentUser};
 };
 
-export default connect(mapStateToProps, { setCurrentSection })(AppLayout);
+export default connect(mapStateToProps, { setCurrentSection, logoutUser })(AppLayout);
 

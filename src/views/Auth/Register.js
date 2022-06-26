@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import {
     Container,
     Row,
@@ -8,28 +8,27 @@ import {
     Col,
     Button
 } from 'reactstrap';
-import Steps, { Step } from "rc-steps";
-import { ThreeDots } from 'react-loader-spinner';
+import Steps, {Step} from "rc-steps";
+import {ThreeDots} from 'react-loader-spinner';
 import "rc-steps/assets/index.css";
 import "rc-steps/assets/iconfont.css";
-import { TiEye } from 'react-icons/ti'
-import { IoMdEyeOff } from 'react-icons/io';
-import { connect } from 'react-redux';
+import {TiEye} from 'react-icons/ti'
+import {IoMdEyeOff} from 'react-icons/io';
+import {connect} from 'react-redux';
 import logo from '../../assets/img/logo.png'
-import { useForm } from 'react-hook-form';
-import { registerUser } from "../../redux/actions";
+import {useForm} from 'react-hook-form';
+import {registerUser} from "../../redux/actions";
 import createNotification from '../../utils/Notification';
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
 
 
-
 const Signup = ({
-    registerUser,
-    registrationError,
-    message,
-    loading
-}) => {
+                    registerUser,
+                    registrationError,
+                    message,
+                    loading
+                }) => {
 
     const [value, setValue] = useState('')
     const [roleValue, setRoleValue] = useState("");
@@ -43,30 +42,30 @@ const Signup = ({
         label: "Marketing Manager",
         value: 'Marketing Manager'
     },
-    {
-        label: "Account Manager",
-        value: 'Account Manager'
-    },
-    {
-        label: "Directors of operations",
-        value: 'Directors of operations'
-    }]
+        {
+            label: "Account Manager",
+            value: 'Account Manager'
+        },
+        {
+            label: "Directors of operations",
+            value: 'Directors of operations'
+        }]
 
     const informationOptions = [{
-        label: "Search Engine (Google,Yahoo, etc)",
-        value: 'Search Engine (Google,Yahoo, etc)'
+        label: "Promotion",
+        value: 'PROMOTION'
     }, {
-        label: "Recommended by a friend or colleague",
-        value: 'Recommended by a friend or colleague'
+        label: "Referral",
+        value: 'REFERRAL'
     },
-    {
-        label: "Social media",
-        value: 'Social media'
-    },
-    {
-        label: "Blog or publications",
-        value: 'Blog or publications'
-    }]
+        {
+            label: "Social media",
+            value: 'SOCIAL'
+        },
+        {
+            label: "Other",
+            value: 'OTHER'
+        }];
     // console.log(options);
 
     const [activeState, setActiveState] = useState(0);
@@ -89,11 +88,11 @@ const Signup = ({
         setInformationValue(value)
     }
 
-    const { handleSubmit, register, watch, formState: { errors } } = useForm();
+    const {handleSubmit, register, watch, formState: {errors}} = useForm();
 
     const handlePersonalDetails = (values) => {
         console.log(values);
-        setRegistrationForm({ ...values, country: value.value });
+        setRegistrationForm({...values, country: value.value});
         setActiveState(1)
     }
 
@@ -107,9 +106,11 @@ const Signup = ({
         } = registrationForm
         // console.log(values);
 
-        const { business_name,
+        const {
+            business_name,
             referral_code,
-            website } = values
+            website
+        } = values
 
         const buz = [{
             business_name,
@@ -157,7 +158,8 @@ const Signup = ({
                                     Sign up to Ontriv
                                 </h2>
                                 <p className=''>
-                                    Lorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet, consectetur adipiscing elit, sed ctetur adipiscing elit, sed
+                                    Lorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet, consectetur adipiscing
+                                    elit, sed ctetur adipiscing elit, sed
                                 </p>
                             </Container>
 
@@ -169,14 +171,16 @@ const Signup = ({
                         <div className='signup-form-wrapper mx-auto'>
                             {/* <div className='mx-auto w-75 d-flex'> */}
                             <div className='signin-logo text-center mb-5 mt-5'>
-                                <img src={logo} alt='ontriv-logo' />
+                                <img src={logo} alt='ontriv-logo'/>
                             </div>
-                            <Row className='gx-0' >
+                            <Row className='gx-0'>
                                 <Col sm='12' md='6'>
                                     <Card className='card-1'>
                                         <Steps direction='vertical' current={activeState}>
-                                            <Step className='' title='Personal Details' description='Lorem ipsum dolor sit amet, cons ectetur adipiscing elit, sed' />
-                                            <Step title='Business Details' description='Lorem ipsum dolor sit amet, cons ectetur adipiscing elit, sed' />
+                                            <Step className='' title='Personal Details'
+                                                  description='Lorem ipsum dolor sit amet, cons ectetur adipiscing elit, sed'/>
+                                            <Step title='Business Details'
+                                                  description='Lorem ipsum dolor sit amet, cons ectetur adipiscing elit, sed'/>
                                         </Steps>
                                     </Card>
                                 </Col>
@@ -192,7 +196,8 @@ const Signup = ({
                                         {
                                             activeState === 0 ?
                                                 <Form onSubmit={handleSubmit(handlePersonalDetails)}>
-                                                    {errors.fullname && <span className='text-danger text-left'>Enter Full Name</span>}
+                                                    {errors.fullname &&
+                                                    <span className='text-danger text-left'>Enter Full Name</span>}
                                                     <input
                                                         type='text'
                                                         placeholder='Full Name'
@@ -204,7 +209,8 @@ const Signup = ({
 
                                                             }
                                                         )} />
-                                                    {errors.email && <span className='text-danger text-left'>Enter a valid Email</span>}
+                                                    {errors.email &&
+                                                    <span className='text-danger text-left'>Enter a valid Email</span>}
                                                     <input
                                                         type='email'
                                                         name='email'
@@ -221,7 +227,8 @@ const Signup = ({
                                                         )}
                                                     />
 
-                                                    {errors.country && <span className='text-danger text-left'>Select Country</span>}
+                                                    {errors.country &&
+                                                    <span className='text-danger text-left'>Select Country</span>}
                                                     <Select
                                                         options={options}
 
@@ -231,12 +238,12 @@ const Signup = ({
                                                         placeholder='Select Country'
                                                         className={`w-100 ${errors.country ? 'border-danger' : ""} mb-3`}
 
-                                                    // {...register('country'
-                                                    //     , {
-                                                    //         required: true,
+                                                        // {...register('country'
+                                                        //     , {
+                                                        //         required: true,
 
-                                                    //     }
-                                                    // )}
+                                                        //     }
+                                                        // )}
                                                     />
                                                     {/* <input
                                                         name='country'
@@ -250,7 +257,8 @@ const Signup = ({
                                                         )}
                                                     /> */}
 
-                                                    {errors.password && <span className='text-danger text-left'>Enter your password</span>}
+                                                    {errors.password &&
+                                                    <span className='text-danger text-left'>Enter your password</span>}
                                                     <div className='password-container'>
                                                         <div className='password-icon'>
                                                             {
@@ -258,12 +266,16 @@ const Signup = ({
                                                                     <TiEye
                                                                         color='#E5E9F2'
                                                                         size='30px'
-                                                                        onClick={() => { setInputType1('text') }}
+                                                                        onClick={() => {
+                                                                            setInputType1('text')
+                                                                        }}
                                                                     /> :
                                                                     <IoMdEyeOff
                                                                         color='#000'
                                                                         size='25px'
-                                                                        onClick={() => { setInputType1('password') }}
+                                                                        onClick={() => {
+                                                                            setInputType1('password')
+                                                                        }}
                                                                     />
 
 
@@ -284,7 +296,8 @@ const Signup = ({
                                                         />
                                                     </div>
 
-                                                    {errors.confirmPassword && <span className='text-danger text-left'>{errors.confirmPassword?.message}</span>}
+                                                    {errors.confirmPassword && <span
+                                                        className='text-danger text-left'>{errors.confirmPassword?.message}</span>}
                                                     <div className='password-container'>
                                                         <div className='password-icon'>
                                                             {
@@ -292,12 +305,16 @@ const Signup = ({
                                                                     <TiEye
                                                                         color='#E5E9F2'
                                                                         size='30px'
-                                                                        onClick={() => { setInputType2('text') }}
+                                                                        onClick={() => {
+                                                                            setInputType2('text')
+                                                                        }}
                                                                     /> :
                                                                     <IoMdEyeOff
                                                                         color='#000'
                                                                         size='25px'
-                                                                        onClick={() => { setInputType2('password') }}
+                                                                        onClick={() => {
+                                                                            setInputType2('password')
+                                                                        }}
                                                                     />
 
 
@@ -323,10 +340,12 @@ const Signup = ({
                                                         />
 
                                                     </div>
-                                                    <div className=' py-3 d-flex justify-content-between align-items-center mx-auto wizard-control-buttons'>
+                                                    <div
+                                                        className=' py-3 d-flex justify-content-between align-items-center mx-auto wizard-control-buttons'>
                                                         <div className='mb-0'>
-                                                            <Button className={`btn-${activeState === 1 ? 'primary' : ""}`
-                                                            }
+                                                            <Button
+                                                                className={`btn-${activeState === 1 ? 'primary' : ""}`
+                                                                }
                                                                 onClick={() => {
                                                                     setActiveState(0)
                                                                 }}
@@ -335,12 +354,16 @@ const Signup = ({
                                                         </div>
                                                         {/* <div className='mb-0'> */}
                                                         <span className={`dot bg-${activeState === 0 ? 'primary' : ""}`}
-                                                            onClick={() => { setActiveState(0) }}
+                                                              onClick={() => {
+                                                                  setActiveState(0)
+                                                              }}
                                                         />
                                                         {/* </div> */}
                                                         {/* <div className='mb-0'> */}
                                                         <span className={`dot bg-${activeState === 1 ? 'primary' : ""}`}
-                                                            onClick={() => { setActiveState(1) }}
+                                                              onClick={() => {
+                                                                  setActiveState(1)
+                                                              }}
                                                         />
                                                         {/* </div> */}
                                                         <div className='mb-0'>
@@ -356,8 +379,10 @@ const Signup = ({
                                                         </div>
                                                     </div>
                                                 </Form> :
-                                                <Form className='business-form' onSubmit={handleSubmit(handleBusinessDetails)}>
-                                                    {errors.business_name && <span className='text-danger text-left'>Enter Business Name</span>}
+                                                <Form className='business-form'
+                                                      onSubmit={handleSubmit(handleBusinessDetails)}>
+                                                    {errors.business_name &&
+                                                    <span className='text-danger text-left'>Enter Business Name</span>}
                                                     <input
                                                         type='text'
                                                         placeholder='Business Name'
@@ -383,7 +408,8 @@ const Signup = ({
                                                             }
                                                         )} />
 
-                                                    {errors.role && <span className='text-danger text-left'>Enter a role</span>}
+                                                    {errors.role &&
+                                                    <span className='text-danger text-left'>Enter a role</span>}
                                                     <Select
                                                         options={roleOptions}
                                                         // placeholder='Role'
@@ -394,12 +420,12 @@ const Signup = ({
                                                         placeholder='role'
                                                         className={`w-100 ${errors.role ? 'border-danger' : ""} mb-3`}
 
-                                                    // {...register('country'
-                                                    //     , {
-                                                    //         required: true,
+                                                        // {...register('country'
+                                                        //     , {
+                                                        //         required: true,
 
-                                                    //     }
-                                                    // )}
+                                                        //     }
+                                                        // )}
                                                     />
                                                     {/* <input
                                                         type='text'
@@ -426,7 +452,8 @@ const Signup = ({
                                                             // }
                                                         )} />
 
-                                                    {errors.aboutUs && <span className='text-danger text-left'>Select an option</span>}
+                                                    {errors.aboutUs &&
+                                                    <span className='text-danger text-left'>Select an option</span>}
                                                     <Select
                                                         options={informationOptions}
                                                         // placeholder='Role'
@@ -437,12 +464,12 @@ const Signup = ({
                                                         placeholder='How do you hear about us?'
                                                         className={`w-100 ${errors.information ? 'border-danger' : ""} mb-3`}
 
-                                                    // {...register('country'
-                                                    //     , {
-                                                    //         required: true,
+                                                        // {...register('country'
+                                                        //     , {
+                                                        //         required: true,
 
-                                                    //     }
-                                                    // )}
+                                                        //     }
+                                                        // )}
                                                     />
                                                     {/* <input
                                                         type='text'
@@ -469,7 +496,8 @@ const Signup = ({
                                                         <Button className='w-100' type='submit'>
                                                             {loading ?
                                                                 <div className='text-center w-100 align-items-center'>
-                                                                    <ThreeDots color='white' height={'12px'} wrapperStyle={{ display: 'block' }} />
+                                                                    <ThreeDots color='white' height={'12px'}
+                                                                               wrapperStyle={{display: 'block'}}/>
                                                                 </div>
                                                                 : 'Sign Up'}
                                                         </Button>
@@ -493,8 +521,6 @@ const Signup = ({
                             </Row>
 
 
-
-
                             {/* </div> */}
 
                         </div>
@@ -508,9 +534,9 @@ const Signup = ({
     )
 }
 
-const mapStateToProps = ({ auth }) => {
-    const { registrationError, message, loading } = auth
-    return ({ registrationError, message, loading })
+const mapStateToProps = ({auth}) => {
+    const {registrationError, message, loading} = auth
+    return ({registrationError, message, loading})
 }
-export default connect(mapStateToProps, { registerUser })(Signup)
+export default connect(mapStateToProps, {registerUser})(Signup)
 // export default Signup
