@@ -10,7 +10,7 @@ export const Axios = axios.create({
 });
 
 export const setAuthToken = (token) => {
-  console.log(token);
+  // console.log(token);
   if (token) {
     // axios.defaults.headers.common['X-CSRFToken'] = token;
     // axios.defaults.headers.common['Authorization'] = token;
@@ -27,7 +27,7 @@ export const setCurrentUser = (data) => {
   try {
     if (data) {
       localStorage.setItem('ontrivUserToken', data.access_token);
-      localStorage.setItem('ontrivCurrentUser', JSON.stringify(data.user));
+      localStorage.setItem('ontrivCurrentUser', JSON.stringify(Object.assign(data.user, data.profile)));
     } else {
       localStorage.removeItem('ontrivUserToken');
       localStorage.removeItem('ontrivCurrentUser');
@@ -36,3 +36,8 @@ export const setCurrentUser = (data) => {
     console.log('>>>>: src/helpers/Utils.js : setCurrentUser -> error', error);
   }
 };
+
+
+export const getAuthToken = () => {
+  return localStorage.getItem('ontrivUserToken');   
+}

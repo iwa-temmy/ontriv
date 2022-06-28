@@ -12,9 +12,11 @@ import Billing from './Billing';
 import Personal from './PersonalDetails';
 import Team from './Team';
 import Subscription from './Subscriptions'
+import {connect} from "react-redux";
 
 const Settings = () => {
     const [activeTab, setActiveTab] = useState('subscriptions');
+
 
     return (
         <div className="settings">
@@ -91,4 +93,10 @@ const Settings = () => {
         </div>
     )
 }
-export default Settings;
+
+const mapStateToProps = (state) => {
+    return {
+        ...state,
+    }
+}
+export default connect(mapStateToProps, {})(Settings);
