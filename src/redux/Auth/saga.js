@@ -95,7 +95,7 @@ function* login({ payload }) {
     }
   } catch (error) {
     // console.log(error);
-    // console.log(error.response);
+    console.log(error.response);
 
     // console.log(error.response.data.error[0])
     // console.log(error.message);
