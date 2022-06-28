@@ -52,20 +52,21 @@ const Signup = ({
         value: 'Directors of operations'
     }]
 
+
     const informationOptions = [{
-        label: "Search Engine (Google,Yahoo, etc)",
-        value: 'Search Engine (Google,Yahoo, etc)'
+        label: "Referral",
+        value: 'REFERRAL'
     }, {
-        label: "Recommended by a friend or colleague",
-        value: 'Recommended by a friend or colleague'
+        label: "Social",
+        value: 'SOCIAL'
     },
     {
-        label: "Social media",
-        value: 'Social media'
+        label: "Promotion",
+        value: 'PROMOTION'
     },
     {
-        label: "Blog or publications",
-        value: 'Blog or publications'
+        label: "Other",
+        value: 'OTHER'
     }]
     // console.log(options);
 

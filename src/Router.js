@@ -44,7 +44,7 @@ const RouterConfig = () => {
                     <Route exact path='/Chat' element={<Messages />} />
                     <Route exact path='/Schedule' element={<Schedule />} />
                     <Route exact path='/NewPost' element={<NewPost />} />
-                    <Route exact path='/Reports' element={<SetUpBussiness />} />
+                    <Route exact path='/business' element={<SetUpBussiness />} />
                     <Route exact path='/settings' element={<Settings />} />
                 </Route>
 
