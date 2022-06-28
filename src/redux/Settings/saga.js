@@ -1,6 +1,6 @@
 import { put, takeEvery, fork, all } from "redux-saga/effects";
 import Axios  from "../../utils/Axios";
-import { RESET_PASSWORD, resetPasswordSuccess, resetPasswordError, clearMessages } from "../actions";
+import { RESET_PASSWORD, resetPasswordSuccess, resetPasswordError, clearMessages, UPDATE_BUSINESS_DETAILS } from "../actions";
 
 function* resetUserPassword({ payload }) {
   const {credentials} = payload
@@ -47,9 +47,18 @@ function* resetUserPassword({ payload }) {
     yield put(clearMessages());
   }
 }
+function* UpdateBusinessDetails({payload}){
+  const {credentials} = payload;
 
+  yield console.log(credentials);
+
+}
 export function* watchResetPassword() {
   yield takeEvery(RESET_PASSWORD, resetUserPassword);
+}
+
+export function* watchUpdateBusinessDetails(){
+  yield takeEvery(UPDATE_BUSINESS_DETAILS, UpdateBusinessDetails )
 }
 
 

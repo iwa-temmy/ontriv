@@ -3,6 +3,9 @@ import {
   RESET_PASSWORD_ERROR,
   RESET_PASSWORD_SUCCESS,
   RESET_MESSAGE,
+  UPDATE_BUSINESS_DETAILS,
+  UPDATE_BUSINESS_DETAILS_ERROR,
+  UPDATE_BUSINESS_DETAILS_SUCCESS,
 } from "../actions";
 
 export const resetPassword = (credentials) => ({
@@ -21,4 +24,19 @@ export const resetPasswordError = (error) => ({
 
 export const clearMessages = () => ({
   type: RESET_MESSAGE,
-})
+});
+
+export const updateBusinessDetails = (credentials) => ({
+  type: UPDATE_BUSINESS_DETAILS,
+  payload: { credentials },
+});
+
+export const updateBusinessDetailsSuccess = () => ({
+  type: UPDATE_BUSINESS_DETAILS_SUCCESS,
+  payload: "Business Details Updated Successfully",
+});
+
+export const updateBusinessDetailsError = (error) => ({
+  type: UPDATE_BUSINESS_DETAILS_ERROR,
+  payload: { error },
+});
