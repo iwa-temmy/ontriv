@@ -32,9 +32,18 @@ export const GET_TAG ='GET_TAG';
 export const GET_TAG_SUCCESS = 'GET_TAG_SUCCESS';
 export const GET_TAG_ERROR = 'GET_TAG_ERROR';
 
+//Setttings (General)
+export const RESET_PASSWORD = "RESET_PASSWORD";
+export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
+export const RESET_PASSWORD_ERROR = "RESET_PASSWORD_ERROR";
+export const UPDATE_BUSINESS_DETAILS = "UPDATE_BUSINESS_DETAILS";
+export const UPDATE_BUSINESS_DETAILS_SUCCESS = "UPDATE_BUSINESS_DETAILS";
+export const UPDATE_BUSINESS_DETAILS_ERROR = "UPDATE_BUSINESS_DETAILS_ERROR";
+
 
 
 
 export * from './Auth/action';
 export * from './Nav/action';
 export * from './Client/action';
+export * from './Settings/action';
