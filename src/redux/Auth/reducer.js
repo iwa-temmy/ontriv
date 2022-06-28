@@ -9,7 +9,7 @@ import {
   FORGOT_PASSWORD,
   FORGOT_PASSWORD_SUCCESS,
   FORGOT_PASSWORD_ERROR,
-  RESET_MESSAGE
+  RESET_MESSAGE,
 } from "../actions";
 
 const INIT_STATE = {
@@ -84,10 +84,16 @@ const authReducer = (state = INIT_STATE, action) => {
     case LOGOUT_USER:
       return { ...state, currentUser: null, error: "", message: null };
 
-    case RESET_MESSAGE: 
-      return {...state, message: null};
+    case RESET_MESSAGE:
+      return {
+        ...state,
+        registrationError: "",
+        loginError: "",
+        forgotPasswordError: "",
+        message: "",
+      };
     default:
-      return state ;
+      return state;
   }
 };
 

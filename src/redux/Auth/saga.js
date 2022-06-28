@@ -120,6 +120,7 @@ function* login({ payload }) {
       message = error.message;
     }
     yield put(loginUserError(message));
+    yield put (resetMessage());
   }
 }
 
@@ -160,7 +161,7 @@ function* forgotPassword({ payload }) {
 function* logout() {
   // const { history } = payload;
   yield setCurrentUser();
-  yield localStorage.clear();
+  localStorage.clear();
   window.location.href = "/auth/login";
 }
 
