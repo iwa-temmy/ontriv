@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo} from 'react'
 import { HiUser } from 'react-icons/hi'
 import { CenteredModal as Modal } from '../../components/Modal'
 import { ThreeDots } from 'react-loader-spinner'

@@ -31,7 +31,7 @@ function * createClient ({ payload }) {
     console.log(response.config)
     if (response.status === 201) {
       yield put(createClientSuccess(response.data.detail))
-      // window.location.reload()
+      //
     } else {
       yield put(createClientError(response.data.message))
     }
@@ -55,7 +55,7 @@ function * createClient ({ payload }) {
       ? error.response.data?.password[0]
       : error.response.data?.email
       ? error.response.data?.email[0]
-      : error.response.data.detail
+      : error.response.data
 
       switch (error.response.status) {
         case 500:
@@ -92,8 +92,8 @@ function * inviteClient ({ payload }) {
     console.log(response.headers)
     console.log(response.config)
     if (response.status === 201) {
-      yield put(inviteClientSuccess(response.data.detail))
-      window.location.reload()
+      yield put(inviteClientSuccess(response.data.msg))
+     
     } else {
       yield put(inviteClientError(response.data.message))
     }
@@ -118,7 +118,7 @@ function * inviteClient ({ payload }) {
         ? error.response.data?.password[0]
         : error.response.data?.email
         ? error.response.data?.email[0]
-        : error.response.data.detail
+        : error.response.data
 
       switch (error.response.status) {
         case 500:
