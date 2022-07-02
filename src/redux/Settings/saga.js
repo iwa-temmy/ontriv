@@ -4,13 +4,16 @@ import {
   RESET_PASSWORD,
   GET_BUSINESS_DETAILS,
   UPDATE_BUSINESS_DETAILS,
+  CHANGE_BUSINESS_LOGO,
   resetPasswordSuccess,
   resetPasswordError,
   clearMessages,
   getBusinessDetailsSuccess,
   getBusinessDetailsError,
   updateBusinessDetailsSuccess,
-  updateBusinessDetailsError
+  updateBusinessDetailsError,
+  changeBusinessLogoSuccess,
+  changeBusinessLogoError
 } from "../actions";
 
 function* resetUserPassword({ payload }) {
@@ -114,8 +117,14 @@ function* UpdateBusinessDetails({ payload }) {
   } catch (error) {
     let message;
     if (error.response) {
-      const errorMessage = "";
-
+      const errorMessage = error?.response?.data.website 
+      ? error?.response?.data?.website?.[0] 
+      : error.response.data.business_name ? 
+      error.response.data.business_name?.[0]
+      : error.response.data.address ? 
+      error?.response.data?.address?.[0]
+      : error?.response?.data.country;
+      
       switch (error.response.status) {
         case 500:
           message = "Internal Server Error";
@@ -135,10 +144,63 @@ function* UpdateBusinessDetails({ payload }) {
     } else if (error.message) {
       message = error.message;
     }
-    yield put(resetPasswordError(message));
-    // yield put(clearMessages());
+    yield put(updateBusinessDetailsError(message));
+    yield put(clearMessages());
   }
 }
+function* ChangeBusinessLogo({ payload }) {
+  const { credentials } = payload;
+  try {
+    const response = yield Axios.patch(
+      `/business/api/v1/business/`,
+      credentials, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+    );
+    if (response?.status === 200) {
+      yield put(changeBusinessLogoSuccess());
+      yield call(getBusinessDetails);
+    } else {
+      yield put(updateBusinessDetailsError(response.data.message));
+    }
+    yield put(clearMessages());
+  } catch (error) {
+    let message;
+    if (error.response) {
+      const errorMessage = error?.response?.data.website 
+      ? error?.response?.data?.website?.[0] 
+      : error.response.data.business_name ? 
+      error.response.data.business_name?.[0]
+      : error.response.data.address ? 
+      error?.response.data?.address?.[0]
+      : error?.response?.data.country;
+      
+      switch (error.response.status) {
+        case 500:
+          message = "Internal Server Error";
+          break;
+        case 404:
+          message = "Not found";
+          break;
+        case 401:
+          message = "Invalid credentials";
+          break;
+        case 400:
+          message = errorMessage;
+          break;
+        default:
+          message = error.response.statusText;
+      }
+    } else if (error.message) {
+      message = error.message;
+    }
+    yield put(changeBusinessLogoError(message));
+    yield put(clearMessages());
+  }
+}
+
 export function* watchResetPassword() {
   yield takeEvery(RESET_PASSWORD, resetUserPassword);
 }
@@ -150,11 +212,15 @@ export function* watchUpdateBusinessDetails() {
 export function* watchGetBusinessDetails() {
   yield takeEvery(GET_BUSINESS_DETAILS, getBusinessDetails);
 }
+export function* watchChangeBusinessLogo(){
+  yield takeEvery(CHANGE_BUSINESS_LOGO, ChangeBusinessLogo)
+}
 
 export default function* rootSaga() {
   yield all([
     fork(watchResetPassword),
     fork(watchUpdateBusinessDetails),
     fork(watchGetBusinessDetails),
+    fork(watchChangeBusinessLogo)
   ]);
 }

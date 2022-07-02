@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import {
   getBusinessDetails,
   updateBusinessDetails,
+  changeBusinessLogo,
 } from "../../../redux/actions";
 
 const BusinessDetails = ({
@@ -24,6 +25,9 @@ const BusinessDetails = ({
   updateBusinessDetailsError,
   updatingStateLoading,
   message,
+  changeBusinessLogo,
+  changeLogoloading,
+  changeLogoError,
 }) => {
   const [data, setdata] = useState({});
 
@@ -48,7 +52,13 @@ const BusinessDetails = ({
     // 👇️ open file input box on click of other element
     inputRef.current.click();
   };
-
+  const changeLogo = (e) => {
+    const formData = new FormData();
+    const imageName = e.target.files[0];
+    console.log(imageName);
+    formData.append("logo", imageName);
+    changeBusinessLogo(formData);
+  };
   const handleUpdateBusinessDetails = (values) => {
     const payload = {
       ...values,
@@ -57,9 +67,13 @@ const BusinessDetails = ({
       website: values.website || data?.website,
       address: values.address || data?.address,
     };
-
-    updateBusinessDetails(payload);
+    if (values.business_name !== "") {
+      updateBusinessDetails(payload);
+    }else {
+      createNotification("error", "Field cannot be Empty");
+    }
   };
+
   const GetBusinessDetails = useCallback(() => {
     getBusinessDetails();
   }, [getBusinessDetails]);
@@ -86,7 +100,19 @@ const BusinessDetails = ({
     if (message?.length > 0 && updatingStateLoading === false) {
       createNotification("success", message);
     }
-  }, [updateBusinessDetailsError, message, updatingStateLoading]);
+    if (changeLogoError?.length > 0) {
+      createNotification("error", changeLogoError);
+    }
+    if (message?.length > 0 && changeLogoloading === false) {
+      createNotification("success", message);
+    }
+  }, [
+    updateBusinessDetailsError,
+    message,
+    updatingStateLoading,
+    changeLogoloading,
+    changeLogoError,
+  ]);
 
   return (
     <div className="business-details mt-4">
@@ -157,11 +183,19 @@ const BusinessDetails = ({
             <Card className="upload-picture-container mb-4 w-100">
               <h1>Business Logo</h1>
               <div className="d-flex ">
-                <img
-                  className="img-container"
-                  src={data?.logo}
-                  alt="company logo"
-                />
+                {changeLogoloading ? (
+                  <div>loading!!!!</div>
+                ) : data?.logo ? (
+                  <img
+                    src={data?.logo}
+                    className="img-container"
+                    style={{ objectFit: "cover" }}
+                    alt="business logo"
+                  />
+                ) : (
+                  <div className="img-container" alt="company logo"></div>
+                )}
+
                 <div className="upload-text-wrapper">
                   <h1>Upload Logo</h1>
                   <p className="mb-0">Image format with max size of 3mb</p>
@@ -179,6 +213,7 @@ const BusinessDetails = ({
                     className="w-100 file-upload-button"
                     ref={inputRef}
                     style={{ display: "none" }}
+                    onChange={changeLogo}
                   />
                 </div>
               </div>
@@ -196,15 +231,20 @@ const mapStateToProps = ({ settings }) => {
     updateBusinessDetailsError,
     updatingStateLoading,
     message,
+    changeLogoloading,
+    changeLogoError,
   } = settings;
   return {
     businessDetails,
     updateBusinessDetailsError,
     updatingStateLoading,
     message,
+    changeLogoloading,
+    changeLogoError,
   };
 };
 export default connect(mapStateToProps, {
   getBusinessDetails,
   updateBusinessDetails,
+  changeBusinessLogo,
 })(BusinessDetails);

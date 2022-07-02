@@ -9,6 +9,9 @@ import {
   UPDATE_BUSINESS_DETAILS,
   UPDATE_BUSINESS_DETAILS_SUCCESS,
   UPDATE_BUSINESS_DETAILS_ERROR,
+  CHANGE_BUSINESS_LOGO,
+  CHANGE_BUSINESS_LOGO_SUCCESS,
+  CHANGE_BUSINESS_LOGO_ERROR
 } from "../actions";
 
 const settingsReducer = (state = {}, action) => {
@@ -36,6 +39,7 @@ const settingsReducer = (state = {}, action) => {
         ...state,
         resetPasswordError: "",
         message: "",
+        updateBusinessDetailsError:""
       };
     case GET_BUSINESS_DETAILS:
       return {
@@ -69,6 +73,24 @@ const settingsReducer = (state = {}, action) => {
         updatingStateLoading: false,
         updateBusinessDetailsError: action.payload,
       };
+    case CHANGE_BUSINESS_LOGO: 
+      return {
+        ...state,
+        changeLogoloading: true,
+        changeLogoError: "",
+      }
+    case CHANGE_BUSINESS_LOGO_SUCCESS:
+      return {
+        ...state,
+        changeLogoloading: false,
+        message: action.payload,
+      }
+    case CHANGE_BUSINESS_LOGO_ERROR:
+      return {
+        ...state,
+        changeLogoloading: false,
+        changeLogoError: action.payload
+      }
     default:
       return state;
   }

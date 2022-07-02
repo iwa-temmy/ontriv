@@ -9,6 +9,9 @@ import {
   UPDATE_BUSINESS_DETAILS,
   UPDATE_BUSINESS_DETAILS_ERROR,
   UPDATE_BUSINESS_DETAILS_SUCCESS,
+  CHANGE_BUSINESS_LOGO,
+  CHANGE_BUSINESS_LOGO_SUCCESS,
+  CHANGE_BUSINESS_LOGO_ERROR,
 } from "../actions";
 
 export const resetPassword = (credentials) => ({
@@ -50,5 +53,20 @@ export const updateBusinessDetailsSuccess = () => ({
 
 export const updateBusinessDetailsError = (error) => ({
   type: UPDATE_BUSINESS_DETAILS_ERROR,
-  payload: { error },
+  payload: error,
 });
+
+export const changeBusinessLogo = (credentials) => ({
+  type: CHANGE_BUSINESS_LOGO,
+  payload: {credentials},
+})
+
+export const changeBusinessLogoSuccess = () => ({
+  type: CHANGE_BUSINESS_LOGO_SUCCESS,
+  payload: "Business Logo Updated Successfully",
+})
+
+export const changeBusinessLogoError = (error) => ({
+  type: CHANGE_BUSINESS_LOGO_ERROR,
+  payload: error,
+})

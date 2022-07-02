@@ -78,13 +78,13 @@ const PersonalDetails = ({
                 type="text"
                 placeholder="First name"
                 className=""
-                value={currentUser?.full_name}
+                defaultValue={currentUser?.full_name}
               />
               <Input
                 type="email"
                 placeholder="Email address"
                 className=""
-                value={currentUser?.email}
+                defaultValue={currentUser?.email}
               />
               <Input type="email" placeholder="Phone Number" className="" />
               <Button className="w-50">Update</Button>
@@ -124,7 +124,7 @@ const PersonalDetails = ({
                       errors.new_password1 ? "border-danger" : ""
                     }`}
                     {...register("new_password1", {
-                      //   required: true,
+                        required: true,
                     })}
                   />
                   {errors.new_password1 && (
