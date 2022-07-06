@@ -3,49 +3,59 @@ import { Card } from 'reactstrap'
 import { BsFillGridFill, BsListUl } from 'react-icons/bs'
 // import {AiOutlineUnordered}
 import { MdOutlineFileDownload } from 'react-icons/md'
-import { getTag } from '../../redux/actions'
+import { getTag, getClient } from '../../redux/actions'
 import { HiPlus } from 'react-icons/hi'
 import AddNewClient from './AddClient.js'
 import GridView from './GridView.js'
 import ListView from './ListView.js'
 import { connect } from 'react-redux'
-import createNotification from '../../utils/Notification';
+import createNotification from '../../utils/Notification'
 
-
-const ClientManagement = ({ getTag, tags ,getTagError}) => {
-  const [view, setView] = useState('')
+const ClientManagement = ({
+  getTag,
+  tags,
+  getTagError,
+  clients,
+  getClient
+}) => {
+  const [view, setView] = useState('list')
   const [addClient, setAddClient] = useState(false)
-   const [tagOptions, setTagOptions] = useState([]
-  )
+  const [tagOptions, setTagOptions] = useState([])
+
+  // useEffect(() => {
+  //   getTag()
+  //   // eslint-disable-next-line
+  // }, [])
 
   useEffect(() => {
-    getTag()
+    getClient()
     // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
-
     const options = tags?.map((x, i) => {
       return { label: x.name, value: x.id, key: i }
     })
     console.log(options)
-    setTagOptions([  ...options,{
-      label: 'Create New Tag',
-      value: 'Create New Tag'
-    }])
+    setTagOptions([
+      ...options,
+      {
+        label: 'Create New Tag',
+        value: 'Create New Tag'
+      }
+    ])
     // eslint-disable-next-line
   }, [tags])
 
   useEffect(() => {
-        console.log(getTagError)
-        if (getTagError.length > 0) {
-            createNotification('error', getTagError)
-        }
-        // if (message.length > 0) {
-        //     createNotification('info', creatingTagError)
-        // }
-
-    }, [getTagError])
+    console.log(getTagError)
+    if (getTagError.length > 0) {
+      createNotification('error', getTagError)
+    }
+    // if (message.length > 0) {
+    //     createNotification('info', creatingTagError)
+    // }
+  }, [getTagError])
 
   return (
     <>
@@ -57,12 +67,12 @@ const ClientManagement = ({ getTag, tags ,getTagError}) => {
                 <h4 className='mb-0 client-analytics-text'>
                   <span className='first-text'>Number of </span>Clients
                 </h4>
-                <h4 className='mb-0 client-count'>0</h4>
+                <h4 className='mb-0 client-count'>{clients.length}</h4>
               </div>
             </Card>
 
             <div className='d-flex justify-content-between align-items-center client-management-control'>
-              <div>
+              <div className='cursor-pointer'>
                 {view === 'list' ? (
                   <Card className='client-icon-card list'>
                     <BsListUl
@@ -102,10 +112,10 @@ const ClientManagement = ({ getTag, tags ,getTagError}) => {
               </div>
             </div>
           </div>
-          {view === 'grid' ? (
-            <GridView />
-          ) : view === 'list' ? (
-            <ListView />
+          {clients.length > 0 && view === 'grid' ? (
+            <GridView clients={clients} />
+          ) : clients.length > 0 && view === 'list' ? (
+            <ListView clients={clients} />
           ) : (
             <div className='client-inactive-state text-center'>
               <Card className='client-inactive-state-card mx-auto'>
@@ -132,11 +142,11 @@ const ClientManagement = ({ getTag, tags ,getTagError}) => {
           )}
 
           {addClient && (
-            <AddNewClient 
-            addState={addClient} 
-            setAddState={setAddClient}
-            tags={tagOptions}
-             />
+            <AddNewClient
+              addState={addClient}
+              setAddState={setAddClient}
+              tags={tagOptions}
+            />
           )}
         </div>
       </div>
@@ -145,7 +155,7 @@ const ClientManagement = ({ getTag, tags ,getTagError}) => {
 }
 
 const mapStateToProps = ({ client }) => {
-  const { tags,getTagError } = client
-  return { tags,getTagError }
+  const { tags, getTagError, clients } = client
+  return { tags, getTagError, clients }
 }
-export default connect(mapStateToProps, { getTag })(ClientManagement)
+export default connect(mapStateToProps, { getTag, getClient })(ClientManagement)

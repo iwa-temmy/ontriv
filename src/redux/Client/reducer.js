@@ -2,6 +2,9 @@ import {
   CREATE_CLIENT,
   CREATE_CLIENT_SUCCESS,
   CREATE_CLIENT_ERROR,
+  GET_CLIENT,
+  GET_CLIENT_SUCCESS,
+  GET_CLIENT_ERROR,
   INVITE_CLIENT,
   INVITE_CLIENT_SUCCESS,
   INVITE_CLIENT_ERROR,
@@ -20,7 +23,8 @@ const INIT_STATE = {
   creatingTagError: '',
   message: '',
   tags: [],
-  getTagError: ''
+  getTagError: '',
+  clients: []
 }
 
 const ClientReducer = (state = INIT_STATE, action) => {
@@ -109,6 +113,27 @@ const ClientReducer = (state = INIT_STATE, action) => {
         ...state,
         loading: false,
         getTagError: action.payload.message
+          ? action.payload.message
+          : action.payload.error
+      }
+    case GET_CLIENT:
+      return {
+        ...state,
+        loading: true,
+        getClientError: ''
+      }
+    case GET_CLIENT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        clients: action.payload?.data,
+        getClientError: ''
+      }
+    case GET_CLIENT_ERROR:
+      return {
+        ...state,
+        loading: false,
+        getClientError: action.payload.message
           ? action.payload.message
           : action.payload.error
       }
