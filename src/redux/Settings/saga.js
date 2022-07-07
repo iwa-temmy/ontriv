@@ -19,7 +19,8 @@ import {
   changeProfileImageSuccess,
   changeProfileImageError,
   updateUserDetailsSuccess,
-  updateUserDetailsError
+  updateUserDetailsError,
+
 } from "../actions";
 import { GetUserDetails } from "../General/saga";
 
@@ -221,9 +222,9 @@ function * ChangeProfileImage({payload}){
     );
     if (response?.status === 200) {
       yield put(changeProfileImageSuccess());
-      yield call(getBusinessDetails);
+      yield call(GetUserDetails);
     } else {
-      yield put(updateBusinessDetailsError(response.data.message));
+      yield put(changeProfileImageError(response.data.message));
     }
     yield put(clearMessages());
   } catch (error) {
@@ -306,6 +307,7 @@ function* UpdateUserDetails({ payload }) {
     yield put(clearMessages());
   }
 }
+
 
 export function* watchResetPassword() {
   yield takeEvery(RESET_PASSWORD, resetUserPassword);

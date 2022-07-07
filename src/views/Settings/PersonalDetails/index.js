@@ -6,7 +6,7 @@ import { TiEye } from "react-icons/ti";
 import { IoMdEyeOff } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import createNotification from "../../../utils/Notification";
-import { resetPassword, updateUserDetails } from "../../../redux/actions";
+import { resetPassword, updateUserDetails, changeProfileImage } from "../../../redux/actions";
 import PersonalDetailsForm from "./PersonalDetailsForm";
 
 //redux
@@ -21,7 +21,8 @@ const PersonalDetails = ({
   changeProfileImageloading,
   updateUserDetails,
   updateUserLoading,
-  updateUserError
+  updateUserError,
+  changeProfileImage
 }) => {
   const [inputType1, setInputType1] = useState("password");
   const [inputType2, setInputType2] = useState("password");
@@ -44,7 +45,6 @@ const PersonalDetails = ({
 
   //Handle Update Password
   const handleUpdatePassword = (data) => {
-    console.log(data);
     if (data?.new_password1 !== data?.new_password2) {
       createNotification("error", "Passwords doesn't match");
     } else {
@@ -66,7 +66,8 @@ const PersonalDetails = ({
     const formData = new FormData();
     const imageName = e.target.files[0];
     console.log(imageName);
-    formData.append("logo", imageName);
+    formData.append("profile_image", imageName);
+    changeProfileImage(formData);
   }
   useEffect(() => {
     // console.log(loginError, message, loading);
@@ -248,4 +249,4 @@ const mapStateToProps = ({ general, settings }) => {
     updateUserError
   };
 };
-export default connect(mapStateToProps, { resetPassword, updateUserDetails })(PersonalDetails);
+export default connect(mapStateToProps, { resetPassword, updateUserDetails, changeProfileImage })(PersonalDetails);

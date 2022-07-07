@@ -46,6 +46,7 @@ const settingsReducer = (state = {}, action) => {
         resetPasswordError: "",
         message: "",
         updateBusinessDetailsError: "",
+        updateUserError: ""
       };
     case GET_BUSINESS_DETAILS:
       return {
