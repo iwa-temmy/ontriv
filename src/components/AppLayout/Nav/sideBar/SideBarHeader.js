@@ -14,7 +14,7 @@ const SidebarHeader = ({ menuShadow, setShowMobileSideBar }) => {
                 <li className="nav-item mb-0 p-0">
                     <div className="navbar-brand d-flex align-items-center justify-content-between pt-1 pb-3 text-center">
                         <Link to="/overview" >
-                            <img src={logo} alt='ontriv-logo' className="navbar-logo mb-0" />
+                            <img src={logo} alt='ontriv-logo' className="navbar-logo mb-0" width="120px"/>
                             {/* <img src={logoMobile} alt='ontriv-logo' width='30px'  height="30px" className={'d-lg-none p-0'} /> */}
 
                         </Link>

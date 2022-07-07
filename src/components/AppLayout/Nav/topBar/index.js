@@ -18,6 +18,7 @@ export const TopNav = ({currentSection, setShowMobileSideBar, logoutUser, userDe
     const [notificationState, updateNotificationState] = useState(false);
     const [mobileSearch, setMobileSearch] = useState(false);
 
+    console.log(userDetails);
     return (
         <React.Fragment>
             <div className="navbar-static-top topbar">
@@ -59,7 +60,7 @@ export const TopNav = ({currentSection, setShowMobileSideBar, logoutUser, userDe
                                          onClick={() => updateNotificationState(!notificationState)}/>
                                     <div className="userProfile-img"
                                          onClick={() => updateUserProfileState(!userProfileState)}>
-                                        <img src={userProfilePic} alt='user-dp'/>
+                                        <img src={userDetails?.profile_image ? userDetails?.profile_image : userProfilePic} alt='user-dp'/>
                                     </div>
                                 </div>
 
@@ -87,11 +88,11 @@ export const TopNav = ({currentSection, setShowMobileSideBar, logoutUser, userDe
                     <div className="user-menu-img mb-3 d-flex justify-content-between align-items-center"
                          onClick={() => updateUserProfileState(!userProfileState)}>
                         <p>{' '}</p>
-                        <img src={userProfilePic} alt='user-dp'/>
+                        <img src={userDetails?.profile_image ? userDetails?.profile_image : userProfilePic} alt='user-dp'/>
                     </div>
                     <div className="user-menu">
                         <div className="user-menu-header">
-                            <h1 className="user-name mb-0">{userDetails?.full_name}</h1>
+                            <h1 className="user-name mb-0">{userDetails?.fullname}</h1>
                             <h6 className="user-email mb-0">{userDetails?.email}</h6>
                         </div>
                         <div className="user-menu-items">

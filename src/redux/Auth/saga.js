@@ -13,12 +13,10 @@ import {
   registerUserError,
   // forgotPasswordSuccess,
   forgotPasswordError,
-  resetMessage
+  resetMessage,
 } from "../actions";
-
 function* register({ payload }) {
   const { data } = payload;
-  yield console.log(data);
 
   try {
     const response = yield Axios.post(`/register/api/v1/registration/`, data);
@@ -77,6 +75,7 @@ function* login({ payload }) {
     if (response?.status === 200) {
       setAuthToken(response?.data?.access_token);
       setCurrentUser(response?.data);
+      
       const user_data = {...response?.data?.user, accessToken: response?.data?.access_token}
       yield put(
         loginUserSuccess({
@@ -94,12 +93,6 @@ function* login({ payload }) {
       yield put(loginUserError("Login Failed, please try again later"));
     }
   } catch (error) {
-    // console.log(error);
-    // console.log(error.response);
-
-    // console.log(error.response.data.error[0])
-    // console.log(error.message);
-    // // const {message} = erroresponse.data;
     let message;
     if (error.response) {
       message = error.response.data.message;
@@ -159,7 +152,6 @@ function* forgotPassword({ payload }) {
 }
 
 function* logout() {
-  // const { history } = payload;
   yield setCurrentUser();
   localStorage.clear();
   window.location.href = "/auth/login";

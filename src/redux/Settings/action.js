@@ -12,6 +12,12 @@ import {
   CHANGE_BUSINESS_LOGO,
   CHANGE_BUSINESS_LOGO_SUCCESS,
   CHANGE_BUSINESS_LOGO_ERROR,
+  CHANGE_PROFILE_IMAGE,
+  CHANGE_PROFILE_IMAGE_SUCCESS,
+  CHANGE_PROFILE_IMAGE_ERROR,
+  UPDATE_USER_DETAILS,
+  UPDATE_USER_DETAILS_SUCCESS,
+  UPDATE_USER_DETAILS_ERROR,
 } from "../actions";
 
 export const resetPassword = (credentials) => ({
@@ -48,7 +54,7 @@ export const updateBusinessDetails = (credentials) => ({
 });
 export const updateBusinessDetailsSuccess = () => ({
   type: UPDATE_BUSINESS_DETAILS_SUCCESS,
-  payload: "Business Details Updated Successfully" 
+  payload: "Business Details Updated Successfully",
 });
 
 export const updateBusinessDetailsError = (error) => ({
@@ -58,15 +64,44 @@ export const updateBusinessDetailsError = (error) => ({
 
 export const changeBusinessLogo = (credentials) => ({
   type: CHANGE_BUSINESS_LOGO,
-  payload: {credentials},
-})
+  payload: { credentials },
+});
 
 export const changeBusinessLogoSuccess = () => ({
   type: CHANGE_BUSINESS_LOGO_SUCCESS,
   payload: "Business Logo Updated Successfully",
-})
+});
 
 export const changeBusinessLogoError = (error) => ({
   type: CHANGE_BUSINESS_LOGO_ERROR,
   payload: error,
-})
+});
+export const changeProfileImage = (credentials) => ({
+  type: CHANGE_PROFILE_IMAGE,
+  payload: { credentials },
+});
+
+export const changeProfileImageSuccess = () => ({
+  type: CHANGE_PROFILE_IMAGE_SUCCESS,
+  payload: "Profile Image Updated Successfully",
+});
+
+export const changeProfileImageError = (error) => ({
+  type: CHANGE_PROFILE_IMAGE_ERROR,
+  payload: error,
+});
+
+export const updateUserDetails = (credentials) => ({
+  type: UPDATE_USER_DETAILS,
+  payload: { credentials },
+});
+
+export const updateUserDetailsSuccess = () => ({
+  type: UPDATE_USER_DETAILS_SUCCESS,
+  payload: "Profile Details Updated Successfully",
+});
+
+export const updateUserDetailsError = (error) => ({
+  type: UPDATE_USER_DETAILS_ERROR,
+  payload: error,
+});

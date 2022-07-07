@@ -11,7 +11,13 @@ import {
   UPDATE_BUSINESS_DETAILS_ERROR,
   CHANGE_BUSINESS_LOGO,
   CHANGE_BUSINESS_LOGO_SUCCESS,
-  CHANGE_BUSINESS_LOGO_ERROR
+  CHANGE_BUSINESS_LOGO_ERROR,
+  CHANGE_PROFILE_IMAGE,
+  CHANGE_PROFILE_IMAGE_SUCCESS,
+  CHANGE_PROFILE_IMAGE_ERROR,
+  UPDATE_USER_DETAILS,
+  UPDATE_USER_DETAILS_SUCCESS,
+  UPDATE_USER_DETAILS_ERROR
 } from "../actions";
 
 const settingsReducer = (state = {}, action) => {
@@ -39,7 +45,7 @@ const settingsReducer = (state = {}, action) => {
         ...state,
         resetPasswordError: "",
         message: "",
-        updateBusinessDetailsError:""
+        updateBusinessDetailsError: "",
       };
     case GET_BUSINESS_DETAILS:
       return {
@@ -50,11 +56,11 @@ const settingsReducer = (state = {}, action) => {
         ...state,
         businessDetails: action?.payload,
       };
-    case GET_BUSINESS_DETAILS_ERROR: 
+    case GET_BUSINESS_DETAILS_ERROR:
       return {
         ...state,
-        message: action.payload
-      }
+        message: action.payload,
+      };
     case UPDATE_BUSINESS_DETAILS:
       return {
         ...state,
@@ -73,24 +79,60 @@ const settingsReducer = (state = {}, action) => {
         updatingStateLoading: false,
         updateBusinessDetailsError: action.payload,
       };
-    case CHANGE_BUSINESS_LOGO: 
+    case CHANGE_BUSINESS_LOGO:
       return {
         ...state,
         changeLogoloading: true,
         changeLogoError: "",
-      }
+      };
     case CHANGE_BUSINESS_LOGO_SUCCESS:
       return {
         ...state,
         changeLogoloading: false,
         message: action.payload,
-      }
+      };
     case CHANGE_BUSINESS_LOGO_ERROR:
       return {
         ...state,
         changeLogoloading: false,
-        changeLogoError: action.payload
-      }
+        changeLogoError: action.payload,
+      };
+    case CHANGE_PROFILE_IMAGE:
+      return {
+        ...state,
+        changeProfileImageloading: true,
+        changeProfileImageError: "",
+      };
+    case CHANGE_PROFILE_IMAGE_SUCCESS:
+      return {
+        ...state,
+        changeProfileImageloading: false,
+        message: action.payload,
+      };
+    case CHANGE_PROFILE_IMAGE_ERROR:
+      return {
+        ...state,
+        changeProfileImageloading: false,
+        changeProfileImageError: action.payload,
+      };
+    case UPDATE_USER_DETAILS:
+      return {
+        ...state,
+        updateUserLoading: true,
+        updateUserError: ""
+      };
+    case UPDATE_USER_DETAILS_SUCCESS:
+      return {
+        ...state,
+        updateUserLoading: false,
+        message: action.payload,
+      };
+    case UPDATE_USER_DETAILS_ERROR:
+      return {
+        ...state,
+        updateUserLoading: false,
+        updateUserError: action.payload
+      };
     default:
       return state;
   }

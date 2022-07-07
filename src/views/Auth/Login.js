@@ -70,7 +70,7 @@ const Signin = ({
 
             <div className="mx-auto  signin-form-wrapper">
               <div className="signin-logo text-center my-2 mb-4">
-                <img src={logo} alt="ontriv-logo" />
+                <img src={logo} alt="ontriv-logo" width="200px"/>
               </div>
               <Card className="px-5 py-4  signin-form-card mb-1">
                 <h4 className="text-center">Welcome Back!</h4>

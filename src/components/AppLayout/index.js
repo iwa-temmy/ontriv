@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "./Nav/sideBar";
 import { TopNav } from "./Nav/topBar";
 import {connect} from "react-redux";
-import { setCurrentSection, logoutUser } from "../../redux/actions";
+import { setCurrentSection, logoutUser, getUserDetails } from "../../redux/actions";
 
 
-const AppLayout = ({ children, setCurrentSection, currentSection, logoutUser, currentUser }) => {
+const AppLayout = ({ children, setCurrentSection, currentSection, logoutUser, getUserDetails,  userDetails }) => {
     const [showMobileSideBar, setShowMobileSideBar] = useState(false)
+
+    useEffect(() => {
+        getUserDetails();
+    }, [getUserDetails])
     return (
         <div className='app-layout ' >
             <Sidebar
@@ -19,7 +23,7 @@ const AppLayout = ({ children, setCurrentSection, currentSection, logoutUser, cu
                     currentSection={currentSection}
                     setShowMobileSideBar={setShowMobileSideBar}
                     logoutUser={logoutUser}
-                    userDetails={currentUser}
+                    userDetails={userDetails}
                 />
                 <div className="content-wrapper">
                     {children}
@@ -30,11 +34,11 @@ const AppLayout = ({ children, setCurrentSection, currentSection, logoutUser, cu
 
 }
 
-const mapStateToProps = ({ nav, auth }) => {
+const mapStateToProps = ({ nav, general }) => {
     const { currentSection } = nav;
-    const {currentUser} = auth;
-    return { currentSection,  currentUser};
+    const {userDetails} = general;
+    return { currentSection,  userDetails};
 };
 
-export default connect(mapStateToProps, { setCurrentSection, logoutUser })(AppLayout);
+export default connect(mapStateToProps, { setCurrentSection, logoutUser, getUserDetails })(AppLayout);
 

@@ -5,6 +5,8 @@ import {
   GET_BUSINESS_DETAILS,
   UPDATE_BUSINESS_DETAILS,
   CHANGE_BUSINESS_LOGO,
+  CHANGE_PROFILE_IMAGE,
+  UPDATE_USER_DETAILS,
   resetPasswordSuccess,
   resetPasswordError,
   clearMessages,
@@ -13,8 +15,14 @@ import {
   updateBusinessDetailsSuccess,
   updateBusinessDetailsError,
   changeBusinessLogoSuccess,
-  changeBusinessLogoError
+  changeBusinessLogoError,
+  changeProfileImageSuccess,
+  changeProfileImageError,
+  updateUserDetailsSuccess,
+  updateUserDetailsError
 } from "../actions";
+import { GetUserDetails } from "../General/saga";
+
 
 function* resetUserPassword({ payload }) {
   const { credentials } = payload;
@@ -200,6 +208,104 @@ function* ChangeBusinessLogo({ payload }) {
     yield put(clearMessages());
   }
 }
+function * ChangeProfileImage({payload}){
+  const { credentials } = payload;
+  try {
+    const response = yield Axios.patch(
+      `/accounts/api/v1/user/`,
+      credentials, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+    );
+    if (response?.status === 200) {
+      yield put(changeProfileImageSuccess());
+      yield call(getBusinessDetails);
+    } else {
+      yield put(updateBusinessDetailsError(response.data.message));
+    }
+    yield put(clearMessages());
+  } catch (error) {
+    let message;
+    if (error.response) {
+      const errorMessage = error?.response?.data.website 
+      ? error?.response?.data?.website?.[0] 
+      : error.response.data.business_name ? 
+      error.response.data.business_name?.[0]
+      : error.response.data.address ? 
+      error?.response.data?.address?.[0]
+      : error?.response?.data.country;
+      
+      switch (error.response.status) {
+        case 500:
+          message = "Internal Server Error";
+          break;
+        case 404:
+          message = "Not found";
+          break;
+        case 401:
+          message = "Invalid credentials";
+          break;
+        case 400:
+          message = errorMessage;
+          break;
+        default:
+          message = error.response.statusText;
+      }
+    } else if (error.message) {
+      message = error.message;
+    }
+    yield put(changeProfileImageError(message));
+    yield put(clearMessages());
+  }
+}
+function* UpdateUserDetails({ payload }) {
+  const { credentials } = payload;
+  try {
+    const response = yield Axios.patch(
+      `/accounts/api/v1/user/`,
+      credentials
+    );
+    if (response?.status === 200) {
+      yield put(updateUserDetailsSuccess());
+      yield call(GetUserDetails);
+    } else {
+      yield put(updateUserDetailsError(response?.data?.message));
+    }
+    yield put(clearMessages());
+  } catch (error) {
+    let message;
+    if (error.response) {
+      const errorMessage = error?.response?.data?.phone 
+      ? error?.response?.data?.phone?.[0] 
+      : error?.response?.data?.fullname ? 
+      error.response?.data?.fullname?.[0]
+      : null
+      
+      switch (error?.response?.status) {
+        case 500:
+          message = "Internal Server Error";
+          break;
+        case 404:
+          message = "Not found";
+          break;
+        case 401:
+          message = "Invalid credentials";
+          break;
+        case 400:
+          message = errorMessage;
+          break;
+        default:
+          message = error.response.statusText;
+      }
+    } else if (error.message) {
+      message = error.message;
+    }
+    yield put(updateUserDetailsError(message));
+    yield put(clearMessages());
+  }
+}
 
 export function* watchResetPassword() {
   yield takeEvery(RESET_PASSWORD, resetUserPassword);
@@ -215,12 +321,20 @@ export function* watchGetBusinessDetails() {
 export function* watchChangeBusinessLogo(){
   yield takeEvery(CHANGE_BUSINESS_LOGO, ChangeBusinessLogo)
 }
+export function* watchChangeProfileImage(){
+  yield takeEvery(CHANGE_PROFILE_IMAGE, ChangeProfileImage)
+}
+export function* watchUpdateUserDetails(){
+  yield takeEvery(UPDATE_USER_DETAILS, UpdateUserDetails)
+}
 
 export default function* rootSaga() {
   yield all([
     fork(watchResetPassword),
     fork(watchUpdateBusinessDetails),
     fork(watchGetBusinessDetails),
-    fork(watchChangeBusinessLogo)
+    fork(watchChangeBusinessLogo),
+    fork(watchChangeProfileImage),
+    fork(watchUpdateUserDetails)
   ]);
 }
