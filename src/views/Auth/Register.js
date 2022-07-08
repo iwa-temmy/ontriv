@@ -171,7 +171,7 @@ const Signup = ({
                         <div className='signup-form-wrapper mx-auto'>
                             {/* <div className='mx-auto w-75 d-flex'> */}
                             <div className='signin-logo text-center mb-5 mt-5'>
-                                <img src={logo} alt='ontriv-logo'/>
+                                <img src={logo} alt='ontriv-logo' width="150px"/>
                             </div>
                             <Row className='gx-0'>
                                 <Col sm='12' md='6'>

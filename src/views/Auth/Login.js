@@ -70,7 +70,7 @@ const Signin = ({
 
             <div className="mx-auto  signin-form-wrapper">
               <div className="signin-logo text-center my-2 mb-4">
-                <img src={logo} alt="ontriv-logo" width="200px"/>
+                <img src={logo} alt="ontriv-logo" width="200px" />
               </div>
               <Card className="px-5 py-4  signin-form-card mb-1">
                 <h4 className="text-center">Welcome Back!</h4>
@@ -183,7 +183,7 @@ const Signin = ({
                     {/* </Link> */}
                   </Button>
 
-                  <div className="py-3 mx-auto w-75">
+                  {/* <div className="py-3 mx-auto w-75">
                     <p className="easy-login">Easy Login</p>
                   </div>
                   <div className="mx-auto w-75 social-login d-flex justify-content-between">
@@ -200,7 +200,7 @@ const Signin = ({
                       <AiFillTwitterCircle size="26px" color="#1DA1F2" />
                     </div>
                     {/* <p className='easy-login'>Easy Login</p> */}
-                  </div>
+                  {/* </div> */} 
                 </Form>
               </Card>
               <div className="no-account my-4 py-4 text-center">
