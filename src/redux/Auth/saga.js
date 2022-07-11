@@ -93,6 +93,12 @@ function* login({ payload }) {
       yield put(loginUserError("Login Failed, please try again later"));
     }
   } catch (error) {
+    // console.log(error);
+    console.log(error.response);
+
+    // console.log(error.response.data.error[0])
+    // console.log(error.message);
+    // // const {message} = erroresponse.data;
     let message;
     if (error.response) {
       message = error.response.data.message;

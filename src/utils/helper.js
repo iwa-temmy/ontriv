@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://ontriv.herokuapp.com'
+const BASE_URL = 'https://ontriv.herokuapp.com'
 
 export const Axios = axios.create({
   baseURL: BASE_URL,

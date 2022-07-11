@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom"
 import Table from '../../components/Table';
-import ontriv from '../../assets/img/ontriv.png';
+// import ontriv from '../../assets/img/ontriv.png';
 import tag from '../../assets/img/Tag.svg';
 import { connect } from 'react-redux';
 import { setCurrentSection } from "../../redux/actions";
@@ -11,155 +11,28 @@ import { setCurrentSection } from "../../redux/actions";
 import { MdDelete } from 'react-icons/md';
 
 
-const clients = [
-    {
-        id: 1,
-        name: 'Digital Seed',
-        img: ontriv,
-        email: 'Content Calendar',
-        createDate: '12/04/21',
-        projectTimeline: '6 Months',
-        projectTag: 'Content Calendar',
-    },
-    {
-        id: 2,
-        name: 'Digital Seed',
-        img: ontriv,
-        email: 'Content Calendar',
-        createDate: '12/04/21',
-        projectTimeline: '6 Months',
-        projectTag: 'Content Calendar',
-    },
-    {
-        id: 3,
-        name: 'Digital Seed',
-        img: ontriv,
-        email: 'Content Calendar',
-        createDate: '12/04/21',
-        projectTimeline: '6 Months',
-        projectTag: 'Content Calendar',
-    },
-    {
-        id: 4,
-        name: 'Digital Seed',
-        img: ontriv,
-        email: 'Content Calendar',
-        createDate: '12/04/21',
-        projectTimeline: '6 Months',
-        projectTag: 'Content Calendar',
-    },
-    {
-        id: 5,
-        name: 'Digital Seed',
-        img: ontriv,
-        email: 'Content Calendar',
-        createDate: '12/04/21',
-        projectTimeline: '6 Months',
-        projectTag: 'Content Calendar',
-    },
-    {
-        id: 6,
-        name: 'Digital Seed',
-        img: ontriv,
-        email: 'Content Calendar',
-        createDate: '12/04/21',
-        projectTimeline: '6 Months',
-        projectTag: 'Content Calendar',
-    },
-    {
-        id: 7,
-        name: 'Digital Seed',
-        img: ontriv,
-        email: 'Content Calendar',
-        createDate: '12/04/21',
-        projectTimeline: '6 Months',
-        projectTag: 'Content Calendar',
-    },
-    {
-        id: 8,
-        name: 'Digital Seed',
-        img: ontriv,
-        email: 'Content Calendar',
-        createDate: '12/04/21',
-        projectTimeline: '6 Months',
-        projectTag: 'Content Calendar',
-    },
-    {
-        id: 9,
-        name: 'Digital Seed',
-        img: ontriv,
-        email: 'Content Calendar',
-        createDate: '12/04/21',
-        projectTimeline: '6 Months',
-        projectTag: 'Content Calendar',
-    },
-    {
-        id: 10,
-        name: 'Digital Seed',
-        img: ontriv,
-        email: 'Content Calendar',
-        createDate: '12/04/21',
-        projectTimeline: '6 Months',
-        projectTag: 'Content Calendar',
-    },
-    {
-        id: 11,
-        name: 'Digital Seed',
-        img: ontriv,
-        email: 'Content Calendar',
-        createDate: '12/04/21',
-        projectTimeline: '6 Months',
-        projectTag: 'Content Calendar',
-    },
-    {
-        id: 12,
-        name: 'Digital Seed',
-        img: ontriv,
-        email: 'Content Calendar',
-        createDate: '12/04/21',
-        projectTimeline: '6 Months',
-        projectTag: 'Content Calendar',
-    },
-    {
-        id: 13,
-        name: 'Digital Seed',
-        img: ontriv,
-        email: 'Content Calendar',
-        createDate: '12/04/21',
-        projectTimeline: '6 Months',
-        projectTag: 'Content Calendar',
-    },
-    {
-        id: 14,
-        name: 'Digital Seed',
-        img: ontriv,
-        email: 'Content Calendar',
-        createDate: '12/04/21',
-        projectTimeline: '6 Months',
-        projectTag: 'Content Calendar',
-    },
-];
+// ;
 
 
-const ClientListView = ({ setCurrentSection }) => {
+const ClientListView = ({ setCurrentSection,clients }) => {
     const cols = React.useMemo(
         () => [
             {
                 Header: 'Logo',
-                accessor: 'img',
+                accessor: 'profile_image',
                 cellClass: '',
                 Cell: (props) =>
                     <Link to='/client-details'
 
                     >
-                        <img src={props.value} alt='client-logo'
+                        <img src={props.value} alt='client'
                             onClick={() => { setCurrentSection('Client Details') }}
                         />
                     </Link>
             },
             {
                 Header: 'Name',
-                accessor: 'name',
+                accessor: 'fullname',
                 cellClass: 'pt-4 list-client-item-bold ',
                 Cell: (props) => <>{props.value}</>,
             },
