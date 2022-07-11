@@ -195,13 +195,14 @@ const Signup = ({
                                         </div> */}
                                         {
                                             activeState === 0 ?
-                                                <Form onSubmit={handleSubmit(handlePersonalDetails)}>
+                                                <Form onSubmit={handleSubmit(handlePersonalDetails)} >
                                                     {errors.fullname &&
                                                     <span className='text-danger text-left'>Enter Full Name</span>}
                                                     <input
                                                         type='text'
                                                         placeholder='Full Name'
                                                         name="fullname"
+                                                        autocomplete="off" 
                                                         className={`w-100 ${errors.fullname ? 'border-danger' : ""}`}
                                                         {...register('fullname'
                                                             , {
@@ -215,6 +216,7 @@ const Signup = ({
                                                         type='email'
                                                         name='email'
                                                         placeholder='Email Address'
+                                                        autocomplete="none" 
                                                         className={`w-100 ${errors.email ? 'border-danger' : ""}`}
                                                         {...register('email'
                                                             , {
@@ -285,7 +287,7 @@ const Signup = ({
                                                             type={inputType1}
                                                             placeholder='Create password'
                                                             name='password'
-
+                                                            autocomplete="off" 
                                                             {...register('password'
                                                                 , {
                                                                     required: true,
@@ -325,6 +327,7 @@ const Signup = ({
                                                             name='confirmPassword'
                                                             placeholder='Confirm password'
                                                             className={`w-100 ${errors.confirmPassword ? 'border-danger' : ""}`}
+                                                            autocomplete="off" 
                                                             {...register('confirmPassword'
                                                                 , {
                                                                     required: true,
@@ -380,13 +383,15 @@ const Signup = ({
                                                     </div>
                                                 </Form> :
                                                 <Form className='business-form'
-                                                      onSubmit={handleSubmit(handleBusinessDetails)}>
+                                                      onSubmit={handleSubmit(handleBusinessDetails)} autoComplete="new-password">
                                                     {errors.business_name &&
                                                     <span className='text-danger text-left'>Enter Business Name</span>}
                                                     <input
                                                         type='text'
                                                         placeholder='Business Name'
                                                         name="business_name"
+                                                        autocomplete='off'
+                                                        id="business_name"
                                                         className={`w-100 ${errors.business_name ? 'border-danger' : ""}`}
                                                         {...register('business_name'
                                                             , {
@@ -400,6 +405,8 @@ const Signup = ({
                                                         type='text'
                                                         placeholder='Business Website'
                                                         name="website"
+                                                        autocomplete='off'
+                                                        id="business_website"
                                                         className={`w-100 ${errors.website ? 'border-danger' : ""}`}
                                                         {...register('website'
                                                             , {

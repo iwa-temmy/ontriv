@@ -51,13 +51,13 @@ const ForgotPassword = ({
     return (
         <div className='auth'>
             <div className='auth-logo'>
-                <img src={logo} alt='ontriv-logo' />
+                <img src={logo} alt='ontriv-logo' width="150px"/>
             </div>
             <div className='reset-password'>
                 <Container>
                     <div className='mx-auto reset-password-wrapper'>
                         <div className='text-center reset-password-text'>
-                            <h4>Resest password</h4>
+                            <h4>Reset password</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
                         </div>
                         <Card className='p-5 signin-form-card '>
