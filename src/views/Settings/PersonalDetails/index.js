@@ -94,15 +94,15 @@ const PersonalDetails = ({
                 <div className="d-flex ">
                   {changeProfileImageloading ? (
                     <div>loading!!!!</div>
-                  ) : userDetails?.logo ? (
+                  ) : userDetails?.profile_image ? (
                     <img
-                      src={userDetails?.logo}
+                      src={userDetails?.profile_image}
                       className="img-container"
                       style={{ objectFit: "cover" }}
                       alt="business logo"
                     />
                   ) : (
-                    <div className="img-container" alt="company logo"></div>
+                    <div className="img-container" alt="company logo"/>
                   )}
 
                   <div className="upload-text-wrapper">
