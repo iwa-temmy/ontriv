@@ -14,7 +14,7 @@ import { MdDelete } from 'react-icons/md';
 // ;
 
 
-const ClientListView = ({ setCurrentSection,clients }) => {
+const ClientListView = ({ setCurrentSection,clients,deleteClient }) => {
     const cols = React.useMemo(
         () => [
             {

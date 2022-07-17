@@ -10,6 +10,8 @@ import GridView from './GridView.js'
 import ListView from './ListView.js'
 import { connect } from 'react-redux'
 import createNotification from '../../utils/Notification'
+import axios from '../../utils/Axios.js'
+import notification from '../../utils/Notification.js'
 
 const ClientManagement = ({
   getTag,
@@ -31,6 +33,21 @@ const ClientManagement = ({
     getClient()
     // eslint-disable-next-line
   }, [])
+
+  const deleteClient = async clientEmail => {
+    try {
+      const response = await axios.delete(
+        `/business/api/v1/business/remove/client/${clientEmail}`,
+        {
+          email: clientEmail
+        }
+      )
+      notification('success', response.data.message)
+    } catch (err) {
+      console.log(err)
+      notification('success', err.message)
+    }
+  }
 
   useEffect(() => {
     const options = tags?.map((x, i) => {
@@ -113,9 +130,9 @@ const ClientManagement = ({
             </div>
           </div>
           {clients.length > 0 && view === 'grid' ? (
-            <GridView clients={clients} />
+            <GridView clients={clients} deleteClient={deleteClient}/>
           ) : clients.length > 0 && view === 'list' ? (
-            <ListView clients={clients} />
+            <ListView clients={clients} deleteClient={deleteClient}/>
           ) : (
             <div className='client-inactive-state text-center'>
               <Card className='client-inactive-state-card mx-auto'>
