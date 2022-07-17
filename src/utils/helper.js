@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
-const BASE_URL = 'https://ontriv.herokuapp.com'
+const BASE_URL = "https://ontriv.herokuapp.com";
 
 export const Axios = axios.create({
   baseURL: BASE_URL,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
@@ -14,30 +14,42 @@ export const setAuthToken = (token) => {
   if (token) {
     // axios.defaults.headers.common['X-CSRFToken'] = token;
     // axios.defaults.headers.common['Authorization'] = token;
-    Axios.defaults.headers.common={'Authorization':`Bearer ${token}`}
-    Axios.defaults.headers.common = {'Authorization': `bearer ${token}`}
+    Axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
+    Axios.defaults.headers.common = { Authorization: `bearer ${token}` };
   } else {
     // delete axios.defaults.headers.common['X-CSRFToken'];
-    delete Axios.defaults.headers.common['Authorization'];
+    delete Axios.defaults.headers.common["Authorization"];
   }
 };
-
 
 export const setCurrentUser = (data) => {
   try {
     if (data) {
-      localStorage.setItem('ontrivUserToken', data.access_token);
-      localStorage.setItem('ontrivCurrentUser', JSON.stringify(Object.assign(data.user, data.profile)));
+      localStorage.setItem("ontrivUserToken", data.access_token);
+      localStorage.setItem(
+        "ontrivCurrentUser",
+        JSON.stringify(Object.assign(data.user, data.profile))
+      );
     } else {
-      localStorage.removeItem('ontrivUserToken');
-      localStorage.removeItem('ontrivCurrentUser');
+      localStorage.removeItem("ontrivUserToken");
+      localStorage.removeItem("ontrivCurrentUser");
     }
   } catch (error) {
-    console.log('>>>>: src/helpers/Utils.js : setCurrentUser -> error', error);
+    console.log(">>>>: src/helpers/Utils.js : setCurrentUser -> error", error);
   }
 };
 
-
 export const getAuthToken = () => {
-  return localStorage.getItem('ontrivUserToken');   
-}
+  return localStorage.getItem("ontrivUserToken");
+};
+
+export const calculateTotal = (items) => {
+  let itemAmountsArray = [];
+  let total = 0;
+  if (items?.length) {
+    itemAmountsArray = items?.map((item) => parseInt(item?.amount));
+    total = itemAmountsArray?.reduce((a, b) => a + b);
+  }
+
+  return total;
+};
