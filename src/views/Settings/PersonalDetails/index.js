@@ -1,22 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { Row, Col, Card, Input, Button, Form } from "reactstrap";
+import React, { useState, useEffect, useRef } from "react";
+import { Row, Col, Card, Button, Form } from "reactstrap";
 import { ThreeDots } from "react-loader-spinner";
 import bluePlus from "../../../assets/img/blue-plus-bus-icon.svg";
 import { TiEye } from "react-icons/ti";
 import { IoMdEyeOff } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import createNotification from "../../../utils/Notification";
-import { resetPassword } from "../../../redux/actions";
+import { resetPassword, updateUserDetails, changeProfileImage } from "../../../redux/actions";
+import PersonalDetailsForm from "./PersonalDetailsForm";
 
 //redux
 import { connect } from "react-redux";
 
 const PersonalDetails = ({
-  currentUser,
+  userDetails,
   message,
   resetPasswordError,
   loading,
   resetPassword,
+  changeProfileImageloading,
+  updateUserDetails,
+  updateUserLoading,
+  updateUserError,
+  changeProfileImage
 }) => {
   const [inputType1, setInputType1] = useState("password");
   const [inputType2, setInputType2] = useState("password");
@@ -29,9 +35,16 @@ const PersonalDetails = ({
     formState: { errors },
   } = useForm();
 
+  //fileInput Ref
+  const inputRef = useRef(null);
+
+  const handleClick = () => {
+    // 👇️ open file input box on click of other element
+    inputRef.current.click();
+  };
+
   //Handle Update Password
   const handleUpdatePassword = (data) => {
-    console.log(data);
     if (data?.new_password1 !== data?.new_password2) {
       createNotification("error", "Passwords doesn't match");
     } else {
@@ -42,6 +55,20 @@ const PersonalDetails = ({
     }
   };
 
+  //Handle Update personal details
+  const handleUpdatePersonalDetails = (data) => {
+    console.log(data);
+    updateUserDetails(data);
+  };
+
+  //Handle ChangeProfileImage
+  const handleProfilePictureChange = (e) => {
+    const formData = new FormData();
+    const imageName = e.target.files[0];
+    console.log(imageName);
+    formData.append("profile_image", imageName);
+    changeProfileImage(formData);
+  }
   useEffect(() => {
     // console.log(loginError, message, loading);
     if (resetPasswordError?.length > 0) {
@@ -50,46 +77,62 @@ const PersonalDetails = ({
     if (message?.length > 0 && loading === false) {
       createNotification("success", message);
     }
-  }, [resetPasswordError, message, loading]);
+    if(updateUserError?.length > 0){
+      createNotification("error", updateUserError);
+    }
+    if (message?.length > 0 && updateUserLoading === false) {
+      createNotification("success", message);
+    }
+  }, [resetPasswordError, message, loading,updateUserLoading, updateUserError]);
   return (
     <div className="personal-details mt-4">
       <Row>
         <Col xl="6" className="mt-3 mb-3">
           <Card className="upload-picture-container mb-4">
-            <div className="d-flex ">
-              <div className="img-container"></div>
               <div className="upload-text-wrapper">
                 <h1>Upload Profile Picture</h1>
-                <p className="mb-0">Image format with max size of 3mb</p>
-                <div className="d-flex">
-                  <img src={bluePlus} alt="" />
-                  <h6 className="pt-2 ms-2 business__right-section__image-upload-placeholder__image-upload-blue">
-                    Upload new photo
-                  </h6>
-                  {/* <input type='file' className='w-100 file-upload-button' /> */}
+                <div className="d-flex ">
+                  {changeProfileImageloading ? (
+                    <div>loading!!!!</div>
+                  ) : userDetails?.profile_image ? (
+                    <img
+                      src={userDetails?.profile_image}
+                      className="img-container"
+                      style={{ objectFit: "cover" }}
+                      alt="business logo"
+                    />
+                  ) : (
+                    <div className="img-container" alt="company logo"/>
+                  )}
+
+                  <div className="upload-text-wrapper">
+                    <h1>Profile Picture</h1>
+                    <p className="mb-0">Image format with max size of 3mb</p>
+                    <button className="d-flex align-items-center bg-transparent border-0">
+                      <img src={bluePlus} alt="plus icon" />
+                      <h6
+                        className="pt-2 ms-2 business__right-section__image-upload-placeholder__image-upload-blue"
+                        onClick={handleClick}
+                      >
+                        Upload new photo
+                      </h6>
+                    </button>
+                    <input
+                      type="file"
+                      className="w-100 file-upload-button"
+                      ref={inputRef}
+                      style={{ display: "none" }}
+                      onChange={handleProfilePictureChange}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
           </Card>
-          <div>
-            <Card className="personal-details-form-card">
-              <h1>Profile Details</h1>
-              <Input
-                type="text"
-                placeholder="First name"
-                className=""
-                value={currentUser?.full_name}
-              />
-              <Input
-                type="email"
-                placeholder="Email address"
-                className=""
-                value={currentUser?.email}
-              />
-              <Input type="email" placeholder="Phone Number" className="" />
-              <Button className="w-50">Update</Button>
-            </Card>
-          </div>
+          <PersonalDetailsForm
+            handleUpdatePersonalDetails={handleUpdatePersonalDetails}
+            userDetails={userDetails}
+            updateUserLoading={updateUserLoading}
+          />
         </Col>
         <Col xl="6" className="mb-2">
           <div>
@@ -124,7 +167,7 @@ const PersonalDetails = ({
                       errors.new_password1 ? "border-danger" : ""
                     }`}
                     {...register("new_password1", {
-                      //   required: true,
+                      required: true,
                     })}
                   />
                   {errors.new_password1 && (
@@ -193,14 +236,17 @@ const PersonalDetails = ({
   );
 };
 
-const mapStateToProps = ({ auth, settings }) => {
-  const { currentUser } = auth;
-  const { message, resetPasswordError, loading } = settings;
+const mapStateToProps = ({ general, settings }) => {
+  const { userDetails } = general;
+  const { message, resetPasswordError, loading, changeProfileImageloading, updateUserLoading, updateUserError } = settings;
   return {
-    currentUser,
+    userDetails,
     message,
     resetPasswordError,
     loading,
+    changeProfileImageloading,
+    updateUserLoading,
+    updateUserError
   };
 };
-export default connect(mapStateToProps, { resetPassword })(PersonalDetails);
+export default connect(mapStateToProps, { resetPassword, updateUserDetails, changeProfileImage })(PersonalDetails);

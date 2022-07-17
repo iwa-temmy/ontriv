@@ -66,7 +66,7 @@ const ClientManagement = ({
 
   useEffect(() => {
     console.log(getTagError)
-    if (getTagError.length > 0) {
+    if (getTagError?.length > 0) {
       createNotification('error', getTagError)
     }
     // if (message.length > 0) {

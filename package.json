@@ -24,6 +24,7 @@
     "react-notifications": "^1.7.3",
     "react-paystack": "^3.0.5",
     "react-perfect-scrollbar": "^1.5.8",
+    "react-phone-number-input": "^3.2.3",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.1.1",
     "react-scripts": "4.0.3",
