@@ -212,7 +212,7 @@ const ClientListView = ({ setCurrentSection, invoices, loading }) => {
   return (
     <div className="mb-0 mt-2 overflow-auto">
       {loading ? (
-        <div className="d-flex justify-content-center align-items-center">
+        <div className="d-flex justify-content-center align-items-center" style={{marginTop: "6rem"}}>
           <Bars height="100" width="100" color="#2062F4" />
         </div>
       ) : invoices?.length ? (

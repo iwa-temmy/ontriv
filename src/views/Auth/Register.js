@@ -190,7 +190,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                                             </Steps>
                                         </div> */}
                     {activeState === 0 ? (
-                      <Form onSubmit={handleSubmit(handlePersonalDetails)}>
+                      <Form onSubmit={handleSubmit(handlePersonalDetails)} autoComplete="off">
                         {errors.fullname && (
                           <span className="text-danger text-left">
                             Enter Full Name
@@ -200,8 +200,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                           type="text"
                           placeholder="Full Name"
                           name="fullname"
-                          autocomplete="off"
-                          list="autocompleteOff"
+                          autoComplete="none"
                           id="fullname"
                           className={`w-100 ${
                             errors.fullname ? "border-danger" : ""
@@ -218,8 +217,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                         <input
                           type="email"
                           name="email"
-                          autocomplete="off"
-                          list="autocompleteOff"
+                          autoComplete="none"
                           id="email"
                           placeholder="Email Address"
                           className={`w-100 ${
@@ -402,6 +400,8 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                       <Form
                         className="business-form"
                         onSubmit={handleSubmit(handleBusinessDetails)}
+                        autoComplete="off"
+                        key="100"
                       >
                         {errors.business_name && (
                           <span className="text-danger text-left">
@@ -412,8 +412,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                           type="text"
                           placeholder="Business Name"
                           name="business_name"
-                          autocomplete="off"
-                          list="autocompleteOff"
+                          autocomplete="new_password"
                           id="business_name"
                           className={`w-100 ${
                             errors.business_name ? "border-danger" : ""
@@ -432,8 +431,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                           type="text"
                           placeholder="Business Website"
                           name="website"
-                          autocomplete="off"
-                          list="autocompleteOff"
+                          autocomplete="new_password"
                           id="website"
                           className={`w-100 ${
                             errors.website ? "border-danger" : ""
@@ -488,6 +486,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                           type="text"
                           placeholder="Referral Code"
                           name="referral_code"
+                          autocomplete="new_password"
                           className={`w-100 ${
                             errors.referral_code ? "border-danger" : ""
                           }`}
