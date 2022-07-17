@@ -4,7 +4,6 @@ import GreenCircle from "../../assets/img/finanace-green-circle.svg";
 import YellowCircle from "../../assets/img/finanace-yellow-circle.svg";
 import BluePlus from "../../assets/img/bg-blue-plust.svg";
 import XCancel from "../../assets/img/x-cancel.svg";
-import { connect } from "react-redux";
 import SelectUserImg from "../../assets/img/select-user-example-img.png";
 import { BiPlus } from "react-icons/bi";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -13,10 +12,14 @@ import Select from "react-select";
 import ListView from "./ListView.js";
 import ExpenseListView from "./ExpenseView.js";
 
-//utils
-import {calculateTotal} from "../../utils/helper";
+//redux
+import { connect } from "react-redux";
+import { getAllInvoices } from "../../redux/actions";
 
-const Finances = ({ clients }) => {
+//utils
+import { calculateTotal } from "../../utils/helper";
+
+const Finances = ({ clients, getAllInvoices, invoices, getInvoiceLoading }) => {
   const [view] = useState("list");
   const [addClient, setAddClient] = useState(false);
   const [invoiceTab, setInvoiceTab] = useState("invoice");
@@ -40,6 +43,10 @@ const Finances = ({ clients }) => {
       },
     ]);
   }, []);
+
+  useEffect(() => {
+    getAllInvoices();
+  }, [getAllInvoices]);
   //functions
   const handleAddItem = () => {
     let id = items.length + 1;
@@ -101,7 +108,7 @@ const Finances = ({ clients }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  };  
+  };
 
   //handle Form Submission
   const handleCreateInvoice = (e) => {
@@ -118,7 +125,7 @@ const Finances = ({ clients }) => {
       recurring: recurring,
       currency: "Naira",
       total: calculateTotal(items),
-      sub_total: calculateTotal(items), 
+      sub_total: calculateTotal(items),
     };
     console.log(payload);
     fetch("https://ontriv.herokuapp.com/invoice/api/v1/invoice/create/", {
@@ -139,7 +146,6 @@ const Finances = ({ clients }) => {
         console.log(err);
       });
   };
-
 
   const options = [
     {
@@ -229,15 +235,15 @@ const Finances = ({ clients }) => {
                 alt=""
               />
             </div>
-            {/* <h6 className='fw-bold fs-6 my-1'>
-                  #11212HHHHH
-                </h6> */}
             <Form onSubmit={handleCreateInvoice}>
-              <label className="text-left w-100">Select Client</label>
+              <label className="text-left w-100" htmlFor="client">
+                Select Client
+              </label>
               <Input
                 className="off-canvas-menu__input py-3 px-3"
                 type="select"
                 name="client"
+                id="client"
                 value={formData?.client || ""}
                 onChange={handleInputChange}
               >
@@ -418,7 +424,9 @@ const Finances = ({ clients }) => {
                   <BiPlus /> ADD ITEM
                 </span>
                 <h6 className="fw-light ms-auto me-4 my-auto">Total</h6>
-                <h6 className="fw-bold ms-auto me-4 my-auto">$ {calculateTotal(items) || "0.00"}</h6>
+                <h6 className="fw-bold ms-auto me-4 my-auto">
+                  $ {calculateTotal(items) || "0.00"}
+                </h6>
               </div>
               <div className="d-inline-flex mt-2 w-100 mb-2">
                 <h6 className="add-item me-auto my-auto">Preview</h6>
@@ -701,7 +709,7 @@ const Finances = ({ clients }) => {
         </div>
         {invoiceTab === "invoice" ? (
           view === "list" ? (
-            <ListView />
+            <ListView invoices={invoices} loading={getInvoiceLoading}/>
           ) : (
             <div className="client-inactive-state text-center">
               <Card className="client-inactive-state-card mx-auto">
@@ -759,9 +767,11 @@ const Finances = ({ clients }) => {
 };
 
 const mapStateToProps = (state) => {
-  const { auth } = state;
+  const { auth, invoice } = state;
   return {
     clients: auth?.currentUser?.client_list,
+    invoices: invoice?.invoices,
+    getInvoiceLoading: invoice?.getInvoiceLoading,
   };
 };
-export default connect(mapStateToProps, {})(Finances);
+export default connect(mapStateToProps, { getAllInvoices })(Finances);

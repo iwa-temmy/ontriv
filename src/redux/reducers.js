@@ -4,6 +4,7 @@ import nav from './Nav/reducer';
 import client from './Client/reducer'
 import settings from "./Settings/reducer";
 import general from "./General/reducer"
+import invoice from "./Invoices/reducer"
 
 
 const Reducers = combineReducers({
@@ -11,7 +12,8 @@ const Reducers = combineReducers({
     nav,
     client,
     settings,
-    general
+    general,
+    invoice
 });
 
 export default Reducers;

@@ -67,6 +67,9 @@ export const UPDATE_USER_DETAILS_ERROR = "UPDATE_USER_DETAILS_ERROR";
 export const GET_INVOICES = "GET_INVOICES";
 export const GET_INVOICES_SUCCESS = "GET_INVOICES_SUCCESS";
 export const GET_INVOICES_ERROR = "GET_INVOICES_ERROR";
+export const CREATE_NEW_INVOICE = "CREATE_NEW_INVOICE";
+export const CREATE_NEW_INVOICE_SUCCESS = "CREATE_NEW_INVOICE_SUCCESS";
+export const CREATE_NEW_INVOICE_ERROR = "CREATE_NEW_INVOICE_ERROR";
 
 
 
@@ -76,3 +79,4 @@ export * from './Nav/action';
 export * from './Client/action';
 export * from './Settings/action';
 export * from './General/action';
+export * from "./Invoices/action";
