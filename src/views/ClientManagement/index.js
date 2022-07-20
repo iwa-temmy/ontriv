@@ -35,6 +35,7 @@ const ClientManagement = ({
   }, [])
 
   const deleteClient = async clientEmail => {
+    console.log(clientEmail)
     try {
       const response = await axios.delete(
         `/business/api/v1/business/remove/client/${clientEmail}`,
@@ -43,9 +44,11 @@ const ClientManagement = ({
         }
       )
       notification('success', response.data.message)
+      getClient()
     } catch (err) {
       console.log(err)
-      notification('success', err.message)
+      console.log(err.response)
+      notification('error', err.message)
     }
   }
 
@@ -130,9 +133,9 @@ const ClientManagement = ({
             </div>
           </div>
           {clients.length > 0 && view === 'grid' ? (
-            <GridView clients={clients} deleteClient={deleteClient}/>
+            <GridView clients={clients} deleteClient={deleteClient} />
           ) : clients.length > 0 && view === 'list' ? (
-            <ListView clients={clients} deleteClient={deleteClient}/>
+            <ListView clients={clients} deleteClient={deleteClient} />
           ) : (
             <div className='client-inactive-state text-center'>
               <Card className='client-inactive-state-card mx-auto'>
