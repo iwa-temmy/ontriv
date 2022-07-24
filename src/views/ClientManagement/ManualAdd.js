@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo} from 'react'
-import { HiUser } from 'react-icons/hi'
+import React, { useEffect, useState, useMemo } from 'react'
+import { HiUser, HiPlusCircle } from 'react-icons/hi'
 import { CenteredModal as Modal } from '../../components/Modal'
 import { ThreeDots } from 'react-loader-spinner'
 import { useForm, Controller } from 'react-hook-form'
@@ -18,6 +18,12 @@ const AddNewClient = ({
   loading
 }) => {
   const options = useMemo(() => countryList().getData(), [])
+  const [uploadedImage, setUploadedImage] = useState(null)
+
+  const handlePictureUpload = e => {
+    // setPhoto(e.target.files[0])
+    setUploadedImage(URL.createObjectURL(e.target.files[0]))
+  }
 
   const {
     handleSubmit,
@@ -94,6 +100,7 @@ const AddNewClient = ({
             className={`w-100 ${errors.country ? 'border-danger' : ''} mb-3`}
             render={({ field: { onChange, value, ref } }) => (
               <Select
+                placeholder='Country'
                 inputRef={ref}
                 // value={options.filter(c => value.includes(c.value))}
                 className={`w-100 ${
@@ -110,18 +117,64 @@ const AddNewClient = ({
             })}
           />
 
-          {errors.password && (
-            <span className='text-danger text-left'>Enter password</span>
+          {errors.project_tag && (
+            <span className='text-danger text-left'>Enter project tag</span>
           )}
           <input
-            type='password'
-            name='password'
-            placeholder='Set password'
-            className={`w-100 ${errors.password ? 'border-danger' : ''}`}
-            {...register('password', {
+            type='text'
+            name='project_tag'
+            placeholder='Project Tag'
+            className={`w-100 ${errors.project_tag ? 'border-danger' : ''}`}
+            {...register('project_tag', {
               required: true
             })}
           />
+
+          <div  className='mb-2 d-flex justify-content-end'>
+            <div
+              className='img-holder'
+              style={{
+                marginRight: '30px'
+              }}
+            >
+              {uploadedImage && <img src={uploadedImage} alt='client-logo' className='add-client-logo' />}
+            </div>
+            <div>
+              <div className='d-flex justify-content-center align-items-center' role='button'>
+                <HiPlusCircle color='#2062F4' size='20' />
+                <div role='button'>
+                  <label
+                  role='button'
+                    for='client_logo'
+                    className='mb-0 cursor-pointer'
+                    style={{
+                      fontWeight: ' 700',
+                      fontSize: '15px',
+                      color: '#2062F4'
+                    }}
+                  >
+                    Upload Logo
+                  </label>
+                </div>
+              </div>
+              <input
+                type='file'
+                name='client_logo'
+                id='client_logo'
+                accept=''
+                className='d-none'
+                onChange={e => handlePictureUpload(e)}
+              />
+              <p
+                style={{
+                  fontWeight: '300',
+                  fontSize: '12px'
+                }}
+              >
+                3MB max size (500 x500)
+              </p>
+            </div>
+          </div>
 
           <div className='pt-2 pb-3'>
             <button
