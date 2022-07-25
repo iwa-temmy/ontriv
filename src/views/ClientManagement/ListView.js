@@ -58,21 +58,21 @@ const ClientListView = ({ setCurrentSection, clients, deleteClient }) => {
       // },
       {
         Header: 'Date Created',
-        accessor: 'createDate',
+        accessor: 'date_joined',
         cellClass: 'pt-4 list-client-item ',
-        Cell: props => <>{props.value}</>
+        Cell: props => <>{props.value.split('T')[0].replace(/-/g,'/')}</>
       },
-      {
-        Header: 'Project Tag',
-        accessor: 'projectTag',
-        cellClass: 'pt-3  list-client-item',
-        Cell: props => (
-          <div className='list-client-tag text-center'>
-            <img src={tag} alt='project-tag' className='mr-2' />
-            {props.value}
-          </div>
-        )
-      },
+      // {
+      //   Header: 'Project Tag',
+      //   accessor: 'projectTag',
+      //   cellClass: 'pt-3  list-client-item',
+      //   Cell: props => (
+      //     <div className='list-client-tag text-center'>
+      //       <img src={tag} alt='project-tag' className='mr-2' />
+      //       {props.value}
+      //     </div>
+      //   )
+      // },
 
       {
         Header: 'Action',
