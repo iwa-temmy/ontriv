@@ -162,9 +162,9 @@ const ClientListView = ({ setCurrentSection, invoices, loading }) => {
       },
       {
         Header: "Invoice Name",
-        accessor: "name",
+        accessor: "client",
         cellClass: "pt-4 list-client-item-finance ",
-        Cell: (props) => <>{props.value}</>,
+        Cell: (props) => <>{props.value.fullname}</>,
       },
       {
         Header: "Date",
