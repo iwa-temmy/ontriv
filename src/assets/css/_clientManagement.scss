@@ -194,11 +194,10 @@
     border: none;
     padding: 12px;
   }
-  .btn-outline-primary{
+  .btn-outline-primary {
     background: transparent;
-    color:#2062f4;
-    border:1px solid #2062f4;
-
+    color: #2062f4;
+    border: 1px solid #2062f4;
   }
 }
 
@@ -284,8 +283,8 @@
 
 .client-details {
   .client-profile-card {
-    padding: 40px 70px 20px 40px;
-    background: #e8f7ff;
+    padding: 22px 70px 22px 40px;
+    background: #e8f7ff !important;
     border: 1px solid #49a8f8;
     border-radius: 24px;
   }
@@ -322,7 +321,7 @@
     }
   }
   .content-calendar {
-    padding: 0 40px;
+    padding: 0 20px;
     background: #fff;
     border-radius: 24px !important;
     border: none !important;
@@ -356,7 +355,7 @@
   .client-basic-information,
   .client-invoices,
   .client-connected-account-card {
-    padding: 40px;
+    padding: 35px;
     background: #fff;
     border-radius: 24px !important;
     border: none !important;
@@ -409,7 +408,7 @@
     .account {
       background: #f9fafc;
       border-radius: 10px;
-      padding: 20px 30px;
+      padding: 10px 20px 10px 10px !important;
       margin-bottom: 25px;
       p {
         font-size: 15px;
@@ -507,4 +506,27 @@
       padding: 7px !important;
     }
   }
+}
+.img-holder {
+  width: 50px;
+  height: 50px;
+  background: #e0e6ed;
+  border-radius: 10px;
+}
+.add-client-logo {
+  width: 50px;
+  height: 50px;
+  // background: #e0e6ed;
+  border-radius: 10px;
+}
+.client-details-img-wrapper {
+  background: #ffffff;
+  box-shadow: 0px 4px 44px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  width: 55px;
+  height: 60px;
+}
+
+.icon-img-container {
+  
 }

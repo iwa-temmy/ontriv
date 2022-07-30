@@ -72,6 +72,7 @@ function* login({ payload }) {
       "/accounts/api/v1/login/",
       payload.userDetails
     );
+    console.log(response)
     if (response?.status === 200) {
       setAuthToken(response?.data?.access_token);
       setCurrentUser(response?.data);
@@ -93,12 +94,14 @@ function* login({ payload }) {
       yield put(loginUserError("Login Failed, please try again later"));
     }
   } catch (error) {
-    // console.log(error);
+    yield put(loginUserError(''));
+
+    console.log(error);
     console.log(error.response);
 
-    // console.log(error.response.data.error[0])
-    // console.log(error.message);
-    // // const {message} = erroresponse.data;
+    console.log(error.response.data)
+    console.log(error.message);
+    // const {message} = erroresponse.data;
     let message;
     if (error.response) {
       message = error.response.data.message;

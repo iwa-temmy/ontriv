@@ -14,7 +14,7 @@ const GridView = ({ clients }) => {
             <Card className='grid-view-card'>
               <div className='client-details d-flex  align-items-center'>
                 <div className='client-logo-wrapper'>
-                  <img src={el.profile_image} alt='client=logo' />
+                  <img src={el.profile_image} alt='logo' />
                 </div>
                 <div>
                   <h1 className='client-name mb-0'>{el.fullname}</h1>
@@ -22,10 +22,10 @@ const GridView = ({ clients }) => {
                 </div>
               </div>
               <div className='d-flex justify-content-between project-details align-items-center'>
-                <div>
+                {/* <div>
                   <h1 className='project-timeline-header'>Project Timeline</h1>
                   <p className='project-timeline'>{el.projectTimeline}</p>
-                </div>
+                </div> */}
                 <div>
                   <h3 className='date-created-header'>Date Created:</h3>
                   <p className='date-created'>{el.date}</p>

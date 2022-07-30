@@ -19,6 +19,59 @@ import {
   createClientError
 } from '../actions'
 
+
+function * getClient () {
+  console.log('------------------------------')
+  try {
+    const response = yield Axios.get(`/business/api/v1/list-all-client/`)
+    console.log(response)
+    console.log(response.status)
+    console.log(response.statusText)
+    console.log(response.headers)
+    console.log(response.config)
+    if (response.status === 200) {
+      yield put(getClientSuccess(response.data))
+      // window.location.reload();
+    } else {
+      yield put(getClientError(response.data.message))
+    }
+  } catch (error) {
+    console.log(error)
+    console.log(error.response)
+    // console.log(error.response.data.proj[0].tags)
+    console.log(error.response.status)
+    console.log(error.response.statusText)
+    console.log(error.response.headers)
+    console.log(error.response.config)
+
+    let message
+    if (error.response) {
+      const errorMessage = error.response.data?.detail
+
+      switch (error.response.status) {
+        case 500:
+          message = 'Internal Server Error'
+          break
+        case 404:
+          message = 'Not found'
+          break
+        case 401:
+          message = 'Unauthorized'
+          break
+        case 400:
+          message = errorMessage
+          break
+        default:
+          message = error.response.statusText
+      }
+    } else if (error.message) {
+      message = error.message
+    }
+    console.log(message)
+    yield put(getTagError(message))
+  }
+}
+
 function * createClient ({ payload }) {
   const { clientDetails } = payload
   console.log(clientDetails)
@@ -35,6 +88,7 @@ function * createClient ({ payload }) {
     if (response.status === 201) {
       yield put(createClientSuccess(response.data.detail))
       //
+      yield call(getClient)
     } else {
       yield put(createClientError(response.data.message))
     }
@@ -256,57 +310,7 @@ function * createTag ({ payload }) {
   }
 }
 
-function * getClient () {
-  console.log('------------------------------')
-  try {
-    const response = yield Axios.get(`/business/api/v1/list-all-client/`)
-    console.log(response)
-    console.log(response.status)
-    console.log(response.statusText)
-    console.log(response.headers)
-    console.log(response.config)
-    if (response.status === 200) {
-      yield put(getClientSuccess(response.data))
-      // window.location.reload();
-    } else {
-      yield put(getClientError(response.data.message))
-    }
-  } catch (error) {
-    console.log(error)
-    console.log(error.response)
-    // console.log(error.response.data.proj[0].tags)
-    console.log(error.response.status)
-    console.log(error.response.statusText)
-    console.log(error.response.headers)
-    console.log(error.response.config)
 
-    let message
-    if (error.response) {
-      const errorMessage = error.response.data?.detail
-
-      switch (error.response.status) {
-        case 500:
-          message = 'Internal Server Error'
-          break
-        case 404:
-          message = 'Not found'
-          break
-        case 401:
-          message = 'Unauthorized'
-          break
-        case 400:
-          message = errorMessage
-          break
-        default:
-          message = error.response.statusText
-      }
-    } else if (error.message) {
-      message = error.message
-    }
-    console.log(message)
-    yield put(getTagError(message))
-  }
-}
 
 export function * watchCreateClient () {
   yield takeEvery(CREATE_CLIENT, createClient)
