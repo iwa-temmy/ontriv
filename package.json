@@ -12,6 +12,7 @@
     "classnames": "^2.3.1",
     "dates-generator": "^1.0.4",
     "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
     "node-sass": "^7.0.1",
     "rc-steps": "3.6.0",
     "react": "^17.0.2",

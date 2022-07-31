@@ -431,7 +431,7 @@ const Finances = ({ clients, getAllInvoices, invoices, getInvoiceLoading }) => {
               <div className="d-inline-flex mt-2 w-100 mb-2">
                 <h6 className="add-item me-auto my-auto">Preview</h6>
                 <div className="py-2 ms-3 px-4 align-items-center ">
-                  <button className="btn btn-primary">Create</button>
+                  <button className="btn btn-primary">Save</button>
                 </div>
               </div>
             </Form>
