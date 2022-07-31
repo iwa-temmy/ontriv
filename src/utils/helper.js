@@ -84,7 +84,7 @@ export const paymentStatus = (status) => {
         <div
           className="status-tag-circle"
           style={{ backgroundColor: "#ED8000" }}
-        ></div>{" "}
+        ></div>
         <span>{status}</span>
       </div>
     );
@@ -94,15 +94,18 @@ export const paymentStatus = (status) => {
         <div
           className="status-tag-circle"
           style={{ backgroundColor: "#57D9A3" }}
-        ></div>{" "}
-        <span className="text-white">{status}</span>
+        ></div>
+        <span>{status}</span>
       </div>
     );
   } else {
     return (
-      <div className="list-client-tag text-center d-flex align-items-center justify-content-center w-75">
-        <div className="status-tag-circle"></div>{" "}
-        <span className="text-white">{status}</span>
+      <div className="list-client-tag-overdue text-center d-flex align-items-center justify-content-center w-75">
+        <div
+          className="status-tag-circle"
+          style={{ backgroundColor: "#FF2154" }}
+        ></div>
+        <span>{status}</span>
       </div>
     );
   }
