@@ -106,10 +106,11 @@
     }
 
     .signin-logo {
-      display: none;
-      @media (max-width: 1000px) {
-        display: block;
-      }
+      // display: none;
+      // @media (max-width: 1000px) {
+      //   display: block;
+      // }
+      display: block;
     }
     @media (min-width: 1600px) {
       position: relative;

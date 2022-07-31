@@ -63,7 +63,7 @@ const Signin = ({
             </Container>
           </div>
         </Col>
-        <Col md="8" sm="12" lg="8" className="pl-0 mt-5">
+        <Col md="8" sm="12" lg="8" className="pl-0 mt-3">
           <div className="signin-right">
             {/* <Container> */}
 
