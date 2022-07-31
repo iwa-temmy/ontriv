@@ -59,6 +59,17 @@ export const formatInvoiceIssueDate = (date) => {
   return moment(date).format("DD-MM-YYYY");
 };
 
+export const stringDateFormat = (date) => {
+  return moment(date).format("DD MMMM, YYYY");
+};
+
+export const formatNumber = (num) => {
+  if (!num) {
+    return;
+  }
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
 export const formatAmount = (num) => {
   if (num) {
     const initial = parseFloat(num).toFixed(2);
@@ -69,20 +80,29 @@ export const formatAmount = (num) => {
 export const paymentStatus = (status) => {
   if (status === "Pending") {
     return (
-      <div className="list-client-tag-paid text-center bg-warning d-flex align-items-center justify-content-center">
-        <div className="status-tag-circle"></div> <span className="text-white">{status}</span>
+      <div className="list-client-tag-pending text-center d-flex align-items-center justify-content-center w-75">
+        <div
+          className="status-tag-circle"
+          style={{ backgroundColor: "#ED8000" }}
+        ></div>{" "}
+        <span>{status}</span>
       </div>
     );
   } else if (status === "Paid") {
     return (
-      <div className="list-client-tag-paid text-center bg-success">
-        <div className="status-tag-circle"></div> <span className="text-white">{status}</span>
+      <div className="list-client-tag-paid text-center d-flex align-items-center justify-content-center w-75">
+        <div
+          className="status-tag-circle"
+          style={{ backgroundColor: "#57D9A3" }}
+        ></div>{" "}
+        <span className="text-white">{status}</span>
       </div>
     );
   } else {
     return (
-      <div className="list-client-tag-paid text-center bg-success">
-        <div className="status-tag-circle"></div> <span className="text-white">{status}</span>
+      <div className="list-client-tag text-center d-flex align-items-center justify-content-center w-75">
+        <div className="status-tag-circle"></div>{" "}
+        <span className="text-white">{status}</span>
       </div>
     );
   }

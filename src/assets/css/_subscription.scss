@@ -497,18 +497,25 @@
   width: 8px;
   height:8px;
   border-radius: 50%;
-  background-color: #fff;
   margin-right: 6px;
 }
 .list-client-tag-paid {
+  background: rgba(87, 217, 163, 15%) !important;
+  color: #57D9A3;
+  padding: 8px 12px;
+  border-radius: 10px !important;
+}
+.list-client-tag-overdue {
   // background: rgba(87, 217, 163, 15%) !important;
   // color: #57D9A3;
   padding: 8px 12px;
   border-radius: 10px !important;
-  img {
-    margin-right: 3px;
-    margin-bottom: 2px;
-  }
+}
+.list-client-tag-pending{
+  background-color: #ED800080;
+  padding: 8px 12px;
+  color: #ED8000;
+  border-radius: 10px;
 }
 
 .client-details {
@@ -733,13 +740,24 @@
     letter-spacing: 0.5px;
     color: #222234;
   }
-  &__paid {
+  &__status {
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 19px;
     line-height: 20px;
     letter-spacing: 0.5px;
     color: #00D67D;
+    margin-left: 10px;
+    text-transform: uppercase;
+  }
+  &__paid{
+    color: #00D67D;
+  }
+  &__pending{
+    color:  #ffc107;
+  }
+  &__overdue{
+    color: #dc3545;
   }
   &__grey-section {
     background: #FAFAFC;

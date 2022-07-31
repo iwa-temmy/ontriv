@@ -1,6 +1,5 @@
 import React from "react";
 import Table from "../../components/Table";
-import lightGreen from "../../assets/img/finance-light-green-circle.svg";
 import { connect } from "react-redux";
 import { setCurrentSection } from "../../redux/actions";
 import { Bars } from "react-loader-spinner";
@@ -57,11 +56,9 @@ const ClientListView = ({ setCurrentSection, invoices, loading }) => {
         accessor: "status",
         cellClass: "pt-3  list-client-item-finance ",
         Cell: (props) => (
-          // <div className="list-client-tag-paid text-center">
           <>
             {paymentStatus(props.value)}
           </>
-          // </div>
         ),
       },
     ],
