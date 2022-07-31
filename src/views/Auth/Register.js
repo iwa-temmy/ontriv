@@ -150,9 +150,8 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
             <div className="signup-text text-white  mx-auto">
               <Container>
                 <h2 className=" mt-5 mb-3">Sign up to Ontriv</h2>
-                <p className="">
-                  Lorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet,
-                  consectetur adipiscing elit, sed ctetur adipiscing elit, sed
+                <p className="h4">
+                  The ultimate tool to run your social media agency
                 </p>
               </Container>
             </div>
@@ -172,11 +171,11 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                       <Step
                         className=""
                         title="Personal Details"
-                        description="Lorem ipsum dolor sit amet, cons ectetur adipiscing elit, sed"
+                        description="It allows us to customize your experience"
                       />
                       <Step
                         title="Business Details"
-                        description="Lorem ipsum dolor sit amet, cons ectetur adipiscing elit, sed"
+                        description="It allows you to use your business details on invoices and client portals"
                       />
                     </Steps>
                   </Card>
