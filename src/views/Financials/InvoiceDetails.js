@@ -10,7 +10,7 @@ import {
   formatAmount,
 } from "../../utils/helper";
 import { BsFillCheckCircleFill } from "react-icons/bs";
-import {MdPending, MdCancel} from "react-icons/md";
+import { MdPending, MdCancel } from "react-icons/md";
 import { connect } from "react-redux";
 
 const InvoiceDetails = ({ details, address }) => {
@@ -22,11 +22,7 @@ const InvoiceDetails = ({ details, address }) => {
       return (
         <>
           <div className="d-inline-flex w-100 align-items-center justify-content-between">
-            <MdPending
-              className="ms-auto"
-              color="#ffc107"
-              size="24px"
-            />
+            <MdPending className="ms-auto" color="#ffc107" size="24px" />
             <h6 className="invoice-modal__status invoice-modal__pending mt-2 pl-2">
               {row?.original?.status}
             </h6>
@@ -52,11 +48,7 @@ const InvoiceDetails = ({ details, address }) => {
       return (
         <>
           <div className="d-inline-flex w-100 align-items-center justify-content-between">
-            <MdCancel
-              className="ms-auto"
-              color="#dc3545"
-              size="24px"
-            />
+            <MdCancel className="ms-auto" color="#dc3545" size="24px" />
             <h6 className="invoice-modal__status invoice-modal__overdue mt-2 pl-2">
               {row?.original?.status}
             </h6>
@@ -136,29 +128,35 @@ const InvoiceDetails = ({ details, address }) => {
               </div>
             </Col>
           </Row>
-            {paymentStatus(row?.original?.status)}
+          {paymentStatus(row?.original?.status)}
           <img src={HrInvoice} className="w-100" alt="" />
           <div className="mt-5 invoice-modal__grey-section w-100 py-4 px-4">
             <Row style={{ textAlign: "left" }}>
-              <Col xl="3">
-                <h6 className="invoice-modal__qty ">Qty</h6>
-                <h6 className="invoice-modal__qty">01</h6>
-                <h6 className="invoice-modal__qty">01</h6>
+              <Col xl="2">
+                <h6 className="invoice-modal__qty ">QTY</h6>
+              </Col>
+              <Col xl="5">
+                <h6 className="invoice-modal__qty">ITEM DESCRIPTION</h6>
+              </Col>
+              <Col xl="2">
+                <h6 className="invoice-modal__qty">RATE</h6>
               </Col>
               <Col xl="3">
-                <h6 className="invoice-modal__qty">Qty</h6>
-                <h6 className="invoice-modal__qty">Item Name</h6>
-                <h6 className="invoice-modal__qty">Item Name</h6>
+                <h6 className="invoice-modal__qty">AMOUNT</h6>
+              </Col>
+            </Row>
+            <Row>
+              <Col xl="2">
+                <h6 className="invoice-modal__qty ">1</h6>
+              </Col>
+              <Col xl="5">
+                <h6 className="invoice-modal__qty">Facebook</h6>
+              </Col>
+              <Col xl="2">
+                <h6 className="invoice-modal__qty">200</h6>
               </Col>
               <Col xl="3">
-                <h6 className="invoice-modal__qty">Qty</h6>
-                <h6 className="invoice-modal__qty">3,000.00</h6>
-                <h6 className="invoice-modal__qty">3,000.00</h6>
-              </Col>
-              <Col xl="3">
-                <h6 className="invoice-modal__qty">Qty</h6>
-                <h6 className="invoice-modal__qty">3,000.00</h6>
-                <h6 className="invoice-modal__qty">3,000.00</h6>
+                <h6 className="invoice-modal__qty">1000</h6>
               </Col>
             </Row>
           </div>
