@@ -493,9 +493,16 @@
   background-color: rgba(217, 87, 87, 0.15) !important;
   border-radius: 10px !important;
 }
+.status-tag-circle {
+  width: 8px;
+  height:8px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-right: 6px;
+}
 .list-client-tag-paid {
-  background: rgba(87, 217, 163, 15%) !important;
-  color: #57D9A3;
+  // background: rgba(87, 217, 163, 15%) !important;
+  // color: #57D9A3;
   padding: 8px 12px;
   border-radius: 10px !important;
   img {

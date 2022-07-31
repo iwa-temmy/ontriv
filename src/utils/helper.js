@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 
 const BASE_URL = "https://ontriv.herokuapp.com";
 
@@ -52,4 +53,37 @@ export const calculateTotal = (items) => {
   }
 
   return total;
+};
+
+export const formatInvoiceIssueDate = (date) => {
+  return moment(date).format("DD-MM-YYYY");
+};
+
+export const formatAmount = (num) => {
+  if (num) {
+    const initial = parseFloat(num).toFixed(2);
+    return initial.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+};
+
+export const paymentStatus = (status) => {
+  if (status === "Pending") {
+    return (
+      <div className="list-client-tag-paid text-center bg-warning d-flex align-items-center justify-content-center">
+        <div className="status-tag-circle"></div> <span className="text-white">{status}</span>
+      </div>
+    );
+  } else if (status === "Paid") {
+    return (
+      <div className="list-client-tag-paid text-center bg-success">
+        <div className="status-tag-circle"></div> <span className="text-white">{status}</span>
+      </div>
+    );
+  } else {
+    return (
+      <div className="list-client-tag-paid text-center bg-success">
+        <div className="status-tag-circle"></div> <span className="text-white">{status}</span>
+      </div>
+    );
+  }
 };
