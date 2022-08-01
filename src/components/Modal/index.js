@@ -26,6 +26,25 @@ export const CenteredModal = ({ className, modalState, setModalState, size, chil
         </div>
     );
 }
+export const InvoicePreviewModal = ({ className, modalState, toggleModalState, size, children }) => {
+
+    return (
+        <div>
+            {/* <Button color="danger" onClick={toggle}>{buttonLabel}</Button> */}
+            <Modal
+                isOpen={modalState}
+                toggle={toggleModalState}
+                modalClassName='cstm-modal'
+                size={size}
+                className={`${className} modal-dialog-centered`} >
+                <div className='modal-cstm-button text-center' onClick={toggleModalState}>
+                    <TiTimes size='25px' />
+                </div>
+                {children}
+            </Modal>
+        </div>
+    );
+}
 export const TopRightModal = ({ modalState, setModalState, size, children }) => {
     const toggle = () => {
         setModalState(!modalState);

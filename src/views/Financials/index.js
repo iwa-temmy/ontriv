@@ -550,7 +550,7 @@ const Finances = ({ clients, getAllInvoices, invoices, getInvoiceLoading }) => {
       ) : null}
       <div className="dashboard dashboard-wrapper">
         <Row>
-          <Col md="7" sm="16" lg="7" xl="5" className="mb-3">
+          <Col md="12" sm="12" lg="6" xl="6" className="mb-3">
             <Card className="py-4 px-4 finances__top-cards">
               <Row>
                 <Col
@@ -592,7 +592,7 @@ const Finances = ({ clients, getAllInvoices, invoices, getInvoiceLoading }) => {
               </Row>
             </Card>
           </Col>
-          <Col md="7" sm="16" lg="9" xl="7" className="mb-3">
+          <Col md="12" sm="12" lg="6" xl="6" className="mb-3">
             <Row className="h-100">
               <Col xl="6">
                 <Card className="py-4 px-4 h-100 finances__top-cards">

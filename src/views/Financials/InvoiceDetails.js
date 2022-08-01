@@ -1,7 +1,7 @@
 import { Row, Col } from "reactstrap";
-import { CenteredModal as Modal } from "../../components/Modal";
-import React, { useState } from "react";
-import boxIcon from "../../assets/img/box-icon-finance.svg";
+import { InvoicePreviewModal as Modal } from "../../components/Modal";
+import React from "react";
+// import boxIcon from "../../assets/img/box-icon-finance.svg";
 import TitleModalLogoHere from "../../assets/img/TitleModalLogoHere.svg";
 import HrInvoice from "../../assets/img/hr-invoice.svg";
 import {
@@ -13,8 +13,12 @@ import { BsFillCheckCircleFill } from "react-icons/bs";
 import { MdPending, MdCancel } from "react-icons/md";
 import { connect } from "react-redux";
 
-const InvoiceDetails = ({ details, address }) => {
-  const [showModal, setShowModal] = useState(false);
+const InvoiceDetails = ({
+  details,
+  address,
+  showModal,
+  toggleInvoicePreview,
+}) => {
   const { row } = details;
 
   const paymentStatus = (status) => {
@@ -59,14 +63,7 @@ const InvoiceDetails = ({ details, address }) => {
   };
   return (
     <div>
-      <img
-        src={boxIcon}
-        alt="client-logo"
-        onClick={() => {
-          setShowModal(true);
-        }}
-      />
-      <Modal modalState={showModal} setModalState={setShowModal}>
+      <Modal modalState={showModal} toggleModalState={toggleInvoicePreview}>
         <div className="add-client-wrapper-2 text-center ">
           <div className="d-inline-flex" style={{ width: "100%" }}>
             <img className="me-auto" src={TitleModalLogoHere} alt="" />

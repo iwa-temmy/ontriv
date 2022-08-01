@@ -7,9 +7,15 @@ import HrInvoice from "../../assets/img/hr-invoice.svg";
 import PlusSign from "../../assets/img/plus-sign.svg";
 import LockKey from "../../assets/img/lock-key.svg";
 
-const InvoiceDetailsPage = () => {
+//react-router
+import { useLocation } from "react-router-dom";
+
+const InvoiceDetailsPage = (props) => {
   const [showOptions, setShowOptions] = useState(true);
   const [showSettings, setShowSettings] = useState(true);
+
+  const location = useLocation();
+  console.log(location?.state);
   return (
     <>
       <div className="dashboard dashboard-wrapper px-2">
