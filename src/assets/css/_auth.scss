@@ -78,15 +78,15 @@
       top: 22%;
       left: 15%;
       .signin-header-text {
-        font-size: 34px;
-        font-weight: 600;
+        font-size: 48px;
+        font-weight: 700;
         width: 65%;
         @media (max-width: 1600px) {
           width: 100%;
         }
       }
       .signin-subhead-text {
-        font-weight: 200;
+        font-weight: 400;
         // padding-right: 5em;
         font-size: 15px;
         width: 50%;
@@ -106,10 +106,11 @@
     }
 
     .signin-logo {
-      display: none;
-      @media (max-width: 1000px) {
-        display: block;
-      }
+      // display: none;
+      // @media (max-width: 1000px) {
+      //   display: block;
+      // }
+      display: block;
     }
     @media (min-width: 1600px) {
       position: relative;

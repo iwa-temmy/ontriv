@@ -46,7 +46,7 @@ const Signin = ({
   return (
     <div className="auth">
       <Row className="gx-0">
-        <Col lg="4" sm="12" className="pr-0">
+        <Col md="4" sm="12" lg="4" className="pr-0">
           <div className="signin-left">
             <Container>
               {/* <div className='signin-img-container '>
@@ -54,17 +54,16 @@ const Signin = ({
                             </div> */}
               <div className="signin-text text-white pl-5 w-75 mx-auto">
                 <h2 className="signin-header-text mt-5 mb-3">
-                  Content Manager Dream Tool.
+                  Social media management made easy
                 </h2>
                 <h4 className="signin-subhead-text">
-                  Sed ut perspiciatis, unde omnis iste natus error sit
-                  voluptatem.
+                  Spend less, stay organized & save time.
                 </h4>
               </div>
             </Container>
           </div>
         </Col>
-        <Col lg="8" sm="12" className="pl-0 mt-2">
+        <Col md="12" sm="12" lg="8" className="pl-0 mt-3">
           <div className="signin-right">
             {/* <Container> */}
 

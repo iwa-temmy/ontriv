@@ -1469,3 +1469,13 @@ label {
   letter-spacing: 0.75px;
   color: #2062F4;
 }
+
+
+.btn-secondary{
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+.btn-secondary:focus{
+  outline: none !important;
+  box-shadow: none !important;
+}

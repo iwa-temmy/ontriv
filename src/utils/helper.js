@@ -1,5 +1,7 @@
 import axios from "axios";
 import moment from "moment";
+import { BsFillCheckCircleFill } from "react-icons/bs";
+import { MdPending, MdCancel } from "react-icons/md";
 
 const BASE_URL = "https://ontriv.herokuapp.com";
 
@@ -107,6 +109,48 @@ export const paymentStatus = (status) => {
         ></div>
         <span>{status}</span>
       </div>
+    );
+  }
+};
+
+
+export const invoicePaymentStatus = (status) => {
+  if (status === "Pending") {
+    return (
+      <>
+        <div className="d-inline-flex w-100 align-items-center justify-content-between">
+          <MdPending className="ms-auto" color="#ffc107" size="24px" />
+          <h6 className="invoice-modal__status invoice-modal__pending mt-2 pl-2">
+            {status}
+          </h6>
+        </div>
+      </>
+    );
+  } else if (status === "Paid") {
+    return (
+      <>
+        <div className="d-inline-flex w-100 align-items-center justify-content-between">
+          <BsFillCheckCircleFill
+            className="ms-auto"
+            color="#00D67D"
+            size="24px"
+          />
+          <h6 className="invoice-modal__status invoice-modal__paid mt-2 pl-2">
+            {status}
+          </h6>
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <div className="d-inline-flex w-100 align-items-center justify-content-between">
+          <MdCancel className="ms-auto" color="#dc3545" size="24px" />
+          <h6 className="invoice-modal__status invoice-modal__overdue mt-2 pl-2">
+            {status}
+          </h6>
+        </div>
+      </>
     );
   }
 };

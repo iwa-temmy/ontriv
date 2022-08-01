@@ -1,22 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "../../components/Table";
 import { connect } from "react-redux";
 import { setCurrentSection } from "../../redux/actions";
 import { Bars } from "react-loader-spinner";
-import {formatInvoiceIssueDate, formatAmount, paymentStatus} from "../../utils/helper"
-
+import {
+  formatInvoiceIssueDate,
+  formatAmount,
+  paymentStatus,
+} from "../../utils/helper";
+//Navigation
+import { useNavigate } from "react-router-dom";
+//Components
+import TableDropdown from "../../components/Dropdown/TableDropdown";
 import InvoiceDetails from "./InvoiceDetails";
 
-
 const ClientListView = ({ setCurrentSection, invoices, loading }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [invoiceDetails, setInvoiceDetails] = useState({});
+
+  const navigate = useNavigate();
+
+  const toggleInvoicePreview = (record) => {
+    if (showModal) {
+      setInvoiceDetails(record);
+    } else {
+      setInvoiceDetails(record);
+    }
+    setShowModal(!showModal);
+  };
+
+  const openFullInvoicePage = (record) => {
+    const invoiceData = record?.row?.original;
+    navigate(`/invoices-&-financials/invoice/${invoiceData?.id}`, {state: invoiceData} )
+  }
   const cols = React.useMemo(
     () => [
-      {
-        Header: "",
-        accessor: "img",
-        cellClass: "",
-        Cell: (props) => <InvoiceDetails details={props} />,
-      },
       {
         Header: "Invoice Name",
         accessor: "description",
@@ -47,7 +65,9 @@ const ClientListView = ({ setCurrentSection, invoices, loading }) => {
         cellClass: "pt-4 list-client-item-finance ",
         Cell: (props) => (
           <>
-            <span className="pt-2 mb-0 text-underline">{formatAmount(props.value)}</span>
+            <span className="pt-2 mb-0 text-underline">
+              {formatAmount(props.value)}
+            </span>
           </>
         ),
       },
@@ -55,10 +75,17 @@ const ClientListView = ({ setCurrentSection, invoices, loading }) => {
         Header: "Status",
         accessor: "status",
         cellClass: "pt-3  list-client-item-finance ",
+        Cell: (props) => <>{paymentStatus(props.value)}</>,
+      },
+      {
+        Header: "Action",
+        accessor: "img",
+        cellClass: "",
         Cell: (props) => (
-          <>
-            {paymentStatus(props.value)}
-          </>
+          <TableDropdown
+            toggleInvoicePreview={() => toggleInvoicePreview(props)}
+            openFullInvoicePage={() => openFullInvoicePage(props)}
+          />
         ),
       },
     ],
@@ -68,7 +95,10 @@ const ClientListView = ({ setCurrentSection, invoices, loading }) => {
   return (
     <div className="mb-0 mt-2 overflow-auto">
       {loading ? (
-        <div className="d-flex justify-content-center align-items-center" style={{marginTop: "6rem"}}>
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ marginTop: "6rem" }}
+        >
           <Bars height="100" width="100" color="#2062F4" />
         </div>
       ) : invoices?.length ? (
@@ -80,10 +110,18 @@ const ClientListView = ({ setCurrentSection, invoices, loading }) => {
           pagePosition="center"
         />
       ) : (
-        <div className="d-flex justify-content-center align-items-center" style={{marginTop: "6rem"}}>
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ marginTop: "6rem" }}
+        >
           <span className="text-center">No Invoices available</span>
         </div>
       )}
+      <InvoiceDetails
+        toggleInvoicePreview={toggleInvoicePreview}
+        showModal={showModal}
+        details={invoiceDetails}
+      />
     </div>
   );
 };
