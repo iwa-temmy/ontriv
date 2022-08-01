@@ -2,10 +2,14 @@ import { Button, Row, Col } from "reactstrap";
 import { CenteredModal as Modal } from "../../components/Modal";
 import React, { useState } from "react";
 import TitleModalLogoHere from "../../assets/img/TitleModalLogoHere.svg";
-import GreenMark from "../../assets/img/green-mark-modal.svg";
 import HrInvoice from "../../assets/img/hr-invoice.svg";
 import PlusSign from "../../assets/img/plus-sign.svg";
 import LockKey from "../../assets/img/lock-key.svg";
+//redux
+import {connect} from "react-redux";
+
+//utils
+import { stringDateFormat, invoicePaymentStatus, formatAmount } from "../../utils/helper";
 
 //react-router
 import { useLocation } from "react-router-dom";
@@ -14,6 +18,8 @@ const InvoiceDetailsPage = (props) => {
   const [showOptions, setShowOptions] = useState(true);
   const [showSettings, setShowSettings] = useState(true);
 
+  //props
+  const {address} = props;
   const location = useLocation();
   console.log(location?.state);
   return (
@@ -28,26 +34,28 @@ const InvoiceDetailsPage = (props) => {
               <div className="add-client-wrapper-2 text-center ">
                 <div className="d-inline-flex" style={{ width: "100%" }}>
                   <img className="me-auto" src={TitleModalLogoHere} alt="" />
-                  <h6 className="invoice-modal__title">INV-057</h6>
+                  <h6 className="invoice-modal__title">
+                    INV-{location?.state?.id}
+                  </h6>
                 </div>
                 <Row>
-                  <Col xl="6">
+                  <Col sm="6" lg="6" xl="6">
                     <h6 className="invoice-modal__light text-left mb-3">
-                      4945 Forest Avenue, New York, 10004, United States
+                     {address}
                     </h6>
                     <h6 className="invoice-modal__bold text-left mb-3">
-                      27 March, 2020
+                      {stringDateFormat(location?.state?.issued_on)}
                     </h6>
                     <div className="">
                       <h6 className="invoice-modal__light text-left">
                         Due Date
                       </h6>
                       <h6 className="invoice-modal__bold text-left">
-                        04 April, 2020
+                        {stringDateFormat(location?.state?.due_date)}
                       </h6>
                     </div>
                   </Col>
-                  <Col xl="6">
+                  <Col sm="6" lg="6" xl="6">
                     <div className="" style={{ textAlign: "right" }}>
                       <h6
                         className="invoice-modal__light text-right"
@@ -59,7 +67,7 @@ const InvoiceDetailsPage = (props) => {
                         className="invoice-modal__bold text-right"
                         style={{ fontSize: "14px", fontWeight: "500" }}
                       >
-                        Terry Baptista
+                        {location?.state?.client?.fullname}
                       </h6>
                       <h6
                         className="invoice-modal__light text-right"
@@ -88,32 +96,35 @@ const InvoiceDetailsPage = (props) => {
                     </div>
                   </Col>
                 </Row>
-                <div className="d-inline-flex w-100">
-                  <img className="ms-auto" src={GreenMark} alt="" />
-                  <h6 className="invoice-modal__paid mt-3">PAID</h6>
-                </div>
+                {invoicePaymentStatus(location?.state?.status)}
                 <img src={HrInvoice} className="w-100" alt="" />
                 <div className="mt-5 invoice-modal__grey-section w-100 py-4 px-4">
                   <Row style={{ textAlign: "left" }}>
-                    <Col xl="3">
-                      <h6 className="invoice-modal__qty ">Qty</h6>
-                      <h6 className="invoice-modal__qty">01</h6>
-                      <h6 className="invoice-modal__qty">01</h6>
+                    <Col md="2" lg="2">
+                      <h6 className="invoice-modal__qty ">QTY</h6>
                     </Col>
-                    <Col xl="3">
-                      <h6 className="invoice-modal__qty">Qty</h6>
-                      <h6 className="invoice-modal__qty">Item Name</h6>
-                      <h6 className="invoice-modal__qty">Item Name</h6>
+                    <Col md="5" lg="5">
+                      <h6 className="invoice-modal__qty">ITEM DESCRIPTION</h6>
                     </Col>
-                    <Col xl="3">
-                      <h6 className="invoice-modal__qty">Qty</h6>
-                      <h6 className="invoice-modal__qty">3,000.00</h6>
-                      <h6 className="invoice-modal__qty">3,000.00</h6>
+                    <Col md="2" lg="2">
+                      <h6 className="invoice-modal__qty">RATE</h6>
                     </Col>
-                    <Col xl="3">
-                      <h6 className="invoice-modal__qty">Qty</h6>
-                      <h6 className="invoice-modal__qty">3,000.00</h6>
-                      <h6 className="invoice-modal__qty">3,000.00</h6>
+                    <Col md="3" lg="3">
+                      <h6 className="invoice-modal__qty">AMOUNT</h6>
+                    </Col>
+                  </Row>
+                  <Row style={{ textAlign: "left" }}>
+                    <Col md="2" lg="2">
+                      <h6 className="invoice-modal__qty ">01</h6>
+                    </Col>
+                    <Col md="5" lg="5">
+                      <h6 className="invoice-modal__qty">Facebook</h6>
+                    </Col>
+                    <Col md="2" lg="2">
+                      <h6 className="invoice-modal__qty">3,000</h6>
+                    </Col>
+                    <Col md="3" lg="3">
+                      <h6 className="invoice-modal__qty">$3,000</h6>
                     </Col>
                   </Row>
                 </div>
@@ -130,13 +141,13 @@ const InvoiceDetailsPage = (props) => {
                             className="invoice-modal__qty "
                             style={{ textAlign: "right" }}
                           >
-                            $ 4,500.00
+                           {formatAmount(location?.state?.sub_total)}
                           </h6>
                           <h6
                             className="invoice-modal__qty"
                             style={{ textAlign: "right" }}
                           >
-                            $450.00
+                            $0.00
                           </h6>
                         </Col>
                       </Row>
@@ -152,7 +163,7 @@ const InvoiceDetailsPage = (props) => {
                             className="invoice-modal__total ms-auto my-auto"
                             style={{ textAlign: "right" }}
                           >
-                            $ 4,950.00
+                            $  {formatAmount(location?.state?.total)}
                           </h6>
                         </div>
                       </Row>
@@ -334,4 +345,9 @@ const InvoiceDetailsPage = (props) => {
   );
 };
 
-export default InvoiceDetailsPage;
+const mapStateToProps = (state) => {
+  return {
+    address: state?.settings?.businessDetails?.address,
+  };
+};
+export default connect(mapStateToProps, {})(InvoiceDetailsPage);

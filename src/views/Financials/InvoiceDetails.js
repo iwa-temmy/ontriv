@@ -1,16 +1,15 @@
 import { Row, Col } from "reactstrap";
 import { InvoicePreviewModal as Modal } from "../../components/Modal";
 import React from "react";
-// import boxIcon from "../../assets/img/box-icon-finance.svg";
 import TitleModalLogoHere from "../../assets/img/TitleModalLogoHere.svg";
 import HrInvoice from "../../assets/img/hr-invoice.svg";
 import {
   stringDateFormat,
   formatNumber,
   formatAmount,
+  invoicePaymentStatus,
 } from "../../utils/helper";
-import { BsFillCheckCircleFill } from "react-icons/bs";
-import { MdPending, MdCancel } from "react-icons/md";
+
 import { connect } from "react-redux";
 
 const InvoiceDetails = ({
@@ -21,46 +20,6 @@ const InvoiceDetails = ({
 }) => {
   const { row } = details;
 
-  const paymentStatus = (status) => {
-    if (status === "Pending") {
-      return (
-        <>
-          <div className="d-inline-flex w-100 align-items-center justify-content-between">
-            <MdPending className="ms-auto" color="#ffc107" size="24px" />
-            <h6 className="invoice-modal__status invoice-modal__pending mt-2 pl-2">
-              {row?.original?.status}
-            </h6>
-          </div>
-        </>
-      );
-    } else if (status === "Paid") {
-      return (
-        <>
-          <div className="d-inline-flex w-100 align-items-center justify-content-between">
-            <BsFillCheckCircleFill
-              className="ms-auto"
-              color="#00D67D"
-              size="24px"
-            />
-            <h6 className="invoice-modal__status invoice-modal__paid mt-2 pl-2">
-              {row?.original?.status}
-            </h6>
-          </div>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <div className="d-inline-flex w-100 align-items-center justify-content-between">
-            <MdCancel className="ms-auto" color="#dc3545" size="24px" />
-            <h6 className="invoice-modal__status invoice-modal__overdue mt-2 pl-2">
-              {row?.original?.status}
-            </h6>
-          </div>
-        </>
-      );
-    }
-  };
   return (
     <div>
       <Modal modalState={showModal} toggleModalState={toggleInvoicePreview}>
@@ -125,7 +84,7 @@ const InvoiceDetails = ({
               </div>
             </Col>
           </Row>
-          {paymentStatus(row?.original?.status)}
+          {invoicePaymentStatus(row?.original?.status)}
           <img src={HrInvoice} className="w-100" alt="" />
           <div className="mt-5 invoice-modal__grey-section w-100 py-4 px-4">
             <Row style={{ textAlign: "left" }}>
