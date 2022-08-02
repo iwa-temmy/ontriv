@@ -28,7 +28,7 @@ const InvoiceDetailsPage = (props) => {
   const [showRequestPayout, setShowRequestPayout] = useState(false);
 
   //props
-  const { address } = props;
+  const { address, logo } = props;
   const location = useLocation();
   console.log(location?.state);
 
@@ -49,7 +49,7 @@ const InvoiceDetailsPage = (props) => {
               <div id="invoice">
                 <div className="add-client-wrapper-2 text-center ">
                   <div className="d-inline-flex" style={{ width: "100%" }}>
-                    <img className="me-auto" src={TitleModalLogoHere} alt="" />
+                    <img className="me-auto mb-5" src={logo} alt="business logo" />
                     <h6 className="invoice-modal__title">
                       INV-{location?.state?.id}
                     </h6>
@@ -354,6 +354,7 @@ const InvoiceDetailsPage = (props) => {
 const mapStateToProps = (state) => {
   return {
     address: state?.settings?.businessDetails?.address,
+    logo: state?.settings?.businessDetails?.logo,
   };
 };
 export default connect(mapStateToProps, {})(InvoiceDetailsPage);
