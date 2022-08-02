@@ -1,27 +1,42 @@
-import { Button, Row, Col } from "reactstrap";
-import { CenteredModal as Modal } from "../../components/Modal";
+import { Row, Col } from "reactstrap";
+
 import React, { useState } from "react";
 import TitleModalLogoHere from "../../assets/img/TitleModalLogoHere.svg";
 import HrInvoice from "../../assets/img/hr-invoice.svg";
 import PlusSign from "../../assets/img/plus-sign.svg";
 import LockKey from "../../assets/img/lock-key.svg";
 //redux
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
 //utils
-import { stringDateFormat, invoicePaymentStatus, formatAmount } from "../../utils/helper";
+import {
+  stringDateFormat,
+  invoicePaymentStatus,
+  formatAmount,
+  pdfWithPrintJs,
+} from "../../utils/helper";
 
 //react-router
 import { useLocation } from "react-router-dom";
+import InvoiceSettingsModal from "./InvoiceActions/InvoiceSettingsModal";
+import RecordPaymentModal from "./InvoiceActions/RecordPaymentModal";
 
 const InvoiceDetailsPage = (props) => {
-  const [showOptions, setShowOptions] = useState(true);
-  const [showSettings, setShowSettings] = useState(true);
+  const [showOptions, setShowOptions] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [showRecordPayment, setShowRecordPayment] = useState(false);
+  const [showRequestPayout, setShowRequestPayout] = useState(false);
 
   //props
-  const {address} = props;
+  const { address } = props;
   const location = useLocation();
   console.log(location?.state);
+
+  const getPDF = () => {
+    setShowOptions(false);
+    pdfWithPrintJs("invoice", "invoice");
+  };
+
   return (
     <>
       <div className="dashboard dashboard-wrapper px-2">
@@ -31,171 +46,168 @@ const InvoiceDetailsPage = (props) => {
               className="bg-white rounded-2 py-4 px-5"
               style={{ borderRadius: "10px" }}
             >
-              <div className="add-client-wrapper-2 text-center ">
-                <div className="d-inline-flex" style={{ width: "100%" }}>
-                  <img className="me-auto" src={TitleModalLogoHere} alt="" />
-                  <h6 className="invoice-modal__title">
-                    INV-{location?.state?.id}
-                  </h6>
-                </div>
-                <Row>
-                  <Col sm="6" lg="6" xl="6">
-                    <h6 className="invoice-modal__light text-left mb-3">
-                     {address}
-                    </h6>
-                    <h6 className="invoice-modal__bold text-left mb-3">
-                      {stringDateFormat(location?.state?.issued_on)}
-                    </h6>
-                    <div className="">
-                      <h6 className="invoice-modal__light text-left">
-                        Due Date
-                      </h6>
-                      <h6 className="invoice-modal__bold text-left">
-                        {stringDateFormat(location?.state?.due_date)}
-                      </h6>
-                    </div>
-                  </Col>
-                  <Col sm="6" lg="6" xl="6">
-                    <div className="" style={{ textAlign: "right" }}>
-                      <h6
-                        className="invoice-modal__light text-right"
-                        style={{ textAlign: "right" }}
-                      >
-                        Billed to,
-                      </h6>
-                      <h6
-                        className="invoice-modal__bold text-right"
-                        style={{ fontSize: "14px", fontWeight: "500" }}
-                      >
-                        {location?.state?.client?.fullname}
-                      </h6>
-                      <h6
-                        className="invoice-modal__light text-right"
-                        style={{ textAlign: "right" }}
-                      >
-                        3455 Geraldine Lane,
-                      </h6>
-                      <h6
-                        className="invoice-modal__light text-right"
-                        style={{ textAlign: "right" }}
-                      >
-                        New York
-                      </h6>
-                      <h6
-                        className="invoice-modal__light text-right"
-                        style={{ textAlign: "right" }}
-                      >
-                        10013
-                      </h6>
-                      <h6
-                        className="invoice-modal__light text-right"
-                        style={{ textAlign: "right" }}
-                      >
-                        United States
-                      </h6>
-                    </div>
-                  </Col>
-                </Row>
-                {invoicePaymentStatus(location?.state?.status)}
-                <img src={HrInvoice} className="w-100" alt="" />
-                <div className="mt-5 invoice-modal__grey-section w-100 py-4 px-4">
-                  <Row style={{ textAlign: "left" }}>
-                    <Col md="2" lg="2">
-                      <h6 className="invoice-modal__qty ">QTY</h6>
-                    </Col>
-                    <Col md="5" lg="5">
-                      <h6 className="invoice-modal__qty">ITEM DESCRIPTION</h6>
-                    </Col>
-                    <Col md="2" lg="2">
-                      <h6 className="invoice-modal__qty">RATE</h6>
-                    </Col>
-                    <Col md="3" lg="3">
-                      <h6 className="invoice-modal__qty">AMOUNT</h6>
-                    </Col>
-                  </Row>
-                  <Row style={{ textAlign: "left" }}>
-                    <Col md="2" lg="2">
-                      <h6 className="invoice-modal__qty ">01</h6>
-                    </Col>
-                    <Col md="5" lg="5">
-                      <h6 className="invoice-modal__qty">Facebook</h6>
-                    </Col>
-                    <Col md="2" lg="2">
-                      <h6 className="invoice-modal__qty">3,000</h6>
-                    </Col>
-                    <Col md="3" lg="3">
-                      <h6 className="invoice-modal__qty">$3,000</h6>
-                    </Col>
-                  </Row>
-                </div>
-                <Row>
-                  <Col className="ms-auto" xl="11">
-                    <div className="mt-5 invoice-modal__grey-section py-4 px-4">
-                      <Row>
-                        <Col xl="6">
-                          <h6 className="invoice-modal__qty ">Sub Total</h6>
-                          <h6 className="invoice-modal__qty">VAT(10%)</h6>
-                        </Col>
-                        <Col xl="6">
-                          <h6
-                            className="invoice-modal__qty "
-                            style={{ textAlign: "right" }}
-                          >
-                           {formatAmount(location?.state?.sub_total)}
-                          </h6>
-                          <h6
-                            className="invoice-modal__qty"
-                            style={{ textAlign: "right" }}
-                          >
-                            $0.00
-                          </h6>
-                        </Col>
-                      </Row>
-                      <Row className="invoice-modal__blue-section py-3">
-                        <div className="d-inline-flex w-100">
-                          <h6
-                            className="invoice-modal__qty my-auto"
-                            style={{ textAlign: "left" }}
-                          >
-                            Total (USD)
-                          </h6>
-                          <h6
-                            className="invoice-modal__total ms-auto my-auto"
-                            style={{ textAlign: "right" }}
-                          >
-                            $  {formatAmount(location?.state?.total)}
-                          </h6>
-                        </div>
-                      </Row>
-                    </div>
-                  </Col>
-                </Row>
-                <img src={HrInvoice} className="my-5 w-100" alt="" />
-                <h6 className="text-left">Notes</h6>
-                <p className="fw-light w-75 text-left fs-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec
-                  id turpis malesuada nibh.
-                </p>
-                <img src={HrInvoice} className="my-5 w-100" alt="" />
-                <h6 className="add-item">WWW.LOGOHERE.COM</h6>
-                <img src={HrInvoice} className="my-5 w-100" alt="" />
-                <div className="d-inline-flex mb-5 w-100">
-                  <div className="me-auto">
-                    <div className="d-inline-flex w-full">
-                      <img src={PlusSign} className="" alt="" />
-                      <h6 className="add-item ms-3 me-auto my-auto">
-                        Dowload Invoice
-                      </h6>
-                    </div>
-                    <h6 className="text-left fw-light fs-6">
-                      You can update logo in Settings
+              <div id="invoice">
+                <div className="add-client-wrapper-2 text-center ">
+                  <div className="d-inline-flex" style={{ width: "100%" }}>
+                    <img className="me-auto" src={TitleModalLogoHere} alt="" />
+                    <h6 className="invoice-modal__title">
+                      INV-{location?.state?.id}
                     </h6>
                   </div>
-                  <h6 className="save-pdf py-2 px-4">Print</h6>
-                  <h6 className="py-2 ms-3 px-4 send align-items-center ">
-                    Send
+                  <Row>
+                    <Col sm="6" lg="6" xl="6">
+                      <h6 className="invoice-modal__light text-left mb-3">
+                        {address}
+                      </h6>
+                      <h6 className="invoice-modal__bold text-left mb-3">
+                        {stringDateFormat(location?.state?.issued_on)}
+                      </h6>
+                      <div className="">
+                        <h6 className="invoice-modal__light text-left">
+                          Due Date
+                        </h6>
+                        <h6 className="invoice-modal__bold text-left">
+                          {stringDateFormat(location?.state?.due_date)}
+                        </h6>
+                      </div>
+                    </Col>
+                    <Col sm="6" lg="6" xl="6">
+                      <div className="" style={{ textAlign: "right" }}>
+                        <h6
+                          className="invoice-modal__light text-right"
+                          style={{ textAlign: "right" }}
+                        >
+                          Billed to,
+                        </h6>
+                        <h6
+                          className="invoice-modal__bold text-right"
+                          style={{ fontSize: "14px", fontWeight: "500" }}
+                        >
+                          {location?.state?.client?.fullname}
+                        </h6>
+                        <h6
+                          className="invoice-modal__light text-right"
+                          style={{ textAlign: "right" }}
+                        >
+                          3455 Geraldine Lane,
+                        </h6>
+                        <h6
+                          className="invoice-modal__light text-right"
+                          style={{ textAlign: "right" }}
+                        >
+                          New York
+                        </h6>
+                        <h6
+                          className="invoice-modal__light text-right"
+                          style={{ textAlign: "right" }}
+                        >
+                          10013
+                        </h6>
+                        <h6
+                          className="invoice-modal__light text-right"
+                          style={{ textAlign: "right" }}
+                        >
+                          United States
+                        </h6>
+                      </div>
+                    </Col>
+                  </Row>
+                  {invoicePaymentStatus(location?.state?.status)}
+                  <img src={HrInvoice} className="w-100" alt="" />
+                  <div className="mt-5 invoice-modal__grey-section w-100 py-4 px-4">
+                    <Row style={{ textAlign: "left" }}>
+                      <Col md="2" lg="2">
+                        <h6 className="invoice-modal__qty ">QTY</h6>
+                      </Col>
+                      <Col md="5" lg="5">
+                        <h6 className="invoice-modal__qty">ITEM DESCRIPTION</h6>
+                      </Col>
+                      <Col md="2" lg="2">
+                        <h6 className="invoice-modal__qty">RATE</h6>
+                      </Col>
+                      <Col md="3" lg="3">
+                        <h6 className="invoice-modal__qty">AMOUNT</h6>
+                      </Col>
+                    </Row>
+                    <Row style={{ textAlign: "left" }}>
+                      <Col md="2" lg="2">
+                        <h6 className="invoice-modal__qty ">01</h6>
+                      </Col>
+                      <Col md="5" lg="5">
+                        <h6 className="invoice-modal__qty">Facebook</h6>
+                      </Col>
+                      <Col md="2" lg="2">
+                        <h6 className="invoice-modal__qty">3,000</h6>
+                      </Col>
+                      <Col md="3" lg="3">
+                        <h6 className="invoice-modal__qty">$3,000</h6>
+                      </Col>
+                    </Row>
+                  </div>
+                  <Row>
+                    <Col className="ms-auto" xl="11">
+                      <div className="mt-5 invoice-modal__grey-section py-4 px-4">
+                        <Row>
+                          <Col xl="6">
+                            <h6 className="invoice-modal__qty ">Sub Total</h6>
+                            <h6 className="invoice-modal__qty">VAT(10%)</h6>
+                          </Col>
+                          <Col xl="6">
+                            <h6
+                              className="invoice-modal__qty "
+                              style={{ textAlign: "right" }}
+                            >
+                              {formatAmount(location?.state?.sub_total)}
+                            </h6>
+                            <h6
+                              className="invoice-modal__qty"
+                              style={{ textAlign: "right" }}
+                            >
+                              $0.00
+                            </h6>
+                          </Col>
+                        </Row>
+                        <Row className="invoice-modal__blue-section py-3">
+                          <div className="d-inline-flex w-100">
+                            <h6
+                              className="invoice-modal__qty my-auto"
+                              style={{ textAlign: "left" }}
+                            >
+                              Total (USD)
+                            </h6>
+                            <h6
+                              className="invoice-modal__total ms-auto my-auto"
+                              style={{ textAlign: "right" }}
+                            >
+                              $ {formatAmount(location?.state?.total)}
+                            </h6>
+                          </div>
+                        </Row>
+                      </div>
+                    </Col>
+                  </Row>
+                  <img src={HrInvoice} className="my-5 w-100" alt="" />
+                  <h6 className="add-item mb-5">www.yourwebsiteurl.com</h6>
+                </div>
+              </div>
+              <div className="d-inline-flex mb-5 w-100">
+                <div className="me-auto">
+                  <div className="d-inline-flex w-full">
+                    <img src={PlusSign} className="" alt="" />
+                    <h6 className="add-item ms-3 me-auto my-auto">
+                      Dowload Invoice
+                    </h6>
+                  </div>
+                  <h6 className="text-left fw-light fs-6">
+                    You can update logo in Settings
                   </h6>
                 </div>
+                <button className="save-pdf  px-5" onClick={getPDF}>
+                  Print
+                </button>
+                <button className="ms-3 px-5 send align-items-center ">
+                  Send
+                </button>
               </div>
             </div>
             <div
@@ -241,10 +253,15 @@ const InvoiceDetailsPage = (props) => {
           </Col>
           <Col xl="4">
             <div className="d-inline-flex w-10t">
-              <h6 className="py-2 ms-3 px-4 me-2 send align-items-center ">
+              <button className="py-2 ms-3 px-4 me-2 send align-items-center ">
                 Edit Invoice
-              </h6>
-              <h6 className="blue-btn py-2 px-4">More Actions</h6>
+              </button>
+              <button
+                className="blue-btn py-2 px-4"
+                onClick={() => setShowOptions(!showOptions)}
+              >
+                More Actions
+              </button>
             </div>
             {showOptions ? (
               <div className="more-actions-container">
@@ -263,10 +280,16 @@ const InvoiceDetailsPage = (props) => {
                 >
                   Invoice Settings
                 </h6>
-                <h6 className="px-4 slightly-black action-menu pt-4">
+                <h6
+                  className="px-4 slightly-black action-menu pt-4"
+                  onClick={getPDF}
+                >
                   Print Invoice
                 </h6>
-                <h6 className="px-4 slightly-black action-menu pt-4">
+                <h6
+                  className="px-4 slightly-black action-menu pt-4"
+                  onClick={getPDF}
+                >
                   Download PDF
                 </h6>
                 <h6 className="px-4 slightly-black action-menu py-4">
@@ -276,8 +299,8 @@ const InvoiceDetailsPage = (props) => {
             ) : null}
             <div className="my-4 py-5 px-4 bg-white">
               <h6 className="text-center fs-6 fw-light slightly-black mb-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                Lorem ipsum dolor sit amet, consectetur
+                The invoice can be sent to any email besides the client's
+                registered email address.
               </h6>
               <div className="d-inline-flex w-100">
                 <h6 className="py-2 mx-auto mt-3 px-4 send align-items-center ">
@@ -287,13 +310,15 @@ const InvoiceDetailsPage = (props) => {
             </div>
             <div className="my-4 py-5 px-4 bg-white">
               <h6 className="text-center fs-6 fw-light slightly-black mb-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                Lorem ipsum dolor sit amet, consectetur
+                Did the Client make an offline payment? You can record your
+                payment by clicking the button below
               </h6>
               <div className="d-inline-flex w-100">
-                <h6 className="py-2 mx-auto mt-3 px-4 send align-items-center ">
-                  Mark as not paid
-                </h6>
+                <button className="py-2 mx-auto mt-3 px-4 send align-items-center " onClick={() => 
+                  setShowRecordPayment(true)
+                }>
+                  Record Payment
+                </button>
               </div>
             </div>
             <div className="my-4 py-2 px-2 bg-white">
@@ -306,7 +331,7 @@ const InvoiceDetailsPage = (props) => {
             </div>
             <h6
               className="py-3 text-center px-4 send w-100 mb-4"
-              style={{ textAlign: "center" }}
+              // style={{ textAlign: "center" }}
             >
               Make Recurring
             </h6>
@@ -314,33 +339,14 @@ const InvoiceDetailsPage = (props) => {
           </Col>
         </Row>
       </div>
-      <Modal modalState={showSettings} setModalState={setShowSettings}>
-        <div className="add-client-wrapper text-center ">
-          <div className="add-client-text text-center">
-            <h3>Invoice Settings</h3>
-          </div>
-          <form className="business-form mt-4">
-            <label className="text-left w-100">Currency</label>
-            <select name="" className="bank-select w-100 px-3 py-3 mb-2" id="">
-              <option value="">Select option</option>
-              <option value="">Nigerian Naira - NGN</option>
-            </select>
-            <label className="text-left w-100">Issues DATE</label>
-            <select name="" className="bank-select w-100 px-3 py-3 mb-2" id="">
-              <option value="">Select option</option>
-              <option value="">23/05/2021</option>
-            </select>
-            <label className="text-left w-100">Reminder</label>
-            <select name="" className="bank-select w-100 px-3 py-3 mb-2" id="">
-              <option value="">Select option</option>
-              <option value="">Don’t send auto reminder</option>
-            </select>
-            <div className="pt-2 pb-3">
-              <Button className="px-5">Update Settings</Button>
-            </div>
-          </form>
-        </div>
-      </Modal>
+      <InvoiceSettingsModal
+        showSettings={showSettings}
+        setShowSettings={setShowSettings}
+      />
+      <RecordPaymentModal
+        showRecordPayment={showRecordPayment}
+        setShowRecordPayment={setShowRecordPayment}
+      />
     </>
   );
 };

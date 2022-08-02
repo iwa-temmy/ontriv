@@ -1,7 +1,7 @@
 import axios from "axios";
 import moment from "moment";
-import { BsFillCheckCircleFill } from "react-icons/bs";
-import { MdPending, MdCancel } from "react-icons/md";
+import html2canvas from "html2canvas";
+import printJs from "print-js";
 
 const BASE_URL = "https://ontriv.herokuapp.com";
 
@@ -113,13 +113,13 @@ export const paymentStatus = (status) => {
   }
 };
 
-
 export const invoicePaymentStatus = (status) => {
   if (status === "Pending") {
     return (
       <>
-        <div className="d-inline-flex w-100 align-items-center justify-content-between">
-          <MdPending className="ms-auto" color="#ffc107" size="24px" />
+        <span className="d-flex justify-content-end status">Status</span>
+        <div className="d-flex w-100 justify-content-end">
+          {/* <MdPending className="ms-auto" color="#ffc107" size="24px" /> */}
           <h6 className="invoice-modal__status invoice-modal__pending mt-2 pl-2">
             {status}
           </h6>
@@ -129,12 +129,8 @@ export const invoicePaymentStatus = (status) => {
   } else if (status === "Paid") {
     return (
       <>
-        <div className="d-inline-flex w-100 align-items-center justify-content-between">
-          <BsFillCheckCircleFill
-            className="ms-auto"
-            color="#00D67D"
-            size="24px"
-          />
+        <span className="d-flex justify-content-end status">Status</span>
+        <div className="d-flex w-100 justify-content-end">
           <h6 className="invoice-modal__status invoice-modal__paid mt-2 pl-2">
             {status}
           </h6>
@@ -144,13 +140,44 @@ export const invoicePaymentStatus = (status) => {
   } else {
     return (
       <>
-        <div className="d-inline-flex w-100 align-items-center justify-content-between">
-          <MdCancel className="ms-auto" color="#dc3545" size="24px" />
+        <span className="d-flex justify-content-end status">Status</span>
+        <div className="d-flex w-100 justify-content-end">
           <h6 className="invoice-modal__status invoice-modal__overdue mt-2 pl-2">
             {status}
           </h6>
         </div>
       </>
     );
+  }
+};
+
+
+
+export const pdfWithPrintJs = (printable, documentTitle, type = 'image') => {
+  // const cssText = `
+  //   background-color: #ffffff
+  // `;
+  try {
+      html2canvas(document.getElementById(printable), {
+          logging: true,
+          allowTaint: true,
+          letterRendering: 1,
+          useCORS: true,
+          backgroundColor: 'white',
+      }).then(canvas => {
+          const imgData = canvas.toDataURL('image/jpeg', 1.0);
+          const config = {
+              type,
+              documentTitle,
+              printable: imgData,
+              base64: true,
+              // targetStyle: [cssText],
+              // maxWidth: 800,
+          };
+          printJs(config);
+      });
+  } catch (e) {
+      console.log('pdfWithPrintJs', e);
+      console.log('Failed!', 'PDF generation failed.\n Page might be too large.\n', 'error');
   }
 };
