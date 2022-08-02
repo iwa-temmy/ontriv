@@ -1,25 +1,30 @@
-import { Button, Row, Col } from "reactstrap";
-import { CenteredModal as Modal } from "../../components/Modal";
+import { Row, Col } from "reactstrap";
+
 import React, { useState } from "react";
 import TitleModalLogoHere from "../../assets/img/TitleModalLogoHere.svg";
 import HrInvoice from "../../assets/img/hr-invoice.svg";
 import PlusSign from "../../assets/img/plus-sign.svg";
 import LockKey from "../../assets/img/lock-key.svg";
 //redux
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
 //utils
-import { stringDateFormat, invoicePaymentStatus, formatAmount } from "../../utils/helper";
+import {
+  stringDateFormat,
+  invoicePaymentStatus,
+  formatAmount,
+} from "../../utils/helper";
 
 //react-router
 import { useLocation } from "react-router-dom";
+import InvoiceSettingsModal from "./InvoiceActions/InvoiceSettingsModal";
 
 const InvoiceDetailsPage = (props) => {
-  const [showOptions, setShowOptions] = useState(true);
-  const [showSettings, setShowSettings] = useState(true);
+  const [showOptions, setShowOptions] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
 
   //props
-  const {address} = props;
+  const { address } = props;
   const location = useLocation();
   console.log(location?.state);
   return (
@@ -41,7 +46,7 @@ const InvoiceDetailsPage = (props) => {
                 <Row>
                   <Col sm="6" lg="6" xl="6">
                     <h6 className="invoice-modal__light text-left mb-3">
-                     {address}
+                      {address}
                     </h6>
                     <h6 className="invoice-modal__bold text-left mb-3">
                       {stringDateFormat(location?.state?.issued_on)}
@@ -141,7 +146,7 @@ const InvoiceDetailsPage = (props) => {
                             className="invoice-modal__qty "
                             style={{ textAlign: "right" }}
                           >
-                           {formatAmount(location?.state?.sub_total)}
+                            {formatAmount(location?.state?.sub_total)}
                           </h6>
                           <h6
                             className="invoice-modal__qty"
@@ -163,7 +168,7 @@ const InvoiceDetailsPage = (props) => {
                             className="invoice-modal__total ms-auto my-auto"
                             style={{ textAlign: "right" }}
                           >
-                            $  {formatAmount(location?.state?.total)}
+                            $ {formatAmount(location?.state?.total)}
                           </h6>
                         </div>
                       </Row>
@@ -171,14 +176,7 @@ const InvoiceDetailsPage = (props) => {
                   </Col>
                 </Row>
                 <img src={HrInvoice} className="my-5 w-100" alt="" />
-                <h6 className="text-left">Notes</h6>
-                <p className="fw-light w-75 text-left fs-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec
-                  id turpis malesuada nibh.
-                </p>
-                <img src={HrInvoice} className="my-5 w-100" alt="" />
-                <h6 className="add-item">WWW.LOGOHERE.COM</h6>
-                <img src={HrInvoice} className="my-5 w-100" alt="" />
+                <h6 className="add-item mb-5">www.yourwebsiteurl.com</h6>
                 <div className="d-inline-flex mb-5 w-100">
                   <div className="me-auto">
                     <div className="d-inline-flex w-full">
@@ -241,10 +239,15 @@ const InvoiceDetailsPage = (props) => {
           </Col>
           <Col xl="4">
             <div className="d-inline-flex w-10t">
-              <h6 className="py-2 ms-3 px-4 me-2 send align-items-center ">
+              <button className="py-2 ms-3 px-4 me-2 send align-items-center ">
                 Edit Invoice
-              </h6>
-              <h6 className="blue-btn py-2 px-4">More Actions</h6>
+              </button>
+              <button
+                className="blue-btn py-2 px-4"
+                onClick={() => setShowOptions(!showOptions)}
+              >
+                More Actions
+              </button>
             </div>
             {showOptions ? (
               <div className="more-actions-container">
@@ -276,8 +279,8 @@ const InvoiceDetailsPage = (props) => {
             ) : null}
             <div className="my-4 py-5 px-4 bg-white">
               <h6 className="text-center fs-6 fw-light slightly-black mb-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                Lorem ipsum dolor sit amet, consectetur
+                The invoice can be sent to any email besides the client's
+                registered email address.
               </h6>
               <div className="d-inline-flex w-100">
                 <h6 className="py-2 mx-auto mt-3 px-4 send align-items-center ">
@@ -287,12 +290,12 @@ const InvoiceDetailsPage = (props) => {
             </div>
             <div className="my-4 py-5 px-4 bg-white">
               <h6 className="text-center fs-6 fw-light slightly-black mb-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                Lorem ipsum dolor sit amet, consectetur
+                Did the Client make an offline payment? You can record your
+                payment by clicking the button below
               </h6>
               <div className="d-inline-flex w-100">
                 <h6 className="py-2 mx-auto mt-3 px-4 send align-items-center ">
-                  Mark as not paid
+                  Record Payment
                 </h6>
               </div>
             </div>
@@ -314,33 +317,10 @@ const InvoiceDetailsPage = (props) => {
           </Col>
         </Row>
       </div>
-      <Modal modalState={showSettings} setModalState={setShowSettings}>
-        <div className="add-client-wrapper text-center ">
-          <div className="add-client-text text-center">
-            <h3>Invoice Settings</h3>
-          </div>
-          <form className="business-form mt-4">
-            <label className="text-left w-100">Currency</label>
-            <select name="" className="bank-select w-100 px-3 py-3 mb-2" id="">
-              <option value="">Select option</option>
-              <option value="">Nigerian Naira - NGN</option>
-            </select>
-            <label className="text-left w-100">Issues DATE</label>
-            <select name="" className="bank-select w-100 px-3 py-3 mb-2" id="">
-              <option value="">Select option</option>
-              <option value="">23/05/2021</option>
-            </select>
-            <label className="text-left w-100">Reminder</label>
-            <select name="" className="bank-select w-100 px-3 py-3 mb-2" id="">
-              <option value="">Select option</option>
-              <option value="">Don’t send auto reminder</option>
-            </select>
-            <div className="pt-2 pb-3">
-              <Button className="px-5">Update Settings</Button>
-            </div>
-          </form>
-        </div>
-      </Modal>
+      <InvoiceSettingsModal
+        showSettings={showSettings}
+        setShowSettings={setShowSettings}
+      />
     </>
   );
 };

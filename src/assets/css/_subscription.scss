@@ -680,7 +680,9 @@
   font-weight: 600;
   color: #9da8b6;
 }
-
+.create-invoice-button{
+  font-weight: 600 !important;
+}
 .client-details-settings-modal {
   margin: auto;
   width: 75%;
@@ -743,8 +745,8 @@
   &__status {
     font-style: normal;
     font-weight: 600;
-    font-size: 19px;
-    line-height: 20px;
+    font-size: 22px;
+    line-height: 24px;
     letter-spacing: 0.5px;
     color: #00D67D;
     margin-left: 10px;
@@ -1122,6 +1124,7 @@ label {
 
 .send {
   background: #2062F4;
+  border: transparent;
   border-radius: 10px;
   font-weight: bold;
   font-size: 14px;
@@ -1130,9 +1133,11 @@ label {
   text-align: center;
   letter-spacing: 1.25px;
   color: #F7F7FC;
+  cursor: pointer;
 }
 
 .blue-btn {
+  background-color: transparent;
   border: 1px solid #2062F4;
   border-radius: 10px;
   font-style: normal;
@@ -1143,10 +1148,12 @@ label {
   text-align: center;
   letter-spacing: 1.25px;
   color: #2062F4;
+  cursor: pointer;
 }
 
 .slightly-black {
   color: #17151E;
+  line-height: 24px;
 }
 
 .light-blue-bg {
@@ -1155,12 +1162,13 @@ label {
 }
 
 .more-actions-container {
-  position: relative;
-  top: -20px;
-  left: 30%;
+  position: absolute;
+  top: 20%;
+  right: 5%;
   background-color: white;
-  width: 50%;
+  width: 15%;
   border-radius: 8px;
+  box-shadow: 0 0 50px #ccc;
 }
 
 .action-menu {
@@ -1478,4 +1486,14 @@ label {
 .btn-secondary:focus{
   outline: none !important;
   box-shadow: none !important;
+}
+.status{
+  color: #6F6F84;
+  margin-top: 1rem;
+}
+
+@media (max-width: 745px){
+  .invoice-buttons{
+    flex-direction: column;
+  }
 }

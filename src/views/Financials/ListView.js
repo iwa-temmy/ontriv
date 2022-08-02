@@ -3,6 +3,7 @@ import Table from "../../components/Table";
 import { connect } from "react-redux";
 import { setCurrentSection } from "../../redux/actions";
 import { Bars } from "react-loader-spinner";
+import noInvoice from "../../assets/img/no-invoice.svg";
 import {
   formatInvoiceIssueDate,
   formatAmount,
@@ -14,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import TableDropdown from "../../components/Dropdown/TableDropdown";
 import InvoiceDetails from "./InvoiceDetails";
 
-const ClientListView = ({ setCurrentSection, invoices, loading }) => {
+const ClientListView = ({ setCurrentSection, invoices, loading, openInvoiceModal }) => {
   const [showModal, setShowModal] = useState(false);
   const [invoiceDetails, setInvoiceDetails] = useState({});
 
@@ -31,8 +32,10 @@ const ClientListView = ({ setCurrentSection, invoices, loading }) => {
 
   const openFullInvoicePage = (record) => {
     const invoiceData = record?.row?.original;
-    navigate(`/invoices-&-financials/invoice/${invoiceData?.id}`, {state: invoiceData} )
-  }
+    navigate(`/invoices-&-financials/invoice/${invoiceData?.id}`, {
+      state: invoiceData,
+    });
+  };
   const cols = React.useMemo(
     () => [
       {
@@ -111,10 +114,19 @@ const ClientListView = ({ setCurrentSection, invoices, loading }) => {
         />
       ) : (
         <div
-          className="d-flex justify-content-center align-items-center"
-          style={{ marginTop: "6rem" }}
+          className="d-flex flex-column justify-content-center align-items-center"
+          style={{ marginTop: "4.6rem" }}
         >
-          <span className="text-center">No Invoices available</span>
+          <img src={noInvoice} alt="empty invoice icon" width={140} />
+          <span className="text-center my-4">
+            Invoice your first client and get paid instantly
+          </span>
+          <button
+            className="btn btn-primary send px-5 py-2"
+            onClick={openInvoiceModal}
+          >
+            Create a new invoice
+          </button>
         </div>
       )}
       <InvoiceDetails
