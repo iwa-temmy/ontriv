@@ -177,7 +177,7 @@ export const pdfWithPrintJs = (printable, documentTitle, type = 'image') => {
           printJs(config);
       });
   } catch (e) {
-      LOGGER('pdfWithPrintJs', e);
-      toast.error('Failed!', 'PDF generation failed.\n Page might be too large.\n', 'error');
+      console.log('pdfWithPrintJs', e);
+      console.log('Failed!', 'PDF generation failed.\n Page might be too large.\n', 'error');
   }
 };
