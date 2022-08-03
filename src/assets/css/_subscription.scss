@@ -493,15 +493,29 @@
   background-color: rgba(217, 87, 87, 0.15) !important;
   border-radius: 10px !important;
 }
+.status-tag-circle {
+  width: 8px;
+  height:8px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
 .list-client-tag-paid {
   background: rgba(87, 217, 163, 15%) !important;
   color: #57D9A3;
   padding: 8px 12px;
   border-radius: 10px !important;
-  img {
-    margin-right: 3px;
-    margin-bottom: 2px;
-  }
+}
+.list-client-tag-overdue {
+  background:  #FF215480 ;
+  color: #FF2154;
+  padding: 8px 12px;
+  border-radius: 10px !important;
+}
+.list-client-tag-pending{
+  background-color: #ED800080;
+  padding: 8px 12px;
+  color: #ED8000;
+  border-radius: 10px;
 }
 
 .client-details {
@@ -666,7 +680,9 @@
   font-weight: 600;
   color: #9da8b6;
 }
-
+.create-invoice-button{
+  font-weight: 600 !important;
+}
 .client-details-settings-modal {
   margin: auto;
   width: 75%;
@@ -726,13 +742,24 @@
     letter-spacing: 0.5px;
     color: #222234;
   }
-  &__paid {
+  &__status {
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
-    line-height: 20px;
+    font-size: 22px;
+    line-height: 24px;
     letter-spacing: 0.5px;
     color: #00D67D;
+    margin-left: 10px;
+    text-transform: uppercase;
+  }
+  &__paid{
+    color: #00D67D;
+  }
+  &__pending{
+    color:  #ffc107;
+  }
+  &__overdue{
+    color: #dc3545;
   }
   &__grey-section {
     background: #FAFAFC;
@@ -1087,7 +1114,7 @@ label {
   border-radius: 10px;
   font-weight: bold;
   font-size: 14px;
-  line-height: 21px;
+  line-height: 20px;
   display: flex;
   align-items: center;
   text-align: center;
@@ -1097,6 +1124,7 @@ label {
 
 .send {
   background: #2062F4;
+  border: transparent;
   border-radius: 10px;
   font-weight: bold;
   font-size: 14px;
@@ -1105,9 +1133,11 @@ label {
   text-align: center;
   letter-spacing: 1.25px;
   color: #F7F7FC;
+  cursor: pointer;
 }
 
 .blue-btn {
+  background-color: transparent;
   border: 1px solid #2062F4;
   border-radius: 10px;
   font-style: normal;
@@ -1118,10 +1148,12 @@ label {
   text-align: center;
   letter-spacing: 1.25px;
   color: #2062F4;
+  cursor: pointer;
 }
 
 .slightly-black {
   color: #17151E;
+  line-height: 24px;
 }
 
 .light-blue-bg {
@@ -1130,12 +1162,13 @@ label {
 }
 
 .more-actions-container {
-  position: relative;
-  top: -20px;
-  left: 30%;
+  position: absolute;
+  top: 20%;
+  right: 5%;
   background-color: white;
-  width: 50%;
+  width: 15%;
   border-radius: 8px;
+  box-shadow: 0 0 50px #ccc;
 }
 
 .action-menu {
@@ -1443,4 +1476,24 @@ label {
   text-align: center;
   letter-spacing: 0.75px;
   color: #2062F4;
+}
+
+
+.btn-secondary{
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+.btn-secondary:focus{
+  outline: none !important;
+  box-shadow: none !important;
+}
+.status{
+  color: #6F6F84;
+  margin-top: 1rem;
+}
+
+@media (max-width: 745px){
+  .invoice-buttons{
+    flex-direction: column;
+  }
 }

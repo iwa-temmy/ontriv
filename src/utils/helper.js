@@ -1,4 +1,7 @@
 import axios from "axios";
+import moment from "moment";
+import html2canvas from "html2canvas";
+import printJs from "print-js";
 
 const BASE_URL = "https://ontriv.herokuapp.com";
 
@@ -52,4 +55,129 @@ export const calculateTotal = (items) => {
   }
 
   return total;
+};
+
+export const formatInvoiceIssueDate = (date) => {
+  return moment(date).format("DD-MM-YYYY");
+};
+
+export const stringDateFormat = (date) => {
+  return moment(date).format("DD MMMM, YYYY");
+};
+
+export const formatNumber = (num) => {
+  if (!num) {
+    return;
+  }
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+export const formatAmount = (num) => {
+  if (num) {
+    const initial = parseFloat(num).toFixed(2);
+    return initial.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+};
+
+export const paymentStatus = (status) => {
+  if (status === "Pending") {
+    return (
+      <div className="list-client-tag-pending text-center d-flex align-items-center justify-content-center w-75">
+        <div
+          className="status-tag-circle"
+          style={{ backgroundColor: "#ED8000" }}
+        ></div>
+        <span>{status}</span>
+      </div>
+    );
+  } else if (status === "Paid") {
+    return (
+      <div className="list-client-tag-paid text-center d-flex align-items-center justify-content-center w-75">
+        <div
+          className="status-tag-circle"
+          style={{ backgroundColor: "#57D9A3" }}
+        ></div>
+        <span>{status}</span>
+      </div>
+    );
+  } else {
+    return (
+      <div className="list-client-tag-overdue text-center d-flex align-items-center justify-content-center w-75">
+        <div
+          className="status-tag-circle"
+          style={{ backgroundColor: "#FF2154" }}
+        ></div>
+        <span>{status}</span>
+      </div>
+    );
+  }
+};
+
+export const invoicePaymentStatus = (status) => {
+  if (status === "Pending") {
+    return (
+      <>
+        <span className="d-flex justify-content-end status">Status</span>
+        <div className="d-flex w-100 justify-content-end">
+          {/* <MdPending className="ms-auto" color="#ffc107" size="24px" /> */}
+          <h6 className="invoice-modal__status invoice-modal__pending mt-2 pl-2">
+            {status}
+          </h6>
+        </div>
+      </>
+    );
+  } else if (status === "Paid") {
+    return (
+      <>
+        <span className="d-flex justify-content-end status">Status</span>
+        <div className="d-flex w-100 justify-content-end">
+          <h6 className="invoice-modal__status invoice-modal__paid mt-2 pl-2">
+            {status}
+          </h6>
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <span className="d-flex justify-content-end status">Status</span>
+        <div className="d-flex w-100 justify-content-end">
+          <h6 className="invoice-modal__status invoice-modal__overdue mt-2 pl-2">
+            {status}
+          </h6>
+        </div>
+      </>
+    );
+  }
+};
+
+
+
+export const pdfWithPrintJs = (printable, documentTitle, type = 'image') => {
+  // const cssText = `
+  //   background-color: #ffffff
+  // `;
+  try {
+      html2canvas(document.getElementById(printable), {
+          logging: true,
+          allowTaint: true,
+          letterRendering: 1,
+          useCORS: true,
+          backgroundColor: 'white',
+      }).then(canvas => {
+          const imgData = canvas.toDataURL('image/jpeg', 1.0);
+          const config = {
+              type,
+              documentTitle,
+              printable: imgData,
+              base64: true,
+              // targetStyle: [cssText],
+              // maxWidth: 800,
+          };
+          printJs(config);
+      });
+  } catch (e) {
+      console.log('pdfWithPrintJs', e);
+      console.log('Failed!', 'PDF generation failed.\n Page might be too large.\n', 'error');
+  }
 };

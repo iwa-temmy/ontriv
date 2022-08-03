@@ -97,29 +97,29 @@ function* login({ payload }) {
     yield put(loginUserError(''));
 
     console.log(error);
-    console.log(error.response);
+    console.log(error?.response);
 
-    console.log(error.response.data)
-    console.log(error.message);
+    console.log(error?.response?.data)
+    console.log(error?.message);
     // const {message} = erroresponse.data;
     let message;
     if (error.response) {
-      message = error.response.data.message;
-      switch (error.response.status) {
+      message = error?.response?.data.message;
+      switch (error?.response?.status) {
         case 500:
           message = "Internal Server Error";
           break;
         case 404:
-          message = error.response.data.message;
+          message = error?.response?.data?.message;
           break;
         case 401:
           message = "Invalid credentials";
           break;
         default:
-          message = error.response.data.error[0];
+          message = error?.response?.data?.error?.[0];
       }
-    } else if (error.message) {
-      message = error.message;
+    } else if (error?.message) {
+      message = error?.message;
     }
     yield put(loginUserError(message));
     yield put (resetMessage());

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Table from '../../components/Table'
 // import ontriv from '../../assets/img/ontriv.png';
-import tag from '../../assets/img/Tag.svg'
+// import tag from '../../assets/img/Tag.svg'
 import { connect } from 'react-redux'
 import { setCurrentSection } from '../../redux/actions'
 import { CenteredModal as Modal } from '../../components/Modal'

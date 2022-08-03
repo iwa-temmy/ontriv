@@ -205,7 +205,7 @@ const BusinessDetails = ({
                       className="pt-2 ms-2 business__right-section__image-upload-placeholder__image-upload-blue"
                       onClick={handleClick}
                     >
-                      Upload new photo
+                      Upload new Logo
                     </h6>
                   </button>
                   <input

@@ -150,8 +150,8 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
             <div className="signup-text text-white  mx-auto">
               <Container>
                 <h2 className=" mt-5 mb-3">Sign up to Ontriv</h2>
-                <p className="">
-                The ultimate tool to run your social media agency
+                <p className="h4">
+                  The ultimate tool to run your social media agency
                 </p>
               </Container>
             </div>
