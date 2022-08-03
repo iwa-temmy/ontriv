@@ -14,7 +14,14 @@ const GridView = ({ clients }) => {
             <Card className='grid-view-card'>
               <div className='client-details d-flex  align-items-center'>
                 <div className='client-logo-wrapper'>
-                  <img src={el.profile_image} alt='logo' />
+                  <img
+                    src={el.profile_image}
+                    alt='logo'
+                    style={{
+                      width: '40px',
+                      height: '40px'
+                    }}
+                  />
                 </div>
                 <div>
                   <h1 className='client-name mb-0'>{el.fullname}</h1>
@@ -44,13 +51,12 @@ const GridView = ({ clients }) => {
             </Card>
           </Col>
         ))}
-        
       </Row>
 
       <DatatablePagination
         position='center'
         page={0}
-        pages={clients.length}
+        pages={5}
         canPrevious={true}
         canNext={true}
         pageSizeOptions={[4, 10, 20, 30, 40, 50]}

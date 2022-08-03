@@ -48,6 +48,8 @@ const Calendar = () => {
     year: selectedDate.getFullYear()
   })
 
+  const [currentMonth, setCurrentMonth] = useState(calendar.month)
+
   useEffect(() => {
     const body = {
       month: calendar.month,
@@ -71,6 +73,11 @@ const Calendar = () => {
     })
     // eslint-disable-next-line
   }, [])
+
+  useEffect(() => {
+    console.log(calendar.month)
+    setCurrentMonth(calendar.month)
+  }, [calendar])
 
   const onClickNext = () => {
     const body = { month: calendar.nextMonth, year: calendar.nextYear }
@@ -186,44 +193,60 @@ const Calendar = () => {
                     </td>
                   ))}
                 </tr>
-
+                {console.log('---------------->>>>>', currentMonth, dates)}
                 {dates.length > 0 &&
-                  dates.map(week => (
-                    <tr key={JSON.stringify(week[0])}>
-                      {week.map(each => (
-                        <td
-                          key={JSON.stringify(each)}
-                          style={{ padding: '5px 0' }}
-                        >
-                          <div
-                            role='button'
-                            onClick={() => {
-                              onSelectDate(each)
-                              togglePost()
-                              console.log(each)
-                            }}
-                            style={{ textAlign: 'center', padding: '5px 0' }}
-                          >
-                            {each.date === selectedDate.getDate() ? (
+                  dates
+                    // .map(el =>
+                    //   el.month === currentMonth ? el : { ...el, date: '-' }
+                    // )
+                    .map(week => (
+                      <tr key={JSON.stringify(week[0])}>
+                        {console.log(week)}
+                        {week
+                          .map(el =>
+                            el.month === currentMonth
+                              ? el
+                              : { ...el, date: '' }
+                          )
+                          .map(each => (
+                            <td
+                              key={JSON.stringify(each)}
+                              style={{ padding: '5px 0' }}
+                            >
                               <div
-                                className='text-white d-flex align-items-center justify-content-center rounded-circle m-auto'
+                                role='button'
+                                onClick={() => {
+                                  onSelectDate(each)
+                                  togglePost()
+                                  console.log(each)
+                                }}
                                 style={{
-                                  background:
-                                    'linear-gradient(93.88deg, #49A8F8 6.88%, #0053F4 74.45%)',
-                                  height: '35px',
-                                  width: '35px'
+                                  textAlign: 'center',
+                                  padding: '5px 0'
                                 }}
                               >
-                                {selectedDate.getDate()}
+                                {each.date === selectedDate.getDate() ? (
+                                  <div
+                                    className='text-white d-flex align-items-center justify-content-center rounded-circle m-auto'
+                                    style={{
+                                      background:
+                                        'linear-gradient(93.88deg, #49A8F8 6.88%, #0053F4 74.45%)',
+                                      height: '35px',
+                                      width: '35px'
+                                    }}
+                                  >
+                                    {selectedDate.getDate()}
+                                  </div>
+                                ) : (
+                                  each.date
+                                )}
+
+                                {console.log(each.date.month)}
                               </div>
-                            ) : (
-                              each.date
-                            )}
-                          </div>
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
+                            </td>
+                          ))}
+                      </tr>
+                    ))}
               </tbody>
             </table>
           </div>

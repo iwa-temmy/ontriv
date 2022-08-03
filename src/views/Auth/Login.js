@@ -54,12 +54,11 @@ const Signin = ({
                             </div> */}
               <div className="signin-text text-white pl-5 w-75 mx-auto">
                 <h2 className="signin-header-text mt-5 mb-3">
-                  Content Manager Dream Tool.
+                Social media management made easy
                 </h2>
-                <h4 className="signin-subhead-text">
-                  Sed ut perspiciatis, unde omnis iste natus error sit
-                  voluptatem.
-                </h4>
+                <p className="signin-subhead-text">
+                Spend less, stay organized & save time.
+                </p>
               </div>
             </Container>
           </div>

@@ -166,6 +166,7 @@ const ClientManagement = ({
               addState={addClient}
               setAddState={setAddClient}
               tags={tagOptions}
+              setAddClient={setAddClient}
             />
           )}
         </div>

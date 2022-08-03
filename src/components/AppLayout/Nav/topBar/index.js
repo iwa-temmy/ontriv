@@ -51,11 +51,11 @@ export const TopNav = ({currentSection, setShowMobileSideBar, logoutUser, userDe
                                                       setMobileSearch(true)
                                                   }}/>
                                     </div>
-                                    <Link to='/Chat'
+                                    {/* <Link to='/Chat'
 
                                     >
                                         <img src={chat} alt='chat-icon' width='100%' height='100%'/>
-                                    </Link>
+                                    </Link> */}
                                     <img src={Notification} alt='notification-icon' className="mx-1" width='40%'
                                          onClick={() => updateNotificationState(!notificationState)}/>
                                     <div className="userProfile-img"
