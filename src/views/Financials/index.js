@@ -16,10 +16,12 @@ import { getAllInvoices } from "../../redux/actions";
 
 //utils
 import CreateInvoiceModal from "./InvoiceActions/CreateInvoiceModal";
+import RequestPayoutModal from "./InvoiceActions/RequestPayoutModal";
 
-const Finances = ({ clients, getAllInvoices, invoices, getInvoiceLoading }) => {
+const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
   const [view] = useState("list");
   const [addClient, setAddClient] = useState(false);
+  const [showPayoutModal, setShowPayoutModal] = useState(false);
   const [invoiceTab, setInvoiceTab] = useState("invoice");
   const [show, setShow] = useState(false);
   const [showExpense, setShowExpense] = useState(false);
@@ -37,6 +39,12 @@ const Finances = ({ clients, getAllInvoices, invoices, getInvoiceLoading }) => {
     setShow(false);
   };
 
+  const openRequestPayoutModal = () => {
+    setShowPayoutModal(true);
+  }
+  const closeRequestPayoutModal = () => {
+    setShowPayoutModal(false);
+  }
   const options = [
     {
       value: "chocolate",
@@ -320,9 +328,7 @@ const Finances = ({ clients, getAllInvoices, invoices, getInvoiceLoading }) => {
               <div className="d-inline-flex white-button py-1 px-4 me-4">
                 <div
                   className="btn-lg w-auto "
-                  onClick={() => {
-                    setAddClient(true);
-                  }}
+                  onClick={openRequestPayoutModal}
                 >
                   <h6 className="mb-0">Request Payout</h6>
                 </div>
@@ -413,6 +419,7 @@ const Finances = ({ clients, getAllInvoices, invoices, getInvoiceLoading }) => {
         {addClient && (
           <AddNewClient addState={addClient} setAddState={setAddClient} />
         )}
+        <RequestPayoutModal showRequestPayout={showPayoutModal} setShowRequestPayout={setShowPayoutModal} />
       </div>
     </>
   );

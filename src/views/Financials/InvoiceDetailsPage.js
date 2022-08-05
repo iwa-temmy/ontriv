@@ -1,7 +1,7 @@
 import { Row, Col } from "reactstrap";
 
 import React, { useState } from "react";
-import TitleModalLogoHere from "../../assets/img/TitleModalLogoHere.svg";
+// import TitleModalLogoHere from "../../assets/img/TitleModalLogoHere.svg";
 import HrInvoice from "../../assets/img/hr-invoice.svg";
 import PlusSign from "../../assets/img/plus-sign.svg";
 import LockKey from "../../assets/img/lock-key.svg";
@@ -20,12 +20,15 @@ import {
 import { useLocation } from "react-router-dom";
 import InvoiceSettingsModal from "./InvoiceActions/InvoiceSettingsModal";
 import RecordPaymentModal from "./InvoiceActions/RecordPaymentModal";
+import ScheduleModal from "./InvoiceActions/ScheduleModal";
+import DuplicateInvoiceModal from "./InvoiceActions/DuplicateInvoiceModal";
 
 const InvoiceDetailsPage = (props) => {
   const [showOptions, setShowOptions] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [showRecordPayment, setShowRecordPayment] = useState(false);
-  const [showRequestPayout, setShowRequestPayout] = useState(false);
+  const [showSchedule, setShowSchedule] = useState(false);
+  const [showDuplicateInvoiceModal, setShowDuplicateInvoiceModal] = useState(false);
 
   //props
   const { address, logo } = props;
@@ -49,7 +52,11 @@ const InvoiceDetailsPage = (props) => {
               <div id="invoice">
                 <div className="add-client-wrapper-2 text-center ">
                   <div className="d-inline-flex" style={{ width: "100%" }}>
-                    <img className="me-auto mb-5" src={logo} alt="business logo" />
+                    <img
+                      className="me-auto mb-5"
+                      src={logo}
+                      alt="business logo"
+                    />
                     <h6 className="invoice-modal__title">
                       INV-{location?.state?.id}
                     </h6>
@@ -268,7 +275,7 @@ const InvoiceDetailsPage = (props) => {
                 <h6 className="px-4 slightly-black action-menu pt-4">
                   New Invoice
                 </h6>
-                <h6 className="px-4 slightly-black action-menu pt-4">
+                <h6 className="px-4 slightly-black action-menu pt-4" onClick={() => setShowDuplicateInvoiceModal(true)}>
                   Make A copy
                 </h6>
                 <h6
@@ -314,9 +321,10 @@ const InvoiceDetailsPage = (props) => {
                 payment by clicking the button below
               </h6>
               <div className="d-inline-flex w-100">
-                <button className="py-2 mx-auto mt-3 px-4 send align-items-center " onClick={() => 
-                  setShowRecordPayment(true)
-                }>
+                <button
+                  className="py-2 mx-auto mt-3 px-4 send align-items-center "
+                  onClick={() => setShowRecordPayment(true)}
+                >
                   Record Payment
                 </button>
               </div>
@@ -324,17 +332,17 @@ const InvoiceDetailsPage = (props) => {
             <div className="my-4 py-2 px-2 bg-white">
               <div className="light-blue-bg d-inline-flex w-100 px-3 py-3">
                 <h6 className="my-auto fw-light slightly-black">
-                  Lorem ipsum dolor sit amet,{" "}
+                  Invoice Link
                 </h6>
                 <img src={LockKey} className="ms-auto" alt="" />
               </div>
             </div>
-            <h6
+            <button
               className="py-3 text-center px-4 send w-100 mb-4"
-              // style={{ textAlign: "center" }}
+              onClick={() => setShowSchedule(true)}
             >
               Make Recurring
-            </h6>
+            </button>
             <h6 className="blue-btn py-3 px-4">Preview as Client</h6>
           </Col>
         </Row>
@@ -346,6 +354,14 @@ const InvoiceDetailsPage = (props) => {
       <RecordPaymentModal
         showRecordPayment={showRecordPayment}
         setShowRecordPayment={setShowRecordPayment}
+      />
+      <ScheduleModal
+        showSchedule={showSchedule}
+        setShowSchedule={setShowSchedule}
+      />
+      <DuplicateInvoiceModal
+        showDuplicateInvoiceModal={showDuplicateInvoiceModal}
+        setShowDuplicateInvoiceModal={setShowDuplicateInvoiceModal}
       />
     </>
   );
