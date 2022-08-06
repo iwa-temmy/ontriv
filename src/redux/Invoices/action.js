@@ -2,6 +2,9 @@ import {
   GET_INVOICES,
   GET_INVOICES_SUCCESS,
   GET_INVOICES_ERROR,
+  GET_ONE_INVOICE,
+  GET_ONE_INVOICE_SUCCESS,
+  GET_ONE_INVOICE_ERROR,
   CREATE_NEW_INVOICE,
   CREATE_NEW_INVOICE_SUCCESS,
   CREATE_NEW_INVOICE_ERROR,
@@ -20,6 +23,21 @@ export const getAllInvoicesError = (error) => ({
   type: GET_INVOICES_ERROR,
   payload: { error },
 });
+
+export const getOneInvoice = (id) => ({
+  type: GET_ONE_INVOICE,
+  payload: {id}
+})
+
+export const getOneInvoiceSuccess = (invoice) => ({
+  type: GET_ONE_INVOICE_SUCCESS,
+  payload: invoice
+})
+
+export const getOneInvoiceError = (error) => ({
+  type: GET_ONE_INVOICE_ERROR,
+  payload: error,
+})
 
 export const createNewInvoice = (credentials) => ({
   type: CREATE_NEW_INVOICE,

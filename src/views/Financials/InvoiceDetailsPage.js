@@ -1,6 +1,6 @@
 import { Row, Col } from "reactstrap";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import TitleModalLogoHere from "../../assets/img/TitleModalLogoHere.svg";
 import InvoiceSettingsModal from "./InvoiceActions/InvoiceSettingsModal";
 import RecordPaymentModal from "./InvoiceActions/RecordPaymentModal";
@@ -14,6 +14,7 @@ import PlusSign from "../../assets/img/plus-sign.svg";
 import LockKey from "../../assets/img/lock-key.svg";
 //redux
 import { connect } from "react-redux";
+import { getOneInvoice } from "../../redux/actions";
 
 //utils
 import {
@@ -39,7 +40,7 @@ const InvoiceDetailsPage = (props) => {
   const [showCreateInvoiceModal, setShowCreateInvoiceModal] = useState(false);
 
   //props
-  const { address, logo } = props;
+  const { address, logo, getOneInvoice, invoiceDetails } = props;
   const location = useLocation();
   console.log(window.location.href);
 
@@ -58,6 +59,10 @@ const InvoiceDetailsPage = (props) => {
   const CloseCreateInvoiceModal = () => {
     setShowCreateInvoiceModal(false);
   };
+
+  useEffect(() => {
+    getOneInvoice(location?.state?.id);
+  }, [getOneInvoice, location?.state?.id]);
   return (
     <>
       {showCreateInvoiceModal ? (
@@ -75,27 +80,30 @@ const InvoiceDetailsPage = (props) => {
                   <div className="d-inline-flex" style={{ width: "100%" }}>
                     <img
                       className="me-auto mb-5"
-                      src={logo}
+                      src={invoiceDetails?.extra_details?.business_logo}
                       alt="business logo"
                     />
                     <h6 className="invoice-modal__title">
-                      INV-{location?.state?.id}
+                      {invoiceDetails?.extra_details?.invoice_prefix
+                        ? invoiceDetails?.extra_details?.invoice_prefix
+                        : "INV"}{" "}
+                      -{invoiceDetails?.id}
                     </h6>
                   </div>
                   <Row>
                     <Col sm="6" lg="6" xl="6">
                       <h6 className="invoice-modal__light text-left mb-3">
-                        {address}
+                        {invoiceDetails?.extra_details?.business_address}
                       </h6>
                       <h6 className="invoice-modal__bold text-left mb-3">
-                        {stringDateFormat(location?.state?.issued_on)}
+                        {stringDateFormat(invoiceDetails?.issued_on)}
                       </h6>
                       <div className="">
                         <h6 className="invoice-modal__light text-left">
                           Due Date
                         </h6>
                         <h6 className="invoice-modal__bold text-left">
-                          {stringDateFormat(location?.state?.due_date)}
+                          {stringDateFormat(invoiceDetails?.due_date)}
                         </h6>
                       </div>
                     </Col>
@@ -111,7 +119,7 @@ const InvoiceDetailsPage = (props) => {
                           className="invoice-modal__bold text-right"
                           style={{ fontSize: "14px", fontWeight: "500" }}
                         >
-                          {location?.state?.client?.fullname}
+                          {invoiceDetails?.client?.fullname}
                         </h6>
                         <h6
                           className="invoice-modal__light text-right"
@@ -140,7 +148,7 @@ const InvoiceDetailsPage = (props) => {
                       </div>
                     </Col>
                   </Row>
-                  {invoicePaymentStatus(location?.state?.status)}
+                  {invoicePaymentStatus(invoiceDetails?.status)}
                   <img src={HrInvoice} className="w-100" alt="" />
                   <div className="mt-5 invoice-modal__grey-section w-100 py-4 px-4">
                     <Row style={{ textAlign: "left" }}>
@@ -157,41 +165,53 @@ const InvoiceDetailsPage = (props) => {
                         <h6 className="invoice-modal__qty">AMOUNT</h6>
                       </Col>
                     </Row>
-                    <Row style={{ textAlign: "left" }}>
-                      <Col md="2" lg="2">
-                        <h6 className="invoice-modal__qty ">01</h6>
-                      </Col>
-                      <Col md="5" lg="5">
-                        <h6 className="invoice-modal__qty">Facebook</h6>
-                      </Col>
-                      <Col md="2" lg="2">
-                        <h6 className="invoice-modal__qty">3,000</h6>
-                      </Col>
-                      <Col md="3" lg="3">
-                        <h6 className="invoice-modal__qty">$3,000</h6>
-                      </Col>
-                    </Row>
+                    {invoiceDetails?.items?.map((item) => {
+                      return (
+                        <Row style={{ textAlign: "left" }} key={item?.id}>
+                          <Col md="2" lg="2">
+                            <h6 className="invoice-modal__qty ">
+                              {item?.quantity}
+                            </h6>
+                          </Col>
+                          <Col md="5" lg="5">
+                            <h6 className="invoice-modal__qty">
+                              {item?.item_description}
+                            </h6>
+                          </Col>
+                          <Col md="2" lg="2">
+                            <h6 className="invoice-modal__qty">{formatAmount(item?.rate)}</h6>
+                          </Col>
+                          <Col md="3" lg="3">
+                            <h6 className="invoice-modal__qty">
+                              {formatAmount(item?.amount)}
+                            </h6>
+                          </Col>
+                        </Row>
+                      );
+                    })}
                   </div>
                   <Row>
                     <Col className="ms-auto" xl="11">
                       <div className="mt-5 invoice-modal__grey-section py-4 px-4">
                         <Row>
-                          <Col xl="6">
+                          <Col xl="6" lg="6" sm="6">
                             <h6 className="invoice-modal__qty ">Sub Total</h6>
-                            <h6 className="invoice-modal__qty">VAT(10%)</h6>
+                            <h6 className="invoice-modal__qty">
+                              VAT({invoiceDetails?.vat}%)
+                            </h6>
                           </Col>
-                          <Col xl="6">
+                          <Col xl="6" lg="6" sm="6">
                             <h6
                               className="invoice-modal__qty "
                               style={{ textAlign: "right" }}
                             >
-                              {formatAmount(location?.state?.sub_total)}
+                              {formatAmount(invoiceDetails?.sub_total)}
                             </h6>
                             <h6
                               className="invoice-modal__qty"
                               style={{ textAlign: "right" }}
                             >
-                              $0.00
+                              ${invoiceDetails?.vat}
                             </h6>
                           </Col>
                         </Row>
@@ -207,7 +227,7 @@ const InvoiceDetailsPage = (props) => {
                               className="invoice-modal__total ms-auto my-auto"
                               style={{ textAlign: "right" }}
                             >
-                              $ {formatAmount(location?.state?.total)}
+                              $ {formatAmount(invoiceDetails?.total)}
                             </h6>
                           </div>
                         </Row>
@@ -413,6 +433,7 @@ const mapStateToProps = (state) => {
   return {
     address: state?.settings?.businessDetails?.address,
     logo: state?.settings?.businessDetails?.logo,
+    invoiceDetails: state?.invoice?.oneInvoice,
   };
 };
-export default connect(mapStateToProps, {})(InvoiceDetailsPage);
+export default connect(mapStateToProps, { getOneInvoice })(InvoiceDetailsPage);

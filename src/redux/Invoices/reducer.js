@@ -2,6 +2,9 @@ import {
   GET_INVOICES,
   GET_INVOICES_SUCCESS,
   GET_INVOICES_ERROR,
+  GET_ONE_INVOICE,
+  GET_ONE_INVOICE_SUCCESS,
+  GET_ONE_INVOICE_ERROR,
   RESET_MESSAGE,
   CREATE_NEW_INVOICE,
   CREATE_NEW_INVOICE_SUCCESS,
@@ -15,6 +18,9 @@ const intialState = {
   invoices: [],
   createInvoiceLoading: false,
   createInvoiceError: "",
+  getOneInvoiceLoading: false,
+  getOneInvoiceError: "",
+  oneInvoice: {},
 };
 const invoicesReducer = (state = intialState, action) => {
   switch (action.type) {
@@ -35,6 +41,23 @@ const invoicesReducer = (state = intialState, action) => {
         getInvoiceLoading: false,
         getInvoiceError: action.payload.error,
       };
+    case GET_ONE_INVOICE:
+      return {
+        ...state,
+        getOneInvoiceLoading: true,
+      }
+    case GET_ONE_INVOICE_SUCCESS:
+      return {
+        ...state,
+        getOneInvoiceLoading: false,
+        oneInvoice: action.payload
+      }
+    case GET_ONE_INVOICE_ERROR:
+      return {
+        ...state,
+        getOneInvoiceLoading: false,
+        getOneInvoiceError: action.payload
+      }
     case CREATE_NEW_INVOICE:
       return {
         ...state,
@@ -57,7 +80,8 @@ const invoicesReducer = (state = intialState, action) => {
         ...state,
         getInvoiceError: "",
         message: "",
-        createInvoiceError:""
+        createInvoiceError:"",
+        getOneInvoiceError: ""
       };
 
     default:
