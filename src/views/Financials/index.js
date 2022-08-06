@@ -42,9 +42,6 @@ const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
   const openRequestPayoutModal = () => {
     setShowPayoutModal(true);
   }
-  const closeRequestPayoutModal = () => {
-    setShowPayoutModal(false);
-  }
   const options = [
     {
       value: "chocolate",

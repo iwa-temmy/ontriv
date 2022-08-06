@@ -24,7 +24,7 @@ export function* GetAllInvoices() {
     if (error.response) {
       const errorMessage = error.response.data.detail;
 
-      switch (error.response.status) {
+      switch (error?.response?.status) {
         case 500:
           message = "Internal Server Error";
           break;

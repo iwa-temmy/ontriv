@@ -2,6 +2,13 @@ import { Row, Col } from "reactstrap";
 
 import React, { useState } from "react";
 // import TitleModalLogoHere from "../../assets/img/TitleModalLogoHere.svg";
+import InvoiceSettingsModal from "./InvoiceActions/InvoiceSettingsModal";
+import RecordPaymentModal from "./InvoiceActions/RecordPaymentModal";
+import ScheduleModal from "./InvoiceActions/ScheduleModal";
+import DuplicateInvoiceModal from "./InvoiceActions/DuplicateInvoiceModal";
+import InvoiceDetails from "./InvoiceDetails";
+
+//icons
 import HrInvoice from "../../assets/img/hr-invoice.svg";
 import PlusSign from "../../assets/img/plus-sign.svg";
 import LockKey from "../../assets/img/lock-key.svg";
@@ -14,34 +21,48 @@ import {
   invoicePaymentStatus,
   formatAmount,
   pdfWithPrintJs,
+  copierHelper,
 } from "../../utils/helper";
 
 //react-router
 import { useLocation } from "react-router-dom";
-import InvoiceSettingsModal from "./InvoiceActions/InvoiceSettingsModal";
-import RecordPaymentModal from "./InvoiceActions/RecordPaymentModal";
-import ScheduleModal from "./InvoiceActions/ScheduleModal";
-import DuplicateInvoiceModal from "./InvoiceActions/DuplicateInvoiceModal";
+import CreateInvoiceModal from "./InvoiceActions/CreateInvoiceModal";
 
 const InvoiceDetailsPage = (props) => {
   const [showOptions, setShowOptions] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [showRecordPayment, setShowRecordPayment] = useState(false);
   const [showSchedule, setShowSchedule] = useState(false);
-  const [showDuplicateInvoiceModal, setShowDuplicateInvoiceModal] = useState(false);
+  const [showDuplicateInvoiceModal, setShowDuplicateInvoiceModal] =
+    useState(false);
+  const [showPreviewInvoiceModal, setShowPreviewInvoiceModal] = useState(false);
+  const [showCreateInvoiceModal, setShowCreateInvoiceModal] = useState(false);
 
   //props
   const { address, logo } = props;
   const location = useLocation();
-  console.log(location?.state);
+  console.log(window.location.href);
 
   const getPDF = () => {
     setShowOptions(false);
     pdfWithPrintJs("invoice", "invoice");
   };
 
+  const toggleInvoicePreview = () => {
+    setShowPreviewInvoiceModal(!showPreviewInvoiceModal);
+  };
+
+  const OpenCreateInvoiceModal = () => {
+    setShowCreateInvoiceModal(true);
+  };
+  const CloseCreateInvoiceModal = () => {
+    setShowCreateInvoiceModal(false);
+  };
   return (
     <>
+      {showCreateInvoiceModal ? (
+        <CreateInvoiceModal closeInvoiceModal={CloseCreateInvoiceModal} />
+      ) : null}
       <div className="dashboard dashboard-wrapper px-2">
         <Row>
           <Col xl="8" className="">
@@ -272,10 +293,16 @@ const InvoiceDetailsPage = (props) => {
             </div>
             {showOptions ? (
               <div className="more-actions-container">
-                <h6 className="px-4 slightly-black action-menu pt-4">
+                <h6
+                  className="px-4 slightly-black action-menu pt-4"
+                  onClick={OpenCreateInvoiceModal}
+                >
                   New Invoice
                 </h6>
-                <h6 className="px-4 slightly-black action-menu pt-4" onClick={() => setShowDuplicateInvoiceModal(true)}>
+                <h6
+                  className="px-4 slightly-black action-menu pt-4"
+                  onClick={() => setShowDuplicateInvoiceModal(true)}
+                >
                   Make A copy
                 </h6>
                 <h6
@@ -330,11 +357,16 @@ const InvoiceDetailsPage = (props) => {
               </div>
             </div>
             <div className="my-4 py-2 px-2 bg-white">
-              <div className="light-blue-bg d-inline-flex w-100 px-3 py-3">
+              <div className="light-blue-bg d-flex justify-content-between w-100 px-3 py-3">
                 <h6 className="my-auto fw-light slightly-black">
                   Invoice Link
                 </h6>
-                <img src={LockKey} className="ms-auto" alt="" />
+                <button
+                  className="btn btn-link"
+                  onClick={() => copierHelper(window.location.href)}
+                >
+                  <img src={LockKey} className="ms-auto" alt="" />
+                </button>
               </div>
             </div>
             <button
@@ -343,7 +375,12 @@ const InvoiceDetailsPage = (props) => {
             >
               Make Recurring
             </button>
-            <h6 className="blue-btn py-3 px-4">Preview as Client</h6>
+            <button
+              className="blue-btn py-3 px-4 w-100"
+              onClick={toggleInvoicePreview}
+            >
+              Preview as Client
+            </button>
           </Col>
         </Row>
       </div>
@@ -362,6 +399,11 @@ const InvoiceDetailsPage = (props) => {
       <DuplicateInvoiceModal
         showDuplicateInvoiceModal={showDuplicateInvoiceModal}
         setShowDuplicateInvoiceModal={setShowDuplicateInvoiceModal}
+      />
+      <InvoiceDetails
+        toggleInvoicePreview={toggleInvoicePreview}
+        showModal={showPreviewInvoiceModal}
+        details={location?.state}
       />
     </>
   );

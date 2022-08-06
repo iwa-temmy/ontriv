@@ -2,6 +2,7 @@ import axios from "axios";
 import moment from "moment";
 import html2canvas from "html2canvas";
 import printJs from "print-js";
+import createNotification from "./Notification";
 
 const BASE_URL = "https://ontriv.herokuapp.com";
 
@@ -151,33 +152,45 @@ export const invoicePaymentStatus = (status) => {
   }
 };
 
-
-
-export const pdfWithPrintJs = (printable, documentTitle, type = 'image') => {
+export const pdfWithPrintJs = (printable, documentTitle, type = "image") => {
   // const cssText = `
   //   background-color: #ffffff
   // `;
   try {
-      html2canvas(document.getElementById(printable), {
-          logging: true,
-          allowTaint: true,
-          letterRendering: 1,
-          useCORS: true,
-          backgroundColor: 'white',
-      }).then(canvas => {
-          const imgData = canvas.toDataURL('image/jpeg', 1.0);
-          const config = {
-              type,
-              documentTitle,
-              printable: imgData,
-              base64: true,
-              // targetStyle: [cssText],
-              // maxWidth: 800,
-          };
-          printJs(config);
-      });
+    html2canvas(document.getElementById(printable), {
+      logging: true,
+      allowTaint: true,
+      letterRendering: 1,
+      useCORS: true,
+      backgroundColor: "white",
+    }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/jpeg", 1.0);
+      const config = {
+        type,
+        documentTitle,
+        printable: imgData,
+        base64: true,
+        // targetStyle: [cssText],
+        // maxWidth: 800,
+      };
+      printJs(config);
+    });
   } catch (e) {
-      console.log('pdfWithPrintJs', e);
-      console.log('Failed!', 'PDF generation failed.\n Page might be too large.\n', 'error');
+    console.log("pdfWithPrintJs", e);
+    console.log(
+      "Failed!",
+      "PDF generation failed.\n Page might be too large.\n",
+      "error"
+    );
+  }
+};
+
+export const copierHelper = (text) => {
+  if (text) {
+    navigator.clipboard.writeText(text);
+
+    createNotification("success", "Invoice Link copied");
+  } else {
+    createNotification("error", "Failed to copy to clipboard, try again later");
   }
 };
