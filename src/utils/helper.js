@@ -194,3 +194,7 @@ export const copierHelper = (text) => {
     createNotification("error", "Failed to copy to clipboard, try again later");
   }
 };
+
+export const calculateVat = (total, vat) => {
+  return (vat/100) * total
+}

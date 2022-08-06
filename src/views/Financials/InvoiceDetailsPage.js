@@ -23,6 +23,7 @@ import {
   formatAmount,
   pdfWithPrintJs,
   copierHelper,
+  calculateVat,
 } from "../../utils/helper";
 
 //react-router
@@ -179,7 +180,9 @@ const InvoiceDetailsPage = (props) => {
                             </h6>
                           </Col>
                           <Col md="2" lg="2">
-                            <h6 className="invoice-modal__qty">{formatAmount(item?.rate)}</h6>
+                            <h6 className="invoice-modal__qty">
+                              {formatAmount(item?.rate)}
+                            </h6>
                           </Col>
                           <Col md="3" lg="3">
                             <h6 className="invoice-modal__qty">
@@ -211,7 +214,11 @@ const InvoiceDetailsPage = (props) => {
                               className="invoice-modal__qty"
                               style={{ textAlign: "right" }}
                             >
-                              ${invoiceDetails?.vat}
+                              $
+                              {calculateVat(
+                                invoiceDetails?.sub_total,
+                                invoiceDetails?.vat
+                              )}
                             </h6>
                           </Col>
                         </Row>
