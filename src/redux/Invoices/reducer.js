@@ -9,6 +9,9 @@ import {
   CREATE_NEW_INVOICE,
   CREATE_NEW_INVOICE_SUCCESS,
   CREATE_NEW_INVOICE_ERROR,
+  GET_ONE_INVOICE_SETTINGS,
+  GET_ONE_INVOICE_SETTINGS_SUCCESS,
+  GET_ONE_INVOICE_SETTINGS_ERROR,
 } from "../actions";
 
 const intialState = {
@@ -21,6 +24,8 @@ const intialState = {
   getOneInvoiceLoading: false,
   getOneInvoiceError: "",
   oneInvoice: {},
+  getOneInvoiceSettingError: false,
+  oneInvoiceSetting: {}
 };
 const invoicesReducer = (state = intialState, action) => {
   switch (action.type) {
@@ -75,6 +80,20 @@ const invoicesReducer = (state = intialState, action) => {
         createInvoiceLoading: false,
         createInvoiceError: action.payload
       };
+    case GET_ONE_INVOICE_SETTINGS: 
+     return {
+      ...state
+     }
+    case GET_ONE_INVOICE_SETTINGS_SUCCESS:
+      return {
+        ...state, 
+        oneInvoiceSetting: action.payload
+      }
+    case GET_ONE_INVOICE_SETTINGS_ERROR:
+      return {
+        ...state,
+        getOneInvoiceSettingError: action.payload
+      }
     case RESET_MESSAGE:
       return {
         ...state,

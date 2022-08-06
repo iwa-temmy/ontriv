@@ -165,7 +165,7 @@ const CreateInvoiceModal = ({
       createNotification("success", message);
       closeInvoiceModal();
     }
-  }, [loading, error, message]);
+  }, [loading, error, message, closeInvoiceModal]);
   return (
     <div className="off-canvas-menu">
       <div className="off-canvas-menu__content px-4 py-4">

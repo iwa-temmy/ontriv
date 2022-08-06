@@ -42,7 +42,7 @@ const InvoiceDetailsPage = (props) => {
   const [showCreateInvoiceModal, setShowCreateInvoiceModal] = useState(false);
 
   //props
-  const { address, logo, getOneInvoice, invoiceDetails, loading } = props;
+  const { getOneInvoice, invoiceDetails, loading } = props;
   const location = useLocation();
   console.log(window.location.href);
 
@@ -70,14 +70,13 @@ const InvoiceDetailsPage = (props) => {
       {showCreateInvoiceModal ? (
         <CreateInvoiceModal closeInvoiceModal={CloseCreateInvoiceModal} />
       ) : null}
-      {loading ? (
-        <div
-          className="d-flex justify-content-center align-items-center"
-        >
-          <Bars height="100" width="100" color="#2062F4" />
-        </div>
-      ) : (
-        <div className="dashboard dashboard-wrapper px-2">
+
+      <div className="dashboard dashboard-wrapper px-2 position-relative">
+        {loading ? (
+          <div className="position-fixed top-50 start-50">
+            <Bars height="100" width="100" color="#2062F4" />
+          </div>
+        ) : (
           <Row>
             <Col xl="8" className="">
               <div
@@ -225,10 +224,10 @@ const InvoiceDetailsPage = (props) => {
                                 style={{ textAlign: "right" }}
                               >
                                 $
-                                {calculateVat(
+                                {formatAmount(calculateVat(
                                   invoiceDetails?.sub_total,
                                   invoiceDetails?.vat
-                                )}
+                                ))}
                               </h6>
                             </Col>
                           </Row>
@@ -331,13 +330,13 @@ const InvoiceDetailsPage = (props) => {
               {showOptions ? (
                 <div className="more-actions-container">
                   <h6
-                    className="px-4 slightly-black action-menu pt-4"
+                    className="px-4 slightly-black action-menu py-3"
                     onClick={OpenCreateInvoiceModal}
                   >
                     New Invoice
                   </h6>
                   <h6
-                    className="px-4 slightly-black action-menu pt-4"
+                    className="px-4 slightly-black action-menu py-3"
                     onClick={() => setShowDuplicateInvoiceModal(true)}
                   >
                     Make A copy
@@ -347,23 +346,23 @@ const InvoiceDetailsPage = (props) => {
                       setShowSettings(true);
                       setShowOptions(false);
                     }}
-                    className="px-4 slightly-black action-menu pt-4"
+                    className="px-4 slightly-black action-menu py-3"
                   >
                     Invoice Settings
                   </h6>
                   <h6
-                    className="px-4 slightly-black action-menu pt-4"
+                    className="px-4 slightly-black action-menu py-3"
                     onClick={getPDF}
                   >
                     Print Invoice
                   </h6>
                   <h6
-                    className="px-4 slightly-black action-menu pt-4"
+                    className="px-4 slightly-black action-menu py-3"
                     onClick={getPDF}
                   >
                     Download PDF
                   </h6>
-                  <h6 className="px-4 slightly-black action-menu py-4">
+                  <h6 className="px-4 slightly-black action-menu py-3">
                     Delete Invoice
                   </h6>
                 </div>
@@ -407,7 +406,7 @@ const InvoiceDetailsPage = (props) => {
                 </div>
               </div>
               <button
-                className="py-3 text-center px-4 send w-100 mb-4"
+                className="py-3 text-center px-4 recurring w-100 mb-4"
                 onClick={() => setShowSchedule(true)}
               >
                 Make Recurring
@@ -420,12 +419,13 @@ const InvoiceDetailsPage = (props) => {
               </button>
             </Col>
           </Row>
-        </div>
-      )}
+        )}
+      </div>
 
       <InvoiceSettingsModal
         showSettings={showSettings}
         setShowSettings={setShowSettings}
+        invoiceId={location?.state?.id}
       />
       <RecordPaymentModal
         showRecordPayment={showRecordPayment}
@@ -450,8 +450,6 @@ const InvoiceDetailsPage = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    address: state?.settings?.businessDetails?.address,
-    logo: state?.settings?.businessDetails?.logo,
     invoiceDetails: state?.invoice?.oneInvoice,
     loading: state?.invoice?.getOneInvoiceLoading,
   };

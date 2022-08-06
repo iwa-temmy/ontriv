@@ -394,7 +394,7 @@
     }
   }
   button {
-    background: #2062f4;
+    background: linear-gradient(93.88deg, #49A8F8 6.88%, #0053F4 74.45%);
     border-radius: 16px;
     color: #fff;
     border: none;
@@ -1120,8 +1120,22 @@ label {
   text-align: center;
   letter-spacing: 1.25px;
   color: #BDBDBD;
+  height: 40px;
 }
-
+.recurring {
+  background: #2062F4;
+  border: transparent;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 21px;
+  display: flex;
+ justify-content: center;
+ align-items: center;
+  letter-spacing: 1.25px;
+  color: #F7F7FC;
+  cursor: pointer;
+}
 .send {
   background: #2062F4;
   border: transparent;
@@ -1135,6 +1149,7 @@ label {
   letter-spacing: 1.25px;
   color: #F7F7FC;
   cursor: pointer;
+  height: 40px;
 }
 
 .blue-btn {
@@ -1164,7 +1179,7 @@ label {
 
 .more-actions-container {
   position: absolute;
-  top: 20%;
+  top: 5%;
   right: 5%;
   background-color: white;
   width: 15%;
@@ -1187,7 +1202,9 @@ label {
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
+  text-align: center;
   line-height: 22px;
+  // padding: 0.5rem 0;
   letter-spacing: 0.25px;
   color: #2062F4;
 }
