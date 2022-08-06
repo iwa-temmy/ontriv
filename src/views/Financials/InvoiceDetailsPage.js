@@ -160,40 +160,40 @@ const InvoiceDetailsPage = (props) => {
                     <img src={HrInvoice} className="w-100" alt="" />
                     <div className="mt-5 invoice-modal__grey-section w-100 py-4 px-4">
                       <Row style={{ textAlign: "left" }}>
-                        <Col md="2" lg="2">
+                        <Col sm="2" lg="2">
                           <h6 className="invoice-modal__qty ">QTY</h6>
                         </Col>
-                        <Col md="5" lg="5">
+                        <Col sm="5" lg="5">
                           <h6 className="invoice-modal__qty">
                             ITEM DESCRIPTION
                           </h6>
                         </Col>
-                        <Col md="2" lg="2">
+                        <Col sm="2" lg="2">
                           <h6 className="invoice-modal__qty">RATE</h6>
                         </Col>
-                        <Col md="3" lg="3">
+                        <Col sm="3" lg="3">
                           <h6 className="invoice-modal__qty">AMOUNT</h6>
                         </Col>
                       </Row>
                       {invoiceDetails?.items?.map((item) => {
                         return (
                           <Row style={{ textAlign: "left" }} key={item?.id}>
-                            <Col md="2" lg="2">
+                            <Col sm="2" lg="2">
                               <h6 className="invoice-modal__qty ">
                                 {item?.quantity}
                               </h6>
                             </Col>
-                            <Col md="5" lg="5">
+                            <Col sm="5" lg="5">
                               <h6 className="invoice-modal__qty">
                                 {item?.item_description}
                               </h6>
                             </Col>
-                            <Col md="2" lg="2">
+                            <Col sm="2" lg="2">
                               <h6 className="invoice-modal__qty">
                                 {formatAmount(item?.rate)}
                               </h6>
                             </Col>
-                            <Col md="3" lg="3">
+                            <Col sm="3" lg="3">
                               <h6 className="invoice-modal__qty">
                                 {formatAmount(item?.amount)}
                               </h6>
@@ -450,8 +450,8 @@ const InvoiceDetailsPage = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    invoiceDetails: state?.invoice?.oneInvoice,
-    loading: state?.invoice?.getOneInvoiceLoading,
+    invoiceDetails: state?.oneInvoice?.details,
+    loading: state?.oneInvoice?.getOneInvoiceLoading,
   };
 };
 export default connect(mapStateToProps, { getOneInvoice })(InvoiceDetailsPage);

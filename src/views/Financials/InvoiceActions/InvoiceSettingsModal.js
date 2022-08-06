@@ -88,7 +88,7 @@ const InvoiceSettingsModal = ({
 
 const mapStateToProps = (state) => {
   return {
-    oneInvoiceSetting: state?.invoice?.oneInvoiceSetting,
+    oneInvoiceSetting: state?.oneInvoice?.invoiceSetting,
   };
 };
 
