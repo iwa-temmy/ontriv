@@ -44,7 +44,6 @@ const InvoiceDetailsPage = (props) => {
   //props
   const { getOneInvoice, invoiceDetails, loading } = props;
   const location = useLocation();
-  console.log(window.location.href);
 
   const getPDF = () => {
     setShowOptions(false);

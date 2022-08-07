@@ -5,14 +5,21 @@ import {
   GET_ONE_INVOICE_SETTINGS,
   GET_ONE_INVOICE_SETTINGS_SUCCESS,
   GET_ONE_INVOICE_SETTINGS_ERROR,
+  UPDATE_ONE_INVOICE_SETTINGS,
+  UPDATE_ONE_INVOICE_SETTINGS_SUCCESS,
+  UPDATE_ONE_INVOICE_SETTINGS_ERROR,
   RESET_MESSAGE,
 } from "../../actions";
 
 const intialState = {
   getOneInvoiceLoading: false,
-  getOneInvoiceError: "",
-  details: {},
+  updateOneInvoiceSettingLoading: false,
   getOneInvoiceSettingError: false,
+  updateOneInvoiceError: false,
+  getOneInvoiceError: "",
+  updateOneInvoiceSettingError: "",
+  details: {},
+  message: "",
   invoiceSetting: {},
 };
 
@@ -35,12 +42,7 @@ const oneInvoiceReducer = (state = intialState, action) => {
         getOneInvoiceLoading: false,
         getOneInvoiceError: action.payload,
       };
-    case RESET_MESSAGE:
-      return {
-        ...state,
-        getOneInvoiceError: "",
-        getOneInvoiceSettingError: "",
-      };
+
     case GET_ONE_INVOICE_SETTINGS:
       return {
         ...state,
@@ -54,6 +56,33 @@ const oneInvoiceReducer = (state = intialState, action) => {
       return {
         ...state,
         getOneInvoiceSettingError: action.payload,
+      };
+    case UPDATE_ONE_INVOICE_SETTINGS:
+      return {
+        ...state,
+        updateOneInvoiceSettingLoading: true,
+      };
+    case UPDATE_ONE_INVOICE_SETTINGS_SUCCESS:
+      return {
+        ...state,
+        updateOneInvoiceSettingLoading: false,
+        message: action.payload.message,
+        invoiceSetting: action.payload.data,
+      };
+    case UPDATE_ONE_INVOICE_SETTINGS_ERROR:
+      return {
+        ...state,
+        updateOneInvoiceSettingLoading: false,
+        updateOneInvoiceSettingError: action.payload,
+      };
+
+    case RESET_MESSAGE:
+      return {
+        ...state,
+        getOneInvoiceError: "",
+        getOneInvoiceSettingError: "",
+        updateOneInvoiceSettingError: "",
+        message: "",
       };
     default:
       return state;
