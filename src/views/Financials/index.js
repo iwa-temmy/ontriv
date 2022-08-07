@@ -17,6 +17,7 @@ import { getAllInvoices } from "../../redux/actions";
 //utils
 import CreateInvoiceModal from "./InvoiceActions/CreateInvoiceModal";
 import RequestPayoutModal from "./InvoiceActions/RequestPayoutModal";
+import AddVendor from "./ExpenseActions/AddVendor";
 
 const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
   const [view] = useState("list");
@@ -161,49 +162,7 @@ const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
         </div>
       ) : null}
       {showVendor ? (
-        <div className="off-canvas-menu">
-          <div className="off-canvas-menu__content px-5 py-2">
-            <div className="d-inline-flex w-100">
-              <div className="add-client-text text-center">
-                <h5>Add new vendor</h5>
-              </div>
-              <img
-                onClick={() => setShowVendor(false)}
-                className="ms-auto"
-                src={XCancel}
-                alt=""
-              />
-            </div>
-
-            <label className="text-left w-100">Vendor Name</label>
-            <Input
-              type="text"
-              placeholder=""
-              className="off-canvas-menu__input py-3 px-3"
-            />
-            <label className="text-left w-100">Email Address</label>
-            <Input
-              type="email"
-              placeholder=""
-              className="off-canvas-menu__input py-3 px-3"
-            />
-            <label className="text-left w-100 mt-4">Phone Number</label>
-            <Input
-              type="tel"
-              placeholder=""
-              className="off-canvas-menu__input py-3 px-3"
-            />
-            <div>
-              <label className="text-left w-100 mt-4">Address</label>
-              <textarea className="w-100 rounded-3 mt-2 canvas-textarea"></textarea>
-            </div>
-            <div className="d-inline-flex mt-2 w-100 mb-4">
-              <div className="py-3 ms-3 ms-auto px-4 send align-items-center ">
-                <h6 className="mb-0">Add Vendor</h6>
-              </div>
-            </div>
-          </div>
-        </div>
+       <AddVendor setShowVendor={setShowVendor}/>
       ) : null}
       <div className="dashboard dashboard-wrapper">
         <Row>

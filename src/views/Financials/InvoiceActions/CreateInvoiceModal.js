@@ -161,7 +161,7 @@ const CreateInvoiceModal = ({
     if (error?.length > 0 && !loading) {
       createNotification("error", error);
     }
-    if (message?.length > 0  && !loading ) {
+    if (message?.length > 0 && !loading) {
       createNotification("success", message);
       closeInvoiceModal();
     }
@@ -192,6 +192,7 @@ const CreateInvoiceModal = ({
             value={formData?.client || ""}
             onChange={handleInputChange}
           >
+            <option value="">Select Client</option>
             {clients?.map((client) => {
               return (
                 <option value={client?.id} key={client?.id}>
@@ -310,56 +311,59 @@ const CreateInvoiceModal = ({
             </Col>
             <Col md="1"></Col>
           </Row>
-          {items?.map((item, index) => {
-            return (
-              <Row className="mt-2" key={item.id}>
-                <Col md="4">
-                  <Input
-                    type="text"
-                    name="item_description"
-                    placeholder="Description"
-                    className="off-canvas-menu__input py-3 px-2"
-                    value={item?.item_description || ""}
-                    onChange={(e) => handleItemInputChange(e, index)}
-                  />
-                </Col>
-                <Col md="2">
-                  <Input
-                    type="number"
-                    name="quantity"
-                    placeholder="Quantity "
-                    value={item.quantity || ""}
-                    className="off-canvas-menu__input py-3 px-2"
-                    onChange={(e) => handleItemInputChange(e, index)}
-                  />
-                </Col>
-                <Col md="3">
-                  <Input
-                    type="number"
-                    name="rate"
-                    placeholder="Rate"
-                    value={item?.rate || ""}
-                    className="off-canvas-menu__input py-3 px-2"
-                    onChange={(e) => handleItemInputChange(e, index)}
-                  />
-                </Col>
-                <Col md="2">
-                  <h6 className="pt-3">
-                    ${item?.rate * item?.quantity || "0.00"}
-                  </h6>
-                </Col>
-                <Col md="1" className="pt-3">
-                  <span
-                    style={{ cursor: "pointer" }}
-                    onClick={() => removeItem(index)}
-                  >
-                    <AiOutlineDelete color="red" size="20px" />
-                  </span>
-                </Col>
-              </Row>
-            );
-          })}
-          <div className="d-inline-flex mt-2 w-100 mt-4">
+          <div style={{ height: "150px", overflowY: "scroll" }}>
+            {items?.map((item, index) => {
+              return (
+                <Row className="mt-2" key={item.id}>
+                  <Col md="4">
+                    <Input
+                      type="text"
+                      name="item_description"
+                      placeholder="Description"
+                      className="off-canvas-menu__input py-3 px-2"
+                      value={item?.item_description || ""}
+                      onChange={(e) => handleItemInputChange(e, index)}
+                    />
+                  </Col>
+                  <Col md="2">
+                    <Input
+                      type="number"
+                      name="quantity"
+                      placeholder="QTY"
+                      value={item.quantity || ""}
+                      className="off-canvas-menu__input py-3 px-2"
+                      onChange={(e) => handleItemInputChange(e, index)}
+                    />
+                  </Col>
+                  <Col md="3">
+                    <Input
+                      type="number"
+                      name="rate"
+                      placeholder="Rate"
+                      value={item?.rate || ""}
+                      className="off-canvas-menu__input py-3 px-2"
+                      onChange={(e) => handleItemInputChange(e, index)}
+                    />
+                  </Col>
+                  <Col md="2">
+                    <h6 className="pt-3">
+                      ${item?.rate * item?.quantity || "0.00"}
+                    </h6>
+                  </Col>
+                  <Col md="1" className="pt-3">
+                    <span
+                      style={{ cursor: "pointer" }}
+                      onClick={() => removeItem(index)}
+                    >
+                      <AiOutlineDelete color="red" size="20px" />
+                    </span>
+                  </Col>
+                </Row>
+              );
+            })}
+          </div>
+
+          <div className="d-inline-flex w-100">
             <span className="btn btn-primary me-auto" onClick={handleAddItem}>
               <BiPlus /> ADD ITEM
             </span>
@@ -368,7 +372,7 @@ const CreateInvoiceModal = ({
               $ {calculateTotal(items) || "0.00"}
             </h6>
           </div>
-          <div className="d-inline-flex mt-2 w-100 mb-2">
+          <div className="d-inline-flex w-100 mt-4">
             <h6 className="add-item me-auto my-auto">Preview</h6>
             <div className="py-2 ms-3 px-4 align-items-center ">
               <button className="btn btn-primary" disabled={loading}>

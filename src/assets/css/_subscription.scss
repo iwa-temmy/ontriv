@@ -806,7 +806,7 @@
 label {
   font-style: normal;
   font-weight: normal;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 28px;
   letter-spacing: 0.35px;
   color: #111317;
@@ -1086,9 +1086,8 @@ label {
   &__content {
     background-color: white;
     min-height: 90vh;
-    overflow-y: scroll;
-    width: 48vw;
-    font-size: 0.7rem !important;
+    width: 42vw;
+    font-size: 0.5rem !important;
     position: fixed;
     right: 0;
   }
@@ -1096,6 +1095,12 @@ label {
     border: 1px solid #E0E0E0 !important;
     box-sizing: border-box !important;
     border-radius: 16px !important;
+  }
+  .form-control{
+    font-size: 0.8rem;
+  }
+  textarea{
+    font-size: 14px;
   }
 }
 
