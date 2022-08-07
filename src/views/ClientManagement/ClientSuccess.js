@@ -10,15 +10,11 @@ const AddNewClient = ({
   addState,
   createClient,
   setAddState,
+  setAddClient,
   creationError,
   message,
   loading
 }) => {
-
-
-
- 
-
   return (
     <Modal modalState={addState} setModalState={setAddState}>
       <div className='add-client-wrapper text-center '>
@@ -30,7 +26,14 @@ const AddNewClient = ({
           <p>Please check the email used to activate the account. </p>
         </div>
         <div className='pt-2 pb-3'>
-          <button className='w-100 btn-primary btn' type='submit' onClick={setAddState}>
+          <button
+            className='w-100 btn-primary btn'
+            type='submit'
+            onClick={() => {
+              setAddState()
+              setAddClient(false)
+            }}
+          >
             Done
           </button>
         </div>

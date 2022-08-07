@@ -88,11 +88,11 @@
       .signin-subhead-text {
         font-weight: 400;
         // padding-right: 5em;
-        font-size: 15px;
-        width: 50%;
-        @media (max-width: 1600px) {
-          width: 80%;
-        }
+        font-size: 14px;
+        width: 100%;
+        // @media (max-width: 1600px) {
+        //   width: 80%;
+        // }
       }
     }
   }
@@ -308,15 +308,15 @@
     }
   }
   .signup-right {
-    .css-6j8wv5-Input{
-      margin:0;
+    .css-6j8wv5-Input {
+      margin: 0;
     }
-    .css-319lph-ValueContainer{
-      padding:0 8px !important;
+    .css-319lph-ValueContainer {
+      padding: 0 8px !important;
     }
     .css-tlfecz-indicatorContainer,
-    .css-1okebmr-indicatorSeparator{
-      display:none;
+    .css-1okebmr-indicatorSeparator {
+      display: none;
     }
     .css-6j8wv5-Input {
       @media (min-width: 767px) {
@@ -398,11 +398,12 @@
         @media (max-width: 767px) {
           display: none;
         }
+       
         @media (min-width: 1600px) {
           padding: 113px 51px 51px 113px;
           margin: 150px -30px 0 0;
         }
-        margin: 130px -30px 0 0;
+        margin: 98px -30px 0 0;
         padding: 75px 40px 0px 75px;
         border-radius: 24px;
         .rc-steps-vertical .rc-steps-item-description {
@@ -563,11 +564,13 @@
     .reset-password-text {
       h4 {
       }
-      p {
+      div {
         margin-top: 15px;
         margin-bottom: 30px;
         font-size: 16px;
         font-weight: 300;
+        // width:77%;
+        // margin: 15px auto 30px auto;
       }
     }
 
@@ -633,4 +636,8 @@
       font-weight: 400;
     }
   }
+}
+
+.rc-steps-item:last-child {
+  width: 50% !important;
 }

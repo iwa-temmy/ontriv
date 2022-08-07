@@ -19,6 +19,7 @@ const AddNewClient = ({
   tags,
   getTag,
   createTag,
+  setAddClient,
   loading
 }) => {
   // const [tagValue, setTagsValue] = useState('')
@@ -49,7 +50,7 @@ const AddNewClient = ({
       setManualModal(false)
       toggleSuccess()
     }
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
   }, [creationError, message, loading])
 
   return (
@@ -66,14 +67,23 @@ const AddNewClient = ({
 
           <div>
             <div className='pt-2 pb-2 mb-1'>
-              <button className='w-100 btn-primary btn' onClick={toggleInvite}>
+              <button
+                className='w-100 btn-primary btn'
+                onClick={() => {
+                  toggleInvite()
+                  // setAddClient(false)
+                }}
+              >
                 Send Invite
               </button>
             </div>
             <div className='pt-2 pb-2'>
               <button
                 className='w-100 btn-outline-primary btn'
-                onClick={toggleManual}
+                onClick={() => {
+                  toggleManual()
+                  // setAddClient(false)
+                }}
               >
                 Manually add client
               </button>
@@ -84,6 +94,7 @@ const AddNewClient = ({
             <ManualAdd
               addState={manualModal}
               setAddState={toggleManual}
+
               // createTag={createTag}
             />
           )}
@@ -97,7 +108,7 @@ const AddNewClient = ({
           )}
         </div>
       </Modal>
-      <ClientSuccess addState={clientSuccess} setAddState={toggleSuccess} />
+      <ClientSuccess addState={clientSuccess} setAddState={toggleSuccess} setAddClient={setAddClient} />
     </>
   )
 }

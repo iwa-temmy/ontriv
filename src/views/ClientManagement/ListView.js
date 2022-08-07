@@ -28,13 +28,19 @@ const ClientListView = ({ setCurrentSection, clients, deleteClient }) => {
         cellClass: '',
         Cell: props => (
           <Link to='/client-details'>
-            <img
-              src={props.value}
-              alt='client'
-              onClick={() => {
-                setCurrentSection('Client Details')
-              }}
-            />
+            <div>
+              <img
+                style={{
+                  width: '40px',
+                  height: '40px'
+                }}
+                src={props.value}
+                alt='client'
+                onClick={() => {
+                  setCurrentSection('Client Details')
+                }}
+              />
+            </div>
           </Link>
         )
       },
@@ -60,7 +66,7 @@ const ClientListView = ({ setCurrentSection, clients, deleteClient }) => {
         Header: 'Date Created',
         accessor: 'date_joined',
         cellClass: 'pt-4 list-client-item ',
-        Cell: props => <>{props.value.split('T')[0].replace(/-/g,'/')}</>
+        Cell: props => <>{props.value.split('T')[0].replace(/-/g, '/')}</>
       },
       // {
       //   Header: 'Project Tag',
@@ -79,18 +85,17 @@ const ClientListView = ({ setCurrentSection, clients, deleteClient }) => {
         accessor: 'id',
         cellClass: 'pt-4 list-client-delete list-client-item cursor-pointer',
         Cell: props => (
-          <>
-            <MdDelete
-              size='14px'
-              className='pt-0'
-              onClick={() => {
-                setClientId(props.row.values.email)
-                toggleShowDelete()
-                // console.log(props.row.values.email)
-              }}
-            />
+          <div
+            onClick={() => {
+              setClientId(props.row.values.email)
+              toggleShowDelete()
+
+              // console.log(props.row.values.email)
+            }}
+          >
+            <MdDelete size='14px' className='pt-0' />
             <span className='pt-2 mb-0 text-underline'>Delete</span>
-          </>
+          </div>
         )
       }
     ],
