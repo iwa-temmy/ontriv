@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "reactstrap";
+import { Input } from "reactstrap";
 import { CenteredModal as Modal } from "../../../components/Modal";
 
 const RecordPaymentModal = ({ showRecordPayment, setShowRecordPayment }) => {
@@ -11,10 +11,7 @@ const RecordPaymentModal = ({ showRecordPayment, setShowRecordPayment }) => {
         </div>
         <form className="business-form mt-4">
           <label className="text-left w-100">Payment Date</label>
-          <select name="" className="bank-select w-100 px-3 py-3 mb-2" id="">
-            <option value="">Select option</option>
-            <option value="">Nigerian Naira - NGN</option>
-          </select>
+          <Input type="date"  name="payment_date"/>
           <label className="text-left w-100">Payment Method</label>
           <select name="" className="bank-select w-100 px-3 py-3 mb-2" id="">
             <option value="">Select option</option>

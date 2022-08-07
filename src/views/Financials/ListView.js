@@ -132,7 +132,7 @@ const ClientListView = ({ setCurrentSection, invoices, loading, openInvoiceModal
       <InvoiceDetails
         toggleInvoicePreview={toggleInvoicePreview}
         showModal={showModal}
-        details={invoiceDetails}
+        details={invoiceDetails?.row?.original}
       />
     </div>
   );

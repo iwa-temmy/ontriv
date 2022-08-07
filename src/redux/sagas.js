@@ -4,6 +4,7 @@ import client from './Client/saga';
 import settings from "./Settings/saga"
 import general from "./General/saga";
 import invoice from "./Invoices/saga";
+import oneInvoice from "./Invoices/OneInvoice/saga";
 
 export default function* rootSaga() {
   yield all([
@@ -12,5 +13,6 @@ export default function* rootSaga() {
    settings(),
    general(),
    invoice(),
+   oneInvoice(),
   ]);
 }

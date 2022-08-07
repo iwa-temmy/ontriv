@@ -2,14 +2,24 @@ import React, { useState, useEffect } from "react";
 import XCancel from "../../../assets/img/x-cancel.svg";
 import { BiPlus } from "react-icons/bi";
 import { Form, Input, Row, Col } from "reactstrap";
+import { ThreeDots } from "react-loader-spinner";
 import { AiOutlineDelete } from "react-icons/ai";
 import { calculateTotal } from "../../../utils/helper";
-import Select from 'react-select';
+import createNotification from "../../../utils/Notification";
+import Select from "react-select";
 
 //redux
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
+import { createNewInvoice } from "../../../redux/actions";
 
-const CreateInvoiceModal = ({ clients, closeInvoiceModal }) => {
+const CreateInvoiceModal = ({
+  clients,
+  closeInvoiceModal,
+  createNewInvoice,
+  loading,
+  error,
+  message,
+}) => {
   const [schedule, setSchedule] = useState({});
   const [formData, setFormData] = useState({});
   const [items, setItems] = useState([]);
@@ -38,9 +48,8 @@ const CreateInvoiceModal = ({ clients, closeInvoiceModal }) => {
     setFormData({});
     setItems([]);
     closeInvoiceModal();
-
-  }
-    //Handle FormData Inputs
+  };
+  //Handle FormData Inputs
   //handle Never ending Select
   const handleNeverEndingChange = (value) => {
     setSchedule({ ...schedule, never_ending: value });
@@ -82,38 +91,33 @@ const CreateInvoiceModal = ({ clients, closeInvoiceModal }) => {
   //handle Form Submission
   const handleCreateInvoice = (e) => {
     e.preventDefault();
-    const payload = {
-      ...formData,
-      schedule: {
-        interval: schedule?.interval?.value,
-        never_ending: schedule?.interval?.never_ending?.value,
-        start_date: schedule?.start_date,
-        end_date: schedule?.end_date,
-      },
-      items: items,
-      recurring: recurring,
-      currency: "Naira",
-      total: calculateTotal(items),
-      sub_total: calculateTotal(items),
-    };
-    console.log(payload);
-    fetch("https://ontriv.herokuapp.com/invoice/api/v1/invoice/create/", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU4MDE5NzU4LCJpYXQiOjE2NTgwMTM3NTgsImp0aSI6ImRjNGRjYTA4NThhZjRlNDFhNjgyNTM0ZWYwZDlmNjMyIiwidXNlcl9pZCI6MTV9.MLdsY16ZEwHnVo7TJa_MUbVGM3sxOUOr4t-gL_WbOvg`,
-      },
-      body: JSON.stringify(payload),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.status) {
-          console.log("Yes");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    let payload = {};
+    if (recurring) {
+      payload = {
+        ...formData,
+        schedule: {
+          interval: schedule?.interval?.value || null,
+          never_ending: schedule?.interval?.never_ending?.value || null,
+          start_date: schedule?.start_date || null,
+          end_date: schedule?.end_date || null,
+        },
+        items: items,
+        recurring: recurring,
+        currency: "Naira",
+        total: calculateTotal(items) || null,
+        sub_total: calculateTotal(items) || null,
+      };
+    } else {
+      payload = {
+        ...formData,
+        items: items,
+        recurring: recurring,
+        currency: "Naira",
+        total: calculateTotal(items) || null,
+        sub_total: calculateTotal(items) || null,
+      };
+    }
+    createNewInvoice(payload);
   };
 
   const intervalOptions = [
@@ -153,6 +157,15 @@ const CreateInvoiceModal = ({ clients, closeInvoiceModal }) => {
       },
     ]);
   }, []);
+  useEffect(() => {
+    if (error?.length > 0 && !loading) {
+      createNotification("error", error);
+    }
+    if (message?.length > 0  && !loading ) {
+      createNotification("success", message);
+      closeInvoiceModal();
+    }
+  }, [loading, error, message, closeInvoiceModal]);
   return (
     <div className="off-canvas-menu">
       <div className="off-canvas-menu__content px-4 py-4">
@@ -358,7 +371,19 @@ const CreateInvoiceModal = ({ clients, closeInvoiceModal }) => {
           <div className="d-inline-flex mt-2 w-100 mb-2">
             <h6 className="add-item me-auto my-auto">Preview</h6>
             <div className="py-2 ms-3 px-4 align-items-center ">
-              <button className="btn btn-primary">Save</button>
+              <button className="btn btn-primary" disabled={loading}>
+                {loading ? (
+                  <div className="text-center w-100 align-items-center">
+                    <ThreeDots
+                      color="white"
+                      height={"12px"}
+                      wrapperStyle={{ display: "block" }}
+                    />
+                  </div>
+                ) : (
+                  "Save"
+                )}
+              </button>
             </div>
           </div>
         </Form>
@@ -367,10 +392,15 @@ const CreateInvoiceModal = ({ clients, closeInvoiceModal }) => {
   );
 };
 
-const mapStateToProps = state => {
-    const {auth} = state;
-    return {
-        clients: auth?.currentUser?.client_list,
-    }
-}
-export default connect(mapStateToProps, {})(CreateInvoiceModal);
+const mapStateToProps = (state) => {
+  const { auth, invoice } = state;
+  return {
+    clients: auth?.currentUser?.client_list,
+    loading: invoice?.createInvoiceLoading,
+    error: invoice?.createInvoiceError,
+    message: invoice?.message,
+  };
+};
+export default connect(mapStateToProps, { createNewInvoice })(
+  CreateInvoiceModal
+);
