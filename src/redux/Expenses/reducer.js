@@ -2,6 +2,7 @@ import {
   GET_EXPENSES,
   GET_EXPENSES_SUCCESS,
   GET_EXPENSES_ERROR,
+  RESET_MESSAGE,
 } from "../actions";
 
 const intialState = {
@@ -28,13 +29,17 @@ const expenseReducer = (state = intialState, action) => {
       return {
         ...state,
         getExpensesLoading: false,
-        getExpensesError: action.payload.error
+        getExpensesError: action.payload.error,
       };
-
+    case RESET_MESSAGE:
+      return {
+        ...state,
+        message: "",
+        getExpensesError: "",
+      };
     default:
       return state;
   }
 };
-
 
 export default expenseReducer;

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from "react-router-dom"
 import Table from '../../components/Table';
 import boxIcon from '../../assets/img/box-icon-finance.svg';
+
+//redux
 import { connect } from 'react-redux';
-import { setCurrentSection } from "../../redux/actions";
+import { setCurrentSection, getAllExpenses } from "../../redux/actions";
+
 
 
 
@@ -152,9 +155,7 @@ const clients = [
         projectTag: 'Paid',
     },
 ];
-
-
-const ExpenseListView = ({ setCurrentSection }) => {
+const ExpenseListView = ({ setCurrentSection, getAllExpenses, expenses }) => {
     const cols = React.useMemo(
         () => [
             {
@@ -165,7 +166,7 @@ const ExpenseListView = ({ setCurrentSection }) => {
                     <Link to='/invoices-&-financials/details'
 
                     >
-                        <img src={props.value} alt='client-logo'
+                        <img src={props.value || boxIcon} alt='client-logo'
                             onClick={() => { setCurrentSection('Client Details') }}
                         />
                     </Link>
@@ -214,13 +215,22 @@ const ExpenseListView = ({ setCurrentSection }) => {
         // eslint-disable-next-line
         []
     );
+
+    useEffect(() => {
+      getAllExpenses()
+    }, [getAllExpenses])
     return (
         <div className="mb-0 mt-2 overflow-auto">
-            <Table columns={cols} data={clients} divided defaultPageSize={6} pagePosition='center' />
+            <Table columns={cols} data={[]} divided defaultPageSize={6} pagePosition='center' />
         </div>
     );
 };
 
 
+const mapStateToProps = state => {
+  return {
+    expenses: state?.expense?.expenses,
+  }
+}
 
-export default connect(null, { setCurrentSection })(ExpenseListView);
+export default connect(mapStateToProps, { setCurrentSection, getAllExpenses })(ExpenseListView);
