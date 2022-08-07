@@ -7,11 +7,9 @@ import {RiLogoutBoxRFill} from "react-icons/ri"
 import Notification from '../../../../assets/img/notification.svg'
 import userProfilePic from '../../../../assets/img/userPic.png'
 import notificationIcon from '../../../../assets/img/icon.png'
-import chat from '../../../../assets/img/chat.svg'
 import {TopRightModal} from '../../../Modal';
 import ClientLog from '../../../../assets/img/clientlogo.png'
 import {HiOutlineMenuAlt2} from 'react-icons/hi'
-import {Link} from "react-router-dom";
 
 export const TopNav = ({currentSection, setShowMobileSideBar, logoutUser, userDetails}) => {
     const [userProfileState, updateUserProfileState] = useState(false);
