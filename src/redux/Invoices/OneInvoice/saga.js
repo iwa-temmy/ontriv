@@ -93,7 +93,6 @@ export function* GetOneInvoiceSetting({ payload }) {
   }
 }
 export function* UpdateOneInvoiceSetting({payload}) {
-  console.log(payload);
   const credentials = {
     invoice: payload?.invoice,
     currency: payload?.currency,

@@ -56,6 +56,7 @@ const InvoiceDetailsPage = (props) => {
 
   const OpenCreateInvoiceModal = () => {
     setShowCreateInvoiceModal(true);
+    setShowOptions(false);
   };
   const CloseCreateInvoiceModal = () => {
     setShowCreateInvoiceModal(false);
@@ -223,10 +224,12 @@ const InvoiceDetailsPage = (props) => {
                                 style={{ textAlign: "right" }}
                               >
                                 $
-                                {formatAmount(calculateVat(
-                                  invoiceDetails?.sub_total,
-                                  invoiceDetails?.vat
-                                ))}
+                                {formatAmount(
+                                  calculateVat(
+                                    invoiceDetails?.sub_total,
+                                    invoiceDetails?.vat
+                                  )
+                                )}
                               </h6>
                             </Col>
                           </Row>
@@ -336,7 +339,10 @@ const InvoiceDetailsPage = (props) => {
                   </h6>
                   <h6
                     className="px-4 slightly-black action-menu py-3"
-                    onClick={() => setShowDuplicateInvoiceModal(true)}
+                    onClick={() => {
+                      setShowDuplicateInvoiceModal(true);
+                      setShowOptions(false);
+                    }}
                   >
                     Make A copy
                   </h6>
@@ -385,7 +391,9 @@ const InvoiceDetailsPage = (props) => {
                 <div className="d-inline-flex w-100">
                   <button
                     className="py-2 mx-auto mt-3 px-4 send align-items-center "
-                    onClick={() => setShowRecordPayment(true)}
+                    onClick={() => {
+                      setShowRecordPayment(true);
+                    }}
                   >
                     Record Payment
                   </button>
