@@ -1,18 +1,16 @@
-import React, {useEffect} from 'react';
-import { Link } from "react-router-dom"
-import Table from '../../components/Table';
-import boxIcon from '../../assets/img/box-icon-finance.svg';
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import Table from "../../components/Table";
+import boxIcon from "../../assets/img/box-icon-finance.svg";
+import EmptyTableData from "../../components/Table/EmptyTableData";
 
 //redux
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import { setCurrentSection, getAllExpenses } from "../../redux/actions";
 //utils
-import { formatAmount } from '../../utils/helper';
+import { formatAmount } from "../../utils/helper";
 
-
-
-import { MdDelete } from 'react-icons/md';
-
+import { MdDelete } from "react-icons/md";
 
 // const clients = [
 //     {
@@ -157,81 +155,104 @@ import { MdDelete } from 'react-icons/md';
 //     },
 // ];
 const ExpenseListView = ({ setCurrentSection, getAllExpenses, expenses }) => {
-    const cols = React.useMemo(
-        () => [
-            {
-                Header: '',
-                accessor: 'img',
-                cellClass: '',
-                Cell: (props) =>
-                    <Link to='/invoices-&-financials/details'
-
-                    >
-                        <img src={props.value || boxIcon} alt='client-logo'
-                            onClick={() => { setCurrentSection('Client Details') }}
-                        />
-                    </Link>
-            },
-            {
-                Header: 'Vendor  Name',
-                accessor: 'vendor',
-                cellClass: 'pt-4 list-client-item-finance ',
-                Cell: (props) => <>{props.value.name}</>,
-            },
-            {
-                Header: 'Catergory',
-                accessor: 'category',
-                cellClass: 'pt-4 list-client-item-finance  ',
-                Cell: (props) => <>{props.value.name}</>,
-            },
-            {
-                Header: 'Amount',
-                accessor: 'amount',
-                cellClass: 'pt-4 list-client-item-finance  ',
-                Cell: (props) => <>{formatAmount(props.value)}</>,
-            },
-            {
-                Header: 'Date',
-                accessor: 'date',
-                cellClass: 'pt-4 list-client-item-finance  ',
-                Cell: (props) => <>{props.value}</>,
-            },
-          {
-            Header: 'Action',
-            accessor: 'id',
-            cellClass: 'pt-4 list-client-item',
-            Cell: (props) => <>
-              <div className='d-flex'>
-                <div className='list-client-delete-finance px-3 py-1'>
-                  <MdDelete size='14px' className='pt-0' onClick={() => {
-                    console.log(props.value)
-                  }} />
-                  <span className='pt-2 mb-0 text-underline'>Delete</span>
-                </div>
+  const cols = React.useMemo(
+    () => [
+      {
+        Header: "",
+        accessor: "img",
+        cellClass: "",
+        Cell: (props) => (
+          <Link to="/invoices-&-financials/details">
+            <img
+              src={props.value || boxIcon}
+              alt="client-logo"
+              onClick={() => {
+                setCurrentSection("Client Details");
+              }}
+            />
+          </Link>
+        ),
+      },
+      {
+        Header: "Vendor  Name",
+        accessor: "vendor",
+        cellClass: "pt-4 list-client-item-finance ",
+        Cell: (props) => <>{props.value.name}</>,
+      },
+      {
+        Header: "Catergory",
+        accessor: "category",
+        cellClass: "pt-4 list-client-item-finance  ",
+        Cell: (props) => <>{props.value.name}</>,
+      },
+      {
+        Header: "Amount",
+        accessor: "amount",
+        cellClass: "pt-4 list-client-item-finance  ",
+        Cell: (props) => <>{formatAmount(props.value)}</>,
+      },
+      {
+        Header: "Date",
+        accessor: "date",
+        cellClass: "pt-4 list-client-item-finance  ",
+        Cell: (props) => <>{props.value}</>,
+      },
+      {
+        Header: "Action",
+        accessor: "id",
+        cellClass: "pt-4 list-client-item",
+        Cell: (props) => (
+          <>
+            <div className="d-flex">
+              <div className="list-client-delete-finance px-3 py-1">
+                <MdDelete
+                  size="14px"
+                  className="pt-0"
+                  onClick={() => {
+                    console.log(props.value);
+                  }}
+                />
+                <span className="pt-2 mb-0 text-underline">Delete</span>
               </div>
+            </div>
+          </>
+        ),
+      },
+    ],
+    // eslint-disable-next-line
+    []
+  );
 
-            </>,
-          },
-        ],
-        // eslint-disable-next-line
-        []
-    );
-
-    useEffect(() => {
-      getAllExpenses()
-    }, [getAllExpenses])
-    return (
-        <div className="mb-0 mt-2 overflow-auto">
-            <Table columns={cols} data={expenses} divided defaultPageSize={6} pagePosition='center' />
-        </div>
-    );
+  useEffect(() => {
+    getAllExpenses();
+  }, [getAllExpenses]);
+  return (
+    <div className="mb-0 mt-2 overflow-auto">
+      {[]?.length > 0 ? (
+        <Table
+          columns={cols}
+          data={expenses}
+          divided
+          defaultPageSize={6}
+          pagePosition="center"
+        />
+      ) : (
+        <EmptyTableData
+          subHeaderText="Start tracking your expenses"
+          buttonText="Create New Expense"
+          // onClick={openInvoiceModal}
+        />
+      )}
+    </div>
+  );
 };
 
-
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     expenses: state?.expense?.expenses,
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, { setCurrentSection, getAllExpenses })(ExpenseListView);
+export default connect(mapStateToProps, { setCurrentSection, getAllExpenses })(
+  ExpenseListView
+);

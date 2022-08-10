@@ -414,7 +414,7 @@ const InvoiceDetailsPage = (props) => {
               </div>
               <button
                 className="py-3 text-center px-4 recurring w-100 mb-4"
-                onClick={() => setShowSchedule(true)}
+                onClick={() => setShowDuplicateInvoiceModal(true)}
               >
                 Make Recurring
               </button>

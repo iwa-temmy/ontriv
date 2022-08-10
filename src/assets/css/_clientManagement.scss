@@ -164,6 +164,7 @@
     border-radius: 50%;
   }
   .add-client-text {
+    font-size: 0.8rem;
     h3 {
       font-size: 30px;
       font-weight: 700;
@@ -174,10 +175,10 @@
       opacity: 0.8;
     }
   }
-  input {
+  input, select {
     border-radius: 16px !important;
     padding: 14px 20px;
-    font-size: 16px;
+    font-size: 0.8rem !important;
     margin-bottom: 20px;
     font-weight: 300;
     // width:100%;

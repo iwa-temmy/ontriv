@@ -370,7 +370,7 @@
     border-radius: 50%;
   }
   .add-client-text {
-    h3 {
+    h3, h5 {
       font-size: 30px;
       font-weight: 700;
     }
@@ -1087,7 +1087,6 @@ label {
     background-color: white;
     min-height: 90vh;
     width: 42vw;
-    font-size: 0.5rem !important;
     position: fixed;
     right: 0;
   }
@@ -1095,6 +1094,7 @@ label {
     border: 1px solid #E0E0E0 !important;
     box-sizing: border-box !important;
     border-radius: 16px !important;
+    font-size: 0.8rem !important;
   }
   .form-control{
     font-size: 0.8rem;
