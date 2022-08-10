@@ -19,7 +19,6 @@ import AddExpenseModal from "./ExpenseActions/AddExpenseModal";
 
 const Finances = ({
   getAllInvoices,
-  getAllExpenses,
   invoices,
   getInvoiceLoading,
 }) => {
