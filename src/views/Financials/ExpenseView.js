@@ -1,178 +1,24 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import Table from "../../components/Table";
-import boxIcon from "../../assets/img/box-icon-finance.svg";
+import { Bars } from "react-loader-spinner";
 import EmptyTableData from "../../components/Table/EmptyTableData";
 
 //redux
 import { connect } from "react-redux";
 import { setCurrentSection, getAllExpenses } from "../../redux/actions";
 //utils
-import { formatAmount } from "../../utils/helper";
+import { formatAmount, formatInvoiceIssueDate } from "../../utils/helper";
 
 import { MdDelete } from "react-icons/md";
 
-// const clients = [
-//     {
-//         id: 1,
-//         name: 'March Inoice',
-//         img: boxIcon,
-//         email: 'General Expenses',
-//         createDate: '03/24/2021',
-//       status: '$ 1000.00',
-//         projectTimeline: '#101',
-//         projectTag: 'Paid',
-//     },
-//     {
-//         id: 2,
-//         name: 'March Inoice',
-//         img: boxIcon,
-//         email: 'General Expenses',
-//         createDate: '03/24/2021',
-//       status: '$ 1000.00',
-//         projectTimeline: '#101',
-//         projectTag: 'Paid',
-//     },
-//     {
-//         id: 3,
-//         name: 'March Inoice',
-//         img: boxIcon,
-//         email: 'General Expenses',
-//         createDate: '03/24/2021',
-//       status: '$ 1000.00',
-//         projectTimeline: '#101',
-//         projectTag: 'Paid',
-//     },
-//     {
-//         id: 4,
-//         name: 'March Inoice',
-//         img: boxIcon,
-//         email: 'General Expenses',
-//         createDate: '03/24/2021',
-//       status: '$ 1000.00',
-//         projectTimeline: '#101',
-//         projectTag: 'Paid',
-//     },
-//     {
-//         id: 5,
-//         name: 'March Inoice',
-//         img: boxIcon,
-//         email: 'General Expenses',
-//         createDate: '03/24/2021',
-//       status: '$ 1000.00',
-//         projectTimeline: '#101',
-//         projectTag: 'Paid',
-//     },
-//     {
-//         id: 6,
-//         name: 'March Inoice',
-//         img: boxIcon,
-//         email: 'General Expenses',
-//         createDate: '03/24/2021',
-//       status: '$ 1000.00',
-//         projectTimeline: '#101',
-//         projectTag: 'Paid',
-//     },
-//     {
-//         id: 7,
-//         name: 'March Inoice',
-//         img: boxIcon,
-//         email: 'General Expenses',
-//         createDate: '03/24/2021',
-//       status: '$ 1000.00',
-//         projectTimeline: '6 Months',
-//         projectTag: 'Paid',
-//     },
-//     {
-//         id: 8,
-//         name: 'March Inoice',
-//         img: boxIcon,
-//         email: 'General Expenses',
-//         createDate: '03/24/2021',
-//       status: '$ 1000.00',
-//         projectTimeline: '#101',
-//         projectTag: 'Paid',
-//     },
-//     {
-//         id: 9,
-//         name: 'March Inoice',
-//         img: boxIcon,
-//         email: 'General Expenses',
-//         createDate: '03/24/2021',
-//       status: '$ 1000.00',
-//         projectTimeline: '#101',
-//         projectTag: 'Paid',
-//     },
-//     {
-//         id: 10,
-//         name: 'March Inoice',
-//         img: boxIcon,
-//         email: 'General Expenses',
-//         createDate: '03/24/2021',
-//       status: '$ 1000.00',
-//         projectTimeline: '#101',
-//         projectTag: 'Paid',
-//     },
-//     {
-//         id: 11,
-//         name: 'March Inoice',
-//         img: boxIcon,
-//         email: 'General Expenses',
-//         createDate: '03/24/2021',
-//       status: '$ 1000.00',
-//         projectTimeline: '#101',
-//         projectTag: 'Paid',
-//     },
-//     {
-//         id: 12,
-//         name: 'March Inoice',
-//         img: boxIcon,
-//         email: 'General Expenses',
-//         createDate: '03/24/2021',
-//       status: '$ 1000.00',
-//         projectTimeline: '#101',
-//         projectTag: 'Paid',
-//     },
-//     {
-//         id: 13,
-//         name: 'March Inoice',
-//         img: boxIcon,
-//         email: 'General Expenses',
-//         createDate: '03/24/2021',
-//       status: '$ 1000.00',
-//         projectTimeline: '#101',
-//         projectTag: 'Paid',
-//     },
-//     {
-//         id: 14,
-//         name: 'March Inoice',
-//         img: boxIcon,
-//         email: 'General Expenses',
-//         createDate: '03/24/2021',
-//         status: '$ 1000.00',
-//         projectTimeline: '#101',
-//         projectTag: 'Paid',
-//     },
-// ];
-const ExpenseListView = ({ setCurrentSection, getAllExpenses, expenses }) => {
+const ExpenseListView = ({
+  setCurrentSection,
+  getAllExpenses,
+  expenses,
+  loading,
+}) => {
   const cols = React.useMemo(
     () => [
-      {
-        Header: "",
-        accessor: "img",
-        cellClass: "",
-        Cell: (props) => (
-          <Link to="/invoices-&-financials/details">
-            <img
-              src={props.value || boxIcon}
-              alt="client-logo"
-              onClick={() => {
-                setCurrentSection("Client Details");
-              }}
-            />
-          </Link>
-        ),
-      },
       {
         Header: "Vendor  Name",
         accessor: "vendor",
@@ -195,7 +41,7 @@ const ExpenseListView = ({ setCurrentSection, getAllExpenses, expenses }) => {
         Header: "Date",
         accessor: "date",
         cellClass: "pt-4 list-client-item-finance  ",
-        Cell: (props) => <>{props.value}</>,
+        Cell: (props) => <>{formatInvoiceIssueDate(props.value)}</>,
       },
       {
         Header: "Action",
@@ -228,7 +74,14 @@ const ExpenseListView = ({ setCurrentSection, getAllExpenses, expenses }) => {
   }, [getAllExpenses]);
   return (
     <div className="mb-0 mt-2 overflow-auto">
-      {[]?.length > 0 ? (
+      {loading ? (
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ marginTop: "6rem" }}
+        >
+          <Bars height="100" width="100" color="#2062F4" />
+        </div>
+      ) : expenses?.length > 0 ? (
         <Table
           columns={cols}
           data={expenses}
@@ -250,6 +103,7 @@ const ExpenseListView = ({ setCurrentSection, getAllExpenses, expenses }) => {
 const mapStateToProps = (state) => {
   return {
     expenses: state?.expense?.expenses,
+    loading: state?.expense?.getExpensesLoading,
   };
 };
 

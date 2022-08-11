@@ -6,7 +6,7 @@ const AddVendor = ({ setShowVendor }) => {
   return (
     <div className="off-canvas-menu">
       <div className="off-canvas-menu__content py-2">
-        <div className="d-inline-flex w-100">
+        <div className="d-inline-flex w-100 my-3 px-4">
           <div className="add-client-text text-center">
             <h5>Add new vendor</h5>
           </div>
@@ -17,7 +17,7 @@ const AddVendor = ({ setShowVendor }) => {
             alt=""
           />
         </div>
-        <Row className="px-4">
+        <Row className="px-4 mt-2">
           <Col sm="12" md="12" lg="12" xl="12">
             <label className="text-left w-100">Vendor Name</label>
             <Input
@@ -34,10 +34,18 @@ const AddVendor = ({ setShowVendor }) => {
               className="off-canvas-menu__input py-3 px-3"
             />
           </Col>
-          <Col>
+          <Col sm="12" md="12" lg="12" xl="12">
             <label className="text-left w-100 mt-4">Phone Number</label>
             <Input
               type="tel"
+              placeholder=""
+              className="off-canvas-menu__input py-3 px-3"
+            />
+          </Col>
+          <Col sm="12" md="12" lg="12" xl="12">
+            <label className="text-left w-100 mt-4">Address</label>
+            <Input
+              type="textarea"
               placeholder=""
               className="off-canvas-menu__input py-3 px-3"
             />
@@ -48,7 +56,7 @@ const AddVendor = ({ setShowVendor }) => {
           <hr />
           <div className="d-flex justify-content-end mt-2 w-100 mb-4 ">
             <button className="py-3 px-4 send" style={{ marginRight: "18px" }}>
-              Add Expense
+              Add Vendor
             </button>
           </div>
         </div>

@@ -92,6 +92,9 @@ export const UPDATE_ONE_INVOICE_SETTINGS_ERROR =
 export const GET_EXPENSES = "GET_EXPENSES";
 export const GET_EXPENSES_SUCCESS = "GET_EXPENSES_SUCCESS";
 export const GET_EXPENSES_ERROR = "GET_EXPENSES_ERROR";
+export const CREATE_NEW_EXPENSE = "CREATE_NEW_EXPENSE";
+export const CREATE_NEW_EXPENSE_SUCCESS = "CREATE_NEW_EXPENSE_SUCCESS";
+export const CREATE_NEW_EXPENSE_ERROR = "CREATE_NEW_EXPENSE_ERROR";
 
 export * from "./Auth/action";
 export * from "./Nav/action";
