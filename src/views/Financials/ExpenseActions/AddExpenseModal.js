@@ -11,7 +11,7 @@ const AddExpenseModal = ({ closeExpenseModal }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    setFormData({ ...FormData, [name]: value });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleRecurringCheck = () => {

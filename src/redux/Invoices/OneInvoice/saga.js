@@ -3,12 +3,16 @@ import {
   GET_ONE_INVOICE,
   GET_ONE_INVOICE_SETTINGS,
   UPDATE_ONE_INVOICE_SETTINGS,
+  RECORD_ONE_INVOICE_PAYMENT,
   getOneInvoiceSuccess,
   getOneInvoiceError,
   getOneInvoiceSettingSuccess,
   getOneInvoiceSettingError,
   updateOneInvoiceSettingSuccess,
   updateOneInvoiceSettingError,
+  recordOneInvoicePayment,
+  recordOneInvoicePaymentSuccess,
+  recordOneInvoicePaymentError,
   clearMessages,
 } from "../../actions";
 import Axios from "../../../utils/Axios";
@@ -101,6 +105,46 @@ export function* UpdateOneInvoiceSetting({payload}) {
   }
   try {
     const response = yield Axios.put(
+      `/invoice/api/v1/invoice/specific/${payload?.id}/`, credentials
+    );
+    if (response?.status === 200) {
+      console.log(response?.data);
+      yield put(updateOneInvoiceSettingSuccess(response?.data));
+    } else {
+      yield put(updateOneInvoiceSettingError(response?.data?.message));
+    }
+    yield put(clearMessages());
+  } catch (error) {
+    let message;
+    if (error.response) {
+      const errorMessage = error.response.data.detail;
+
+      switch (error?.response?.status) {
+        case 500:
+          message = "Internal Server Error";
+          break;
+        case 404:
+          message = "Not found";
+          break;
+        case 401:
+          message = "Invalid credentials";
+          break;
+        case 400:
+          message = errorMessage;
+          break;
+        default:
+          message = error.response.statusText;
+      }
+    } else if (error.message) {
+      message = error.message;
+    }
+    yield put(updateOneInvoiceSettingError(message));
+    yield put(clearMessages());
+  }
+}
+export function* RecordOneInvoicePayment({payload}){
+  try {
+    const response = yield Axios.post(
       `/invoice/api/v1/invoice/specific/${payload?.id}/`, credentials
     );
     if (response?.status === 200) {
