@@ -1,19 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Row, Col } from "reactstrap";
 import XCancel from "../../../assets/img/x-cancel.svg";
+import createNotification from "../../../utils/Notification";
 
-const AddVendor = ({ setShowVendor }) => {
+//redux
+import { connect } from "react-redux";
+import { createNewVendor } from "../../../redux/actions";
+
+const AddVendor = ({
+  setShowVendor,
+  createNewVendor,
+  createNewVendorLoading,
+  createNewVendorError,
+  message,
+}) => {
   const [formData, setFormData] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-const handleSubmit = e => {
-  e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createNewVendor(formData);
+  };
 
-  console.log(formData)
-}
+  useEffect(() => {
+    if (!createNewVendorLoading && message?.length > 0) {
+      createNotification("success", message);
+      setShowVendor(false);
+    } else if (!createNewVendorLoading && createNewVendorError?.length > 0) {
+      createNotification("error", createNewVendorError);
+    }
+  }, [createNewVendorLoading, message, createNewVendorError, setShowVendor]);
 
   return (
     <div className="off-canvas-menu">
@@ -94,4 +113,11 @@ const handleSubmit = e => {
   );
 };
 
-export default AddVendor;
+const mapStateToProps = (state) => {
+  return {
+    createNewVendorLoading: state?.vendors?.createNewVendorLoading,
+    createNewVendorError: state?.vendors?.createNewVendorError,
+    message: state?.vendors?.message,
+  };
+};
+export default connect(mapStateToProps, { createNewVendor })(AddVendor);

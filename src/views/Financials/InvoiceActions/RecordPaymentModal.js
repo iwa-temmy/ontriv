@@ -5,13 +5,19 @@ import createNotification from "../../../utils/Notification";
 import { Input } from "reactstrap";
 import { CenteredModal as Modal } from "../../../components/Modal";
 
-
 //redux
 import { connect } from "react-redux";
 import { recordOneInvoicePayment } from "../../../redux/actions";
 
-
-const RecordPaymentModal = ({ id,showRecordPayment, setShowRecordPayment, recordOneInvoicePayment, loading, message, error }) => {
+const RecordPaymentModal = ({
+  id,
+  showRecordPayment,
+  setShowRecordPayment,
+  recordOneInvoicePayment,
+  recordPaymentLoading,
+  message,
+  recordPaymentError,
+}) => {
   const [formData, setFormData] = useState({});
 
   //handle Input Change
@@ -23,17 +29,17 @@ const RecordPaymentModal = ({ id,showRecordPayment, setShowRecordPayment, record
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    const data = {...formData, invoice: id}
+    const data = { ...formData, invoice: id };
     recordOneInvoicePayment(data);
   };
   useEffect(() => {
-    if (!loading && message?.length > 0) {
+    if (!recordPaymentLoading && message?.length > 0) {
       createNotification("success", message);
       setShowRecordPayment(false);
-    } else if (!loading && error?.length > 0) {
-      createNotification("error", error);
+    } else if (!recordPaymentLoading && recordPaymentError?.length > 0) {
+      createNotification("error", recordPaymentError);
     }
-  }, [loading, message, setShowRecordPayment, error]);
+  }, [recordPaymentLoading, message, setShowRecordPayment, recordPaymentError]);
   return (
     <Modal modalState={showRecordPayment} setModalState={setShowRecordPayment}>
       <div className="add-client-wrapper text-center ">
@@ -71,13 +77,20 @@ const RecordPaymentModal = ({ id,showRecordPayment, setShowRecordPayment, record
             required
           />
           <div className="pt-2 pb-3">
-            <button type="submit" className="px-5">
-            {loading ? <ThreeDots
+            <button
+              type="submit"
+              className="px-5"
+              disabled={recordPaymentLoading}
+            >
+              {recordPaymentLoading ? (
+                <ThreeDots
                   color="white"
                   height={"12px"}
                   wrapperStyle={{ display: "block" }}
-                /> : 
-              "Record Payment"}
+                />
+              ) : (
+                "Record Payment"
+              )}
             </button>
           </div>
         </form>
@@ -86,11 +99,13 @@ const RecordPaymentModal = ({ id,showRecordPayment, setShowRecordPayment, record
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    loading: state?.oneInvoice?.recordPaymentLoading,
+    recordPaymentLoading: state?.oneInvoice?.recordPaymentLoading,
     message: state?.oneInvoice?.message,
-    error: state?.oneInvoice?.recordPaymentError,
-  }
-}
-export default connect(mapStateToProps, {recordOneInvoicePayment} )(RecordPaymentModal);
+    recordPaymentError: state?.oneInvoice?.recordPaymentError,
+  };
+};
+export default connect(mapStateToProps, { recordOneInvoicePayment })(
+  RecordPaymentModal
+);
