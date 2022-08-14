@@ -1532,14 +1532,16 @@ label {
   margin-top: 1rem;
 }
 .phone-selectdropdown{
-  width: 25% !important;
+  width: 32% !important;
+  font-size: 14px !important;
   z-index: 1000 !important;
-  border-top-right-radius: 12px !important;
-  border-bottom-right-radius: 12px !important;
+  border-radius: 16px !important;
+  // border-bottom-right-radius: 12px !important;
 
 }
 .phone-inputField{
   margin-left: -2rem;
+  border-radius: 16px !important;
   padding: 0 2.8rem !important;
 }
 .phone-inputField:focus{

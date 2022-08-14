@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Input } from "reactstrap";
 
-const PhoneNumberInput = ({onChange}) => {
+const PhoneNumberInput = ({name, placeholder, onChange}) => {
   const [countries, setCountries] = useState([]);
-  const [countryCode, setCountryCode] = useState();
-
-  const handleInputChange = (e) => {
-    const { value } = e.target;
-    setCountryCode(value);
-  };
-
-  console.log(countryCode);
+  
 
   useEffect(() => {
     const data = require("../../utils/CountryData.json");
@@ -22,10 +15,10 @@ const PhoneNumberInput = ({onChange}) => {
         type="select"
         defaultValue=""
         name="country_code"
-        className="phone-selectdropdown"
-        onChange={handleInputChange}
+        className="phone-selectdropdown py-3"
+        onChange={onChange}
       >
-        <option value="">Select Country Code</option>
+        <option value="">Country Code</option>
         {countries?.map((country) => {
           return (
             <option
@@ -37,10 +30,10 @@ const PhoneNumberInput = ({onChange}) => {
       </Input>
       <Input
         text="text"
-        name="phone_number"
-        onChange={(e) => onChange(e, countryCode) }
-        className="phone-inputField"
-        placeholder="Phone Number"
+        name={name}
+        onChange={onChange}
+        className="phone-inputField py-3"
+        placeholder={placeholder}
         maxLength="10"
       />
     </div>

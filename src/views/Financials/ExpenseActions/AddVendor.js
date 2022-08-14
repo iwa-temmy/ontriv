@@ -7,6 +7,7 @@ import createNotification from "../../../utils/Notification";
 import { connect } from "react-redux";
 import { createNewVendor } from "../../../redux/actions";
 import ButtonLoader from "../../../components/Loaders/ButtonLoader";
+import PhoneNumberInput from "../../../components/Inputs/PhoneNumberInput";
 
 const AddVendor = ({
   setShowVendor,
@@ -23,7 +24,13 @@ const AddVendor = ({
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    createNewVendor(formData);
+    const payload = {
+      name: formData.name,
+      address: formData.address,
+      email: formData.email,
+      phone_number: formData.country_code.concat("", formData.phone_number),
+    };
+    createNewVendor(payload);
   };
 
   useEffect(() => {
@@ -74,10 +81,9 @@ const AddVendor = ({
             </Col>
             <Col sm="12" md="12" lg="12" xl="12">
               <label className="text-left w-100 mt-4">Phone Number</label>
-              <Input
+              <PhoneNumberInput
                 name="phone_number"
-                type="tel"
-                placeholder=""
+                placeholder="Phone number"
                 className="off-canvas-menu__input py-3 px-3"
                 onChange={handleInputChange}
                 required
@@ -117,7 +123,7 @@ const AddVendor = ({
 
 const mapStateToProps = (state) => {
   return {
-    createNewVendorLoading: state?.vendors?.createNewVendorLoading,
+    createNewVendorLoading: state?.vendors?.createVendorLoading,
     createNewVendorError: state?.vendors?.createNewVendorError,
     message: state?.vendors?.message,
   };
