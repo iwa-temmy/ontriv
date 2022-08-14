@@ -6,6 +6,7 @@ import createNotification from "../../../utils/Notification";
 //redux
 import { connect } from "react-redux";
 import { createNewVendor } from "../../../redux/actions";
+import ButtonLoader from "../../../components/Loaders/ButtonLoader";
 
 const AddVendor = ({
   setShowVendor,
@@ -102,8 +103,9 @@ const AddVendor = ({
                 className="py-3 px-4 send"
                 style={{ marginRight: "18px" }}
                 type="submit"
+                disabled={createNewVendorLoading}
               >
-                Add Vendor
+                {createNewVendorLoading ? <ButtonLoader /> : "Add Vendor"}
               </button>
             </div>
           </div>
