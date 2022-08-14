@@ -1531,6 +1531,21 @@ label {
   color: #6F6F84;
   margin-top: 1rem;
 }
+.phone-selectdropdown{
+  width: 25% !important;
+  z-index: 1000 !important;
+  border-top-right-radius: 12px !important;
+  border-bottom-right-radius: 12px !important;
+
+}
+.phone-inputField{
+  margin-left: -2rem;
+  padding: 0 2.8rem !important;
+}
+.phone-inputField:focus{
+  border-color: #ced4da !important;
+  box-shadow: none !important;
+}
 
 @media (max-width: 745px){
   .invoice-buttons{
