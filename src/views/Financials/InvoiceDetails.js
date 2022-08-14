@@ -104,7 +104,7 @@ const InvoiceDetails = ({
             </Row>
             {details?.items?.map(item => {
               return (
-                <Row>
+                <Row key={item?.id}>
                 <Col xl="2" lg="2" md="2" sm="2">
                   <h6 className="invoice-modal__qty ">{item?.quantity}</h6>
                 </Col>

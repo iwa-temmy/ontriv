@@ -33,18 +33,18 @@ function* resetUserPassword({ payload }) {
       `/accounts/api/v1/password/change/`,
       credentials
     );
-    if (response.status === 200) {
+    if (response?.status === 200) {
       yield put(resetPasswordSuccess());
     } else {
-      yield put(resetPasswordError(response.data.message));
+      yield put(resetPasswordError(response?.data?.message));
     }
     yield put(clearMessages());
   } catch (error) {
     let message;
     if (error.response) {
-      const errorMessage = error.response.data.new_password1
-        ? error.response.data.new_password[0]
-        : error.response.data.new_password2[0];
+      const errorMessage = error?.response?.data?.new_password1
+        ? error?.response?.data?.new_password[0]
+        : error?.response?.data?.new_password2[0];
 
       switch (error.response.status) {
         case 500:

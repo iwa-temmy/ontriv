@@ -40,11 +40,11 @@ const InvoiceDetailsPage = (props) => {
     useState(false);
   const [showPreviewInvoiceModal, setShowPreviewInvoiceModal] = useState(false);
   const [showCreateInvoiceModal, setShowCreateInvoiceModal] = useState(false);
+  const [paymentDisabled, setPaymentDisabled] = useState(false);
 
   //props
   const { getOneInvoice, invoiceDetails, loading } = props;
   const location = useLocation();
-  console.log(window.location.href);
 
   const getPDF = () => {
     setShowOptions(false);
@@ -57,6 +57,7 @@ const InvoiceDetailsPage = (props) => {
 
   const OpenCreateInvoiceModal = () => {
     setShowCreateInvoiceModal(true);
+    setShowOptions(false);
   };
   const CloseCreateInvoiceModal = () => {
     setShowCreateInvoiceModal(false);
@@ -65,6 +66,12 @@ const InvoiceDetailsPage = (props) => {
   useEffect(() => {
     getOneInvoice(location?.state?.id);
   }, [getOneInvoice, location?.state?.id]);
+
+  useEffect(() => {
+    if (invoiceDetails?.status.toLowerCase() === "paid") {
+      setPaymentDisabled(true);
+    }
+  }, [invoiceDetails?.status, setPaymentDisabled]);
   return (
     <>
       {showCreateInvoiceModal ? (
@@ -224,10 +231,12 @@ const InvoiceDetailsPage = (props) => {
                                 style={{ textAlign: "right" }}
                               >
                                 $
-                                {formatAmount(calculateVat(
-                                  invoiceDetails?.sub_total,
-                                  invoiceDetails?.vat
-                                ))}
+                                {formatAmount(
+                                  calculateVat(
+                                    invoiceDetails?.sub_total,
+                                    invoiceDetails?.vat
+                                  )
+                                )}
                               </h6>
                             </Col>
                           </Row>
@@ -337,7 +346,10 @@ const InvoiceDetailsPage = (props) => {
                   </h6>
                   <h6
                     className="px-4 slightly-black action-menu py-3"
-                    onClick={() => setShowDuplicateInvoiceModal(true)}
+                    onClick={() => {
+                      setShowDuplicateInvoiceModal(true);
+                      setShowOptions(false);
+                    }}
                   >
                     Make A copy
                   </h6>
@@ -386,7 +398,10 @@ const InvoiceDetailsPage = (props) => {
                 <div className="d-inline-flex w-100">
                   <button
                     className="py-2 mx-auto mt-3 px-4 send align-items-center "
-                    onClick={() => setShowRecordPayment(true)}
+                    onClick={() => {
+                      setShowRecordPayment(true);
+                    }}
+                    disabled={paymentDisabled}
                   >
                     Record Payment
                   </button>
@@ -407,7 +422,7 @@ const InvoiceDetailsPage = (props) => {
               </div>
               <button
                 className="py-3 text-center px-4 recurring w-100 mb-4"
-                onClick={() => setShowSchedule(true)}
+                onClick={() => setShowDuplicateInvoiceModal(true)}
               >
                 Make Recurring
               </button>
@@ -430,6 +445,7 @@ const InvoiceDetailsPage = (props) => {
       <RecordPaymentModal
         showRecordPayment={showRecordPayment}
         setShowRecordPayment={setShowRecordPayment}
+        id={invoiceDetails?.id}
       />
       <ScheduleModal
         showSchedule={showSchedule}

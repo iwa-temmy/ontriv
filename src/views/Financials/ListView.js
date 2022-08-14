@@ -3,7 +3,6 @@ import Table from "../../components/Table";
 import { connect } from "react-redux";
 import { setCurrentSection } from "../../redux/actions";
 import { Bars } from "react-loader-spinner";
-import noInvoice from "../../assets/img/no-invoice.svg";
 import {
   formatInvoiceIssueDate,
   formatAmount,
@@ -14,8 +13,14 @@ import { useNavigate } from "react-router-dom";
 //Components
 import TableDropdown from "../../components/Dropdown/TableDropdown";
 import InvoiceDetails from "./InvoiceDetails";
+import EmptyTableData from "../../components/Table/EmptyTableData";
 
-const ClientListView = ({ setCurrentSection, invoices, loading, openInvoiceModal }) => {
+const ClientListView = ({
+  setCurrentSection,
+  invoices,
+  loading,
+  openInvoiceModal,
+}) => {
   const [showModal, setShowModal] = useState(false);
   const [invoiceDetails, setInvoiceDetails] = useState({});
 
@@ -113,21 +118,11 @@ const ClientListView = ({ setCurrentSection, invoices, loading, openInvoiceModal
           pagePosition="center"
         />
       ) : (
-        <div
-          className="d-flex flex-column justify-content-center align-items-center"
-          style={{ marginTop: "4.6rem" }}
-        >
-          <img src={noInvoice} alt="empty invoice icon" width={140} />
-          <span className="text-center my-4">
-            Invoice your first client and get paid instantly
-          </span>
-          <button
-            className="btn btn-primary send px-5 py-2"
-            onClick={openInvoiceModal}
-          >
-            Create a new invoice
-          </button>
-        </div>
+        <EmptyTableData
+          subHeaderText="Invoice your first client and get paid instantly"
+          buttonText="Create a new invoice"
+          onClick={openInvoiceModal}
+        />
       )}
       <InvoiceDetails
         toggleInvoicePreview={toggleInvoicePreview}

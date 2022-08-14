@@ -59,7 +59,7 @@ export const calculateTotal = (items) => {
 };
 
 export const formatInvoiceIssueDate = (date) => {
-  return moment(date).format("DD-MM-YYYY");
+  return moment(date).format("MM/DD/YYYY");
 };
 
 export const stringDateFormat = (date) => {

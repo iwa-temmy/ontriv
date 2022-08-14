@@ -1,22 +1,25 @@
 import { all, fork, put, takeEvery } from "redux-saga/effects";
 import {
-  GET_EXPENSES,
-  CREATE_NEW_EXPENSE,
-  getAllExpensesSuccess,
-  getAllExpensesError,
-  createNewExpenseSuccess,
-  createNewExpenseError,
+  GET_ALL_VENDORS,
+  CREATE_NEW_VENDOR,
+  getAllVendorsSuccess,
+  getAllVendorsError,
+  createNewVendorSuccess,
+  createNewVendorError,
   clearMessages,
-} from "../actions";
-import Axios from "../../utils/Axios";
+} from "../../actions";
 
-export function* GetAllExpenses() {
+import Axios from "../../../utils/Axios";
+
+export function* GetAllVendors() {
   try {
-    const response = yield Axios.get(`/invoice/api/v1/expense/business/get/`);
+    const response = yield Axios.get(
+      `/invoice/api/v1/expense/vendor/get/business/`
+    );
     if (response?.status === 200) {
-      yield put(getAllExpensesSuccess(response?.data));
+      yield put(getAllVendorsSuccess(response?.data));
     } else {
-      yield put(getAllExpensesError(response?.data?.message));
+      yield put(getAllVendorsError(response?.data?.message));
     }
     yield put(clearMessages());
   } catch (error) {
@@ -43,23 +46,35 @@ export function* GetAllExpenses() {
     } else if (error.message) {
       message = error.message;
     }
-    yield put(getAllExpensesError(message));
+    yield put(getAllVendorsError(message));
     yield put(clearMessages());
   }
 }
-export function* CreateNewExpense() {
+
+export function* CreateNewVendor({ payload }) {
   try {
-    const response = yield Axios.post(`/invoice/api/v1/expense/create/`);
+    const response = yield Axios.post(
+      `/invoice/api/v1/expense/vendor/create/`,
+      payload
+    );
     if (response?.status === 201) {
-      yield put(createNewExpenseSuccess());
+      yield put(createNewVendorSuccess(response?.data));
     } else {
-      yield put(createNewExpenseError(response?.data?.message));
+      yield put(createNewVendorError(response?.data?.message));
     }
     yield put(clearMessages());
   } catch (error) {
     let message;
     if (error.response) {
-      const errorMessage = error.response.data.detail;
+      const errorMessage = error.response.data.phone_number?.[0]
+        ? error.response.data.phone_number[0]
+        : error.response.data.name?.[0]
+        ? error.response.data.name?.[0]
+        : error.response.data.email?.[0]
+        ? error.response.data.email?.[0]
+        : error.response.data.address?.[0]
+        ? error.response.data.address?.[0]
+        : null;
 
       switch (error?.response?.status) {
         case 500:
@@ -80,17 +95,17 @@ export function* CreateNewExpense() {
     } else if (error.message) {
       message = error.message;
     }
-    yield put(createNewExpenseError(message));
+    yield put(createNewVendorError(message));
     yield put(clearMessages());
   }
 }
-export function* watchGetAllExpenses() {
-  yield takeEvery(GET_EXPENSES, GetAllExpenses);
-}
-export function* watchCreateNewExpense() {
-  yield takeEvery(CREATE_NEW_EXPENSE, CreateNewExpense);
-}
 
+export function* watchGetAllvendors() {
+  yield takeEvery(GET_ALL_VENDORS, GetAllVendors);
+}
+export function* watchCreateNewVendor() {
+  yield takeEvery(CREATE_NEW_VENDOR, CreateNewVendor);
+}
 export default function* rootSaga() {
-  yield all([fork(watchGetAllExpenses), fork(watchCreateNewExpense)]);
+  yield all([fork(watchGetAllvendors), fork(watchCreateNewVendor)]);
 }

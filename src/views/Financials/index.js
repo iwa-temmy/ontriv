@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
-import { Card, Col, Input, Row } from "reactstrap";
+import { Card, Col, Row } from "reactstrap";
 import GreenCircle from "../../assets/img/finanace-green-circle.svg";
 import YellowCircle from "../../assets/img/finanace-yellow-circle.svg";
 import BluePlus from "../../assets/img/bg-blue-plust.svg";
-import XCancel from "../../assets/img/x-cancel.svg";
-import SelectUserImg from "../../assets/img/select-user-example-img.png";
 import AddNewClient from "./AddClient.js";
-import Select from "react-select";
 import ListView from "./ListView.js";
 import ExpenseListView from "./ExpenseView.js";
 
@@ -17,8 +14,14 @@ import { getAllInvoices } from "../../redux/actions";
 //utils
 import CreateInvoiceModal from "./InvoiceActions/CreateInvoiceModal";
 import RequestPayoutModal from "./InvoiceActions/RequestPayoutModal";
+import AddVendor from "./ExpenseActions/AddVendor";
+import AddExpenseModal from "./ExpenseActions/AddExpenseModal";
 
-const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
+const Finances = ({
+  getAllInvoices,
+  invoices,
+  getInvoiceLoading,
+}) => {
   const [view] = useState("list");
   const [addClient, setAddClient] = useState(false);
   const [showPayoutModal, setShowPayoutModal] = useState(false);
@@ -32,63 +35,23 @@ const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
     getAllInvoices();
   }, [getAllInvoices]);
 
+  //Modal Toggle Handlers
   const openInvoiceModal = () => {
     setShow(true);
-  }
+  };
   const closeInvoiceModal = () => {
     setShow(false);
   };
 
+  const openExpenseModal = () => {
+    setShowExpense(true);
+  };
+  const closeExpenseModal = () => {
+    setShowExpense(false);
+  };
   const openRequestPayoutModal = () => {
     setShowPayoutModal(true);
-  }
-  const options = [
-    {
-      value: "chocolate",
-      label: (
-        <div>
-          <img
-            src={SelectUserImg}
-            height="30px"
-            width="30px"
-            className="me-3"
-            alt=""
-          />
-          USER 1{" "}
-        </div>
-      ),
-    },
-    {
-      value: "strawberry",
-      label: (
-        <div>
-          <img
-            src={SelectUserImg}
-            height="30px"
-            width="30px"
-            className="me-3"
-            alt=""
-          />
-          USER 2{" "}
-        </div>
-      ),
-    },
-    {
-      value: "vanilla",
-      label: (
-        <div>
-          <img
-            src={SelectUserImg}
-            height="30px"
-            width="30px"
-            className="me-3"
-            alt=""
-          />
-          USER 3{" "}
-        </div>
-      ),
-    },
-  ];
+  };
 
   return (
     <>
@@ -96,115 +59,9 @@ const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
         <CreateInvoiceModal closeInvoiceModal={closeInvoiceModal} />
       ) : null}
       {showExpense ? (
-        <div className="off-canvas-menu">
-          <div className="off-canvas-menu__content px-5 py-2">
-            <div className="d-inline-flex w-100">
-              <div className="add-client-text text-center">
-                <h5>Add new expense</h5>
-              </div>
-              <img
-                onClick={() => setShowExpense(false)}
-                className="ms-auto"
-                src={XCancel}
-                alt=""
-              />
-            </div>
-
-            <label className="text-left w-100">Select Vendor</label>
-            <Select name="name" value="strawberry" options={options} />
-            <label className="text-left w-100 mt-4">Select Category</label>
-            <Select name="name" value="strawberry" options={options} />
-            <Row className="mt-4">
-              <Col xl="6">
-                <label className="text-left w-100">Date</label>
-                <Input
-                  type="date"
-                  placeholder="14/04/2021"
-                  className="off-canvas-menu__input py-3 px-3"
-                />
-              </Col>
-              <Col xl="6">
-                <label className="text-left w-100">Amount</label>
-                <Input
-                  type="number"
-                  placeholder="$300"
-                  className="off-canvas-menu__input py-3 px-3"
-                />
-              </Col>
-            </Row>
-            <label className="text-left w-100 mt-4">Select Category</label>
-            <select name="" className="off-canvas-menu__input px-4 py-2" id="">
-              <option value="">Monthly</option>
-            </select>
-            <div>
-              <label className="text-left w-100 mt-4">Remarks</label>
-              <textarea className="w-100 rounded-3 mt-2 canvas-textarea"></textarea>
-            </div>
-            <div className="mt-4 d-inline-flex">
-              <input type="checkbox" className="my-auto" />
-              <h6 className="fs-6 my-auto ms-2 fw-light">
-                Attach file to expense record (.docx, .pdf, .jped)
-              </h6>
-            </div>
-            <div className="mt-2 mb-5 d-inline-flex">
-              <input type="checkbox" className="my-auto" />
-              <h6 className="fs-6 my-auto ms-2 fw-light">
-                This is a recurring expense (monthly)
-              </h6>
-            </div>
-            <div className="d-inline-flex mt-2 w-100 mb-4">
-              <div className="py-3 ms-3 ms-auto px-4 send align-items-center ">
-                <h6 className="mb-0">Add Expense</h6>
-              </div>
-            </div>
-          </div>
-        </div>
+        <AddExpenseModal closeExpenseModal={closeExpenseModal} />
       ) : null}
-      {showVendor ? (
-        <div className="off-canvas-menu">
-          <div className="off-canvas-menu__content px-5 py-2">
-            <div className="d-inline-flex w-100">
-              <div className="add-client-text text-center">
-                <h5>Add new vendor</h5>
-              </div>
-              <img
-                onClick={() => setShowVendor(false)}
-                className="ms-auto"
-                src={XCancel}
-                alt=""
-              />
-            </div>
-
-            <label className="text-left w-100">Vendor Name</label>
-            <Input
-              type="text"
-              placeholder=""
-              className="off-canvas-menu__input py-3 px-3"
-            />
-            <label className="text-left w-100">Email Address</label>
-            <Input
-              type="email"
-              placeholder=""
-              className="off-canvas-menu__input py-3 px-3"
-            />
-            <label className="text-left w-100 mt-4">Phone Number</label>
-            <Input
-              type="tel"
-              placeholder=""
-              className="off-canvas-menu__input py-3 px-3"
-            />
-            <div>
-              <label className="text-left w-100 mt-4">Address</label>
-              <textarea className="w-100 rounded-3 mt-2 canvas-textarea"></textarea>
-            </div>
-            <div className="d-inline-flex mt-2 w-100 mb-4">
-              <div className="py-3 ms-3 ms-auto px-4 send align-items-center ">
-                <h6 className="mb-0">Add Vendor</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : null}
+      {showVendor ? <AddVendor setShowVendor={setShowVendor} /> : null}
       <div className="dashboard dashboard-wrapper">
         <Row>
           <Col md="12" sm="12" lg="6" xl="6" className="mb-3">
@@ -343,7 +200,7 @@ const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
                 <img src={BluePlus} alt="" />
                 <div className="btn-lg w-auto ">
                   <h6
-                    onClick={() => setShowExpense(true)}
+                    onClick={openExpenseModal}
                     className="mb-0 cursor-pointer"
                   >
                     Add Expense
@@ -364,7 +221,11 @@ const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
         </div>
         {invoiceTab === "invoice" ? (
           view === "list" ? (
-            <ListView invoices={invoices} loading={getInvoiceLoading} openInvoiceModal={openInvoiceModal}/>
+            <ListView
+              invoices={invoices}
+              loading={getInvoiceLoading}
+              openInvoiceModal={openInvoiceModal}
+            />
           ) : (
             <div className="client-inactive-state text-center">
               <Card className="client-inactive-state-card mx-auto">
@@ -416,7 +277,10 @@ const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
         {addClient && (
           <AddNewClient addState={addClient} setAddState={setAddClient} />
         )}
-        <RequestPayoutModal showRequestPayout={showPayoutModal} setShowRequestPayout={setShowPayoutModal} />
+        <RequestPayoutModal
+          showRequestPayout={showPayoutModal}
+          setShowRequestPayout={setShowPayoutModal}
+        />
       </div>
     </>
   );
@@ -429,4 +293,6 @@ const mapStateToProps = (state) => {
     getInvoiceLoading: invoice?.getInvoiceLoading,
   };
 };
-export default connect(mapStateToProps, { getAllInvoices })(Finances);
+export default connect(mapStateToProps, { getAllInvoices })(
+  Finances
+);
