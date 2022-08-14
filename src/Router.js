@@ -22,6 +22,7 @@ import Messages from "./views/Messages";
 import InvoiceDetailsPage from "./views/Financials/InvoiceDetailsPage";
 import Schedule from "./views/Schedule";
 import NewPost from "./views/Schedule/NewPost";
+import PhoneNumberInput from './components/Inputs/PhoneNumberInput';
 
 
 
@@ -46,6 +47,7 @@ const RouterConfig = () => {
                     <Route exact path='/NewPost' element={<NewPost />} />
                     <Route exact path='/business' element={<SetUpBussiness />} />
                     <Route exact path='/settings' element={<Settings />} />
+                    <Route exact path="/test" element={<PhoneNumberInput />} />
                 </Route>
 
                 <Route exact path='/client' element={<ClientProtectedRoutes />}>
