@@ -4,7 +4,7 @@ import XCancel from "../../../assets/img/x-cancel.svg";
 
 //redux
 import { connect } from "react-redux";
-import { getAllVendors } from "../../../redux/actions";
+import { getAllVendors, createNewExpense } from "../../../redux/actions";
 
 const AddExpenseModal = ({ closeExpenseModal, getAllVendors, vendors }) => {
   const [formData, setFormData] = useState({});
@@ -34,6 +34,17 @@ const AddExpenseModal = ({ closeExpenseModal, getAllVendors, vendors }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    const formdata = new FormData();
+    formdata.append("name", formData.name);
+    formdata.append("category", formdata.category);
+    formdata.append("amount", formData.amount);
+    formdata.append("remarks", formData.remarks);
+    formdata.append("date", formData.date);
+    formdata.append("recurring", recurring);
+    if (attachment) {
+      formdata.append("file", formData?.file);
+    }
+    createNewExpense(formdata);
   };
   const categories = [
     {
@@ -256,6 +267,9 @@ const AddExpenseModal = ({ closeExpenseModal, getAllVendors, vendors }) => {
                   className="off-canvas-menu__input py-3 px-3"
                 >
                   <option>Select Schedule</option>
+                  <option value="daily">Daily</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="Weekly">Weekly</option>
                 </Input>
               </Col>
             )}
@@ -312,4 +326,4 @@ const mapStateToProps = (state) => {
     vendors: state?.vendors?.vendors,
   };
 };
-export default connect(mapStateToProps, { getAllVendors })(AddExpenseModal);
+export default connect(mapStateToProps, { getAllVendors , createNewExpense})(AddExpenseModal);
