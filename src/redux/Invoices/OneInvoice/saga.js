@@ -1,4 +1,4 @@
-import { put, takeEvery, fork, all } from "redux-saga/effects";
+import { put, takeEvery, fork, all, call } from "redux-saga/effects";
 import {
   GET_ONE_INVOICE,
   GET_ONE_INVOICE_SETTINGS,
@@ -10,10 +10,10 @@ import {
   getOneInvoiceSettingError,
   updateOneInvoiceSettingSuccess,
   updateOneInvoiceSettingError,
-  recordOneInvoicePayment,
   recordOneInvoicePaymentSuccess,
   recordOneInvoicePaymentError,
   clearMessages,
+  
 } from "../../actions";
 import Axios from "../../../utils/Axios";
 
@@ -145,19 +145,28 @@ export function* UpdateOneInvoiceSetting({payload}) {
 export function* RecordOneInvoicePayment({payload}){
   try {
     const response = yield Axios.post(
-      `/invoice/api/v1/invoice/specific/${payload?.id}/`, credentials
+      `/invoice/api/v1/payment/record/${payload?.invoice}/`, payload
     );
-    if (response?.status === 200) {
+    if (response?.status === 201) {
       console.log(response?.data);
-      yield put(updateOneInvoiceSettingSuccess(response?.data));
+      yield put(recordOneInvoicePaymentSuccess());
+      yield call (GetOneInvoice)
     } else {
-      yield put(updateOneInvoiceSettingError(response?.data?.message));
+      yield put(recordOneInvoicePaymentError(response?.data?.message));
     }
     yield put(clearMessages());
   } catch (error) {
     let message;
     if (error.response) {
-      const errorMessage = error.response.data.detail;
+      const errorMessage = error.response.data?.amount_paid
+        ? `Amount: ${error.response.data?.amount_paid[0]}`
+        : error.response.data?.invoice
+        ? `Invoice: ${error.response.data?.invoice[0]}`
+        : error.response.data?.payment_method
+        ? `Payment Method: ${error.response.data?.payment_method[0]}`
+        : error.response.data?.payment_date
+        ? `Payment Date: ${error.response.data?.payment_date[0]}`
+        : null
 
       switch (error?.response?.status) {
         case 500:
@@ -178,7 +187,7 @@ export function* RecordOneInvoicePayment({payload}){
     } else if (error.message) {
       message = error.message;
     }
-    yield put(updateOneInvoiceSettingError(message));
+    yield put(recordOneInvoicePaymentError(message));
     yield put(clearMessages());
   }
 }
@@ -195,10 +204,14 @@ export function* watchUpdateOneInvoiceSetting() {
   yield takeEvery(UPDATE_ONE_INVOICE_SETTINGS, UpdateOneInvoiceSetting);
 }
 
+export function* watchRecordInvoicePayment(){
+  yield takeEvery(RECORD_ONE_INVOICE_PAYMENT, RecordOneInvoicePayment);
+}
 export default function* rootSaga() {
   yield all([
     fork(watchGetOneInvoice),
     fork(watchGetOneInvoiceSetting),
     fork(watchUpdateOneInvoiceSetting),
+    fork(watchRecordInvoicePayment),
   ]);
 }

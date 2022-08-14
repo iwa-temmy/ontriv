@@ -40,6 +40,7 @@ const InvoiceDetailsPage = (props) => {
     useState(false);
   const [showPreviewInvoiceModal, setShowPreviewInvoiceModal] = useState(false);
   const [showCreateInvoiceModal, setShowCreateInvoiceModal] = useState(false);
+  const [paymentDisabled, setPaymentDisabled] = useState(false);
 
   //props
   const { getOneInvoice, invoiceDetails, loading } = props;
@@ -65,6 +66,12 @@ const InvoiceDetailsPage = (props) => {
   useEffect(() => {
     getOneInvoice(location?.state?.id);
   }, [getOneInvoice, location?.state?.id]);
+
+  useEffect(() => {
+    if (invoiceDetails?.status.toLowerCase() === "paid") {
+      setPaymentDisabled(true);
+    }
+  }, [invoiceDetails?.status, setPaymentDisabled]);
   return (
     <>
       {showCreateInvoiceModal ? (
@@ -394,6 +401,7 @@ const InvoiceDetailsPage = (props) => {
                     onClick={() => {
                       setShowRecordPayment(true);
                     }}
+                    disabled={paymentDisabled}
                   >
                     Record Payment
                   </button>
@@ -437,6 +445,7 @@ const InvoiceDetailsPage = (props) => {
       <RecordPaymentModal
         showRecordPayment={showRecordPayment}
         setShowRecordPayment={setShowRecordPayment}
+        id={invoiceDetails?.id}
       />
       <ScheduleModal
         showSchedule={showSchedule}

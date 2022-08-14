@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { ThreeDots } from "react-loader-spinner";
+import createNotification from "../../../utils/Notification";
+//core component
 import { Input } from "reactstrap";
 import { CenteredModal as Modal } from "../../../components/Modal";
 
-const RecordPaymentModal = ({ showRecordPayment, setShowRecordPayment }) => {
+
+//redux
+import { connect } from "react-redux";
+import { recordOneInvoicePayment } from "../../../redux/actions";
+
+
+const RecordPaymentModal = ({ id,showRecordPayment, setShowRecordPayment, recordOneInvoicePayment, loading, message, error }) => {
   const [formData, setFormData] = useState({});
 
   //handle Input Change
@@ -14,7 +23,17 @@ const RecordPaymentModal = ({ showRecordPayment, setShowRecordPayment }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    const data = {...formData, invoice: id}
+    recordOneInvoicePayment(data);
   };
+  useEffect(() => {
+    if (!loading && message?.length > 0) {
+      createNotification("success", message);
+      setShowRecordPayment(false);
+    } else if (!loading && error?.length > 0) {
+      createNotification("error", error);
+    }
+  }, [loading, message, setShowRecordPayment, error]);
   return (
     <Modal modalState={showRecordPayment} setModalState={setShowRecordPayment}>
       <div className="add-client-wrapper text-center ">
@@ -45,14 +64,20 @@ const RecordPaymentModal = ({ showRecordPayment, setShowRecordPayment }) => {
           </Input>
           <label className="text-left w-100">Amount Paid</label>
           <Input
+            type="text"
             className="bank-select w-100 px-3 py-3 mb-2"
-            name="amount"
+            name="amount_paid"
             onChange={handleInputChange}
             required
           />
           <div className="pt-2 pb-3">
             <button type="submit" className="px-5">
-              Record Payment
+            {loading ? <ThreeDots
+                  color="white"
+                  height={"12px"}
+                  wrapperStyle={{ display: "block" }}
+                /> : 
+              "Record Payment"}
             </button>
           </div>
         </form>
@@ -61,4 +86,11 @@ const RecordPaymentModal = ({ showRecordPayment, setShowRecordPayment }) => {
   );
 };
 
-export default RecordPaymentModal;
+const mapStateToProps = state => {
+  return {
+    loading: state?.oneInvoice?.recordPaymentLoading,
+    message: state?.oneInvoice?.message,
+    error: state?.oneInvoice?.recordPaymentError,
+  }
+}
+export default connect(mapStateToProps, {recordOneInvoicePayment} )(RecordPaymentModal);

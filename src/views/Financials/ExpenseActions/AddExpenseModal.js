@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { Input, Row, Col } from "reactstrap";
 import XCancel from "../../../assets/img/x-cancel.svg";
 
+//redux
+import { connect } from "react-redux";
+import { getAllVendors } from "../../../redux/actions";
+
 const AddExpenseModal = ({ closeExpenseModal }) => {
   const [formData, setFormData] = useState({});
   const [recurring, setRecurring] = useState(false);
@@ -20,6 +24,116 @@ const AddExpenseModal = ({ closeExpenseModal }) => {
   const handleAttachmentCheck = () => {
     setAttachment(!attachment);
   };
+  const categories = [
+    {
+      name: "Accomodation",
+      value: "Accomodation",
+    },
+    {
+      name: "Advertising & promotion",
+      value: "Advertising & promotion",
+    },
+    {
+      name: "Bank charges",
+      value: "Bank charges",
+    },
+    {
+      name: "Electricity",
+      value: "Electricity",
+    },
+    {
+      name: "Employee Advance",
+      value: "Employee Advance",
+    },
+    {
+      name: "Entertainment",
+      value: "Entertainment",
+    },
+    {
+      name: "Equity & Common stock",
+      value: "Equity & Common stock",
+    },
+    {
+      name: "Food & Drinks",
+      value: "Food & Drinks",
+    },
+    {
+      name: "General expenses",
+      value: "General expenses",
+    },
+    {
+      name: "Insurance",
+      value: "Insurance",
+    },
+    {
+      name: "Inventory",
+      value: "Inventory",
+    },
+    {
+      name: "Legal Fees",
+      value: "Legal Fees",
+    },
+    {
+      name: "Loan",
+      value: "Loan",
+    },
+    {
+      name: "Maintenance",
+      value: "Maintenance",
+    },
+    {
+      name: "Office equipment",
+      value: "Office Equipment",
+    },
+    {
+      name: "Office Supply",
+      value: "Office Supply",
+    },
+    {
+      name: "Outsourcing",
+      value: "Outsourcing",
+    },
+    {
+      name: "Payroll benefits",
+      value: "Payroll benefits",
+    },
+    {
+      name: "Printing",
+      value: "Printing",
+    },
+    {
+      name: "Professional Services",
+      value: "Professional Services",
+    },
+    {
+      name: "Processing fees",
+      value: "Processing fees",
+    },
+    {
+      name: "Research & development",
+      value: "Research & development",
+    },
+    {
+      name: "Software",
+      value: "Software",
+    },
+    {
+      name: "Telephone & Internet",
+      value: "Telephone & Internet",
+    },
+    {
+      name: "Transportation",
+      value: "Transportation",
+    },
+    {
+      name: "Utilities",
+      value: "Utilities",
+    },
+    {
+      name: "Others",
+      value: "Others",
+    },
+  ];
   return (
     <div className="off-canvas-menu">
       <div className="off-canvas-menu__content py-2 ">
@@ -44,7 +158,7 @@ const AddExpenseModal = ({ closeExpenseModal }) => {
               id="client"
               onChange={handleInputChange}
             >
-              <option value="">Select Vendor</option>
+              <option value="" selected>Select Vendor</option>
               <option value="1">Faithia Balogun</option>
             </Input>
           </Col>
@@ -57,8 +171,10 @@ const AddExpenseModal = ({ closeExpenseModal }) => {
               id="category"
               onChange={handleInputChange}
             >
-              <option value="">Select Category</option>
-              <option value="1">Category 1</option>
+              <option selected>Select Category</option>
+              {categories.map((category) => {
+                return <option value={category.value} key={category.name}>{category.name}</option>;
+              })}
             </Input>
           </Col>
           <Col xl="6">
@@ -149,4 +265,9 @@ const AddExpenseModal = ({ closeExpenseModal }) => {
   );
 };
 
-export default AddExpenseModal;
+const mapStateToProps = (state) => {
+  return {
+      vendors: state?.vendors?.vendors
+  }
+}
+export default connect(mapStateToProps) (AddExpenseModal);

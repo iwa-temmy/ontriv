@@ -6,6 +6,7 @@ import general from "./General/saga";
 import invoice from "./Invoices/saga";
 import oneInvoice from "./Invoices/OneInvoice/saga";
 import expense from "./Expenses/saga";
+import vendor from "./Expenses/Vendor/saga"
 
 export default function* rootSaga() {
   yield all([
@@ -16,5 +17,6 @@ export default function* rootSaga() {
     invoice(),
     oneInvoice(),
     expense(),
+    vendor(),
   ]);
 }
