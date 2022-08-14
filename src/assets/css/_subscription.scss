@@ -1171,6 +1171,9 @@ label {
   background-size: 100%;
   transition: background 0s;
 }
+.send:disabled{
+  background-color: #ccc;
+}
 .blue-btn {
   background-color: transparent;
   border: 1px solid #2062F4;
