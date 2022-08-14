@@ -68,7 +68,7 @@ const InvoiceDetailsPage = (props) => {
   }, [getOneInvoice, location?.state?.id]);
 
   useEffect(() => {
-    if (invoiceDetails?.status.toLowerCase() === "paid") {
+    if (invoiceDetails?.status?.toLowerCase() === "paid") {
       setPaymentDisabled(true);
     }
   }, [invoiceDetails?.status, setPaymentDisabled]);

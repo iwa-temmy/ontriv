@@ -29,7 +29,7 @@ const AddExpenseModal = ({ closeExpenseModal, getAllVendors, vendors }) => {
     console.log(imageName);
     setFormData({ ...formData, file: imageName });
   };
-  
+
   //handle Form Submit
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -164,7 +164,10 @@ const AddExpenseModal = ({ closeExpenseModal, getAllVendors, vendors }) => {
           />
         </div>
         <form onSubmit={handleSubmit}>
-          <Row className="mt-2 px-4" style={{ overflowY: "scroll" }}>
+          <Row
+            className="mt-2 px-4"
+            style={{ height: "65vh", overflowY: "scroll" }}
+          >
             <Col xl="12">
               <label className="text-left w-100 mt-2">Select Vendor</label>
               <Input
@@ -286,7 +289,7 @@ const AddExpenseModal = ({ closeExpenseModal, getAllVendors, vendors }) => {
               </div>
             </Col>
           </Row>
-          <div className="position-absolute bottom-0 w-100">
+          <div className="position-absolute bottom-0 w-100 mt-4">
             <hr />
             <div className="d-flex justify-content-end mt-2 w-100 mb-4 ">
               <button
