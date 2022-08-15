@@ -126,6 +126,7 @@ const oneInvoiceReducer = (state = intialState, action) => {
         getOneInvoiceSettingError: "",
         updateOneInvoiceSettingError: "",
         recordPaymentError: "",
+        duplicateInvoiceError: "",
         message: "",
       };
     default:

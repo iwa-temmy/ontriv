@@ -1,4 +1,4 @@
-import { put, takeEvery, fork, all, call, take } from "redux-saga/effects";
+import { put, takeEvery, fork, all, call} from "redux-saga/effects";
 import {
   GET_ONE_INVOICE,
   GET_ONE_INVOICE_SETTINGS,
@@ -198,7 +198,7 @@ export function* RecordOneInvoicePayment({ payload }) {
 export function* DuplicateOneInvoicePayment({ payload }) {
   try {
     const response = yield Axios.post(
-      `/invoice/api/v1/invoice/duplicate/${payload?.invoice}/`,
+      `/invoice/api/v1/invoice/duplicate/`,
       payload
     );
     if (response?.status === 201) {
