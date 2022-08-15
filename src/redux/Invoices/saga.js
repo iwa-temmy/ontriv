@@ -64,7 +64,6 @@ export function* CreateNewInvoice({ payload }) {
   } catch (error) {
     let message;
     if (error.response) {
-      console.log(error.response.data);
       const errorMessage = error?.response?.data?.client
         ? `Client is required`
         : error?.response?.data?.due_date

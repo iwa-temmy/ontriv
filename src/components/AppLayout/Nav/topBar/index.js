@@ -15,8 +15,7 @@ export const TopNav = ({currentSection, setShowMobileSideBar, logoutUser, userDe
     const [userProfileState, updateUserProfileState] = useState(false);
     const [notificationState, updateNotificationState] = useState(false);
     const [mobileSearch, setMobileSearch] = useState(false);
-
-    console.log(userDetails);
+    
     return (
         <React.Fragment>
             <div className="navbar-static-top topbar">

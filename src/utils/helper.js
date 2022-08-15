@@ -59,7 +59,7 @@ export const calculateTotal = (items) => {
 };
 
 export const formatInvoiceIssueDate = (date) => {
-  return moment(date).format("DD-MM-YYYY");
+  return moment(date).format("MM/DD/YYYY");
 };
 
 export const stringDateFormat = (date) => {
@@ -83,7 +83,7 @@ export const formatAmount = (num) => {
 export const paymentStatus = (status) => {
   if (status === "Pending") {
     return (
-      <div className="list-client-tag-pending text-center d-flex align-items-center justify-content-center w-75">
+      <div className="list-client-tag-pending text-center d-flex align-items-center justify-content-center">
         <div
           className="status-tag-circle"
           style={{ backgroundColor: "#ED8000" }}
@@ -93,7 +93,7 @@ export const paymentStatus = (status) => {
     );
   } else if (status === "Paid") {
     return (
-      <div className="list-client-tag-paid text-center d-flex align-items-center justify-content-center w-75">
+      <div className="list-client-tag-paid text-center d-flex align-items-center justify-content-center">
         <div
           className="status-tag-circle"
           style={{ backgroundColor: "#57D9A3" }}
@@ -103,7 +103,7 @@ export const paymentStatus = (status) => {
     );
   } else {
     return (
-      <div className="list-client-tag-overdue text-center d-flex align-items-center justify-content-center w-75">
+      <div className="list-client-tag-overdue text-center d-flex align-items-center justify-content-center">
         <div
           className="status-tag-circle"
           style={{ backgroundColor: "#FF2154" }}

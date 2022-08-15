@@ -40,11 +40,11 @@ const InvoiceDetailsPage = (props) => {
     useState(false);
   const [showPreviewInvoiceModal, setShowPreviewInvoiceModal] = useState(false);
   const [showCreateInvoiceModal, setShowCreateInvoiceModal] = useState(false);
+  const [paymentDisabled, setPaymentDisabled] = useState(false);
 
   //props
   const { getOneInvoice, invoiceDetails, loading } = props;
   const location = useLocation();
-  console.log(window.location.href);
 
   const getPDF = () => {
     setShowOptions(false);
@@ -57,6 +57,7 @@ const InvoiceDetailsPage = (props) => {
 
   const OpenCreateInvoiceModal = () => {
     setShowCreateInvoiceModal(true);
+    setShowOptions(false);
   };
   const CloseCreateInvoiceModal = () => {
     setShowCreateInvoiceModal(false);
@@ -65,6 +66,12 @@ const InvoiceDetailsPage = (props) => {
   useEffect(() => {
     getOneInvoice(location?.state?.id);
   }, [getOneInvoice, location?.state?.id]);
+
+  useEffect(() => {
+    if (invoiceDetails?.status?.toLowerCase() === "paid") {
+      setPaymentDisabled(true);
+    }
+  }, [invoiceDetails?.status, setPaymentDisabled]);
   return (
     <>
       {showCreateInvoiceModal ? (
@@ -224,10 +231,12 @@ const InvoiceDetailsPage = (props) => {
                                 style={{ textAlign: "right" }}
                               >
                                 $
-                                {formatAmount(calculateVat(
-                                  invoiceDetails?.sub_total,
-                                  invoiceDetails?.vat
-                                ))}
+                                {formatAmount(
+                                  calculateVat(
+                                    invoiceDetails?.sub_total,
+                                    invoiceDetails?.vat
+                                  )
+                                )}
                               </h6>
                             </Col>
                           </Row>
@@ -280,42 +289,73 @@ const InvoiceDetailsPage = (props) => {
               >
                 <h6 className="add-item fs-5">Invoice Payment</h6>
                 <Row className="mt-3">
-                  <Col xl="3">
+                  <Col sm="3" lg="3" md="3">
                     <h6 className="fs-6 text-black-50">Client</h6>
                   </Col>
-                  <Col xl="3">
+                  <Col sm="2" lg="2" md="2">
                     <h6 className="fs-6 text-black-50">Amount</h6>
                   </Col>
-                  <Col xl="3">
+                  <Col sm="3" lg="3" md="3">
                     <h6 className="fs-6 text-black-50">Payment date</h6>
                   </Col>
-                  <Col xl="3">
+                  <Col sm="4" lg="4" md="4">
                     <h6 className="fs-6 text-black-50">Payment method</h6>
                   </Col>
-                  <Col xl="3">
-                    <h6 className="fw-light fs-6" style={{ color: "#9DA8B6" }}>
-                      March Inoice
-                    </h6>
-                  </Col>
-                  <Col xl="3">
-                    <h6 className="fw-light fs-6" style={{ color: "#9DA8B6" }}>
-                      $ 1000.00
-                    </h6>
-                  </Col>
-                  <Col xl="3">
-                    <h6 className="fw-light fs-6" style={{ color: "#9DA8B6" }}>
-                      16/04.2021
-                    </h6>
-                  </Col>
-                  <Col xl="3">
-                    <div className="list-client-tag-paid fs-6 py-2 px-0 text-center">
-                      paid
-                    </div>
-                  </Col>
                 </Row>
+                {invoiceDetails?.payment_record?.length > 0 ? (
+                  invoiceDetails?.payment_record?.map((record) => {
+                    return (
+                      <Row
+                        key={record?.id}
+                        className="align-items-center justify-content-center"
+                      >
+                        <Col sm="3" lg="3" md="3">
+                          <h6
+                            className="fw-light fs-6"
+                            style={{ color: "#9DA8B6" }}
+                          >
+                            {invoiceDetails?.client?.fullname}
+                          </h6>
+                        </Col>
+                        <Col sm="2" lg="2" md="2">
+                          <h6
+                            className="fw-light fs-6"
+                            style={{ color: "#9DA8B6" }}
+                          >
+                            {formatAmount(record?.amount_paid)}
+                          </h6>
+                        </Col>
+                        <Col sm="3" lg="3" md="3">
+                          <h6
+                            className="fw-light fs-6"
+                            style={{ color: "#9DA8B6" }}
+                          >
+                            {record?.payment_date}
+                          </h6>
+                        </Col>
+                        <Col sm="4" lg="4" md="4">
+                          <div className="list-client-tag-paid fs-6 py-2 px-0 text-center">
+                            {record?.payment_method}
+                          </div>
+                        </Col>
+                      </Row>
+                    );
+                  })
+                ) : (
+                  <Row>
+                    <Col sm="12" lg="12" md="12">
+                      <h6
+                        className="fw-light fs-6 mt-3"
+                        style={{ color: "#9DA8B6", textAlign: "center" }}
+                      >
+                        Not Available
+                      </h6>
+                    </Col>
+                  </Row>
+                )}
               </div>
             </Col>
-            <Col xl="4">
+            <Col xl="4" className="position-relative">
               <div className="d-inline-flex w-10t">
                 <button className="py-2 ms-3 px-4 me-2 send align-items-center ">
                   Edit Invoice
@@ -337,7 +377,10 @@ const InvoiceDetailsPage = (props) => {
                   </h6>
                   <h6
                     className="px-4 slightly-black action-menu py-3"
-                    onClick={() => setShowDuplicateInvoiceModal(true)}
+                    onClick={() => {
+                      setShowDuplicateInvoiceModal(true);
+                      setShowOptions(false);
+                    }}
                   >
                     Make A copy
                   </h6>
@@ -386,7 +429,10 @@ const InvoiceDetailsPage = (props) => {
                 <div className="d-inline-flex w-100">
                   <button
                     className="py-2 mx-auto mt-3 px-4 send align-items-center "
-                    onClick={() => setShowRecordPayment(true)}
+                    onClick={() => {
+                      setShowRecordPayment(true);
+                    }}
+                    disabled={paymentDisabled}
                   >
                     Record Payment
                   </button>
@@ -407,7 +453,7 @@ const InvoiceDetailsPage = (props) => {
               </div>
               <button
                 className="py-3 text-center px-4 recurring w-100 mb-4"
-                onClick={() => setShowSchedule(true)}
+                onClick={() => setShowDuplicateInvoiceModal(true)}
               >
                 Make Recurring
               </button>
@@ -430,6 +476,7 @@ const InvoiceDetailsPage = (props) => {
       <RecordPaymentModal
         showRecordPayment={showRecordPayment}
         setShowRecordPayment={setShowRecordPayment}
+        id={invoiceDetails?.id}
       />
       <ScheduleModal
         showSchedule={showSchedule}

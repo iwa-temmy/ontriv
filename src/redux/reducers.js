@@ -7,6 +7,7 @@ import general from "./General/reducer";
 import invoice from "./Invoices/reducer";
 import expense from "./Expenses/reducer";
 import oneInvoice from "./Invoices/OneInvoice/reducer";
+import vendors from './Expenses/Vendor/reducer';
 
 
 const Reducers = combineReducers({
@@ -17,7 +18,8 @@ const Reducers = combineReducers({
     general,
     invoice,
     expense,
-    oneInvoice
+    oneInvoice,
+    vendors,
 });
 
 export default Reducers;

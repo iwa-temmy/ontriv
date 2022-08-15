@@ -1,25 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { Input } from "reactstrap";
 import { CenteredModal as Modal } from "../../../components/Modal";
+import { ThreeDots } from "react-loader-spinner";
+import createNotification from "../../../utils/Notification";
 //Redux
 import { connect } from "react-redux";
-import { getOneInvoiceSetting } from "../../../redux/actions";
+import {
+  getOneInvoiceSetting,
+  updateOneInvoiceSetting,
+} from "../../../redux/actions";
 
 const InvoiceSettingsModal = ({
   showSettings,
   setShowSettings,
   getOneInvoiceSetting,
+  updateOneInvoiceSetting,
   invoiceId,
   oneInvoiceSetting,
+  loading,
+  message,
+  error,
 }) => {
   const [formData, setFormData] = useState({});
 
+  //functions
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  console.log(oneInvoiceSetting);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateOneInvoiceSetting(formData);
+  };
   useEffect(() => {
     getOneInvoiceSetting(invoiceId);
   }, [getOneInvoiceSetting, invoiceId]);
@@ -31,13 +44,22 @@ const InvoiceSettingsModal = ({
       setFormData({});
     }
   }, [oneInvoiceSetting]);
+
+  useEffect(() => {
+    if (!loading && message?.length > 0) {
+      createNotification("success", message);
+      setShowSettings(false);
+    } else if (!loading && error?.length > 0) {
+      createNotification("error", error);
+    }
+  }, [loading, message, setShowSettings, error]);
   return (
     <Modal modalState={showSettings} setModalState={setShowSettings}>
       <div className="add-client-wrapper text-center ">
         <div className="add-client-text text-center">
           <h3>Invoice Settings</h3>
         </div>
-        <form className="business-form mt-4">
+        <form className="business-form mt-4" onSubmit={handleSubmit}>
           <div className="my-2">
             <label className="text-left w-100">Currency</label>
             <select
@@ -77,7 +99,11 @@ const InvoiceSettingsModal = ({
 
           <div className="pt-2 pb-3">
             <button type="submit" className="px-5">
-              Update Settings
+              {loading ? <ThreeDots
+                  color="white"
+                  height={"12px"}
+                  wrapperStyle={{ display: "block" }}
+                /> : "Update Settings" }
             </button>
           </div>
         </form>
@@ -89,9 +115,13 @@ const InvoiceSettingsModal = ({
 const mapStateToProps = (state) => {
   return {
     oneInvoiceSetting: state?.oneInvoice?.invoiceSetting,
+    message: state?.oneInvoice?.message,
+    loading: state?.oneInvoice?.updateOneInvoiceSettingLoading,
+    error: state?.oneInvoice?.updateOneInvoiceSettingError,
   };
 };
 
-export default connect(mapStateToProps, { getOneInvoiceSetting })(
-  InvoiceSettingsModal
-);
+export default connect(mapStateToProps, {
+  getOneInvoiceSetting,
+  updateOneInvoiceSetting,
+})(InvoiceSettingsModal);
