@@ -11,6 +11,9 @@ import {
   RECORD_ONE_INVOICE_PAYMENT,
   RECORD_ONE_INVOICE_PAYMENT_SUCCESS,
   RECORD_ONE_INVOICE_PAYMENT_ERROR,
+  DUPLICATE_ONE_INVOICE,
+  DUPLICATE_ONE_INVOICE_SUCCESS,
+  DUPLICATE_ONE_INVOICE_ERROR,
 } from "../../actions";
 
 export const getOneInvoice = (id) => ({
@@ -67,5 +70,17 @@ export const recordOneInvoicePaymentSuccess = () => ({
 });
 export const recordOneInvoicePaymentError = (error) => ({
   type: RECORD_ONE_INVOICE_PAYMENT_ERROR,
+  payload: error,
+});
+export const duplicateOneInvoice = (credentials) => ({
+  type: DUPLICATE_ONE_INVOICE,
+  payload: credentials,
+});
+export const duplicateOneInvoiceSuccess = () => ({
+  type: DUPLICATE_ONE_INVOICE_SUCCESS,
+  payload: "Invoice Duplicated Successfully",
+});
+export const duplicateOneInvoiceError = (error) => ({
+  type: DUPLICATE_ONE_INVOICE_ERROR,
   payload: error,
 });

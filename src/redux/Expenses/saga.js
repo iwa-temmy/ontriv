@@ -47,9 +47,18 @@ export function* GetAllExpenses() {
     yield put(clearMessages());
   }
 }
-export function* CreateNewExpense() {
+export function* CreateNewExpense({ payload }) {
+  const { credentials } = payload;
   try {
-    const response = yield Axios.post(`/invoice/api/v1/expense/create/`);
+    const response = yield Axios.post(
+      `/invoice/api/v1/expense/create/`,
+      credentials,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     if (response?.status === 201) {
       yield put(createNewExpenseSuccess());
     } else {
@@ -58,8 +67,19 @@ export function* CreateNewExpense() {
     yield put(clearMessages());
   } catch (error) {
     let message;
-    if (error.response) {
-      const errorMessage = error.response.data.detail;
+    if (error?.response) {
+      console.log(error?.response?.data);
+      const errorMessage = error?.response?.data?.vendor[0]
+        ? "Vendor is required"
+        : error?.response?.data?.category?.[0]
+        ? `Category: ${error?.response?.data?.category?.[0]}`
+        : error?.response?.data?.date?.[0]
+        ? error?.response?.data?.date[0]
+        : error?.response?.data?.amount?.[0]
+        ? `Amount: ${error?.response?.data?.amount?.[0]}`
+        : error?.response?.data?.remarks?.[0]
+        ? `${error?.response?.data?.remaks?.[0]}`
+        : error?.response?.data;
 
       switch (error?.response?.status) {
         case 500:

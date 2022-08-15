@@ -11,6 +11,9 @@ import {
   RECORD_ONE_INVOICE_PAYMENT,
   RECORD_ONE_INVOICE_PAYMENT_ERROR,
   RECORD_ONE_INVOICE_PAYMENT_SUCCESS,
+  DUPLICATE_ONE_INVOICE,
+  DUPLICATE_ONE_INVOICE_SUCCESS,
+  DUPLICATE_ONE_INVOICE_ERROR,
   RESET_MESSAGE,
 } from "../../actions";
 
@@ -19,10 +22,12 @@ const intialState = {
   updateOneInvoiceSettingLoading: false,
   updateOneInvoiceError: false,
   recordPaymentLoading: false,
+  duplicateInvoiceLoading: false,
   getOneInvoiceError: "",
   getOneInvoiceSettingError: "",
   updateOneInvoiceSettingError: "",
   recordPaymentError: "",
+  duplicateInvoiceError: "",
   details: {},
   message: "",
   invoiceSetting: {},
@@ -97,6 +102,23 @@ const oneInvoiceReducer = (state = intialState, action) => {
         recordPaymentLoading: false,
         recordPaymentError: action.payload,
       };
+    case DUPLICATE_ONE_INVOICE:
+      return {
+        ...state,
+        duplicateInvoiceLoading: true,
+      }
+    case DUPLICATE_ONE_INVOICE_SUCCESS:
+      return {
+        ...state,
+        duplicateInvoiceLoading: false,
+        message: action.payload
+      }
+    case DUPLICATE_ONE_INVOICE_ERROR: 
+      return {
+        ...state,
+        duplicateInvoiceLoading: false,
+        duplicateInvoiceError: "",
+      }
     case RESET_MESSAGE:
       return {
         ...state,
@@ -104,6 +126,7 @@ const oneInvoiceReducer = (state = intialState, action) => {
         getOneInvoiceSettingError: "",
         updateOneInvoiceSettingError: "",
         recordPaymentError: "",
+        duplicateInvoiceError: "",
         message: "",
       };
     default:
