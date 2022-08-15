@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Input, Row, Col } from "reactstrap";
 import XCancel from "../../../assets/img/x-cancel.svg";
+import ButtonLoader from "../../../components/Loaders/ButtonLoader";
 
 //redux
 import { connect } from "react-redux";
 import { getAllVendors, createNewExpense } from "../../../redux/actions";
+import createNotification from "../../../utils/Notification";
 
-const AddExpenseModal = ({ closeExpenseModal, getAllVendors, vendors }) => {
+const AddExpenseModal = ({
+  closeExpenseModal,
+  getAllVendors,
+  vendors,
+  createNewExpense,
+  createExpenseLoading,
+  message,
+  createExpenseError,
+}) => {
   const [formData, setFormData] = useState({});
   const [recurring, setRecurring] = useState(false);
   const [attachment, setAttachment] = useState(false);
@@ -35,8 +45,8 @@ const AddExpenseModal = ({ closeExpenseModal, getAllVendors, vendors }) => {
     e.preventDefault();
     console.log(formData);
     const formdata = new FormData();
-    formdata.append("name", formData.name);
-    formdata.append("category", formdata.category);
+    formdata.append("vendor", formData.vendor);
+    formdata.append("category", formData.category);
     formdata.append("amount", formData.amount);
     formdata.append("remarks", formData.remarks);
     formdata.append("date", formData.date);
@@ -160,6 +170,15 @@ const AddExpenseModal = ({ closeExpenseModal, getAllVendors, vendors }) => {
   useEffect(() => {
     getAllVendors();
   }, [getAllVendors]);
+
+  useEffect(() => {
+    if (!createExpenseLoading && message?.length > 0) {
+      createNotification("success", message);
+      closeExpenseModal();
+    } else if (!createExpenseLoading && createExpenseError?.length > 0) {
+      createNotification("error", createExpenseError);
+    }
+  }, [createExpenseError, createExpenseLoading, message, closeExpenseModal]);
   return (
     <div className="off-canvas-menu">
       <div className="off-canvas-menu__content py-2 ">
@@ -311,7 +330,7 @@ const AddExpenseModal = ({ closeExpenseModal, getAllVendors, vendors }) => {
                 className="py-3 px-4 send"
                 style={{ marginRight: "18px" }}
               >
-                Add Expense
+                {createExpenseLoading ? <ButtonLoader /> : "Add Expense"}
               </button>
             </div>
           </div>
@@ -324,6 +343,11 @@ const AddExpenseModal = ({ closeExpenseModal, getAllVendors, vendors }) => {
 const mapStateToProps = (state) => {
   return {
     vendors: state?.vendors?.vendors,
+    createExpenseLoading: state?.expense?.createExpenseLoading,
+    message: state?.expense?.message,
+    createExpenseError: state?.expense?.createExpenseError,
   };
 };
-export default connect(mapStateToProps, { getAllVendors , createNewExpense})(AddExpenseModal);
+export default connect(mapStateToProps, { getAllVendors, createNewExpense })(
+  AddExpenseModal
+);
