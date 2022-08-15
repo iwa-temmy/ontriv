@@ -37,7 +37,7 @@ const RouterConfig = () => {
                     <Route exact path='/client-management' element={<ClientManagement />} />
                     <Route exact path='/invoices-&-financials' element={<Financials />} />
                     <Route exact path='/invoices-&-financials/invoice/:id' element={<InvoiceDetailsPage />} />
-                    <Route exact path='/client-details' element={<ClientDetails />} />
+                    <Route exact path='/client-details/:id' element={<ClientDetails />} />
                     <Route exact path='/report' element={<Report />} />
                     <Route exact path='/client-report' element={<ReportDetails />} />
                     <Route exact path='/Subscriptions' element={<Subscription />} />

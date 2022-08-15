@@ -5,6 +5,9 @@ import {
   GET_CLIENT,
   GET_CLIENT_SUCCESS,
   GET_CLIENT_ERROR,
+  GET_CLIENT_DETAILS,
+  GET_CLIENT_DETAILS_SUCCESS,
+  GET_CLIENT_DETAILS_ERROR,
   INVITE_CLIENT,
   INVITE_CLIENT_SUCCESS,
   INVITE_CLIENT_ERROR,
@@ -38,6 +41,18 @@ export const getClientSuccess = data => ({
 })
 export const getClientError = error => ({
   type: GET_CLIENT_ERROR,
+  payload: { error }
+})
+export const getClientDetails = ( id ) => ({
+  type: GET_CLIENT_DETAILS,
+  payload: { id }
+})
+export const getClientDetailsSuccess = data => ({
+  type: GET_CLIENT_DETAILS_SUCCESS,
+  payload: { data }
+})
+export const getClientDetailsError = error => ({
+  type: GET_CLIENT_DETAILS_ERROR,
   payload: { error }
 })
 

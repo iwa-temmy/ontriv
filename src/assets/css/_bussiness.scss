@@ -61,7 +61,7 @@
       }
     }
     &__done-btn {
-      background: #E5ECF2;
+      background: linear-gradient(93.88deg, #49A8F8 6.88%, #0053F4 74.45%);
       border-radius: 16px;
       font-style: normal;
       font-weight: bold;
@@ -71,8 +71,14 @@
       align-items: center;
       text-align: center;
       letter-spacing: 1.25px;
-      color: #2062F4;
       border-style: none;
+      color: #fff;
+
+      &:disabled{
+        background: #E5ECF2;
+      color: #2062F4;
+
+      }
     }
   }
 }

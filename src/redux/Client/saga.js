@@ -7,6 +7,7 @@ import {
   CREATE_TAG,
   GET_TAG,
   GET_CLIENT,
+  GET_CLIENT_DETAILS,
   createTagSuccess,
   inviteClientSuccess,
   inviteClientError,
@@ -16,9 +17,10 @@ import {
   getClientSuccess,
   getClientError,
   createClientSuccess,
-  createClientError
+  createClientError,
+  getClientDetailsSuccess,
+  getClientDetailsError
 } from '../actions'
-
 
 function * getClient () {
   console.log('------------------------------')
@@ -35,6 +37,54 @@ function * getClient () {
     } else {
       yield put(getClientError(response.data.message))
     }
+  } catch (error) {
+    console.log(error)
+    console.log(error.response)
+    // console.log(error.response.data.proj[0].tags)
+    console.log(error.response.status)
+    console.log(error.response.statusText)
+    console.log(error.response.headers)
+    console.log(error.response.config)
+
+    let message
+    if (error.response) {
+      const errorMessage = error.response.data?.detail
+
+      switch (error.response.status) {
+        case 500:
+          message = 'Internal Server Error'
+          break
+        case 404:
+          message = 'Not found'
+          break
+        case 401:
+          message = 'Unauthorized'
+          break
+        case 400:
+          message = errorMessage
+          break
+        default:
+          message = error.response.statusText
+      }
+    } else if (error.message) {
+      message = error.message
+    }
+    console.log(message)
+    yield put(getTagError(message))
+  }
+}
+
+function * getClientDetails ({ payload }) {
+  console.log('------------------------------', payload)
+  const { id } = payload
+  try {
+    const response = yield Axios.get(`/business/api/v1/list-all-client/`)
+    console.log(response)
+    console.log(response.status)
+    console.log(response.statusText)
+    console.log(response.headers)
+    console.log(response.config)
+    yield put(getClientDetailsSuccess(response.data))
   } catch (error) {
     console.log(error)
     console.log(error.response)
@@ -310,8 +360,6 @@ function * createTag ({ payload }) {
   }
 }
 
-
-
 export function * watchCreateClient () {
   yield takeEvery(CREATE_CLIENT, createClient)
 }
@@ -327,12 +375,16 @@ export function * watchCreateTag () {
 export function * watchGetClient () {
   yield takeEvery(GET_CLIENT, getClient)
 }
+export function * watchGetClientDetails () {
+  yield takeEvery(GET_CLIENT_DETAILS, getClientDetails)
+}
 export default function * rootSaga () {
   yield all([
     fork(watchCreateClient),
     fork(watchGetTag),
     fork(watchCreateTag),
     fork(watchInviteClient),
-    fork(watchGetClient)
+    fork(watchGetClient),
+    fork(watchGetClientDetails)
   ])
 }

@@ -5,6 +5,9 @@ import {
   GET_CLIENT,
   GET_CLIENT_SUCCESS,
   GET_CLIENT_ERROR,
+  GET_CLIENT_DETAILS,
+  GET_CLIENT_DETAILS_SUCCESS,
+  GET_CLIENT_DETAILS_ERROR,
   INVITE_CLIENT,
   INVITE_CLIENT_SUCCESS,
   INVITE_CLIENT_ERROR,
@@ -24,11 +27,12 @@ const INIT_STATE = {
   message: '',
   tags: [],
   getTagError: '',
-  clients: []
+  clients: [],
+  clientDetails: null
 }
 
 const ClientReducer = (state = INIT_STATE, action) => {
-  console.log(action.payload)
+  console.log(action)
   switch (action.type) {
     case CREATE_CLIENT:
       return {
@@ -130,6 +134,27 @@ const ClientReducer = (state = INIT_STATE, action) => {
         getClientError: ''
       }
     case GET_CLIENT_ERROR:
+      return {
+        ...state,
+        loading: false,
+        getClientError: action.payload.message
+          ? action.payload.message
+          : action.payload.error
+      }
+      case GET_CLIENT_DETAILS:
+      return {
+        ...state,
+        loading: true,
+        getClientError: ''
+      }
+    case GET_CLIENT_DETAILS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        clientDetails: action.payload?.data,
+        getClientError: ''
+      }
+    case GET_CLIENT_DETAILS_ERROR:
       return {
         ...state,
         loading: false,
