@@ -355,7 +355,7 @@ const InvoiceDetailsPage = (props) => {
                 )}
               </div>
             </Col>
-            <Col xl="4">
+            <Col xl="4" className="position-relative">
               <div className="d-inline-flex w-10t">
                 <button className="py-2 ms-3 px-4 me-2 send align-items-center ">
                   Edit Invoice

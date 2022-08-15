@@ -29,7 +29,7 @@ const ExpenseListView = ({
         Header: "Category",
         accessor: "category",
         cellClass: "pt-4 list-client-item-finance  ",
-        Cell: (props) => <>{props.value.name}</>,
+        Cell: (props) => <>{props.value}</>,
       },
       {
         Header: "Amount",
