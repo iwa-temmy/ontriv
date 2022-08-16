@@ -5,6 +5,7 @@ import {
   UPDATE_ONE_INVOICE_SETTINGS,
   RECORD_ONE_INVOICE_PAYMENT,
   DUPLICATE_ONE_INVOICE,
+  getOneInvoice,
   getOneInvoiceSuccess,
   getOneInvoiceError,
   getOneInvoiceSettingSuccess,
@@ -204,7 +205,7 @@ export function* DuplicateOneInvoicePayment({ payload }) {
     if (response?.status === 201) {
       console.log(response?.data);
       yield put(duplicateOneInvoiceSuccess());
-      yield call(GetOneInvoice, [{ id: payload?.invoice }]);
+      yield call(getOneInvoice(payload?.id));
     } else {
       yield put(duplicateOneInvoiceError(response?.data?.message));
     }
