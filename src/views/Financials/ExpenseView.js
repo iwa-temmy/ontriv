@@ -20,10 +20,12 @@ const ExpenseListView = ({
   const cols = React.useMemo(
     () => [
       {
-        Header: "Vendor  Name",
+        Header: "Vendor Name",
         accessor: "vendor",
         cellClass: "pt-4 list-client-item-finance ",
-        Cell: (props) => <>{props.value.name}</>,
+        Cell: (props) => {
+          return (<>{props?.value?.name}</>)
+        },
       },
       {
         Header: "Category",

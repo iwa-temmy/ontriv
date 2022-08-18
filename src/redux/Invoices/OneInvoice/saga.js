@@ -1,10 +1,11 @@
-import { put, takeEvery, fork, all, call, take } from "redux-saga/effects";
+import { put, takeEvery, fork, all, call} from "redux-saga/effects";
 import {
   GET_ONE_INVOICE,
   GET_ONE_INVOICE_SETTINGS,
   UPDATE_ONE_INVOICE_SETTINGS,
   RECORD_ONE_INVOICE_PAYMENT,
   DUPLICATE_ONE_INVOICE,
+  getOneInvoice,
   getOneInvoiceSuccess,
   getOneInvoiceError,
   getOneInvoiceSettingSuccess,
@@ -198,13 +199,13 @@ export function* RecordOneInvoicePayment({ payload }) {
 export function* DuplicateOneInvoicePayment({ payload }) {
   try {
     const response = yield Axios.post(
-      `/invoice/api/v1/invoice/duplicate/${payload?.invoice}/`,
+      `/invoice/api/v1/invoice/duplicate/`,
       payload
     );
     if (response?.status === 201) {
       console.log(response?.data);
       yield put(duplicateOneInvoiceSuccess());
-      yield call(GetOneInvoice, [{ id: payload?.invoice }]);
+      yield call(getOneInvoice(payload?.id));
     } else {
       yield put(duplicateOneInvoiceError(response?.data?.message));
     }
