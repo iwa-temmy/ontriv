@@ -181,28 +181,31 @@ const CreateInvoiceModal = ({
           />
         </div>
         <Form onSubmit={handleCreateInvoice}>
-          <label className="text-left w-100" htmlFor="client">
-            Select Client
-          </label>
-          <Input
-            className="off-canvas-menu__input py-3 px-3"
-            type="select"
-            name="client"
-            id="client"
-            value={formData?.client || ""}
-            onChange={handleInputChange}
-          >
-            <option value="">Select Client</option>
-            {clients?.map((client) => {
-              return (
-                <option value={client?.id} key={client?.id}>
-                  {client?.fullname}
-                </option>
-              );
-            })}
-          </Input>
-          {/* <Select name="name" value="strawberry" options={options} /> */}
-          <label className="text-left w-100 mt-2">Project/Description</label>
+          <div className="mt-4 mb-3">
+            <label className="text-left w-100" htmlFor="client">
+              Select Client
+            </label>
+            <Input
+              className="off-canvas-menu__input py-3 px-3"
+              type="select"
+              name="client"
+              id="client"
+              value={formData?.client || ""}
+              onChange={handleInputChange}
+            >
+              <option value="">Select Client</option>
+              {clients?.map((client) => {
+                return (
+                  <option value={client?.id} key={client?.id}>
+                    {client?.fullname}
+                  </option>
+                );
+              })}
+            </Input>
+          </div>
+
+          <div className="my-3">
+          <label className="text-left w-100">Project/Description</label>
           <Input
             type="text"
             name="description"
@@ -211,7 +214,9 @@ const CreateInvoiceModal = ({
             placeholder="description"
             className="off-canvas-menu__input py-3 px-3"
           />
-          <Row className="mt-2">
+          </div>
+          
+          <Row className="my-3">
             <Col md="6">
               <label className="text-left w-100">Issued on</label>
               <Input
@@ -364,31 +369,31 @@ const CreateInvoiceModal = ({
           </div>
 
           <div className="d-inline-flex w-100">
-            <span className="btn btn-primary me-auto" onClick={handleAddItem}>
-              <BiPlus /> ADD ITEM
+            <span className="add-item-btn me-auto" onClick={handleAddItem}>
+              <span>
+                <BiPlus />
+              </span>{" "}
+              ADD ITEM
             </span>
             <h6 className="fw-light ms-auto me-4 my-auto">Total</h6>
             <h6 className="fw-bold ms-auto me-4 my-auto">
               $ {calculateTotal(items) || "0.00"}
             </h6>
           </div>
-          <div className="d-inline-flex w-100 mt-4">
-            <h6 className="add-item me-auto my-auto">Preview</h6>
-            <div className="py-2 ms-3 px-4 align-items-center ">
-              <button className="btn btn-primary" disabled={loading}>
-                {loading ? (
-                  <div className="text-center w-100 align-items-center">
-                    <ThreeDots
-                      color="white"
-                      height={"12px"}
-                      wrapperStyle={{ display: "block" }}
-                    />
-                  </div>
-                ) : (
-                  "Save"
-                )}
-              </button>
-            </div>
+          <div className="d-inline-flex w-100 mt-4 justify-content-end">
+            <button className="btn btn-primary px-4" disabled={loading}>
+              {loading ? (
+                <div className="text-center w-100 align-items-center">
+                  <ThreeDots
+                    color="white"
+                    height={"12px"}
+                    wrapperStyle={{ display: "block" }}
+                  />
+                </div>
+              ) : (
+                "Save"
+              )}
+            </button>
           </div>
         </Form>
       </div>
