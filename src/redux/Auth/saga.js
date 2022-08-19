@@ -76,7 +76,6 @@ function* login({ payload }) {
     if (response?.status === 200) {
       setAuthToken(response?.data?.access_token);
       setCurrentUser(response?.data);
-      
       const user_data = {...response?.data?.user, accessToken: response?.data?.access_token}
       yield put(
         loginUserSuccess({

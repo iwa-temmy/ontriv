@@ -27,7 +27,7 @@ const ClientListView = ({ setCurrentSection, clients, deleteClient }) => {
         accessor: 'profile_image',
         cellClass: '',
         Cell: props => (
-          <Link to='/client-details'>
+          <Link to={`/client-details/${props.row.values.id}`}>
             <div>
               <img
                 style={{

@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Row, Col, Card, Button } from 'reactstrap'
 import { FiArrowRight } from 'react-icons/fi'
 import Table from '../../../components/Table'
 // import ontriv from '../../../assets/img/ontriv.png'
+import { connect } from 'react-redux'
 import { IoIosCheckmarkCircle } from 'react-icons/io'
-import {  MdAddCircle } from 'react-icons/md'
+import { MdAddCircle } from 'react-icons/md'
 
 import { GoPrimitiveDot } from 'react-icons/go'
 // import { HiPlus } from 'react-icons/hi'
@@ -17,6 +18,8 @@ import cl from '../../../assets/img/cl.png'
 // import Calendar from 'react-calendar';
 import Calendar from '../../../components/Calendar'
 import { CenteredModal as Modal } from '../../../components/Modal'
+import { getClientDetails } from '../../../redux/actions'
+import { useParams } from 'react-router-dom'
 
 const clients = [
   {
@@ -126,7 +129,24 @@ const clients = [
   }
 ]
 
-const ClientDetails = () => {
+const ClientDetails = ({ getClientDetails, clientDetails }) => {
+  const [details, setClientDetails] = useState({})
+  const { id } = useParams()
+  useEffect(() => {
+    getClientDetails(id)
+    // eslint-disable-next-line
+  }, [])
+  useEffect(() => {
+    console.log('---------------->>>>>', clientDetails)
+    if (clientDetails) {
+      console.log(id)
+      const client = clientDetails.filter(el => el.id === Number(id))
+      console.log(client)
+      setClientDetails(client[0])
+    }
+    // eslint-disable-next-line
+  }, [clientDetails])
+
   const [websiteState, setWebsiteState] = useState(false)
   const [hashtagState, setHashtagState] = useState(false)
 
@@ -181,11 +201,18 @@ const ClientDetails = () => {
               <Card className='client-profile-card '>
                 <div className='d-flex justify-content-between align-items-center '>
                   <div className='client-details-img-wrapper d-flex justify-content-center align-items-center'>
-                    <img src={cl} alt='client-logo' />
+                    <img
+                      src={details?.profile_image}
+                      alt='logo'
+                      style={{
+                        width: '50px',
+                        height: '50px'
+                      }}
+                    />
                   </div>
                   <div className='mb-0'>
-                    <h1 className='client-name'>Digital Seed</h1>
-                    <p  className='client-project mb-0'>Content Calendar</p>
+                    <h1 className='client-name'>{details?.fullname}</h1>
+                    <p className='client-project mb-0'>Content Calendar</p>
                   </div>
                   <div className='project-timeline'>
                     <h1>Project Timeline</h1>
@@ -257,13 +284,19 @@ const ClientDetails = () => {
                     <Col sm='6' xl='4'>
                       <div className='client-information-item d-flex align-items-center justify-content-between'>
                         <h2>Main goal</h2>
-                        <MdAddCircle className='information-icon' color='#9DA8B6' />{' '}
+                        <MdAddCircle
+                          className='information-icon'
+                          color='#9DA8B6'
+                        />{' '}
                       </div>
                     </Col>
                     <Col sm='2' md='4'>
                       <div className='client-information-item d-flex align-items-center justify-content-between'>
                         <h2>USP</h2>
-                        <MdAddCircle className='information-icon' color='#9DA8B6' />{' '}
+                        <MdAddCircle
+                          className='information-icon'
+                          color='#9DA8B6'
+                        />{' '}
                       </div>
                     </Col>
                     <Col sm='2' md='4'>
@@ -274,13 +307,19 @@ const ClientDetails = () => {
                         }}
                       >
                         <h2>Hashtag Sets</h2>
-                        <MdAddCircle className='information-icon' color='#9DA8B6' />{' '}
+                        <MdAddCircle
+                          className='information-icon'
+                          color='#9DA8B6'
+                        />{' '}
                       </div>
                     </Col>
                     <Col sm='2' md='4'>
                       <div className='client-information-item d-flex align-items-center justify-content-between'>
                         <h2>Note</h2>
-                        <MdAddCircle className='information-icon' color='#9DA8B6' />{' '}
+                        <MdAddCircle
+                          className='information-icon'
+                          color='#9DA8B6'
+                        />{' '}
                       </div>
                     </Col>
                   </Row>
@@ -357,7 +396,12 @@ const ClientDetails = () => {
                           </p>
                           <div className='icon-img-container'>
                             {/* <IoIosCheckmarkCircle color='#00D67D' /> */}
-                            <img src={cl} alt='...' height='16px' width='16px'/>
+                            <img
+                              src={cl}
+                              alt='...'
+                              height='16px'
+                              width='16px'
+                            />
                           </div>
                         </div>
                       </div>
@@ -392,7 +436,12 @@ const ClientDetails = () => {
                           </p>
                           <div className='icon-img-container'>
                             {/* <IoIosCheckmarkCircle color='#00D67D' /> */}
-                            <img src={cl} alt='...' height='16px' width='16px'/>
+                            <img
+                              src={cl}
+                              alt='...'
+                              height='16px'
+                              width='16px'
+                            />
                           </div>
                         </div>
                       </div>
@@ -428,19 +477,23 @@ const ClientDetails = () => {
                           </p>
                           <div className='icon-img-container'>
                             {/* <IoIosCheckmarkCircle color='#00D67D' /> */}
-                            <img src={cl} alt='...' height='16px' width='16px'/>
+                            <img
+                              src={cl}
+                              alt='...'
+                              height='16px'
+                              width='16px'
+                            />
                           </div>
                         </div>
                       </div>
                     </Col>
-                   
+
                     <Col md='6'>
                       <div className='account  align-items-center d-flex'>
                         <div className=''>
                           <img
-                          
                             style={{
-                                marginRight:"0",
+                              marginRight: '0',
                               width: '22px',
                               height: '22px'
                             }}
@@ -524,4 +577,9 @@ const ClientDetails = () => {
   )
 }
 
-export default ClientDetails
+const mapStateToProps = ({ client }) => {
+  const { clientDetails } = client
+  return { clientDetails }
+}
+
+export default connect(mapStateToProps, { getClientDetails })(ClientDetails)
