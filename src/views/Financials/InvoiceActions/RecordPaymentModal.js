@@ -100,6 +100,7 @@ const RecordPaymentModal = ({
 };
 
 const mapStateToProps = (state) => {
+  console.log(state?.oneInvoice)
   return {
     recordPaymentLoading: state?.oneInvoice?.recordPaymentLoading,
     message: state?.oneInvoice?.message,
