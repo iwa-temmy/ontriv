@@ -101,7 +101,7 @@ const ClientListView = ({
     []
   );
   return (
-    <div className="mb-0 mt-2 overflow-auto">
+    <div className="mb-0 mt-1 overflow-auto">
       {loading ? (
         <div
           className="d-flex justify-content-center align-items-center"
@@ -109,13 +109,13 @@ const ClientListView = ({
         >
           <Bars height="100" width="100" color="#2062F4" />
         </div>
-      ) : invoices?.length ? (
+      ) :invoices?.length ? (
         <Table
           columns={cols}
           data={invoices}
           divided
           defaultPageSize={6}
-          pagePosition="center"
+          pagePosition="left"
         />
       ) : (
         <EmptyTableData
