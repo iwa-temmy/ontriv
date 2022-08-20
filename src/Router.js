@@ -22,7 +22,6 @@ import Messages from "./views/Messages";
 import InvoiceDetailsPage from "./views/Financials/InvoiceDetailsPage";
 import Schedule from "./views/Schedule";
 import NewPost from "./views/Schedule/NewPost";
-import Test from "./components/Inputs/Test";
 
 const RouterConfig = () => {
   return (
@@ -50,7 +49,6 @@ const RouterConfig = () => {
           <Route exact path="/NewPost" element={<NewPost />} />
           <Route exact path="/business" element={<SetUpBussiness />} />
           <Route exact path="/settings" element={<Settings />} />
-          <Route exact path="/test" element={<Test />} />
         </Route>
 
         <Route exact path="/client" element={<ClientProtectedRoutes />}>
