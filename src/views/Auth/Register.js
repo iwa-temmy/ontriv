@@ -209,7 +209,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                           name='fullname'
                           autoComplete='none'
                           id='fullname'
-                          className={`py-4 mb-4 w-100 ${
+                          className={`py-3 mb-4 w-100 ${
                             errors.fullname ? 'border-danger' : ''
                           }`}
                           {...register('fullname', {
@@ -230,7 +230,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                           autoComplete='none'
                           id='email'
                           placeholder='Email address'
-                          className={`w-100 py-4 mb-0  ${
+                          className={`w-100 py-3 mb-0  ${
                             errors.email ? 'border-danger' : ''
                           }`}
                           onChange={e => {
@@ -260,7 +260,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                           }}
                           name='country'
                           placeholder='Select country'
-                          className={`w-100 py-4  ${
+                          className={`w-100 py-3  ${
                             errors.country ? 'border-danger' : ''
                           } `}
 
@@ -315,7 +315,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                             {...register('password', {
                               required: true
                             })}
-                            className={`py-4 mb-4 w-100 ${
+                            className={`py-3 mb-4 w-100 ${
                               errors.password ? 'border-danger' : ''
                             }`}
                             onChange={e => {
@@ -353,7 +353,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                             type={inputType2}
                             name='confirmPassword'
                             placeholder='Confirm password'
-                            className={`py-4  w-100 ${
+                            className={`py-3  w-100 ${
                               errors.confirmPassword ? 'border-danger' : ''
                             }`}
                             {...register('confirmPassword', {
@@ -437,7 +437,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                           name='business_name'
                           autocomplete='new_password'
                           id='business_name'
-                          className={`py-4  w-100 ${
+                          className={`py-3  w-100 ${
                             errors.business_name ? 'border-danger' : ''
                           }`}
                           {...register('business_name', {
@@ -456,7 +456,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                           name='website'
                           autocomplete='new_password'
                           id='website'
-                          className={`py-4  w-100 ${
+                          className={`py-3  w-100 ${
                             errors.website ? 'border-danger' : ''
                           }`}
                           {...register('website', {
@@ -510,7 +510,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                           placeholder='Referral Code'
                           name='referral_code'
                           autocomplete='new_password'
-                          className={`py-4 mb-0 w-100 ${
+                          className={`py-3 mb-0 w-100 ${
                             errors.referral_code ? 'border-danger' : ''
                           }`}
                           {...register(
@@ -535,7 +535,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                           onChange={e => handleInformationChange(e)}
                           // name='country'
                           placeholder='How do you hear about us?'
-                          className={`py-4 w-100 ${
+                          className={`py-3 w-100 ${
                             errors.information ? 'border-danger' : ''
                           } `}
 
@@ -631,7 +631,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                       </Form>
                     )}
                   </Card>
-                  <div className='no-account mt-4 py-4 text-center'>
+                  <div className='no-account mt-4 py-3 text-center'>
                     <p className='mb-0'>
                       Already have an account yet?
                       <span className='register-link'>
