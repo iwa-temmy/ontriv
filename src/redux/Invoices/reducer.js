@@ -6,15 +6,23 @@ import {
   CREATE_NEW_INVOICE,
   CREATE_NEW_INVOICE_SUCCESS,
   CREATE_NEW_INVOICE_ERROR,
+  DELETE_ONE_INVOICE,
+  DELETE_ONE_INVOICE_SUCCESS,
+  DELETE_ONE_INVOICE_ERROR,
 } from "../actions";
 
 const intialState = {
   getInvoiceLoading: false,
-  getInvoiceError: "",
-  message: "",
-  invoices: [],
   createInvoiceLoading: false,
+  deleteInvoiceLoading: true,
+  getInvoiceError: "",
+  message: {
+    createInvoice: "",
+    deleteInvoice: "",
+  },
+  invoices: [],
   createInvoiceError: "",
+  deleteInvoiceError: "",
 };
 const invoicesReducer = (state = intialState, action) => {
   switch (action.type) {
@@ -44,7 +52,7 @@ const invoicesReducer = (state = intialState, action) => {
       return {
         ...state,
         createInvoiceLoading: false,
-        message: action.payload,
+        message: { ...state?.message, createInvoice: action.payload },
       };
     case CREATE_NEW_INVOICE_ERROR:
       return {
@@ -52,13 +60,31 @@ const invoicesReducer = (state = intialState, action) => {
         createInvoiceLoading: false,
         createInvoiceError: action.payload,
       };
+    case DELETE_ONE_INVOICE:
+      return {
+        ...state,
+        deleteInvoiceLoading: true,
+      };
+    case DELETE_ONE_INVOICE_SUCCESS:
+      return {
+        ...state,
+        deleteInvoiceLoading: false,
+        message: { ...state?.message, deleteInvoice: action.payload },
+      };
+    case DELETE_ONE_INVOICE_ERROR:
+      return {
+        ...state,
+        deleteInvoiceLoading: false,
+        deleteInvoiceError: action.payload,
+      };
+
     case RESET_MESSAGE:
       return {
         ...state,
         getInvoiceError: "",
-        message: "",
+        message: { createInvoice: "", deleteInvoice: "" },
         createInvoiceError: "",
-      };  
+      };
     default:
       return state;
   }

@@ -7,7 +7,7 @@ import {
 } from "reactstrap";
 import { AiOutlineMore } from "react-icons/ai";
 
-const TableDropdown = ({ toggleInvoicePreview, openFullInvoicePage }) => {
+const TableDropdown = ({ toggleInvoicePreview, openFullInvoicePage, handleDeleteInvoice }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -19,6 +19,7 @@ const TableDropdown = ({ toggleInvoicePreview, openFullInvoicePage }) => {
       <DropdownMenu left="true">
         <DropdownItem onClick={toggleInvoicePreview}>Preview</DropdownItem>
         <DropdownItem onClick={openFullInvoicePage}>View Full Invoice</DropdownItem>
+        <DropdownItem onClick={handleDeleteInvoice}>Delete</DropdownItem>
       </DropdownMenu>
     </Dropdown>
   );

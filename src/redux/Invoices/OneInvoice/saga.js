@@ -1,4 +1,4 @@
-import { put, takeEvery, fork, all, call} from "redux-saga/effects";
+import { put, takeEvery, fork, all } from "redux-saga/effects";
 import {
   GET_ONE_INVOICE,
   GET_ONE_INVOICE_SETTINGS,
@@ -155,7 +155,7 @@ export function* RecordOneInvoicePayment({ payload }) {
     if (response?.status === 201) {
       console.log(response?.data);
       yield put(recordOneInvoicePaymentSuccess());
-      yield call(GetOneInvoice, [{ id: payload?.invoice }]);
+      yield put(getOneInvoice(payload?.invoice));
     } else {
       yield put(recordOneInvoicePaymentError(response?.data?.message));
     }
@@ -197,6 +197,7 @@ export function* RecordOneInvoicePayment({ payload }) {
   }
 }
 export function* DuplicateOneInvoicePayment({ payload }) {
+  console.log(payload);
   try {
     const response = yield Axios.post(
       `/invoice/api/v1/invoice/duplicate/`,
@@ -205,7 +206,6 @@ export function* DuplicateOneInvoicePayment({ payload }) {
     if (response?.status === 201) {
       console.log(response?.data);
       yield put(duplicateOneInvoiceSuccess());
-      yield call(getOneInvoice(payload?.id));
     } else {
       yield put(duplicateOneInvoiceError(response?.data?.message));
     }
@@ -240,7 +240,7 @@ export function* DuplicateOneInvoicePayment({ payload }) {
     } else if (error.message) {
       message = error.message;
     }
-    yield put(recordOneInvoicePaymentError(message));
+    yield put(duplicateOneInvoiceError(message));
     yield put(clearMessages());
   }
 }

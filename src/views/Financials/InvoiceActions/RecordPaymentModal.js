@@ -15,7 +15,7 @@ const RecordPaymentModal = ({
   setShowRecordPayment,
   recordOneInvoicePayment,
   recordPaymentLoading,
-  message,
+  recordPaymentMessage,
   recordPaymentError,
 }) => {
   const [formData, setFormData] = useState({});
@@ -33,13 +33,18 @@ const RecordPaymentModal = ({
     recordOneInvoicePayment(data);
   };
   useEffect(() => {
-    if (!recordPaymentLoading && message?.length > 0) {
-      createNotification("success", message);
+    if (!recordPaymentLoading && recordPaymentMessage?.length > 0) {
+      createNotification("success", recordPaymentMessage);
       setShowRecordPayment(false);
     } else if (!recordPaymentLoading && recordPaymentError?.length > 0) {
       createNotification("error", recordPaymentError);
     }
-  }, [recordPaymentLoading, message, setShowRecordPayment, recordPaymentError]);
+  }, [
+    recordPaymentLoading,
+    recordPaymentMessage,
+    setShowRecordPayment,
+    recordPaymentError,
+  ]);
   return (
     <Modal modalState={showRecordPayment} setModalState={setShowRecordPayment}>
       <div className="add-client-wrapper text-center ">
@@ -102,7 +107,7 @@ const RecordPaymentModal = ({
 const mapStateToProps = (state) => {
   return {
     recordPaymentLoading: state?.oneInvoice?.recordPaymentLoading,
-    message: state?.oneInvoice?.message,
+    recordPaymentMessage: state?.oneInvoice?.message?.recordPayment,
     recordPaymentError: state?.oneInvoice?.recordPaymentError,
   };
 };
