@@ -71,7 +71,7 @@ const InvoiceDetailsPage = (props) => {
     if (invoiceDetails?.status?.toLowerCase() === "paid") {
       setPaymentDisabled(true);
     }
-  }, [invoiceDetails?.status, setPaymentDisabled]);
+  }, [invoiceDetails?.status, setPaymentDisabled, getOneInvoice]);
   return (
     <>
       {showCreateInvoiceModal ? (

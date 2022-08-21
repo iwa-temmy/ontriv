@@ -5,6 +5,9 @@ import {
   CREATE_NEW_INVOICE,
   CREATE_NEW_INVOICE_SUCCESS,
   CREATE_NEW_INVOICE_ERROR,
+  DELETE_ONE_INVOICE,
+  DELETE_ONE_INVOICE_SUCCESS,
+  DELETE_ONE_INVOICE_ERROR,
 } from "../actions";
 
 export const getAllInvoices = () => ({
@@ -35,4 +38,20 @@ export const createNewInvoiceError = (error) => ({
   type: CREATE_NEW_INVOICE_ERROR,
   payload: error,
 });
+
+export const deleteInvoice = (id) => ({
+  type: DELETE_ONE_INVOICE,
+  payload: id,
+});
+
+export const deleteInvoiceSuccess = () => ({
+  type: DELETE_ONE_INVOICE_SUCCESS,
+  payload: "Invoice Deleted Successfully",
+});
+
+export const deleteInvoiceError = (error) => ({
+  type: DELETE_ONE_INVOICE_ERROR,
+  payload: error,
+});
+
 

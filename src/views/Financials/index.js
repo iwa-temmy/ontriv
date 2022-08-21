@@ -17,11 +17,7 @@ import RequestPayoutModal from "./InvoiceActions/RequestPayoutModal";
 import AddVendor from "./ExpenseActions/AddVendor";
 import AddExpenseModal from "./ExpenseActions/AddExpenseModal";
 
-const Finances = ({
-  getAllInvoices,
-  invoices,
-  getInvoiceLoading,
-}) => {
+const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
   const [view] = useState("list");
   const [addClient, setAddClient] = useState(false);
   const [showPayoutModal, setShowPayoutModal] = useState(false);
@@ -64,11 +60,11 @@ const Finances = ({
       {showVendor ? <AddVendor setShowVendor={setShowVendor} /> : null}
       <div className="dashboard dashboard-wrapper">
         <Row>
-          <Col md="12" sm="12" lg="6" xl="6" className="mb-3">
-            <Card className="py-4 px-4 finances__top-cards">
+          <Col md="5" sm="12" lg="5" xl="5" className="mb-3">
+            <Card className="py-4 px-5 finances__top-cards">
               <Row>
                 <Col
-                  md="7"
+                  md="8"
                   sm="16"
                   lg="8"
                   xl="8"
@@ -81,23 +77,27 @@ const Finances = ({
                     </span>{" "}
                     0.00
                   </h6>
-                  <div>
+                  {/* <div>
                     <h6 className="finances__top-cards__bonus text-center py-0 mx-auto">
                       +10% In the past month
                     </h6>
-                  </div>
+                  </div> */}
                 </Col>
-                <Col md="7" sm="16" lg="8" xl="4" className="px-3">
+                <Col md="4" sm="16" lg="8" xl="4" className="px-3">
                   <div className="finances__top-cards__title d-inline-flex w-100">
                     <img src={GreenCircle} className="me-2" alt="" />
-                    <h6 className="my-auto mp-2">Received</h6>
+                    <h6 className="finances__top-cards__title my-auto mp-2">
+                      Received
+                    </h6>
                   </div>
                   <h6 className="finances__top-cards__amount-small ms-3 ps-1">
                     $0.00
                   </h6>
                   <div className="finances__top-cards__title d-inline-flex mt-3 w-100">
                     <img src={YellowCircle} className="me-2" alt="" />
-                    <h6 className="my-auto mp-2">Pending</h6>
+                    <h6 className="finances__top-cards__title my-auto mp-2">
+                      Pending
+                    </h6>
                   </div>
                   <h6 className="finances__top-cards__amount-small ms-3 ps-1">
                     $0.00
@@ -106,12 +106,14 @@ const Finances = ({
               </Row>
             </Card>
           </Col>
-          <Col md="12" sm="12" lg="6" xl="6" className="mb-3">
+          <Col md="7" sm="12" lg="6" xl="6" className="mb-3">
             <Row className="h-100">
-              <Col xl="6">
-                <Card className="py-4 px-4 h-100 finances__top-cards">
+              <Col xl="6" md="6">
+                <Card className="py-4 px-5 h-100 finances__top-cards">
                   <div md="7" sm="16" lg="8" xl="8" className="">
-                    <h6 className="my-auto mp-2">Payout</h6>
+                    <h6 className="finances__top-cards__title my-auto mp-2">
+                      Payout
+                    </h6>
                     <h6 className="finances__top-cards__amount-big mt-3">
                       <span className="mr-2 finances__top-cards__currency">
                         $
@@ -121,10 +123,12 @@ const Finances = ({
                   </div>
                 </Card>
               </Col>
-              <Col xl="6">
-                <Card className="py-4 h-100 px-4 finances__top-cards">
+              <Col xl="6" md="6">
+                <Card className="py-4 h-100 px-5 finances__top-cards">
                   <div md="7" sm="16" lg="8" xl="8" className="">
-                    <h6 className="my-auto mp-2">Expenses</h6>
+                    <h6 className="finances__top-cards__title my-auto mp-2">
+                      Expenses
+                    </h6>
                     <h6 className="finances__top-cards__amount-big mt-3">
                       <span className="mr-2 finances__top-cards__currency">
                         $
@@ -293,6 +297,4 @@ const mapStateToProps = (state) => {
     getInvoiceLoading: invoice?.getInvoiceLoading,
   };
 };
-export default connect(mapStateToProps, { getAllInvoices })(
-  Finances
-);
+export default connect(mapStateToProps, { getAllInvoices })(Finances);

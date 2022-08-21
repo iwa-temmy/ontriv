@@ -89,7 +89,7 @@ const ExpenseListView = ({
           data={expenses}
           divided
           defaultPageSize={6}
-          pagePosition="center"
+          pagePosition="left"
         />
       ) : (
         <EmptyTableData
