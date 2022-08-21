@@ -209,7 +209,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                           name='fullname'
                           autoComplete='none'
                           id='fullname'
-                          className={`py-3 mb-4 w-100 ${
+                          className={`py-3 mb- w-100 ${
                             errors.fullname ? 'border-danger' : ''
                           }`}
                           {...register('fullname', {
@@ -315,7 +315,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                             {...register('password', {
                               required: true
                             })}
-                            className={`py-3 mb-4 w-100 ${
+                            className={`py-3 mb- w-100 ${
                               errors.password ? 'border-danger' : ''
                             }`}
                             onChange={e => {
