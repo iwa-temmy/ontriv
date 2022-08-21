@@ -476,7 +476,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                           value={roleValue}
                           onChange={e => handleRoleChange(e)}
                           // name='country'
-                          placeholder='role'
+                          placeholder='Role'
                           className={`w-100 ${
                             errors.role ? 'border-danger' : ''
                           } mb-3`}
