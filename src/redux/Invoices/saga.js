@@ -2,11 +2,14 @@ import { put, takeEvery, fork, all, call } from "redux-saga/effects";
 import {
   GET_INVOICES,
   CREATE_NEW_INVOICE,
+  DELETE_ONE_INVOICE,
   getAllInvoicesSuccess,
   getAllInvoicesError,
-  clearMessages,
   createNewInvoiceSuccess,
   createNewInvoiceError,
+  deleteInvoiceSuccess,
+  deleteInvoiceError,
+  clearMessages,
 } from "../actions";
 import Axios from "../../utils/Axios";
 
@@ -106,6 +109,48 @@ export function* CreateNewInvoice({ payload }) {
   }
 }
 
+export function* DeleteInvoice({ payload }) {
+  console.log(payload);
+  try {
+    const response = yield Axios.delete(
+      `/invoice/api/v1/invoice/full/${payload}/`,
+      payload
+    );
+    if (response?.status === 201) {
+      yield put(deleteInvoiceSuccess());
+      yield call(GetAllInvoices);
+    } else {
+      yield put(deleteInvoiceError(response?.data?.message));
+    }
+    yield put(clearMessages());
+  } catch (error) {
+    let message;
+    if (error.response) {
+      const errorMessage = error?.response?.data;
+
+      switch (error.response.status) {
+        case 500:
+          message = "Internal Server Error";
+          break;
+        case 404:
+          message = "Not found";
+          break;
+        case 401:
+          message = "Invalid credentials";
+          break;
+        case 400:
+          message = errorMessage;
+          break;
+        default:
+          message = error.response.statusText;
+      }
+    } else if (error.message) {
+      message = error.message;
+    }
+    yield put(createNewInvoiceError(message));
+    yield put(clearMessages());
+  }
+}
 export function* watchGetAllInvoices() {
   yield takeEvery(GET_INVOICES, GetAllInvoices);
 }
@@ -114,6 +159,14 @@ export function* watchCreateNewInvoice() {
   yield takeEvery(CREATE_NEW_INVOICE, CreateNewInvoice);
 }
 
+export function* watchDeleteInvoice() {
+  yield takeEvery(DELETE_ONE_INVOICE, DeleteInvoice);
+}
+
 export default function* rootSaga() {
-  yield all([fork(watchGetAllInvoices), fork(watchCreateNewInvoice)]);
+  yield all([
+    fork(watchGetAllInvoices),
+    fork(watchCreateNewInvoice),
+    fork(watchDeleteInvoice),
+  ]);
 }

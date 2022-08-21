@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Input } from "reactstrap";
 import { CenteredModal as Modal } from "../../../components/Modal";
 import ButtonLoader from "../../../components/Loaders/ButtonLoader";
@@ -15,7 +15,7 @@ const DuplicateInvoiceModal = ({
   duplicateOneInvoice,
   duplicateInvoiceLoading,
   duplicateInvoiceError,
-  message,
+  duplicateInvoiceMessage,
 }) => {
   const [formData, setFormData] = useState({});
 
@@ -32,13 +32,18 @@ const DuplicateInvoiceModal = ({
   };
 
   useEffect(() => {
-    if (!duplicateInvoiceLoading && message?.length > 0) {
-      createNotification("success", message);
-      setShowDuplicateInvoiceModal(false)
+    if (!duplicateInvoiceLoading && duplicateInvoiceMessage?.length > 0) {
+      createNotification("success", duplicateInvoiceMessage);
+      setShowDuplicateInvoiceModal(false);
     } else if (!duplicateInvoiceLoading && duplicateInvoiceError?.length > 0) {
       createNotification("error", duplicateInvoiceError);
     }
-  }, [message, setShowDuplicateInvoiceModal, duplicateInvoiceLoading, duplicateInvoiceError]);
+  }, [
+    duplicateInvoiceMessage,
+    setShowDuplicateInvoiceModal,
+    duplicateInvoiceLoading,
+    duplicateInvoiceError,
+  ]);
   return (
     <Modal
       modalState={showDuplicateInvoiceModal}
@@ -104,7 +109,7 @@ const mapStateToProps = (state) => {
     clients: auth?.currentUser?.client_list,
     duplicateInvoiceLoading: state?.oneInvoice?.duplicateInvoiceLoading,
     duplicateInvoiceError: state?.oneInvoice?.duplicateInvoiceError,
-    message: state?.oneInvoice?.message,
+    duplicateInvoiceMessage: state?.oneInvoice?.message?.duplicateInvoice,
   };
 };
 export default connect(mapStateToProps, { duplicateOneInvoice })(

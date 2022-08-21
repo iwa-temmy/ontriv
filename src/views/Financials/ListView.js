@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Table from "../../components/Table";
-import { connect } from "react-redux";
-import { setCurrentSection } from "../../redux/actions";
 import { Bars } from "react-loader-spinner";
 import {
   formatInvoiceIssueDate,
@@ -14,12 +12,16 @@ import { useNavigate } from "react-router-dom";
 import TableDropdown from "../../components/Dropdown/TableDropdown";
 import InvoiceDetails from "./InvoiceDetails";
 import EmptyTableData from "../../components/Table/EmptyTableData";
+//redux
+import { connect } from "react-redux";
+import { setCurrentSection, deleteInvoice } from "../../redux/actions";
 
 const ClientListView = ({
   setCurrentSection,
   invoices,
   loading,
   openInvoiceModal,
+  deleteInvoice,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [invoiceDetails, setInvoiceDetails] = useState({});
@@ -40,6 +42,10 @@ const ClientListView = ({
     navigate(`/invoices-&-financials/invoice/${invoiceData?.id}`, {
       state: invoiceData,
     });
+  };
+  const handleDelete = (record) => {
+    const invoiceData = record?.row?.original;
+    deleteInvoice(invoiceData?.id);
   };
   const cols = React.useMemo(
     () => [
@@ -93,6 +99,7 @@ const ClientListView = ({
           <TableDropdown
             toggleInvoicePreview={() => toggleInvoicePreview(props)}
             openFullInvoicePage={() => openFullInvoicePage(props)}
+            handleDeleteInvoice={() => handleDelete(props)}
           />
         ),
       },
@@ -109,7 +116,7 @@ const ClientListView = ({
         >
           <Bars height="100" width="100" color="#2062F4" />
         </div>
-      ) :invoices?.length ? (
+      ) : invoices?.length ? (
         <Table
           columns={cols}
           data={invoices}
@@ -133,4 +140,4 @@ const ClientListView = ({
   );
 };
 
-export default connect(null, { setCurrentSection })(ClientListView);
+export default connect(null, { setCurrentSection, deleteInvoice })(ClientListView);

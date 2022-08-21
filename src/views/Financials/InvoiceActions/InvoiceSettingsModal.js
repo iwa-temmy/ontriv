@@ -18,7 +18,7 @@ const InvoiceSettingsModal = ({
   invoiceId,
   oneInvoiceSetting,
   loading,
-  message,
+  updateSettingsMessage,
   error,
 }) => {
   const [formData, setFormData] = useState({});
@@ -46,13 +46,13 @@ const InvoiceSettingsModal = ({
   }, [oneInvoiceSetting]);
 
   useEffect(() => {
-    if (!loading && message?.length > 0) {
-      createNotification("success", message);
+    if (!loading && updateSettingsMessage?.length > 0) {
+      createNotification("success", updateSettingsMessage);
       setShowSettings(false);
     } else if (!loading && error?.length > 0) {
       createNotification("error", error);
     }
-  }, [loading, message, setShowSettings, error]);
+  }, [loading, updateSettingsMessage, setShowSettings, error]);
   return (
     <Modal modalState={showSettings} setModalState={setShowSettings}>
       <div className="add-client-wrapper text-center ">
@@ -115,7 +115,7 @@ const InvoiceSettingsModal = ({
 const mapStateToProps = (state) => {
   return {
     oneInvoiceSetting: state?.oneInvoice?.invoiceSetting,
-    message: state?.oneInvoice?.message,
+    updateSettingsMessage: state?.oneInvoice?.message?.updateSettings,
     loading: state?.oneInvoice?.updateOneInvoiceSettingLoading,
     error: state?.oneInvoice?.updateOneInvoiceSettingError,
   };
