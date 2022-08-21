@@ -72,8 +72,8 @@ const Signin = ({
                 <img src={logo} alt="ontriv-logo" width="200px" />
               </div>
               <Card className="px-5 py-4  signin-form-card mb-1">
-                <h4 className="text-center">Welcome Back!</h4>
-                <p className="text-center">Login with your Account Details</p>
+                <h4 className="text-center mb-4">Welcome Back!</h4>
+                {/* <p className="text-center">Login with your Account Details</p> */}
                 <Form onSubmit={handleSubmit(signinUser)}>
                   {errors.email && (
                     <span className="text-danger text-left">

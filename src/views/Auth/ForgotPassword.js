@@ -58,96 +58,63 @@ const ForgotPassword = ({
         <Container>
           <div className='mx-auto reset-password-wrapper'>
             <div className='text-center reset-password-text'>
-              <h4>Forgot your password? 😅</h4>
-              <div>
-                <p className='mb-0'>Enter your registered email address, and we'll</p>
-                <p className='mb-0'> send you a link to reset your password</p>
+              <h3
+                className='mb-0'
+                style={{
+                  fontSize: '34px',
+                  opacity: '0.8'
+                }}
+              >
+                Forgot your password? 😅
+              </h3>
+              <div className='mt-4 mb-5'>
+                <p
+                  className='mb-0'
+                  style={{
+                    fontSize: '14px',
+                    color: '#111317',
+                    opacity: '0.8'
+                  }}
+                >
+                  Enter your registered email address, and we'll
+                </p>
+                <p
+                  className='mb-0'
+                  style={{
+                    fontSize: '14px',
+                    color: '#111317',
+                    opacity: '0.8'
+                  }}
+                >
+                  {' '}
+                  send you a link to reset your password
+                </p>
               </div>
             </div>
             <Card className='p-5 signin-form-card '>
               <Form onSubmit={handleSubmit(handlePasswordReset)}>
-                {errors.new_password1 && (
-                  <span className='text-danger text-left'>Enter Password</span>
+                {errors.email && (
+                  <span className='text-danger text-left'>
+                    Enter a valid email addres
+                  </span>
                 )}
                 <div className='password-container'>
-                  <div className='password-icon'>
-                    {inputType1 === 'password' ? (
-                      <TiEye
-                        color='#E5E9F2'
-                        size='30px'
-                        onClick={() => {
-                          setInputType1('text')
-                        }}
-                      />
-                    ) : (
-                      <IoMdEyeOff
-                        color='#000'
-                        size='25px'
-                        onClick={() => {
-                          setInputType1('password')
-                        }}
-                      />
-                    )}
-                  </div>
                   <input
-                    type={inputType1}
-                    placeholder='Create password'
-                    name='new_password1'
-                    className={`w-100 ${
-                      errors.new_password1 ? 'border-danger' : ''
-                    }`}
-                    {...register('new_password1', {
+                    style={{
+                      border: '1px solid #49A8F8'
+                    }}
+                    type='email'
+                    placeholder='Email address'
+                    name='email'
+                    className={`w-100 ${errors.email ? 'border-danger' : ''}`}
+                    {...register('email', {
                       required: true
                     })}
                   />
                 </div>
 
-                {errors.new_password2 && (
-                  <span className='text-danger text-left'>
-                    {errors.new_password2?.message}
-                  </span>
-                )}
-                <div className='password-container'>
-                  <div className='password-icon'>
-                    {inputType2 === 'password' ? (
-                      <TiEye
-                        color='#E5E9F2'
-                        size='30px'
-                        onClick={() => {
-                          setInputType2('text')
-                        }}
-                      />
-                    ) : (
-                      <IoMdEyeOff
-                        color='#000'
-                        size='25px'
-                        onClick={() => {
-                          setInputType2('password')
-                        }}
-                      />
-                    )}
-                  </div>
-
-                  <input
-                    type={inputType2}
-                    placeholder='Confirm password'
-                    name='new_password2'
-                    className={`w-100 ${
-                      errors.new_password2 ? 'border-danger' : ''
-                    }`}
-                    {...register('new_password2', {
-                      required: true,
-                      validate: val => {
-                        if (watch('new_password1') !== val) {
-                          return 'Passwords do not match'
-                        }
-                      }
-                    })}
-                  />
-                </div>
-
                 <div>
-                  <Button className='py-3 mb-4 mt-1'>
+                  <Button className='py-3  mt-1'>
                     {loading ? (
                       <div className='text-center w-100 align-items-center'>
                         <ThreeDots
@@ -157,17 +124,26 @@ const ForgotPassword = ({
                         />
                       </div>
                     ) : (
-                      'Reset'
+                      'Reset Password'
                     )}
                   </Button>
                 </div>
               </Form>
             </Card>
             <div className='no-account my-4 py-4 text-center'>
-              <p className='mb-0'>
+              <p
+                className='mb-0'
+                style={{
+                  fontSize: '15px',
+                  fontWeight:'400'
+                }}
+              >
                 Remember Password?
                 <span className='register-link'>
-                  <a href='/auth/login'> Login</a>
+                  <a href='/auth/login' style={{
+                    fontSize:'16px',
+                    fontWeight:'600'
+                  }}> Login</a>
                 </span>
               </p>
             </div>
