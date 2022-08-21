@@ -254,7 +254,7 @@ const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
             </div>
           )
         ) : view === "list" ? (
-          <ExpenseListView />
+          <ExpenseListView openExpenseModal={openExpenseModal}/>
         ) : (
           <div className="client-inactive-state text-center">
             <Card className="client-inactive-state-card mx-auto">

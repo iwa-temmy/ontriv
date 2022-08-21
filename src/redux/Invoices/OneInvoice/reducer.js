@@ -33,6 +33,7 @@ const intialState = {
     updateSettings: "",
     recordPayment: "",
     duplicateInvoice: "",
+    getOneInvoice: "",
   },
   invoiceSetting: {},
 };
@@ -48,7 +49,8 @@ const oneInvoiceReducer = (state = intialState, action) => {
       return {
         ...state,
         getOneInvoiceLoading: false,
-        details: action.payload,
+        details: action.payload?.invoice,
+        message: { ...state?.message, getOneInvoice: action?.payload?.message },
       };
     case GET_ONE_INVOICE_ERROR:
       return {
@@ -69,7 +71,7 @@ const oneInvoiceReducer = (state = intialState, action) => {
     case GET_ONE_INVOICE_SETTINGS_ERROR:
       return {
         ...state,
-        getOneInvoiceSettingError: action.payload,
+        getOneInvoiceSettingError: action?.payload,
       };
     case UPDATE_ONE_INVOICE_SETTINGS:
       return {
@@ -80,14 +82,14 @@ const oneInvoiceReducer = (state = intialState, action) => {
       return {
         ...state,
         updateOneInvoiceSettingLoading: false,
-        message: { ...state?.message, updateSetting: action.payload },
-        invoiceSetting: action.payload.data,
+        message: { ...state?.message, updateSetting: action?.payload },
+        invoiceSetting: action?.payload?.invoice?.data,
       };
     case UPDATE_ONE_INVOICE_SETTINGS_ERROR:
       return {
         ...state,
         updateOneInvoiceSettingLoading: false,
-        updateOneInvoiceSettingError: action.payload,
+        updateOneInvoiceSettingError: action?.payload,
       };
     case RECORD_ONE_INVOICE_PAYMENT:
       return {
@@ -98,13 +100,13 @@ const oneInvoiceReducer = (state = intialState, action) => {
       return {
         ...state,
         recordPaymentLoading: false,
-        message: { ...state?.message, recordPayment: action.payload },
+        message: { ...state?.message, recordPayment: action?.payload },
       };
     case RECORD_ONE_INVOICE_PAYMENT_ERROR:
       return {
         ...state,
         recordPaymentLoading: false,
-        recordPaymentError: action.payload,
+        recordPaymentError: action?.payload,
       };
     case DUPLICATE_ONE_INVOICE:
       return {
@@ -115,7 +117,10 @@ const oneInvoiceReducer = (state = intialState, action) => {
       return {
         ...state,
         duplicateInvoiceLoading: false,
-        message: { ...state?.message, duplicateInvoice: action.payload },
+        message: {
+          ...state?.message,
+          duplicateInvoice: action?.payload?.message,
+        },
       };
     case DUPLICATE_ONE_INVOICE_ERROR:
       return {
@@ -135,6 +140,7 @@ const oneInvoiceReducer = (state = intialState, action) => {
           updateSettings: "",
           recordPayment: "",
           duplicateInvoice: "",
+          getOneInvoice: "",
         },
       };
     default:
