@@ -16,11 +16,14 @@
   }
   input::placeholder,
   .css-1s2u09g-control::placeholder {
-    color:#6E7191 !important;
+    color: #6e7191 !important;
     font-size: 14px;
     font-weight: 500;
   }
-  
+  .css-1gtu0rj-indicatorContainer svg {
+    display: none;
+  }
+
   .card {
     border: none;
     box-shadow: -20px 4px 30px rgba(0, 0, 0, 0.03);
@@ -689,6 +692,10 @@
     padding-left: 4.5rem !important;
   }
 }
-#react-select-2-input,#react-select-3-input,#react-select-4-input {
-  display: none;
+#react-select-2-input,
+#react-select-3-input,
+#react-select-4-input {
+  // opacity: 0;
+  width: 100%;
+  border: none;
 }

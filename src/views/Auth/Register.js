@@ -12,6 +12,7 @@ import { useForm } from 'react-hook-form'
 import { registerUser } from '../../redux/actions'
 import createNotification from '../../utils/Notification'
 import Select from 'react-select'
+import selectIcon from '../../assets/img/select.png'
 import countryList from 'react-select-country-list'
 
 const Signup = ({ registerUser, registrationError, message, loading }) => {
@@ -251,26 +252,42 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                             Select Country
                           </span>
                         )}
-                        <Select
-                          options={options}
-                          value={value}
-                          onChange={e => {
-                            changeHandler(e)
-                            setCountry(e.value)
-                          }}
-                          name='country'
-                          placeholder='Select country'
-                          className={`w-100 py-3  ${
-                            errors.country ? 'border-danger' : ''
-                          } `}
+                        <div className='position-relative'>
+                          <Select
+                            options={options}
+                            value={value}
+                            onChange={e => {
+                              changeHandler(e)
+                              setCountry(e.value)
+                            }}
+                            name='country'
+                            placeholder='Select country'
+                            className={`w-100 py-3  ${
+                              errors.country ? 'border-danger' : ''
+                            } `}
 
-                          // {...register('country'
-                          //     , {
-                          //         required: true,
+                            // {...register('country'
+                            //     , {
+                            //         required: true,
 
-                          //     }
-                          // )}
-                        />
+                            //     }
+                            // )}
+                          />
+                          <div
+                            className='position-absolute'
+                            style={{
+                              top: '40%',
+                              right: '23px'
+                            }}
+                          >
+                            <img
+                              width='20'
+                              height='20'
+                              src={selectIcon}
+                              alt='---'
+                            />
+                          </div>
+                        </div>
                         {/* <input
                                                         name='country'
                                                         placeholder='Select Country'
