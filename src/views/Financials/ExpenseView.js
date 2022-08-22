@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "../../components/Table";
 import { Bars } from "react-loader-spinner";
 import EmptyTableData from "../../components/Table/EmptyTableData";
@@ -15,6 +15,7 @@ import { formatAmount, formatInvoiceIssueDate } from "../../utils/helper";
 
 import { MdDelete } from "react-icons/md";
 import createNotification from "../../utils/Notification";
+import DeleteModal from "../../components/Modal/DeleteModal";
 
 const ExpenseListView = ({
   setCurrentSection,
@@ -27,6 +28,22 @@ const ExpenseListView = ({
   deleteExpenseMessage,
   deleteExpenseError,
 }) => {
+  const [expenseID, setExpenseID] = useState(0);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  //functions
+  const openDeleteModal = (id) => {
+    setShowDeleteModal(true);
+    setExpenseID(id);
+  };
+  const closeDeleteModal = () => {
+    setShowDeleteModal(false);
+    setExpenseID(0);
+  }
+
+  const handleDeleteExpense = () => {
+    deleteExpense(expenseID)
+  }
   const cols = React.useMemo(
     () => [
       {
@@ -64,7 +81,7 @@ const ExpenseListView = ({
             <button
               className="d-flex"
               onClick={() => {
-                deleteExpense(props.value);
+                openDeleteModal(props.value);
               }}
             >
               <div className="list-client-delete-finance px-3 py-1">
@@ -87,6 +104,7 @@ const ExpenseListView = ({
   useEffect(() => {
     if (!deleteExpenseLoading && deleteExpenseMessage?.length > 0) {
       createNotification("success", deleteExpenseMessage);
+      closeDeleteModal();
     } else if (!deleteExpenseLoading && deleteExpenseError?.length > 0) {
       createNotification("error", deleteExpenseError);
     }
@@ -115,6 +133,13 @@ const ExpenseListView = ({
           onClick={openExpenseModal}
         />
       )}
+
+      <DeleteModal
+        openModal={showDeleteModal}
+        setOpenModal={setShowDeleteModal}
+        deleteAction={handleDeleteExpense}
+        deleteloading={deleteExpenseLoading}
+      />
     </div>
   );
 };
@@ -122,10 +147,10 @@ const ExpenseListView = ({
 const mapStateToProps = (state) => {
   return {
     expenses: state?.expense?.expenses,
-    loading: state?.expense?.getExpensesLoading,
-    deleteLoading: state?.expense?.deleteExpenseLoading,
+    loading: state?.expense?.loading?.getExpense,
+    deleteExpenseLoading: state?.expense?.loading?.deleteExpense,
     deleteExpenseMessage: state?.expense?.message?.deleteExpense,
-    deleteExpenseError: state?.expense?.deleteExpenseError,
+    deleteExpenseError: state?.expense?.error?.deleteExpense,
   };
 };
 

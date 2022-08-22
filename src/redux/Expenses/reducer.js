@@ -6,22 +6,26 @@ import {
   CREATE_NEW_EXPENSE,
   CREATE_NEW_EXPENSE_SUCCESS,
   CREATE_NEW_EXPENSE_ERROR,
-  DELETE_ONE_EXPENSE,
-  DELETE_ONE_EXPENSE_ERROR,
-  DELETE_ONE_EXPENSE_SUCCESS,
+  DELETE_EXPENSE,
+  DELETE_EXPENSE_ERROR,
+  DELETE_EXPENSE_SUCCESS,
 } from "../actions";
 
 const intialState = {
-  getExpensesLoading: false,
-  createExpenseLoading: false,
-  deleteExpenseLoading: false,
+  loading: {
+    getExpense: false,
+    createExpense: false,
+    deleteExpense: false,
+  },
   message: {
     createExpense: "",
     deleteExpense: "",
   },
-  getExpensesError: "",
-  createExpenseError: "",
-  deleteExpenseError: "",
+  error: {
+    getExpense: "",
+    createExpense: "",
+    deleteExpense: "",
+  },
   expenses: [],
 };
 
@@ -30,59 +34,71 @@ const expenseReducer = (state = intialState, action) => {
     case GET_EXPENSES:
       return {
         ...state,
-        getExpensesLoading: true,
+        loading: { ...state?.loading, getExpense: true },
       };
     case GET_EXPENSES_SUCCESS:
       return {
         ...state,
-        getExpensesLoading: false,
-        expenses: action.payload,
+        loading: { ...state?.loading, getExpense: false },
+        expenses: action?.payload,
       };
     case GET_EXPENSES_ERROR:
       return {
         ...state,
-        getExpensesLoading: false,
-        getExpensesError: action.payload.error,
+        loading: { ...state?.loading, getExpense: false },
+        error: { ...state?.error, getExpense: action.payload.error },
       };
     case CREATE_NEW_EXPENSE:
       return {
         ...state,
-        createExpenseLoading: true,
+        loading: { ...state?.loading, createExpense: true },
       };
     case CREATE_NEW_EXPENSE_SUCCESS:
       return {
         ...state,
-        createExpenseLoading: false,
+        loading: { ...state?.loading, createExpense: false },
         message: { ...state?.message, createExpense: action.payload },
       };
     case CREATE_NEW_EXPENSE_ERROR:
       return {
         ...state,
-        createExpenseLoading: false,
-        createExpenseError: action.payload,
+        loading: { ...state?.loading, createExpense: false },
+        error: { ...state?.error, createExpense: action.payload },
       };
-    case DELETE_ONE_EXPENSE:
+    case DELETE_EXPENSE:
       return {
         ...state,
-        deleteExpenseLoading: true,
+        loading: { ...state?.loading, deleteExpense: true },
       };
-    case DELETE_ONE_EXPENSE_SUCCESS:
+    case DELETE_EXPENSE_SUCCESS:
       return {
         ...state,
-        deleteExpenseLoading: false,
+        loading: { ...state?.loading, deleteExpense: false },
         message: { ...state?.message, deleteExpense: action.payload },
       };
-    case DELETE_ONE_EXPENSE_ERROR:
+    case DELETE_EXPENSE_ERROR:
       return {
         ...state,
-        deleteExpenseLoading: false,
-        deleteExpenseError: action.payload,
+        loading: { ...state?.loading, deleteExpense: false },
+        error: { ...state?.error, deleteError: action.payload },
       };
     case RESET_MESSAGE:
       return {
         ...state,
-        message: {},
-        getExpensesError: "",
+        loading: {
+          getExpense: false,
+          createExpense: false,
+          deleteExpense: false,
+        },
+        message: {
+          createExpense: "",
+          deleteExpense: "",
+        },
+        error: {
+          getExpense: "",
+          createExpense: "",
+          deleteExpense: "",
+        },
       };
     default:
       return state;

@@ -16,8 +16,14 @@ import CreateInvoiceModal from "./InvoiceActions/CreateInvoiceModal";
 import RequestPayoutModal from "./InvoiceActions/RequestPayoutModal";
 import AddVendor from "./ExpenseActions/AddVendor";
 import AddExpenseModal from "./ExpenseActions/AddExpenseModal";
+import createNotification from "../../utils/Notification";
 
-const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
+const Finances = ({
+  getAllInvoices,
+  invoices,
+  getInvoiceLoading,
+  getInvoiceError,
+}) => {
   const [view] = useState("list");
   const [addClient, setAddClient] = useState(false);
   const [showPayoutModal, setShowPayoutModal] = useState(false);
@@ -31,6 +37,11 @@ const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
     getAllInvoices();
   }, [getAllInvoices]);
 
+  useEffect(() => {
+    if (!getInvoiceLoading && getInvoiceError?.length > 0) {
+      createNotification("error", getInvoiceError);
+    }
+  }, [getInvoiceLoading, getInvoiceError]);
   //Modal Toggle Handlers
   const openInvoiceModal = () => {
     setShow(true);
@@ -254,7 +265,7 @@ const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
             </div>
           )
         ) : view === "list" ? (
-          <ExpenseListView openExpenseModal={openExpenseModal}/>
+          <ExpenseListView openExpenseModal={openExpenseModal} />
         ) : (
           <div className="client-inactive-state text-center">
             <Card className="client-inactive-state-card mx-auto">
@@ -294,7 +305,8 @@ const mapStateToProps = (state) => {
   const { invoice } = state;
   return {
     invoices: invoice?.invoices,
-    getInvoiceLoading: invoice?.getInvoiceLoading,
+    getInvoiceLoading: invoice?.loading?.getInvoice,
+    getInvoiceError: invoice?.error?.getInvoice,
   };
 };
 export default connect(mapStateToProps, { getAllInvoices })(Finances);

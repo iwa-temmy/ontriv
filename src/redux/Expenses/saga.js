@@ -2,7 +2,7 @@ import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 import {
   GET_EXPENSES,
   CREATE_NEW_EXPENSE,
-  DELETE_ONE_EXPENSE,
+  DELETE_EXPENSE,
   getAllExpensesSuccess,
   getAllExpensesError,
   createNewExpenseSuccess,
@@ -64,6 +64,7 @@ export function* CreateNewExpense({ payload }) {
     );
     if (response?.status === 201) {
       yield put(createNewExpenseSuccess());
+      yield call(GetAllExpenses);
     } else {
       yield put(createNewExpenseError(response?.data?.message));
     }
@@ -115,7 +116,7 @@ export function* DeleteExpense({ payload }) {
     console.log(response?.status);
     if (response?.status === 204) {
       yield put(deleteExpenseSuccess());
-      yield call(GetAllExpenses)
+      yield call(GetAllExpenses);
     } else {
       yield put(deleteExpenseError(response?.data?.message));
     }
@@ -154,7 +155,7 @@ export function* watchCreateNewExpense() {
   yield takeEvery(CREATE_NEW_EXPENSE, CreateNewExpense);
 }
 export function* watchDeleteExpense() {
-  yield takeEvery(DELETE_ONE_EXPENSE, DeleteExpense);
+  yield takeEvery(DELETE_EXPENSE, DeleteExpense);
 }
 
 export default function* rootSaga() {

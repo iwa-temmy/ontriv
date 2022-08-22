@@ -2,7 +2,7 @@ import { put, takeEvery, fork, all, call } from "redux-saga/effects";
 import {
   GET_INVOICES,
   CREATE_NEW_INVOICE,
-  DELETE_ONE_INVOICE,
+  DELETE_INVOICE,
   getAllInvoicesSuccess,
   getAllInvoicesError,
   createNewInvoiceSuccess,
@@ -116,7 +116,7 @@ export function* DeleteInvoice({ payload }) {
       `/invoice/api/v1/invoice/full/${payload}/`,
       payload
     );
-    if (response?.status === 201) {
+    if (response?.status === 204) {
       yield put(deleteInvoiceSuccess());
       yield call(GetAllInvoices);
     } else {
@@ -147,7 +147,7 @@ export function* DeleteInvoice({ payload }) {
     } else if (error.message) {
       message = error.message;
     }
-    yield put(createNewInvoiceError(message));
+    yield put(deleteInvoiceError(message));
     yield put(clearMessages());
   }
 }
@@ -160,7 +160,7 @@ export function* watchCreateNewInvoice() {
 }
 
 export function* watchDeleteInvoice() {
-  yield takeEvery(DELETE_ONE_INVOICE, DeleteInvoice);
+  yield takeEvery(DELETE_INVOICE, DeleteInvoice);
 }
 
 export default function* rootSaga() {
