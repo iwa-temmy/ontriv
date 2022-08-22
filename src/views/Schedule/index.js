@@ -10,15 +10,98 @@ import PostUserImage from './../../assets/img/post-user-img.png'
 import MarkGreenPost from './../../assets/img/mark-green-post.svg'
 import PublishedGreenIndicator from './../../assets/img/published-green-indicator.svg'
 import PostBottomLine from './../../assets/img/post-bottom-line.svg'
-import {Col, Row} from "reactstrap";
-import {useState} from "react";
-import {Link} from "react-router-dom";
+import { Button, Col, Input, Row } from "reactstrap";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import barChart from "../../assets/img/barchart.png"
+import ClientChart from './ClientChart';
+import {clients} from "./data"
+import { FaPlus } from "react-icons/fa";
+import SocialChannels from './tabs';
 
 const Schedule = () => {
   const [currentMenu, setCurrentMenu] = useState("all");
   return (
     <div className='dashboard dashboard-wrapper'>
-      <div className="row w-100 h-100">
+      <Row>
+        <Col
+          xs="12"
+          md="3"
+          sm="12"
+        >
+          <div className='clientWrapper'>
+            <div className="scheduleInputWrapper">
+              <input
+                id="searchClient"
+                name="client"
+                placeholder="Find View"
+                type="text"
+                className='' />
+              <img src={searchChat} className='ms-5' alt="" />
+            </div>
+            <div className='my-4'>
+              <h6 className='chat-titles mb-4'>
+                Your Accounts
+              </h6>
+              <div>
+                <div className="client-owner">
+                  <div className='clientowner-IconHolder'>
+                    <img src={barChart} alt="barChart" />
+                  </div>
+                  <div className='clientowner-NameHolder'>
+                    <h6>Business Owner</h6>
+                    <p>Content Calendar</p>
+                  </div>
+                  <div>
+                    <img src={forwardChat} className='ms-auto' alt="" /></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className='clientsHolder'>
+                <h6 className='chat-titles mb-4'>
+                  Clients
+                </h6>
+                {clients.length > 0 ? (<ClientChart item={clients}/>) : (<div className='no-clients'>
+                  <p>You have no clients. Please invite one to get started  </p>
+                  <div>
+                    <Button type="button" color='' className='addclient'> 
+                    <div className='plus'>
+                    <FaPlus/>
+                    </div>
+                   <span> Add new Client</span>
+                    </Button>
+                  </div>
+                </div>)}
+
+              </div>
+            </div>
+          </div>
+        </Col>
+        <Col
+          className="bg-light border"
+          xs="12"
+          md="9"
+          sm="12"
+        >
+          <div className="postWrapper">
+          <div className='topnav'>
+            <h6 className=''>
+              Posts
+            </h6>
+            <Link to="/NewPost" className=''>
+              <h5 className='mb-0'>
+                Create Post
+              </h5>
+            </Link>
+          </div>
+          <div className='socialChannelWrapper'>
+            <SocialChannels/>
+          </div>
+          </div>
+        </Col>
+      </Row>
+      {/* <div className="row w-100 h-100">
         <div className="col-md-4 col-xl-3 chat">
           <div className="card mb-sm-3 mb-md-0 contacts_card">
             <div className="card-header">
@@ -27,65 +110,7 @@ const Schedule = () => {
                 <input type="text" placeholder="Find view" name="" className="form-control search px-1" />
               </div>
             </div>
-            <div className="card-body contacts_body px-4">
-              <h6 className='chat-titles mb-4'>
-                Clients
-              </h6>
-              <ui className="contacts">
-                <li className="active">
-                  <div className="d-flex bd-highlight">
-                    <div className="img_cont d-flex">
-                      <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                           className=" user_img px-2 py-2 my-auto" alt=''/>
-                    </div>
-                    <div className="user_info my-auto mt-2 ms-0">
-                        <span>Digital Seed</span>
-                        <p>Content Calendar</p>
-                    </div>
-                    <img src={forwardChat} className='ms-auto' alt=""/>
-                  </div>
-                </li>
-                <li className="">
-                  <div className="d-flex bd-highlight">
-                    <div className="img_cont d-flex">
-                      <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                           className=" user_img px-2 py-2 my-auto" alt=''/>
-                    </div>
-                    <div className="user_info my-auto mt-2 ms-0">
-                        <span>Digital Seed</span>
-                        <p>Content Calendar</p>
-                    </div>
-                    <img src={forwardChat} className='ms-auto' alt=""/>
-                  </div>
-                </li>
-                <li className="">
-                  <div className="d-flex bd-highlight">
-                    <div className="img_cont d-flex">
-                      <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                           className=" user_img px-2 py-2 my-auto" alt=''/>
-                    </div>
-                    <div className="user_info my-auto mt-2 ms-0">
-                        <span>Digital Seed</span>
-                        <p>Content Calendar</p>
-                    </div>
-                    <img src={forwardChat} className='ms-auto' alt=""/>
-                  </div>
-                </li>
-                <li className="">
-                  <div className="d-flex bd-highlight">
-                    <div className="img_cont d-flex">
-                      <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                           className=" user_img px-2 py-2 my-auto" alt=''/>
-                    </div>
-                    <div className="user_info my-auto mt-2 ms-0">
-                        <span>Digital Seed</span>
-                        <p>Content Calendar</p>
-                    </div>
-                    <img src={forwardChat} className='ms-auto' alt=""/>
-                  </div>
-                </li>
-              </ui>
-            </div>
+            
             <div className="card-footer"></div>
           </div>
         </div>
@@ -241,7 +266,7 @@ const Schedule = () => {
             </div>
           </div>
         </Col>
-      </div>
+      </div> */}
     </div>
   )
 }
