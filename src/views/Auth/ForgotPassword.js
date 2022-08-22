@@ -23,15 +23,15 @@ const ForgotPassword = ({
   forgotPasswordError,
   message
 }) => {
-  useEffect(() => {
-    // console.log(forgotPasswordError, message, loading)
-    if (forgotPasswordError.length > 0) {
-      createNotification('error', forgotPasswordError)
-    }
-    if (message.length > 0) {
-      createNotification('info', forgotPasswordError)
-    }
-  }, [forgotPasswordError, message, loading])
+  // useEffect(() => {
+  //   // console.log(forgotPasswordError, message, loading)
+  //   if (forgotPasswordError.length > 0) {
+  //     createNotification('error', forgotPasswordError)
+  //   }
+  //   if (message.length > 0) {
+  //     createNotification('info', forgotPasswordError)
+  //   }
+  // }, [forgotPasswordError, message, loading])
 
   const [inputType1, setInputType1] = useState('password')
   const [inputType2, setInputType2] = useState('password')
@@ -44,9 +44,9 @@ const ForgotPassword = ({
   } = useForm()
 
   const handlePasswordReset = values => {
-    const token = localStorage.getItem('ontrivUserToken')
-    const uid = JSON.parse(localStorage.getItem('ontrivCurrentUser')).pk
-    forgotPassword({ ...values, token, uid })
+    // const token = localStorage.getItem('ontrivUserToken')
+    // const uid = JSON.parse(localStorage.getItem('ontrivCurrentUser')).pk
+    forgotPassword(values)
   }
 
   return (
@@ -114,7 +114,7 @@ const ForgotPassword = ({
                 </div>
 
                 <div>
-                  <Button className='py-3  mt-1'>
+                  <Button className='py-3  mt-1' disabled={loading}>
                     {loading ? (
                       <div className='text-center w-100 align-items-center'>
                         <ThreeDots
