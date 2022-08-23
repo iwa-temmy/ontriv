@@ -29,7 +29,6 @@ export function* GetOneInvoice({ payload }) {
     } else {
       yield put(getOneInvoiceError(response?.data?.message));
     }
-    yield put(clearMessages());
   } catch (error) {
     let message;
     if (error.response) {
