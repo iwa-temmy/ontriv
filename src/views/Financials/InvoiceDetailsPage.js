@@ -25,6 +25,7 @@ import {
   pdfWithPrintJs,
   copierHelper,
   calculateVat,
+  downloadPdf
 } from "../../utils/helper";
 
 //react-router
@@ -50,6 +51,10 @@ const InvoiceDetailsPage = (props) => {
     setShowOptions(false);
     pdfWithPrintJs("invoice", "invoice");
   };
+
+  const DownloadInvoicePdf = () => {
+    downloadPdf("invoice")
+  }
 
   const toggleInvoicePreview = () => {
     setShowPreviewInvoiceModal(!showPreviewInvoiceModal);
@@ -89,8 +94,9 @@ const InvoiceDetailsPage = (props) => {
               <div
                 className="bg-white rounded-2 py-4 px-5"
                 style={{ borderRadius: "10px" }}
+                id="invoice"
               >
-                <div id="invoice">
+                <div>
                   <div className="add-client-wrapper-2 text-center ">
                     <div className="d-inline-flex" style={{ width: "100%" }}>
                       <img
@@ -401,7 +407,7 @@ const InvoiceDetailsPage = (props) => {
                   </h6>
                   <h6
                     className="px-4 slightly-black action-menu py-3"
-                    onClick={getPDF}
+                    onClick={DownloadInvoicePdf}
                   >
                     Download PDF
                   </h6>
