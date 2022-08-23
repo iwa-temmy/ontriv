@@ -3,12 +3,15 @@ import {
   GET_INVOICES,
   CREATE_NEW_INVOICE,
   DELETE_INVOICE,
+  REQUEST_PAYOUT,
   getAllInvoicesSuccess,
   getAllInvoicesError,
   createNewInvoiceSuccess,
   createNewInvoiceError,
   deleteInvoiceSuccess,
   deleteInvoiceError,
+  requestPayoutSuccess,
+  requestPayoutError,
   clearMessages,
 } from "../actions";
 import Axios from "../../utils/Axios";
@@ -151,6 +154,59 @@ export function* DeleteInvoice({ payload }) {
     yield put(clearMessages());
   }
 }
+
+export function* RequestPayout({ payload }) {
+  const { credentials } = payload;
+  try {
+    const response = yield Axios.post(
+      `/invoice/api/v1/invoice/create/`,
+      credentials
+    );
+    if (response?.status === 201) {
+      yield put(requestPayoutSuccess());
+      yield call(GetAllInvoices);
+    } else {
+      yield put(requestPayoutError(response?.data?.message));
+    }
+    yield put(clearMessages());
+  } catch (error) {
+    let message;
+    if (error.response) {
+      const errorMessage = error?.response?.data?.amount
+        ? `Amount is required`
+        : error?.response?.data?.bank_name
+        ? `Bank Name is required`
+        : error?.response?.data?.account_number
+        ? `Account Number is required`
+        : error?.response?.data?.account_name
+        ? `Account Name is required}`
+        : error?.response?.data?.paid_out
+        ? `Paid Out is required`
+        : null;
+
+      switch (error.response.status) {
+        case 500:
+          message = "Internal Server Error";
+          break;
+        case 404:
+          message = "Not found";
+          break;
+        case 401:
+          message = "Invalid credentials";
+          break;
+        case 400:
+          message = errorMessage;
+          break;
+        default:
+          message = error.response.statusText;
+      }
+    } else if (error.message) {
+      message = error.message;
+    }
+    yield put(createNewInvoiceError(message));
+    yield put(clearMessages());
+  }
+}
 export function* watchGetAllInvoices() {
   yield takeEvery(GET_INVOICES, GetAllInvoices);
 }
@@ -163,10 +219,14 @@ export function* watchDeleteInvoice() {
   yield takeEvery(DELETE_INVOICE, DeleteInvoice);
 }
 
+export function* watchRequestPayout() {
+  yield takeEvery(REQUEST_PAYOUT, RequestPayout);
+}
 export default function* rootSaga() {
   yield all([
     fork(watchGetAllInvoices),
     fork(watchCreateNewInvoice),
     fork(watchDeleteInvoice),
+    fork(watchRequestPayout),
   ]);
 }

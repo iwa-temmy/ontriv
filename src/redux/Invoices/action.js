@@ -8,6 +8,9 @@ import {
   DELETE_INVOICE,
   DELETE_INVOICE_SUCCESS,
   DELETE_INVOICE_ERROR,
+  REQUEST_PAYOUT,
+  REQUEST_PAYOUT_SUCCESS,
+  REQUEST_PAYOUT_ERROR,
 } from "../actions";
 
 export const getAllInvoices = () => ({
@@ -54,4 +57,17 @@ export const deleteInvoiceError = (error) => ({
   payload: error,
 });
 
+export const requestPayout = (credentials) => ({
+  type: REQUEST_PAYOUT,
+  payload: credentials,
+});
 
+export const requestPayoutSuccess = () => ({
+  type: REQUEST_PAYOUT_SUCCESS,
+  payload: "Request Payout Successfully",
+});
+
+export const requestPayoutError = (error) => ({
+  type: REQUEST_PAYOUT_ERROR,
+  payload: error,
+});

@@ -9,6 +9,9 @@ import {
   DELETE_INVOICE,
   DELETE_INVOICE_SUCCESS,
   DELETE_INVOICE_ERROR,
+  REQUEST_PAYOUT,
+  REQUEST_PAYOUT_SUCCESS,
+  REQUEST_PAYOUT_ERROR,
 } from "../actions";
 
 const intialState = {
@@ -16,15 +19,18 @@ const intialState = {
     getInvoice: false,
     createInvoice: false,
     deleteInvoice: false,
+    requestPayout: false,
   },
   error: {
     getInvoice: "",
     createInvoice: "",
     deleteInvoice: "",
+    requestPayout: "",
   },
   message: {
     createInvoice: "",
     deleteInvoice: "",
+    requestPayout: "",
   },
   invoices: [],
 };
@@ -81,13 +87,35 @@ const invoicesReducer = (state = intialState, action) => {
         loading: { ...state?.loading, deleteInvoice: false },
         error: { ...state?.error, deleteInvoice: action?.payload },
       };
+    case REQUEST_PAYOUT:
+      return {
+        ...state,
+        loading: { ...state?.loading, requestPayout: true },
+      };
+    case REQUEST_PAYOUT_SUCCESS:
+      return {
+        ...state,
+        loading: { ...state?.loading, requestPayout: false },
+        message: { ...state?.message, requestPayout: action.payload },
+      };
+    case REQUEST_PAYOUT_ERROR:
+      return {
+        ...state,
+        loading: { ...state?.loading, requestPayout: false },
+        error: { ...state?.error, requestPayout: action.payload },
+      };
 
     case RESET_MESSAGE:
       return {
         ...state,
         getInvoiceError: "",
-        message: { createInvoice: "", deleteInvoice: "" },
-        error: { getInvoice: "", createInvoice: "", deleteInvoice: "" },
+        message: { createInvoice: "", deleteInvoice: "", requestPayout: "" },
+        error: {
+          getInvoice: "",
+          createInvoice: "",
+          deleteInvoice: "",
+          requestPayout: "",
+        },
       };
     default:
       return state;
