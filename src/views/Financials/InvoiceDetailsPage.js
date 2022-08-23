@@ -25,7 +25,7 @@ import {
   pdfWithPrintJs,
   copierHelper,
   calculateVat,
-  downloadPdf
+  downloadPdf,
 } from "../../utils/helper";
 
 //react-router
@@ -58,8 +58,9 @@ const InvoiceDetailsPage = (props) => {
   };
 
   const DownloadInvoicePdf = () => {
-    downloadPdf("invoice")
-  }
+    downloadPdf("invoice");
+    setShowOptions(false);
+  };
 
   const toggleInvoicePreview = () => {
     setShowPreviewInvoiceModal(!showPreviewInvoiceModal);
@@ -101,11 +102,10 @@ const InvoiceDetailsPage = (props) => {
           <Row>
             <Col xl="8" className="">
               <div
-                className="bg-white rounded-2 py-4 px-5"
+                className="bg-white rounded-2"
                 style={{ borderRadius: "10px" }}
-                id="invoice"
               >
-                <div>
+                <div id="invoice" className="pt-4 px-5">
                   <div className="add-client-wrapper-2 text-center ">
                     <div className="d-inline-flex" style={{ width: "100%" }}>
                       <img
@@ -254,7 +254,7 @@ const InvoiceDetailsPage = (props) => {
                     <h6 className="add-item mb-5">www.yourwebsiteurl.com</h6>
                   </div>
                 </div>
-                <div className="d-inline-flex mb-5 w-100">
+                <div className="d-inline-flex mb-5 w-100 px-5 pb-4">
                   <div className="me-auto">
                     <div className="d-inline-flex w-full">
                       <img src={PlusSign} className="" alt="" />
