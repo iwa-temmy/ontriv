@@ -2,6 +2,7 @@ import axios from "axios";
 import moment from "moment";
 import html2canvas from "html2canvas";
 import printJs from "print-js";
+import jsPDF from "jspdf";
 import createNotification from "./Notification";
 
 const BASE_URL = "https://ontriv.herokuapp.com";
@@ -185,6 +186,20 @@ export const pdfWithPrintJs = (printable, documentTitle, type = "image") => {
   }
 };
 
+export const downloadPdf = (printable) => {
+  const input = document.getElementById(printable);
+  html2canvas(input, { logging: true, letterRendering: 1, useCORS: true }).then(
+    (canvas) => {
+      const imgWidth = 208;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const imgData = canvas.toDataURL("img/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+      pdf.save("invoice.pdf");
+    }
+  );
+};
+
 export const copierHelper = (text) => {
   if (text) {
     navigator.clipboard.writeText(text);
@@ -196,5 +211,5 @@ export const copierHelper = (text) => {
 };
 
 export const calculateVat = (total, vat) => {
-  return (vat/100) * total
-}
+  return (vat / 100) * total;
+};
