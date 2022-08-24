@@ -31,6 +31,7 @@ import {
 //react-router
 import { useLocation } from "react-router-dom";
 import CreateInvoiceModal from "./InvoiceActions/CreateInvoiceModal";
+import EditInvoiceModal from "./InvoiceActions/EditInvoiceModal";
 
 const InvoiceDetailsPage = (props) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -41,6 +42,7 @@ const InvoiceDetailsPage = (props) => {
     useState(false);
   const [showPreviewInvoiceModal, setShowPreviewInvoiceModal] = useState(false);
   const [showCreateInvoiceModal, setShowCreateInvoiceModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [pageData, setPageData] = useState({});
 
   //props
@@ -74,6 +76,12 @@ const InvoiceDetailsPage = (props) => {
     setShowCreateInvoiceModal(false);
   };
 
+  const openEditInvoiceModal = () => {
+    setShowEditModal(true);
+  };
+  const closeEditInvoiceModal = () => {
+    setShowEditModal(false);
+  };
   useEffect(() => {
     getOneInvoice(location?.state?.id);
   }, [getOneInvoice, location?.state?.id]);
@@ -92,7 +100,9 @@ const InvoiceDetailsPage = (props) => {
       {showCreateInvoiceModal ? (
         <CreateInvoiceModal closeInvoiceModal={CloseCreateInvoiceModal} />
       ) : null}
-
+      {showEditModal ? (
+        <EditInvoiceModal closeInvoiceModal={closeEditInvoiceModal} payload={pageData}/>
+      ) : null}
       <div className="dashboard dashboard-wrapper px-2 position-relative">
         {getOneInvoiceLoading ? (
           <div className="position-fixed top-50 start-50">
@@ -348,7 +358,10 @@ const InvoiceDetailsPage = (props) => {
             </Col>
             <Col xl="4" className="position-relative">
               <div className="d-inline-flex w-10t">
-                <button className="py-2 ms-3 px-4 me-2 send align-items-center ">
+                <button
+                  className="py-2 ms-3 px-4 me-2 send align-items-center"
+                  onClick={openEditInvoiceModal}
+                >
                   Edit Invoice
                 </button>
                 <button
