@@ -13,6 +13,11 @@
         gap: 60px;
         cursor: pointer;
         overflow-x: auto;
+        @media(max-width: 576px) {
+          // overflow-x: scroll;
+          gap: 5px;
+          font-size: 10px;
+      }
         ::-webkit-scrollbar {
           visibility: hidden;
         }

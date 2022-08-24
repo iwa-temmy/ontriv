@@ -250,6 +250,11 @@
         border-radius: 20px;
         margin-top: 20px;
         padding: 30px 52px;
+
+
+        @media(max-width: 576px) {
+            padding: 0px;
+        }
     }
 }
 
@@ -257,6 +262,10 @@
     display: flex;
     align-items: center;
     gap: 14px;
+
+    @media(max-width: 576px) {
+        flex-direction: column;
+    }
 
     .post-image {
         width: 122px;
@@ -294,4 +303,288 @@
             }
         }
     }
+}
+
+.post-postType {
+    font-weight: 400;
+    width: 100px;
+    margin-left: -10px;
+    font-size: 12px;
+    line-height: 18px;
+    // text-align: center;
+    letter-spacing: 0.04px;
+    color: #111317;
+    // @media(max-width: 576px) {
+    //     font-size: 10px;
+    // }
+
+}
+
+.post-date-time {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    margin-left: -10px;
+    // text-align: center;
+    letter-spacing: 0.04px;
+    // @media(max-width: 576px) {
+    //     font-size: 10px;
+    // }
+}
+
+.post-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: -10px;
+
+    div {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+    }
+
+    p {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+        text-align: center;
+        letter-spacing: 0.04px;
+        // @media(max-width: 576px) {
+        //     font-size: 10px;
+        // }
+    }
+}
+
+.pending {
+    color: #FF2154;
+
+    div {
+        background: #FF2154;
+    }
+}
+
+.published {
+    color: #57D9A3;
+
+    div {
+        background: #57D9A3;
+    }
+}
+
+.scheduled {
+    color: #2062F4;
+
+    div {
+        background: #2062F4;
+    }
+}
+
+.draft {
+    color: #565C65;
+
+    div {
+        background: #565C65;
+    }
+}
+
+.filterPost {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    @media(max-width: 576px) {
+        gap: 5px;
+        flex-direction: column;
+    }
+
+
+    .poststatus {
+        display: flex;
+        align-items: center;
+        position: relative;
+        gap: 16px;
+        background: #E8F7FF;
+        border-radius: 5px;
+        padding: 0px 10px;
+
+        // width: 194px;
+        @media(max-width: 576px) {
+            width: 100%;
+        }
+
+        .smallcircle {
+            width: 25px;
+            height: 22px;
+            background: #FFFFFF;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            // border: solid;
+        }
+
+        .selectpost {
+            display: flex;
+            align-items: center;
+            // font-weight: 400;
+
+            // position: relative;
+            h6 {
+                margin-top: 6px;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 18px;
+                // @media(max-width: 576px) {
+                //     margin-top: 25px;
+                // }
+
+            }
+
+            .selectholder {
+                position: relative;
+
+                select {
+                    background-color: transparent;
+                    border: none;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    width: 50px;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 18px;
+
+                    option {
+                        background: white;
+                    }
+
+                    &:focus {
+                        outline: none !important;
+                        border: none !important;
+                    }
+                }
+
+                .mask {
+                    position: absolute;
+                    top: 5px;
+                    right: 3px;
+                }
+            }
+
+        }
+    }
+
+    .postime {
+        display: flex;
+        align-items: center;
+        position: relative;
+        background: #E5ECF2;
+        border-radius: 5px;
+        gap: 16px;
+        padding: 0px 10px;
+
+        @media(max-width: 576px) {
+            width: 100%;
+        }
+
+        // @media(max-width: 576px) {
+        //     gap: 5px;
+        // }
+        .smallcalendar {
+            width: 25px;
+            height: 22px;
+            background: #FFFFFF;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timepost {
+            display: flex;
+            align-items: center;
+
+            h6 {
+                margin-top: 8px;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 18px;
+
+                @media(max-width: 576px) {
+                    margin-top: 15px;
+                }
+            }
+
+            .timeholder {
+                position: relative;
+
+                select {
+                    background-color: transparent;
+                    border: none;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    width: 180px;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 18px;
+
+                    // @media(max-width: 576px) {
+                    //     width: 65px;
+                    // }
+
+                    option {
+                        background: white;
+                    }
+
+                    &:focus {
+                        outline: none !important;
+                        border: none !important;
+                    }
+                }
+
+                .calendar {
+                    position: absolute;
+                    right: 5px;
+                    top: 5px;
+
+                    @media(max-width: 576px) {
+                        right: 10px;
+                        // left: -67px;
+                        top: 8px;
+                        // width: 10px;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+.inputholder {
+    position: relative;
+
+    @media(max-width: 576px) {
+        margin-top: 5px;
+    }
+
+    .input {
+        border: 1px solid #C0CCDA !important;
+        border-radius: 5px !important;
+        width: 100%;
+        padding: 5px 30px;
+
+        &:focus {
+            outline: none !important;
+
+        }
+    }
+
+    img {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+
 }
