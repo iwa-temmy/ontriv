@@ -145,7 +145,7 @@ const EditInvoiceModal = ({
       label: <span>False</span>,
     },
   ];
-
+  
   //useEffect
   useEffect(() => {
     console.log("Invoice Data", payload)
