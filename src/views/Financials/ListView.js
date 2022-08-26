@@ -51,7 +51,7 @@ const ClientListView = ({
   const closeDeleteModal = () => {
     setShowDeleteModal(false);
     setInvoiceID(0);
-  }
+  };
   const openFullInvoicePage = (record) => {
     const invoiceData = record?.row?.original;
     navigate(`/invoices-&-financials/invoice/${invoiceData?.id}`, {
@@ -130,7 +130,7 @@ const ClientListView = ({
     }
   }, [deleteError, deleteMessage, deleteloading]);
   return (
-    <div className="mb-0 mt-1 overflow-auto">
+    <div className="mb-0 mt-1" style={{ overflowX: "scroll" }}>
       {loading ? (
         <div
           className="d-flex justify-content-center align-items-center"
