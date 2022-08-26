@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Input } from "reactstrap";
 import { CenteredModal as Modal } from "../../../components/Modal";
 
-const RequestPayoutModal = ({ showRequestPayout, setShowRequestPayout }) => {
+//redux
+import {connect} from "react-redux";
+import { requestPayout } from "../../../redux/actions";
+
+const RequestPayoutModal = ({ showRequestPayout, setShowRequestPayout, requestPayout }) => {
   const [formData, setFormData] = useState({});
 
   const handleInputChange = (e) => {
@@ -12,8 +16,9 @@ const RequestPayoutModal = ({ showRequestPayout, setShowRequestPayout }) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    requestPayout(formData);
   };
+
   return (
     <Modal modalState={showRequestPayout} setModalState={setShowRequestPayout}>
       <div className="add-client-wrapper text-center ">
@@ -61,4 +66,9 @@ const RequestPayoutModal = ({ showRequestPayout, setShowRequestPayout }) => {
   );
 };
 
-export default RequestPayoutModal;
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  }
+}
+export default connect(mapStateToProps, {requestPayout})(RequestPayoutModal);
