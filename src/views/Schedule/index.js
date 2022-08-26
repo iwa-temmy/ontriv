@@ -15,9 +15,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import barChart from "../../assets/img/barchart.png"
 import ClientChart from './ClientChart';
-import {clients} from "./data"
+import {clients, socialPost} from "./data"
 import { FaPlus } from "react-icons/fa";
 import SocialChannels from './tabs';
+import NoPostSchedule from './NoPostSchedule';
 
 const Schedule = () => {
   const [currentMenu, setCurrentMenu] = useState("all");
@@ -96,7 +97,7 @@ const Schedule = () => {
             </Link>
           </div>
           <div className='socialChannelWrapper'>
-            <SocialChannels/>
+            {socialPost.length < 0 ? (<NoPostSchedule/>):(<SocialChannels/>)}
           </div>
           </div>
         </Col>

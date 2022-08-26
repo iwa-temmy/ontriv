@@ -21,14 +21,28 @@ import LKExample from './../../assets/img/LinkedInExample.png'
 import {Button, Col, Input, Row} from "reactstrap";
 import React, {useState} from "react";
 import {CenteredModal as Modal} from "../../components/Modal";
+import Steppper from './newPost/index.jsx';
+import Step1 from './newPost/steps/Step1';
+import Step2 from './newPost/steps/Step2';
+import Step3 from './newPost/steps/Step3';
+import ScheduleSteps from './schedulestep';
+// import "./newPost/index.css"
+
 
 const NewPost = () => {
+  const steps = {
+    1:Step1,
+    2:Step2,
+    3:Step3
+  };
   const [currentMenu, setCurrentMenu] = useState(4);
   const [socialMediaPostTab, setSocialMediaPostTab] = useState("ig");
   const [showSettings, setShowSettings] = useState(false);
   return (
     <>
-      <div className='dashboard dashboard-wrapper'>
+    <ScheduleSteps/>
+    {/* <Steppper title="Account confirmation" steps={steps}/> */}
+      {/* <div className='dashboard dashboard-wrapper'>
         <div className="row w-100 h-100">
           <div className="col-md-4 col-xl-3 chat">
             <div className="card mb-sm-3 mb-md-0 contacts_card p-4">
@@ -439,7 +453,7 @@ const NewPost = () => {
             }} className='px-5 my-2 w-100'>Next</Button>
           </div>
         </div>
-      </Modal>
+      </Modal> */}
     </>
   )
 }

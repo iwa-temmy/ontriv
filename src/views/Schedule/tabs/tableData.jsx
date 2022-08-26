@@ -1,6 +1,6 @@
 import React from 'react'
 import Table from '../../../components/Table'
-import { socialPost } from "../data"
+ import { socialPost } from "../data"
 import SocialChannelTopNav from "./SocialChannelTopNav"
 
 const SocialTableData = () => {
