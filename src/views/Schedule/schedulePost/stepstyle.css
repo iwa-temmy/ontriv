@@ -1,4 +1,4 @@
-.circle{
+/* .circle{
     width: 29px;
     height: 29px;
     line-height: 25px;
@@ -9,7 +9,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* border: 2px solid transparent; */
     cursor: pointer;
     -moz-background-clip: padding-box;
     -webkit-background-clip: padding-box;
@@ -22,9 +21,6 @@
     margin: 0px 0px 20px 0px;
 }
 
-/* .stepBlock{
-    border: solid red;
-} */
 
 .stepBlock .circleWrapper {
     padding: 0px 20px;
@@ -40,7 +36,7 @@
     color: white;
     background: linear-gradient(180deg, #6AD5ED 0%, #49A8F8 100%);
     border: 3px solid #FFFFFF;
-}
+} */
 
 /* .circleWrapper::after{
     content: '';
@@ -54,7 +50,7 @@
     z-index: -1;
 } */
 
-.stepBlock:not(:last-child) > .circleWrapper ::after {
+/* .stepBlock:not(:last-child) > .circleWrapper ::after {
     content: '';
     width:100%;
     height: 2px;
@@ -72,9 +68,9 @@
 
 .stepBlock:not(:last-child).selected > .circleWrapper::after, .stepBlock:not(:last-child).selected ~ .stepBlock:not(:last-child) > .circleWrapper::after{
     height: 2px;
-}
+} */
 
-.primaryButton {
+/* .primaryButton {
     padding: 10px 25px;
     background: green;
     color: white;
@@ -82,4 +78,4 @@
     margin: 10px;
     border-radius: 4px;
     cursor: pointer;
-}
+} */
