@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import {
   Container,
   // Row,
@@ -8,20 +8,20 @@ import {
   // Col,
   Button
 } from 'reactstrap'
-import { TiEye } from 'react-icons/ti'
-import { IoMdEyeOff } from 'react-icons/io'
+// import { TiEye } from 'react-icons/ti'
+// import { IoMdEyeOff } from 'react-icons/io'
 import logo from '../../assets/img/logo.png'
 import { ThreeDots } from 'react-loader-spinner'
 import { useForm } from 'react-hook-form'
 import { connect } from 'react-redux'
 import { forgotPassword } from '../../redux/actions'
-import createNotification from '../../utils/Notification'
+// import createNotification from '../../utils/Notification'
 
 const ForgotPassword = ({
   loading,
   forgotPassword,
-  forgotPasswordError,
-  message
+  // forgotPasswordError,
+  // message
 }) => {
   // useEffect(() => {
   //   // console.log(forgotPasswordError, message, loading)
@@ -33,13 +33,13 @@ const ForgotPassword = ({
   //   }
   // }, [forgotPasswordError, message, loading])
 
-  const [inputType1, setInputType1] = useState('password')
-  const [inputType2, setInputType2] = useState('password')
+  // const [inputType1, setInputType1] = useState('password')
+  // const [inputType2, setInputType2] = useState('password')
 
   const {
     handleSubmit,
     register,
-    watch,
+    // watch,
     formState: { errors }
   } = useForm()
 

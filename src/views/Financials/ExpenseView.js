@@ -39,11 +39,11 @@ const ExpenseListView = ({
   const closeDeleteModal = () => {
     setShowDeleteModal(false);
     setExpenseID(0);
-  }
+  };
 
   const handleDeleteExpense = () => {
-    deleteExpense(expenseID)
-  }
+    deleteExpense(expenseID);
+  };
   const cols = React.useMemo(
     () => [
       {
@@ -75,19 +75,19 @@ const ExpenseListView = ({
       {
         Header: "Action",
         accessor: "id",
-        cellClass: "pt-4 list-client-item",
+        cellClass: "pt-4",
         Cell: (props) => (
           <>
             <button
-              className="d-flex"
+              className="d-flex justify-content-center align-items-center list-client-delete-finance "
               onClick={() => {
                 openDeleteModal(props.value);
               }}
             >
-              <div className="list-client-delete-finance px-3 py-1">
-                <MdDelete size="14px" className="pt-0" />
-                <span className="pt-2 mb-0 text-underline">Delete</span>
-              </div>
+              <MdDelete size="14px" />
+              <span className="text-underline" style={{ marginLeft: "0.2rem" }}>
+                Delete
+              </span>
             </button>
           </>
         ),
