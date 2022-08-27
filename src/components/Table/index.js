@@ -35,10 +35,10 @@ function Table({
   );
 
   return (
-    <>
+    <div style={{height:"50vh", position: "relative"}}>
       <table
         {...getTableProps()}
-        className={`r-table table ${classnames({
+        className={`r-table table  ${classnames({
           "table-divided": divided,
           "table-divided-row": dividedRow,
         })}`}
@@ -108,7 +108,7 @@ function Table({
           paginationMaxSize={pageCount}
         />
       )}
-    </>
+    </div>
   );
 }
 

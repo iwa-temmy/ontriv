@@ -205,7 +205,7 @@ const Finances = ({
               <div className="d-inline-flex white-button py-1 px-4">
                 <img src={BluePlus} alt="" />
                 <div className="btn-lg w-auto " onClick={openInvoiceModal}>
-                  <h6 className="mb-0 cursor-pointer">Create a new Invoice</h6>
+                  <h6 className="mb-0 cursor-pointer">Create New Invoice</h6>
                 </div>
               </div>
             </div>

@@ -51,7 +51,7 @@ const ClientListView = ({
   const closeDeleteModal = () => {
     setShowDeleteModal(false);
     setInvoiceID(0);
-  }
+  };
   const openFullInvoicePage = (record) => {
     const invoiceData = record?.row?.original;
     navigate(`/invoices-&-financials/invoice/${invoiceData?.id}`, {
@@ -130,7 +130,7 @@ const ClientListView = ({
     }
   }, [deleteError, deleteMessage, deleteloading]);
   return (
-    <div className="mb-0 mt-1 overflow-auto">
+    <div className="mb-0 mt-1 overflow-auto" >
       {loading ? (
         <div
           className="d-flex justify-content-center align-items-center"
@@ -148,8 +148,8 @@ const ClientListView = ({
         />
       ) : (
         <EmptyTableData
-          subHeaderText="Invoice your first client and get paid instantly"
-          buttonText="Create a new invoice"
+          subHeaderText="Get started by creating your first invoice"
+          buttonText="Create New invoice"
           onClick={openInvoiceModal}
         />
       )}

@@ -16,7 +16,7 @@ const TableDropdown = ({
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   return (
-    <Dropdown isOpen={dropdownOpen} toggle={toggle} size="md">
+    <Dropdown isOpen={dropdownOpen} toggle={toggle} size="sm">
       <DropdownToggle>
         <AiOutlineMore color="#000" size="20px" />
       </DropdownToggle>

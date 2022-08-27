@@ -33,7 +33,7 @@ export const sideBarMenu = [
 
   {
     id: "Invoices & Financials",
-    title: "Invoices & Financials",
+    title: "Finances",
     icon: <RiPieChartFill size={20} />,
     type: "item",
     navLink: "/invoices-&-financials",
