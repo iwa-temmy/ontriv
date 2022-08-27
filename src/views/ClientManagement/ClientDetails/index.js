@@ -215,8 +215,8 @@ const ClientDetails = ({ getClientDetails, clientDetails }) => {
                     <p className='client-project mb-0'>Content Calendar</p>
                   </div>
                   <div className='project-timeline'>
-                    <h1>Project Timeline</h1>
-                    <p className='mb-0'>6 Months</p>
+                    <h1>Business category</h1>
+                    <p className='mb-0'></p>
                   </div>
                   <div className='client-portal'>
                     <h1>Client Portal</h1>
@@ -232,57 +232,77 @@ const ClientDetails = ({ getClientDetails, clientDetails }) => {
                   <Row>
                     <Col sm='6' xl='4'>
                       <div
-                        className='client-information-item d-flex align-items-center justify-content-between'
+                        className='client-information-item cursor-pointer d-flex align-items-center justify-content-between'
                         onClick={() => {
                           setWebsiteState(!websiteState)
                         }}
                       >
                         <h2>Website</h2>
-                        <IoIosCheckmarkCircle
+                        {/* <IoIosCheckmarkCircle
                           className='information-icon'
                           color='#00D67D'
+                        /> */}
+                        <MdAddCircle
+                          className='information-icon'
+                          color='#9DA8B6'
                         />
                       </div>
                     </Col>
                     <Col sm='6' xl='4'>
-                      <div className='client-information-item d-flex align-items-center justify-content-between'>
+                      <div className='client-information-item cursor-pointer d-flex align-items-center justify-content-between'>
                         <h2>Brand color</h2>
-                        <IoIosCheckmarkCircle
+                        {/* <IoIosCheckmarkCircle
                           className='information-icon'
                           color='#00D67D'
+                        /> */}
+                        <MdAddCircle
+                          className='information-icon'
+                          color='#9DA8B6'
                         />
                       </div>
                     </Col>
                     <Col sm='6' xl='4'>
-                      <div className='client-information-item d-flex align-items-center justify-content-between'>
+                      <div className='client-information-item cursor-pointer d-flex align-items-center justify-content-between'>
                         <h2>Brand font</h2>
-                        <IoIosCheckmarkCircle
+                        {/* <IoIosCheckmarkCircle
                           className='information-icon'
                           color='#00D67D'
+                        /> */}
+                        <MdAddCircle
+                          className='information-icon'
+                          color='#9DA8B6'
                         />
                       </div>
                     </Col>
 
                     <Col sm='6' xl='4'>
-                      <div className='client-information-item d-flex align-items-center justify-content-between'>
+                      <div className='client-information-item cursor-pointer d-flex align-items-center justify-content-between'>
                         <h2>Preferred tone</h2>
-                        <IoIosCheckmarkCircle
+                        {/* <IoIosCheckmarkCircle
                           className='information-icon'
                           color='#00D67D'
+                        /> */}
+                        <MdAddCircle
+                          className='information-icon'
+                          color='#9DA8B6'
                         />
                       </div>
                     </Col>
                     <Col sm='6' xl='4'>
-                      <div className='client-information-item d-flex align-items-center justify-content-between'>
+                      <div className='client-information-item cursor-pointer d-flex align-items-center justify-content-between'>
                         <h2>Target audience</h2>
-                        <IoIosCheckmarkCircle
+                        {/* <IoIosCheckmarkCircle
                           className='information-icon'
                           color='#00D67D'
+                        /> */}
+                        <MdAddCircle
+                          className='information-icon'
+                          color='#9DA8B6'
                         />
                       </div>
                     </Col>
                     <Col sm='6' xl='4'>
-                      <div className='client-information-item d-flex align-items-center justify-content-between'>
+                      <div className='client-information-item cursor-pointer d-flex align-items-center justify-content-between'>
                         <h2>Main goal</h2>
                         <MdAddCircle
                           className='information-icon'
@@ -291,7 +311,7 @@ const ClientDetails = ({ getClientDetails, clientDetails }) => {
                       </div>
                     </Col>
                     <Col sm='2' md='4'>
-                      <div className='client-information-item d-flex align-items-center justify-content-between'>
+                      <div className='client-information-item cursor-pointer d-flex align-items-center justify-content-between'>
                         <h2>USP</h2>
                         <MdAddCircle
                           className='information-icon'
@@ -301,7 +321,7 @@ const ClientDetails = ({ getClientDetails, clientDetails }) => {
                     </Col>
                     <Col sm='2' md='4'>
                       <div
-                        className='client-information-item d-flex align-items-center justify-content-between'
+                        className='client-information-item cursor-pointer d-flex align-items-center justify-content-between'
                         onClick={() => {
                           setHashtagState(!hashtagState)
                         }}
@@ -314,7 +334,7 @@ const ClientDetails = ({ getClientDetails, clientDetails }) => {
                       </div>
                     </Col>
                     <Col sm='2' md='4'>
-                      <div className='client-information-item d-flex align-items-center justify-content-between'>
+                      <div className='client-information-item cursor-pointer d-flex align-items-center justify-content-between'>
                         <h2>Note</h2>
                         <MdAddCircle
                           className='information-icon'
@@ -331,13 +351,59 @@ const ClientDetails = ({ getClientDetails, clientDetails }) => {
 
                 <Card className='client-invoices'>
                   <h2 className='mb-0'>Invoices</h2>
-                  <div className='mb-0 mt-2'>
+                  {/* <div className='mb-0 mt-2'>
                     <Table
                       columns={cols}
                       data={clients}
                       defaultPageSize={2}
                       pagePosition='left'
                     />
+                  </div> */}
+                  <div className='client-details-empty-invoice-state py-5'>
+                    <div className='mb-2'>
+                      <p
+                        className='mb-0 text-center'
+                        style={{
+                          fontWeight: '400',
+                          fontSize: '18px',
+                          lineheight: '27px',
+                          letterspacing: ' 0.374px',
+                          color: '#04004D'
+                        }}
+                      >
+                        This client does not have any invoices
+                      </p>
+                      <p
+                        className='mb-0 text-center'
+                        style={{
+                          fontWeight: '400',
+                          fontSize: '18px',
+                          lineheight: '27px',
+                          letterspacing: ' 0.374px',
+                          color: '#04004D'
+                        }}
+                      >
+                        created by you
+                      </p>
+                    </div>
+                    <div className='pt-2 pb-2 mb-1 text-center '>
+                      <button
+                        className=' btn-primary btn py-3 w-50'
+                        style={{
+                          borderRadius: '16px',
+                          border:"none",
+                          background:
+                            'linear-gradient(93.88deg, #49A8F8 6.88%, #0053F4 74.45%) !important'
+                        }}
+                        onClick={() => {
+                          // toggleInvite()
+                          // // setAddClient(false)
+                          // setSuccessTitle('Invite Sent')
+                        }}
+                      >
+                        Create New Invoice
+                      </button>
+                    </div>
                   </div>
                 </Card>
 
@@ -396,11 +462,15 @@ const ClientDetails = ({ getClientDetails, clientDetails }) => {
                           </p>
                           <div className='icon-img-container'>
                             {/* <IoIosCheckmarkCircle color='#00D67D' /> */}
-                            <img
+                            {/* <img
                               src={cl}
                               alt='...'
                               height='16px'
                               width='16px'
+                            /> */}
+                            <MdAddCircle
+                              className='information-icon'
+                              color='#9DA8B6'
                             />
                           </div>
                         </div>
@@ -436,11 +506,15 @@ const ClientDetails = ({ getClientDetails, clientDetails }) => {
                           </p>
                           <div className='icon-img-container'>
                             {/* <IoIosCheckmarkCircle color='#00D67D' /> */}
-                            <img
+                            {/* <img
                               src={cl}
                               alt='...'
                               height='16px'
                               width='16px'
+                            /> */}
+                            <MdAddCircle
+                              className='information-icon'
+                              color='#9DA8B6'
                             />
                           </div>
                         </div>
@@ -477,11 +551,15 @@ const ClientDetails = ({ getClientDetails, clientDetails }) => {
                           </p>
                           <div className='icon-img-container'>
                             {/* <IoIosCheckmarkCircle color='#00D67D' /> */}
-                            <img
+                            {/* <img
                               src={cl}
                               alt='...'
                               height='16px'
                               width='16px'
+                            /> */}
+                            <MdAddCircle
+                              className='information-icon'
+                              color='#9DA8B6'
                             />
                           </div>
                         </div>

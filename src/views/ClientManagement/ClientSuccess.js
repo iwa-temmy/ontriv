@@ -7,6 +7,7 @@ import { createClient, createTag } from '../../redux/actions'
 import clientSuccess from '../../assets/img/invite-success.png'
 
 const AddNewClient = ({
+  title,
   addState,
   createClient,
   setAddState,
@@ -22,7 +23,7 @@ const AddNewClient = ({
           <img src={clientSuccess} alt='...' />
         </div>
         <div className='add-client-text text-center'>
-          <h3>Client Added</h3>
+          <h3>{title}</h3>
           <p>Please check the email used to activate the account. </p>
         </div>
         <div className='pt-2 pb-3'>

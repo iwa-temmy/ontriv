@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi'
 import { CenteredModal as Modal } from '../Modal'
 import { HiPlus } from 'react-icons/hi'
-
+import postEmptyIcon from '../../assets/img/postEmptyIcon.png'
 const { datesGenerator } = require('dates-generator')
 
 const months = [
@@ -204,9 +204,7 @@ const Calendar = () => {
                         {console.log(week)}
                         {week
                           .map(el =>
-                            el.month === currentMonth
-                              ? el
-                              : { ...el, date: '' }
+                            el.month === currentMonth ? el : { ...el, date: '' }
                           )
                           .map(each => (
                             <td
@@ -255,11 +253,17 @@ const Calendar = () => {
 
       <Modal modalState={showPost} setModalState={togglePost}>
         <div className='add-client-wrapper text-center '>
+          <div className='mt-5'>
+            <img src={postEmptyIcon} alt='icon' />
+          </div>
           <div className=' text-center mt-3 mb-4'>
             <h5
               style={{
                 fontSize: '18px',
-                fontWeight: '600'
+                fontWeight: '400',
+                lineHeight: ' 28px',
+                letterSpacing: '0.35px',
+                color: '#111317'
               }}
             >
               No scheduled posts for this date
@@ -273,8 +277,11 @@ const Calendar = () => {
             onClick={togglePost}
             style={{
               width: '225px',
-
-              borderRadius: '10px'
+              borderRadius: '10px',
+              fontSize: '14px',
+              lineHeight: '21px',
+              letterSpacing: '1.25px',
+              color: ' #F7F7FC'
             }}
           >
             <h5 className='mb-0'>

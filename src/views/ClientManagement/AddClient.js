@@ -27,6 +27,8 @@ const AddNewClient = ({
   const [inviteModal, setInviteModal] = useState(false)
   // const [addTagModal, setAddTagModal] = useState('')
   const [clientSuccess, setClientSuccess] = useState(false)
+  const [sucessTitle, setSuccessTitle] = useState('')
+
   const toggleSuccess = () => {
     setClientSuccess(!clientSuccess)
   }
@@ -60,18 +62,27 @@ const AddNewClient = ({
           <div className='text-center user-icon-container '>
             <HiUser className=' text-center' color='#49A8F8' size='45px' />
           </div>
-          <div className='add-client-text text-center'>
+          <div className='add-client-text text-center mt-3'>
             <h3>Add new client</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <div
+              style={{
+                marginTop: '5px',
+                marginBottom: '50px'
+              }}
+            >
+              <p className='mb-0'>Manage all your social media marketing</p>
+              <p className='mb-0'> clients from a single dashboard</p>
+            </div>
           </div>
 
-          <div>
+          <div className='pb-5'>
             <div className='pt-2 pb-2 mb-1'>
               <button
                 className='w-100 btn-primary btn'
                 onClick={() => {
                   toggleInvite()
                   // setAddClient(false)
+                  setSuccessTitle('Invite Sent')
                 }}
               >
                 Send Invite
@@ -83,6 +94,7 @@ const AddNewClient = ({
                 onClick={() => {
                   toggleManual()
                   // setAddClient(false)
+                  setSuccessTitle('Client added')
                 }}
               >
                 Manually add client
@@ -108,7 +120,12 @@ const AddNewClient = ({
           )}
         </div>
       </Modal>
-      <ClientSuccess addState={clientSuccess} setAddState={toggleSuccess} setAddClient={setAddClient} />
+      <ClientSuccess
+        title={sucessTitle}
+        addState={clientSuccess}
+        setAddState={toggleSuccess}
+        setAddClient={setAddClient}
+      />
     </>
   )
 }
