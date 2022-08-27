@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "../../components/Table";
 import { Bars } from "react-loader-spinner";
 import {
@@ -15,6 +15,8 @@ import EmptyTableData from "../../components/Table/EmptyTableData";
 //redux
 import { connect } from "react-redux";
 import { setCurrentSection, deleteInvoice } from "../../redux/actions";
+import DeleteModal from "../../components/Modal/DeleteModal";
+import createNotification from "../../utils/Notification";
 
 const ClientListView = ({
   setCurrentSection,
@@ -22,9 +24,14 @@ const ClientListView = ({
   loading,
   openInvoiceModal,
   deleteInvoice,
+  deleteloading,
+  deleteError,
+  deleteMessage,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [invoiceDetails, setInvoiceDetails] = useState({});
+  const [invoiceID, setInvoiceID] = useState(0);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -36,16 +43,23 @@ const ClientListView = ({
     }
     setShowModal(!showModal);
   };
-
+  const openDeleteModal = (record) => {
+    const invoiceData = record?.row?.original;
+    setShowDeleteModal(true);
+    setInvoiceID(invoiceData?.id);
+  };
+  const closeDeleteModal = () => {
+    setShowDeleteModal(false);
+    setInvoiceID(0);
+  }
   const openFullInvoicePage = (record) => {
     const invoiceData = record?.row?.original;
     navigate(`/invoices-&-financials/invoice/${invoiceData?.id}`, {
       state: invoiceData,
     });
   };
-  const handleDelete = (record) => {
-    const invoiceData = record?.row?.original;
-    deleteInvoice(invoiceData?.id);
+  const handleDelete = () => {
+    deleteInvoice(invoiceID);
   };
   const cols = React.useMemo(
     () => [
@@ -99,7 +113,7 @@ const ClientListView = ({
           <TableDropdown
             toggleInvoicePreview={() => toggleInvoicePreview(props)}
             openFullInvoicePage={() => openFullInvoicePage(props)}
-            handleDeleteInvoice={() => handleDelete(props)}
+            openDeleteModal={() => openDeleteModal(props)}
           />
         ),
       },
@@ -107,6 +121,14 @@ const ClientListView = ({
     // eslint-disable-next-line
     []
   );
+  useEffect(() => {
+    if (!deleteloading && deleteMessage?.length > 0) {
+      createNotification("success", deleteMessage);
+      closeDeleteModal();
+    } else if (!deleteloading && deleteError?.length > 0) {
+      createNotification("error", deleteError);
+    }
+  }, [deleteError, deleteMessage, deleteloading]);
   return (
     <div className="mb-0 mt-1 overflow-auto">
       {loading ? (
@@ -136,8 +158,23 @@ const ClientListView = ({
         showModal={showModal}
         details={invoiceDetails?.row?.original}
       />
+      <DeleteModal
+        openModal={showDeleteModal}
+        setOpenModal={setShowDeleteModal}
+        deleteAction={handleDelete}
+        deleteloading={deleteloading}
+      />
     </div>
   );
 };
 
-export default connect(null, { setCurrentSection, deleteInvoice })(ClientListView);
+const mapStateToProps = (state) => {
+  return {
+    deleteloading: state?.invoice?.loading?.deleteInvoice,
+    deleteMessage: state?.invoice?.message?.deleteInvoice,
+    deleteError: state?.invoice?.error?.deleteInvoice,
+  };
+};
+export default connect(mapStateToProps, { setCurrentSection, deleteInvoice })(
+  ClientListView
+);

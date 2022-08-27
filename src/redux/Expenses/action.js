@@ -5,6 +5,9 @@ import {
   CREATE_NEW_EXPENSE,
   CREATE_NEW_EXPENSE_SUCCESS,
   CREATE_NEW_EXPENSE_ERROR,
+  DELETE_EXPENSE,
+  DELETE_EXPENSE_SUCCESS,
+  DELETE_EXPENSE_ERROR,
 } from "../actions";
 
 export const getAllExpenses = () => ({
@@ -32,5 +35,20 @@ export const createNewExpenseSuccess = () => ({
 });
 export const createNewExpenseError = (error) => ({
   type: CREATE_NEW_EXPENSE_ERROR,
+  payload: error,
+});
+
+export const deleteExpense = (id) => ({
+  type: DELETE_EXPENSE,
+  payload: id,
+});
+
+export const deleteExpenseSuccess = () => ({
+  type: DELETE_EXPENSE_SUCCESS,
+  payload: "Record Deleted Successfully",
+});
+
+export const deleteExpenseError = (error) => ({
+  type: DELETE_EXPENSE_ERROR,
   payload: error,
 });

@@ -23,7 +23,7 @@ export const getOneInvoice = (id) => ({
 
 export const getOneInvoiceSuccess = (invoice) => ({
   type: GET_ONE_INVOICE_SUCCESS,
-  payload: invoice,
+  payload: { invoice: invoice, message: "Successful Request" },
 });
 
 export const getOneInvoiceError = (error) => ({

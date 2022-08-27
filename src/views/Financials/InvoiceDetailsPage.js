@@ -40,10 +40,15 @@ const InvoiceDetailsPage = (props) => {
     useState(false);
   const [showPreviewInvoiceModal, setShowPreviewInvoiceModal] = useState(false);
   const [showCreateInvoiceModal, setShowCreateInvoiceModal] = useState(false);
-  const [paymentDisabled, setPaymentDisabled] = useState(false);
+  const [pageData, setPageData] = useState({});
 
   //props
-  const { getOneInvoice, invoiceDetails, loading } = props;
+  const {
+    getOneInvoice,
+    invoiceDetails,
+    getOneInvoiceLoading,
+    getInvoiceMessage,
+  } = props;
   const location = useLocation();
 
   const getPDF = () => {
@@ -67,11 +72,15 @@ const InvoiceDetailsPage = (props) => {
     getOneInvoice(location?.state?.id);
   }, [getOneInvoice, location?.state?.id]);
 
+  console.log({ getOneInvoiceLoading, getInvoiceMessage });
   useEffect(() => {
-    if (invoiceDetails?.status?.toLowerCase() === "paid") {
-      setPaymentDisabled(true);
+    if (!getOneInvoiceLoading && getInvoiceMessage?.length > 0) {
+      console.log("yes");
+      setPageData(invoiceDetails);
+    } else {
+      setPageData({});
     }
-  }, [invoiceDetails?.status, setPaymentDisabled, getOneInvoice]);
+  }, [getInvoiceMessage, getOneInvoiceLoading, invoiceDetails]);
   return (
     <>
       {showCreateInvoiceModal ? (
@@ -79,7 +88,7 @@ const InvoiceDetailsPage = (props) => {
       ) : null}
 
       <div className="dashboard dashboard-wrapper px-2 position-relative">
-        {loading ? (
+        {getOneInvoiceLoading ? (
           <div className="position-fixed top-50 start-50">
             <Bars height="100" width="100" color="#2062F4" />
           </div>
@@ -95,30 +104,30 @@ const InvoiceDetailsPage = (props) => {
                     <div className="d-inline-flex" style={{ width: "100%" }}>
                       <img
                         className="me-auto mb-5"
-                        src={invoiceDetails?.extra_details?.business_logo}
+                        src={pageData?.extra_details?.business_logo}
                         alt="business logo"
                       />
                       <h6 className="invoice-modal__title">
-                        {invoiceDetails?.extra_details?.invoice_prefix
-                          ? invoiceDetails?.extra_details?.invoice_prefix
+                        {pageData?.extra_details?.invoice_prefix
+                          ? pageData?.extra_details?.invoice_prefix
                           : "INV"}{" "}
-                        -{invoiceDetails?.id}
+                        -{pageData?.id}
                       </h6>
                     </div>
                     <Row>
                       <Col sm="6" lg="6" xl="6">
                         <h6 className="invoice-modal__light text-left mb-3">
-                          {invoiceDetails?.extra_details?.business_address}
+                          {pageData?.extra_details?.business_address}
                         </h6>
                         <h6 className="invoice-modal__bold text-left mb-3">
-                          {stringDateFormat(invoiceDetails?.issued_on)}
+                          {stringDateFormat(pageData?.issued_on)}
                         </h6>
                         <div className="">
                           <h6 className="invoice-modal__light text-left">
                             Due Date
                           </h6>
                           <h6 className="invoice-modal__bold text-left">
-                            {stringDateFormat(invoiceDetails?.due_date)}
+                            {stringDateFormat(pageData?.due_date)}
                           </h6>
                         </div>
                       </Col>
@@ -134,36 +143,12 @@ const InvoiceDetailsPage = (props) => {
                             className="invoice-modal__bold text-right"
                             style={{ fontSize: "14px", fontWeight: "500" }}
                           >
-                            {invoiceDetails?.client?.fullname}
-                          </h6>
-                          <h6
-                            className="invoice-modal__light text-right"
-                            style={{ textAlign: "right" }}
-                          >
-                            3455 Geraldine Lane,
-                          </h6>
-                          <h6
-                            className="invoice-modal__light text-right"
-                            style={{ textAlign: "right" }}
-                          >
-                            New York
-                          </h6>
-                          <h6
-                            className="invoice-modal__light text-right"
-                            style={{ textAlign: "right" }}
-                          >
-                            10013
-                          </h6>
-                          <h6
-                            className="invoice-modal__light text-right"
-                            style={{ textAlign: "right" }}
-                          >
-                            United States
+                            {pageData?.client?.fullname}
                           </h6>
                         </div>
                       </Col>
                     </Row>
-                    {invoicePaymentStatus(invoiceDetails?.status)}
+                    {invoicePaymentStatus(pageData?.status)}
                     <img src={HrInvoice} className="w-100" alt="" />
                     <div className="mt-5 invoice-modal__grey-section w-100 py-4 px-4">
                       <Row style={{ textAlign: "left" }}>
@@ -182,7 +167,7 @@ const InvoiceDetailsPage = (props) => {
                           <h6 className="invoice-modal__qty">AMOUNT</h6>
                         </Col>
                       </Row>
-                      {invoiceDetails?.items?.map((item) => {
+                      {pageData?.items?.map((item) => {
                         return (
                           <Row style={{ textAlign: "left" }} key={item?.id}>
                             <Col sm="2" lg="2">
@@ -216,7 +201,7 @@ const InvoiceDetailsPage = (props) => {
                             <Col xl="6" lg="6" sm="6">
                               <h6 className="invoice-modal__qty ">Sub Total</h6>
                               <h6 className="invoice-modal__qty">
-                                VAT({invoiceDetails?.vat}%)
+                                VAT({pageData?.vat}%)
                               </h6>
                             </Col>
                             <Col xl="6" lg="6" sm="6">
@@ -224,7 +209,7 @@ const InvoiceDetailsPage = (props) => {
                                 className="invoice-modal__qty "
                                 style={{ textAlign: "right" }}
                               >
-                                {formatAmount(invoiceDetails?.sub_total)}
+                                {formatAmount(pageData?.sub_total)}
                               </h6>
                               <h6
                                 className="invoice-modal__qty"
@@ -233,8 +218,8 @@ const InvoiceDetailsPage = (props) => {
                                 $
                                 {formatAmount(
                                   calculateVat(
-                                    invoiceDetails?.sub_total,
-                                    invoiceDetails?.vat
+                                    pageData?.sub_total,
+                                    pageData?.vat
                                   )
                                 )}
                               </h6>
@@ -252,7 +237,7 @@ const InvoiceDetailsPage = (props) => {
                                 className="invoice-modal__total ms-auto my-auto"
                                 style={{ textAlign: "right" }}
                               >
-                                $ {formatAmount(invoiceDetails?.total)}
+                                $ {formatAmount(pageData?.total)}
                               </h6>
                             </div>
                           </Row>
@@ -302,8 +287,8 @@ const InvoiceDetailsPage = (props) => {
                     <h6 className="fs-6 text-black-50">Payment method</h6>
                   </Col>
                 </Row>
-                {invoiceDetails?.payment_record?.length > 0 ? (
-                  invoiceDetails?.payment_record?.map((record) => {
+                {pageData?.payment_record?.length > 0 ? (
+                  pageData?.payment_record?.map((record) => {
                     return (
                       <Row
                         key={record?.id}
@@ -334,7 +319,7 @@ const InvoiceDetailsPage = (props) => {
                           </h6>
                         </Col>
                         <Col sm="4" lg="4" md="4">
-                          <div className="list-client-tag-paid fs-6 py-2 px-0 text-center">
+                          <div className="list-client-tag-paid fs-6 py-2 text-center w-75">
                             {record?.payment_method}
                           </div>
                         </Col>
@@ -432,7 +417,7 @@ const InvoiceDetailsPage = (props) => {
                     onClick={() => {
                       setShowRecordPayment(true);
                     }}
-                    disabled={paymentDisabled}
+                    disabled={pageData?.status === "Paid"}
                   >
                     Record Payment
                   </button>
@@ -498,7 +483,8 @@ const InvoiceDetailsPage = (props) => {
 const mapStateToProps = (state) => {
   return {
     invoiceDetails: state?.oneInvoice?.details,
-    loading: state?.oneInvoice?.getOneInvoiceLoading,
+    getOneInvoiceLoading: state?.oneInvoice?.getOneInvoiceLoading,
+    getInvoiceMessage: state?.oneInvoice?.message?.getOneInvoice,
   };
 };
 export default connect(mapStateToProps, { getOneInvoice })(InvoiceDetailsPage);

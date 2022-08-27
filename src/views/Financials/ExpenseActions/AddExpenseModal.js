@@ -344,7 +344,7 @@ const mapStateToProps = (state) => {
   return {
     vendors: state?.vendors?.vendors,
     createExpenseLoading: state?.expense?.createExpenseLoading,
-    message: state?.expense?.message,
+    message: state?.expense?.message?.createExpense,
     createExpenseError: state?.expense?.createExpenseError,
   };
 };

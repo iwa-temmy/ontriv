@@ -18,7 +18,7 @@ const CreateInvoiceModal = ({
   createNewInvoice,
   loading,
   error,
-  message,
+  createInvoiceMessage,
 }) => {
   const [schedule, setSchedule] = useState({});
   const [formData, setFormData] = useState({});
@@ -161,11 +161,11 @@ const CreateInvoiceModal = ({
     if (error?.length > 0 && !loading) {
       createNotification("error", error);
     }
-    if (message?.length > 0 && !loading) {
-      createNotification("success", message);
+    if (createInvoiceMessage?.length > 0 && !loading) {
+      createNotification("success", createInvoiceMessage);
       closeInvoiceModal();
     }
-  }, [loading, error, message, closeInvoiceModal]);
+  }, [loading, error, createInvoiceMessage, closeInvoiceModal]);
   return (
     <div className="off-canvas-menu">
       <div className="off-canvas-menu__content px-4 py-4">
@@ -405,9 +405,9 @@ const mapStateToProps = (state) => {
   const { auth, invoice } = state;
   return {
     clients: auth?.currentUser?.client_list,
-    loading: invoice?.createInvoiceLoading,
-    error: invoice?.createInvoiceError,
-    message: invoice?.message,
+    loading: invoice?.loading?.createInvoice,
+    error: invoice?.error?.createInvoice,
+    createInvoiceMessage: invoice?.message?.createInvoice,
   };
 };
 export default connect(mapStateToProps, { createNewInvoice })(
