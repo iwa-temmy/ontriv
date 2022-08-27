@@ -1,7 +1,7 @@
 import { Row, Col } from "reactstrap";
 
 import React, { useEffect, useState } from "react";
-// import TitleModalLogoHere from "../../assets/img/TitleModalLogoHere.svg";
+import TitleModalLogoHere from "../../assets/img/businessLogo.svg";
 import { Bars } from "react-loader-spinner";
 import InvoiceSettingsModal from "./InvoiceActions/InvoiceSettingsModal";
 import RecordPaymentModal from "./InvoiceActions/RecordPaymentModal";
@@ -101,7 +101,10 @@ const InvoiceDetailsPage = (props) => {
         <CreateInvoiceModal closeInvoiceModal={CloseCreateInvoiceModal} />
       ) : null}
       {showEditModal ? (
-        <EditInvoiceModal closeInvoiceModal={closeEditInvoiceModal} payload={pageData}/>
+        <EditInvoiceModal
+          closeInvoiceModal={closeEditInvoiceModal}
+          payload={pageData}
+        />
       ) : null}
       <div className="dashboard dashboard-wrapper px-2 position-relative">
         {getOneInvoiceLoading ? (
@@ -120,7 +123,11 @@ const InvoiceDetailsPage = (props) => {
                     <div className="d-inline-flex" style={{ width: "100%" }}>
                       <img
                         className="me-auto mb-5"
-                        src={pageData?.extra_details?.business_logo}
+                        src={
+                          pageData?.extra_details?.business_logo
+                            ? pageData?.extra_details?.business_logo
+                            : TitleModalLogoHere
+                        }
                         alt="business logo"
                       />
                       <h6 className="invoice-modal__title">
@@ -135,17 +142,6 @@ const InvoiceDetailsPage = (props) => {
                         <h6 className="invoice-modal__light text-left mb-3">
                           {pageData?.extra_details?.business_address}
                         </h6>
-                        <h6 className="invoice-modal__bold text-left mb-3">
-                          {stringDateFormat(pageData?.issued_on)}
-                        </h6>
-                        <div className="">
-                          <h6 className="invoice-modal__light text-left">
-                            Due Date
-                          </h6>
-                          <h6 className="invoice-modal__bold text-left">
-                            {stringDateFormat(pageData?.due_date)}
-                          </h6>
-                        </div>
                       </Col>
                       <Col sm="6" lg="6" xl="6">
                         <div className="" style={{ textAlign: "right" }}>
@@ -161,23 +157,55 @@ const InvoiceDetailsPage = (props) => {
                           >
                             {pageData?.client?.fullname}
                           </h6>
+                          <h6
+                            className="invoice-modal__bold text-right"
+                            style={{ fontSize: "14px", fontWeight: "500" }}
+                          >
+                            {pageData?.client?.client_e}
+                          </h6>
                         </div>
                       </Col>
                     </Row>
-                    {invoicePaymentStatus(pageData?.status)}
+                    <Row className="align-items-end mt-3">
+                      <Col sm="6" lg="6" xl="6">
+                        <div className="mb-4">
+                          <h6 className="invoice-modal__light text-left">
+                            Issue Date
+                          </h6>
+                          <h6 className="invoice-modal__bold text-left mb-3">
+                            {stringDateFormat(pageData?.issued_on)}
+                          </h6>
+                        </div>
+                        <div className="">
+                          <h6 className="invoice-modal__light text-left">
+                            Due Date
+                          </h6>
+                          <h6 className="invoice-modal__bold text-left">
+                            {stringDateFormat(pageData?.due_date)}
+                          </h6>
+                        </div>
+                      </Col>
+                      <Col sm="6" lg="6" xl="6">
+                        {invoicePaymentStatus(pageData?.status)}
+                      </Col>
+                    </Row>
+
                     <img src={HrInvoice} className="w-100" alt="" />
                     <div className="mt-5 invoice-modal__grey-section w-100 py-4 px-4">
-                      <Row style={{ textAlign: "left" }}>
-                        <Col sm="2" lg="2">
-                          <h6 className="invoice-modal__qty ">QTY</h6>
-                        </Col>
+                      <Row
+                        style={{
+                          textAlign: "left",
+                          borderBottom: "2px solid #F2F2F2",
+                        }}
+                      >
                         <Col sm="5" lg="5">
-                          <h6 className="invoice-modal__qty">
-                            ITEM DESCRIPTION
-                          </h6>
+                          <h6 className="invoice-modal__qty">ITEM</h6>
                         </Col>
                         <Col sm="2" lg="2">
                           <h6 className="invoice-modal__qty">RATE</h6>
+                        </Col>
+                        <Col sm="2" lg="2">
+                          <h6 className="invoice-modal__qty ">QTY</h6>
                         </Col>
                         <Col sm="3" lg="3">
                           <h6 className="invoice-modal__qty">AMOUNT</h6>
@@ -185,24 +213,31 @@ const InvoiceDetailsPage = (props) => {
                       </Row>
                       {pageData?.items?.map((item) => {
                         return (
-                          <Row style={{ textAlign: "left" }} key={item?.id}>
-                            <Col sm="2" lg="2">
-                              <h6 className="invoice-modal__qty ">
-                                {item?.quantity}
-                              </h6>
-                            </Col>
+                          <Row
+                            style={{
+                              textAlign: "left",
+                              borderBottom: "2px solid #F2F2F2",
+                              padding: "1rem 0 0.5rem 0",
+                            }}
+                            key={item?.id}
+                          >
                             <Col sm="5" lg="5">
-                              <h6 className="invoice-modal__qty">
+                              <h6 className="invoice-modal__item">
                                 {item?.item_description}
                               </h6>
                             </Col>
                             <Col sm="2" lg="2">
-                              <h6 className="invoice-modal__qty">
+                              <h6 className="invoice-modal__item">
                                 {formatAmount(item?.rate)}
                               </h6>
                             </Col>
+                            <Col sm="2" lg="2">
+                              <h6 className="invoice-modal__item ">
+                                {item?.quantity}
+                              </h6>
+                            </Col>
                             <Col sm="3" lg="3">
-                              <h6 className="invoice-modal__qty">
+                              <h6 className="invoice-modal__item">
                                 {formatAmount(item?.amount)}
                               </h6>
                             </Col>
@@ -211,7 +246,7 @@ const InvoiceDetailsPage = (props) => {
                       })}
                     </div>
                     <Row>
-                      <Col className="ms-auto" xl="11">
+                      <Col className="ms-auto" xl="9">
                         <div className="mt-5 invoice-modal__grey-section py-4 px-4">
                           <Row>
                             <Col xl="6" lg="6" sm="6">
@@ -222,13 +257,13 @@ const InvoiceDetailsPage = (props) => {
                             </Col>
                             <Col xl="6" lg="6" sm="6">
                               <h6
-                                className="invoice-modal__qty "
+                                className="invoice-modal__item "
                                 style={{ textAlign: "right" }}
                               >
                                 {formatAmount(pageData?.sub_total)}
                               </h6>
                               <h6
-                                className="invoice-modal__qty"
+                                className="invoice-modal__item"
                                 style={{ textAlign: "right" }}
                               >
                                 $

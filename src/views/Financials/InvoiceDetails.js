@@ -5,44 +5,46 @@ import TitleModalLogoHere from "../../assets/img/TitleModalLogoHere.svg";
 import HrInvoice from "../../assets/img/hr-invoice.svg";
 import {
   stringDateFormat,
-  formatNumber,
   formatAmount,
   invoicePaymentStatus,
-  calculateVat
+  calculateVat,
 } from "../../utils/helper";
 
 import { connect } from "react-redux";
 
 const InvoiceDetails = ({
   details,
-  address,
+  business_logo,
   showModal,
   toggleInvoicePreview,
 }) => {
-
-
+  console.log(business_logo);
   return (
     <div>
       <Modal modalState={showModal} toggleModalState={toggleInvoicePreview}>
         <div className="add-client-wrapper-2 text-center ">
           <div className="d-inline-flex" style={{ width: "100%" }}>
-            <img className="me-auto" src={TitleModalLogoHere} alt="" />
-            <h6 className="invoice-modal__title">{`INV-${formatNumber(
-              details?.id
-            )}`}</h6>
+            <img
+              className="me-auto mb-5"
+              src={
+                business_logo
+                  ? business_logo
+                  : TitleModalLogoHere
+              }
+              alt="business logo"
+            />
+            <h6 className="invoice-modal__title">
+              {details?.extra_details?.invoice_prefix
+                ? details?.extra_details?.invoice_prefix
+                : "INV"}{" "}
+              -{details?.id}
+            </h6>
           </div>
           <Row>
             <Col sm="6" lg="6" xl="6">
-              <h6 className="invoice-modal__light text-left mb-3">{address}</h6>
-              <h6 className="invoice-modal__bold text-left mb-3">
-                {stringDateFormat(details?.issued_on)}
+              <h6 className="invoice-modal__light text-left mb-3">
+                {details?.extra_details?.business_address}
               </h6>
-              <div className="">
-                <h6 className="invoice-modal__light text-left">Due Date</h6>
-                <h6 className="invoice-modal__bold text-left">
-                  {stringDateFormat(details?.due_date)}
-                </h6>
-              </div>
             </Col>
             <Col sm="6" lg="6" xl="6">
               <div className="" style={{ textAlign: "right" }}>
@@ -62,65 +64,90 @@ const InvoiceDetails = ({
                   className="invoice-modal__light text-right"
                   style={{ textAlign: "right" }}
                 >
-                  3455 Geraldine Lane,
+                  {details?.client?.client_email || "No Email"}
                 </h6>
                 <h6
                   className="invoice-modal__light text-right"
                   style={{ textAlign: "right" }}
                 >
-                  New York
-                </h6>
-                <h6
-                  className="invoice-modal__light text-right"
-                  style={{ textAlign: "right" }}
-                >
-                  10013
-                </h6>
-                <h6
-                  className="invoice-modal__light text-right"
-                  style={{ textAlign: "right" }}
-                >
-                  United States
+                  {details?.client?.client_phone_number !== "Null"
+                    ? details?.client?.client_phone_number
+                    : ""}
                 </h6>
               </div>
             </Col>
           </Row>
-          {invoicePaymentStatus(details?.status)}
+          <Row className="align-items-end mt-3">
+            <Col sm="6" lg="6" xl="6">
+              <div className="mb-4">
+                <h6 className="invoice-modal__light text-left">Issue Date</h6>
+                <h6 className="invoice-modal__bold text-left mb-3">
+                  {stringDateFormat(details?.issued_on)}
+                </h6>
+              </div>
+              <div className="">
+                <h6 className="invoice-modal__light text-left">Due Date</h6>
+                <h6 className="invoice-modal__bold text-left">
+                  {stringDateFormat(details?.due_date)}
+                </h6>
+              </div>
+            </Col>
+            <Col sm="6" lg="6" xl="6">
+              {invoicePaymentStatus(details?.status)}
+            </Col>
+          </Row>
           <img src={HrInvoice} className="w-100" alt="" />
           <div className="mt-5 invoice-modal__grey-section w-100 py-4 px-4">
-            <Row style={{ textAlign: "left" }}>
-              <Col xl="2" lg="2" md="2" sm="2">
-                <h6 className="invoice-modal__qty ">QTY</h6>
+            <Row
+              style={{
+                textAlign: "left",
+                borderBottom: "2px solid #F2F2F2",
+              }}
+            >
+              <Col sm="5" lg="5">
+                <h6 className="invoice-modal__qty">ITEM</h6>
               </Col>
-              <Col xl="5" lg="5" md="5">
-                <h6 className="invoice-modal__qty">ITEM DESCRIPTION</h6>
-              </Col>
-              <Col xl="2" lg="2" md="2">
+              <Col sm="2" lg="2">
                 <h6 className="invoice-modal__qty">RATE</h6>
               </Col>
-              <Col xl="3" lg="3" md="3">
+              <Col sm="2" lg="2">
+                <h6 className="invoice-modal__qty ">QTY</h6>
+              </Col>
+              <Col sm="3" lg="3">
                 <h6 className="invoice-modal__qty">AMOUNT</h6>
               </Col>
             </Row>
-            {details?.items?.map(item => {
+            {details?.items?.map((item) => {
               return (
-                <Row key={item?.id}>
-                <Col xl="2" lg="2" md="2" sm="2">
-                  <h6 className="invoice-modal__qty ">{item?.quantity}</h6>
-                </Col>
-                <Col xl="5" lg="5" md="5">
-                  <h6 className="invoice-modal__qty">{item?.item_description}</h6>
-                </Col>
-                <Col xl="2" lg="2" md="2">
-                  <h6 className="invoice-modal__qty">{formatAmount(item?.rate)}</h6>
-                </Col>
-                <Col xl="3" lg="3" md="3">
-                  <h6 className="invoice-modal__qty">{formatAmount(item?.amount)}</h6>
-                </Col>
-              </Row>
-              )
+                <Row
+                  style={{
+                    textAlign: "left",
+                    borderBottom: "2px solid #F2F2F2",
+                    padding: "1rem 0 0.5rem 0",
+                  }}
+                  key={item?.id}
+                >
+                  <Col sm="5" lg="5">
+                    <h6 className="invoice-modal__item">
+                      {item?.item_description}
+                    </h6>
+                  </Col>
+                  <Col sm="2" lg="2">
+                    <h6 className="invoice-modal__item">
+                      {formatAmount(item?.rate)}
+                    </h6>
+                  </Col>
+                  <Col sm="2" lg="2">
+                    <h6 className="invoice-modal__item ">{item?.quantity}</h6>
+                  </Col>
+                  <Col sm="3" lg="3">
+                    <h6 className="invoice-modal__item">
+                      {formatAmount(item?.amount)}
+                    </h6>
+                  </Col>
+                </Row>
+              );
             })}
-           
           </div>
           <Row>
             <Col className="ms-auto" xl="11">
@@ -141,7 +168,10 @@ const InvoiceDetails = ({
                       className="invoice-modal__qty"
                       style={{ textAlign: "right" }}
                     >
-                      ${formatAmount(calculateVat(details?.sub_total, details?.vat))}
+                      $
+                      {formatAmount(
+                        calculateVat(details?.sub_total, details?.vat)
+                      )}
                     </h6>
                   </Col>
                 </Row>
@@ -173,6 +203,7 @@ const InvoiceDetails = ({
 const mapStateToProps = (state) => {
   return {
     address: state?.settings?.businessDetails?.address,
+    business_logo: state?.auth?.currentUser?.business_logo,
   };
 };
 export default connect(mapStateToProps, {})(InvoiceDetails);
