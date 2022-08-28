@@ -26,7 +26,7 @@ export const CenteredModal = ({ className, modalState, setModalState, size, chil
         </div>
     );
 }
-export const InvoicePreviewModal = ({ className, modalState, toggleModalState, size, children }) => {
+export const InvoicePreviewModal = ({ className, modalState, toggleModalState, handleClose, size, children }) => {
 
     return (
         <div>
@@ -37,7 +37,7 @@ export const InvoicePreviewModal = ({ className, modalState, toggleModalState, s
                 modalClassName='cstm-modal'
                 size={size}
                 className={`${className} modal-dialog-centered`} >
-                <div className='modal-cstm-button text-center' onClick={toggleModalState}>
+                <div className='modal-cstm-button text-center' onClick={handleClose}>
                     <TiTimes size='25px' />
                 </div>
                 {children}

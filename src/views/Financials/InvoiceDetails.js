@@ -17,21 +17,24 @@ const InvoiceDetails = ({
   business_logo,
   showModal,
   toggleInvoicePreview,
+  handleClose,
+  businessAddress,
 }) => {
-  console.log(business_logo);
   return (
     <div>
-      <Modal modalState={showModal} toggleModalState={toggleInvoicePreview}>
+      <Modal modalState={showModal} toggleModalState={toggleInvoicePreview} handleClose={handleClose}>
         <div className="add-client-wrapper-2 text-center ">
           <div className="d-inline-flex" style={{ width: "100%" }}>
             <img
-              className="me-auto mb-5"
+              className="me-auto mb-2"
               src={
                 business_logo
-                  ? business_logo
+                  ? `https://${business_logo?.split("//")?.[1]}`
                   : TitleModalLogoHere
               }
               alt="business logo"
+              width="120px"
+              // height="100px"
             />
             <h6 className="invoice-modal__title">
               {details?.extra_details?.invoice_prefix
@@ -43,7 +46,7 @@ const InvoiceDetails = ({
           <Row>
             <Col sm="6" lg="6" xl="6">
               <h6 className="invoice-modal__light text-left mb-3">
-                {details?.extra_details?.business_address}
+                {businessAddress}
               </h6>
             </Col>
             <Col sm="6" lg="6" xl="6">
@@ -202,7 +205,6 @@ const InvoiceDetails = ({
 
 const mapStateToProps = (state) => {
   return {
-    address: state?.settings?.businessDetails?.address,
     business_logo: state?.auth?.currentUser?.business_logo,
   };
 };

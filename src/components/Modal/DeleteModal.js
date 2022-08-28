@@ -1,7 +1,7 @@
 import React from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { CenteredModal } from ".";
-import { GoAlert } from "react-icons/go";
+import ErrorIcon from "../../assets/img/error.svg";
 
 const DeleteModal = (props) => {
   const { openModal, setOpenModal, deleteAction, deleteloading } = props;
@@ -13,16 +13,17 @@ const DeleteModal = (props) => {
     <CenteredModal
       modalState={openModal}
       setModalState={setOpenModal}
-      size="sm"
+      size="sm"  
     >
-      <div className="text-center">
-        <GoAlert size="50px" color="red" />
-        <p className="mt-2 mb-4">
+      <div className="delete-modal text-center">
+        <img src={ErrorIcon} alt="error icons" width="100px" />
+        <h4 className="mt-4">Are you sure?</h4>
+        <p className="delete-modal-subtext mt-4 mb-4">
           Do you really want to delete these records? This process cannot be
           undone.
         </p>
         <div className="d-flex justify-content-center">
-          <button className="btn btn-danger" onClick={deleteAction}>
+          <button className="delete-btn w-100" onClick={deleteAction}>
             {deleteloading ? (
               <div className="text-center w-100 align-items-center">
                 <ThreeDots
@@ -34,17 +35,6 @@ const DeleteModal = (props) => {
             ) : (
               "Delete"
             )}
-          </button>
-          <button
-            className="btn cancel-btn"
-            style={{
-              backgroundColor: "#ccc",
-              color: "#fff",
-              marginLeft: "12px",
-            }}
-            onClick={closeDeleteModal}
-          >
-            Cancel
           </button>
         </div>
       </div>

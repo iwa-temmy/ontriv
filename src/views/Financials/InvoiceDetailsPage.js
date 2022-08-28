@@ -51,6 +51,7 @@ const InvoiceDetailsPage = (props) => {
     invoiceDetails,
     getOneInvoiceLoading,
     getInvoiceMessage,
+    logo
   } = props;
   const location = useLocation();
 
@@ -86,15 +87,13 @@ const InvoiceDetailsPage = (props) => {
     getOneInvoice(location?.state?.id);
   }, [getOneInvoice, location?.state?.id]);
 
-  console.log({ getOneInvoiceLoading, getInvoiceMessage });
   useEffect(() => {
     if (!getOneInvoiceLoading && getInvoiceMessage?.length > 0) {
-      console.log("yes");
       setPageData(invoiceDetails);
     } else {
       setPageData({});
     }
-  }, [getInvoiceMessage, getOneInvoiceLoading, invoiceDetails]);
+  }, [getInvoiceMessage, getOneInvoiceLoading, invoiceDetails  ]);
   return (
     <>
       {showCreateInvoiceModal ? (
@@ -122,12 +121,13 @@ const InvoiceDetailsPage = (props) => {
                   <div className="add-client-wrapper-2 text-center ">
                     <div className="d-inline-flex" style={{ width: "100%" }}>
                       <img
-                        className="me-auto mb-5"
+                        className="me-auto mb-3"
                         src={
-                          pageData?.extra_details?.business_logo
-                            ? pageData?.extra_details?.business_logo
+                          logo
+                            ? logo
                             : TitleModalLogoHere
                         }
+                        width="120px"
                         alt="business logo"
                       />
                       <h6 className="invoice-modal__title">
@@ -158,10 +158,18 @@ const InvoiceDetailsPage = (props) => {
                             {pageData?.client?.fullname}
                           </h6>
                           <h6
-                            className="invoice-modal__bold text-right"
-                            style={{ fontSize: "14px", fontWeight: "500" }}
+                            className="invoice-modal__light text-right"
+                            style={{ textAlign: "right" }}
                           >
-                            {pageData?.client?.client_e}
+                            {pageData?.client?.client_email || "No Email"}
+                          </h6>
+                          <h6
+                            className="invoice-modal__light text-right"
+                            style={{ textAlign: "right" }}
+                          >
+                            {pageData?.client?.client_phone_number !== "Null"
+                              ? pageData?.client?.client_phone_number
+                              : ""}
                           </h6>
                         </div>
                       </Col>
@@ -539,6 +547,7 @@ const mapStateToProps = (state) => {
     invoiceDetails: state?.oneInvoice?.details,
     getOneInvoiceLoading: state?.oneInvoice?.getOneInvoiceLoading,
     getInvoiceMessage: state?.oneInvoice?.message?.getOneInvoice,
+    logo: state?.settings?.businessDetails?.logo,
   };
 };
 export default connect(mapStateToProps, { getOneInvoice })(InvoiceDetailsPage);

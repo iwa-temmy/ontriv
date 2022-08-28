@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Table from "../../components/Table";
 import { Bars } from "react-loader-spinner";
 import {
@@ -14,7 +14,11 @@ import InvoiceDetails from "./InvoiceDetails";
 import EmptyTableData from "../../components/Table/EmptyTableData";
 //redux
 import { connect } from "react-redux";
-import { setCurrentSection, deleteInvoice } from "../../redux/actions";
+import {
+  setCurrentSection,
+  deleteInvoice,
+  getBusinessDetails,
+} from "../../redux/actions";
 import DeleteModal from "../../components/Modal/DeleteModal";
 import createNotification from "../../utils/Notification";
 
@@ -27,6 +31,9 @@ const ClientListView = ({
   deleteloading,
   deleteError,
   deleteMessage,
+  getBusinessDetails,
+  businessAddress,
+  logo,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [invoiceDetails, setInvoiceDetails] = useState({});
@@ -35,13 +42,13 @@ const ClientListView = ({
 
   const navigate = useNavigate();
 
-  const toggleInvoicePreview = (record) => {
-    if (showModal) {
-      setInvoiceDetails(record);
-    } else {
-      setInvoiceDetails(record);
-    }
-    setShowModal(!showModal);
+  const openInvoicePreview = (record) => {
+    setShowModal(true);
+    setInvoiceDetails(record);
+  };
+  const closeInvoicePreview = () => {
+    setShowModal(false);
+    setTimeout(() => setInvoiceDetails({}), 1000);
   };
   const openDeleteModal = (record) => {
     const invoiceData = record?.row?.original;
@@ -111,7 +118,7 @@ const ClientListView = ({
         cellClass: "",
         Cell: (props) => (
           <TableDropdown
-            toggleInvoicePreview={() => toggleInvoicePreview(props)}
+            toggleInvoicePreview={() => openInvoicePreview(props)}
             openFullInvoicePage={() => openFullInvoicePage(props)}
             openDeleteModal={() => openDeleteModal(props)}
           />
@@ -129,8 +136,22 @@ const ClientListView = ({
       createNotification("error", deleteError);
     }
   }, [deleteError, deleteMessage, deleteloading]);
+  const GetBusinessDetails = useCallback(() => {
+    getBusinessDetails();
+  }, [getBusinessDetails]);
+
+  useEffect(() => {
+    //Get Business Details
+    GetBusinessDetails();
+  }, [GetBusinessDetails]);
+
+  useEffect(() => {
+    if(showModal === false){
+      setTimeout(() => setInvoiceDetails({}), 1000);
+    }
+  }, [showModal])
   return (
-    <div className="mb-0 mt-1 overflow-auto" >
+    <div className="mb-0 mt-1 overflow-auto">
       {loading ? (
         <div
           className="d-flex justify-content-center align-items-center"
@@ -154,9 +175,12 @@ const ClientListView = ({
         />
       )}
       <InvoiceDetails
-        toggleInvoicePreview={toggleInvoicePreview}
+        toggleInvoicePreview={openInvoicePreview}
         showModal={showModal}
         details={invoiceDetails?.row?.original}
+        handleClose={closeInvoicePreview}
+        businessAddress={businessAddress}
+        logo={logo}
       />
       <DeleteModal
         openModal={showDeleteModal}
@@ -173,8 +197,12 @@ const mapStateToProps = (state) => {
     deleteloading: state?.invoice?.loading?.deleteInvoice,
     deleteMessage: state?.invoice?.message?.deleteInvoice,
     deleteError: state?.invoice?.error?.deleteInvoice,
+    businessAddress: state?.settings?.businessDetails?.address,
+    logo: state?.settings?.businessDetails?.logo,
   };
 };
-export default connect(mapStateToProps, { setCurrentSection, deleteInvoice })(
-  ClientListView
-);
+export default connect(mapStateToProps, {
+  setCurrentSection,
+  deleteInvoice,
+  getBusinessDetails,
+})(ClientListView);
