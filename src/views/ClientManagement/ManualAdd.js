@@ -9,6 +9,35 @@ import createNotification from '../../utils/Notification'
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
 
+const businessCategory = [
+  'Agriculture',
+  'Arts',
+  'Beauty & Lifestyle',
+  'Business services',
+  'Coaching',
+  'Construction',
+  'Consulting',
+  'Education',
+  'Engineering',
+  'Entertainment',
+  'Events',
+  'Financial services',
+  'Health & Fitness',
+  'Hotels & Hospitality',
+  'HR & Recruiting',
+  'Legal services',
+  'Manufacturing',
+  'Marketing',
+  'Non-profit',
+  'Pet services',
+  'Photography',
+  'Retail',
+  'Technology',
+  'Travel & Tourism',
+  'Real estate',
+  'Others'
+]
+
 const AddNewClient = ({
   addState,
   createClient,
@@ -69,13 +98,13 @@ const AddNewClient = ({
         <div className='text-center user-icon-container '>
           <HiUser className=' text-center' color='#49A8F8' size='45px' />
         </div>
-        <div className='add-client-text text-center'>
+        <div className='add-client-text text-center mb-4'>
           <h3>Add new client</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
         <form
           className='business-form text-left'
           onSubmit={handleSubmit(addClient)}
+          autocomplete='off'
         >
           {errors.fullname && (
             <span className='text-danger text-left'>Enter client name</span>
@@ -95,6 +124,7 @@ const AddNewClient = ({
           <input
             type='email'
             name='email'
+            autocomplete='new-password'
             placeholder='Email Address'
             className={`w-100 ${errors.email ? 'border-danger' : ''}`}
             {...register('email', {
@@ -107,10 +137,12 @@ const AddNewClient = ({
           />
 
           {errors.country && (
-            <span className='text-danger text-left'>Select Country</span>
+            <span className='text-danger text-left'>
+              Select Business category
+            </span>
           )}
 
-          <Controller
+          {/* <Controller
             control={control}
             // defaultValue={options.map(c => c.value)}
             name='country'
@@ -128,11 +160,24 @@ const AddNewClient = ({
                 }}
                 options={options}
               />
-            )}
-            {...register('country', {
+            )} */}
+          {/* {...register('country', {
               required: true
             })}
-          />
+          /> */}
+          <select
+            className='w-100'
+            {...register('category', {
+              required: true
+            })}
+          >
+            <option value=''>Business category</option>
+            {businessCategory.map(el => (
+              <option value={el}>{el}</option>
+            ))}
+
+            {/* <option>Testing</option> */}
+          </select>
 
           {errors.password && (
             <span className='text-danger text-left'>Enter password</span>
@@ -140,6 +185,7 @@ const AddNewClient = ({
           <input
             type='password'
             name='password'
+            autocomplete='new-password'
             placeholder='Password'
             className={`w-100 ${errors.password ? 'border-danger' : ''}`}
             {...register('password', {

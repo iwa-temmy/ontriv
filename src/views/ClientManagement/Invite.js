@@ -53,12 +53,15 @@ const AddNewClient = ({
             <HiUser className=' text-center' color='#49A8F8' size='45px' />
           </div>
           <div className='add-client-text text-center'>
-            <h3>Add new client</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h3>Invite new client</h3>
+            <p style={{
+              margin:"5px 0 29px 0"
+            }}>Invite your client to set up their portal and connect their social media accounts</p>
           </div>
           <form
             className='business-form text-left'
             onSubmit={handleSubmit(addClient)}
+            autocomplete='off'
           >
             {errors.client_name && (
               <span className='text-danger text-left'>Enter client name</span>
@@ -78,6 +81,7 @@ const AddNewClient = ({
             <input
               type='email'
               name='client_email'
+              autocomplete='new-password'
               placeholder='Email Address'
               className={`w-100 ${errors.email ? 'border-danger' : ''}`}
               {...register('client_email', {
@@ -89,7 +93,7 @@ const AddNewClient = ({
               })}
             />
 
-            {errors.country && (
+            {/* {errors.country && (
               <span className='text-danger text-left'>Select Country</span>
             )}
 
@@ -115,22 +119,23 @@ const AddNewClient = ({
               {...register('country', {
                 required: true
               })}
-            />
+            /> */}
 
-            {errors.password && (
-              <span className='text-danger text-left'>Enter password</span>
+            {errors.projectTag && (
+              <span className='text-danger text-left'>Enter Project tag</span>
             )}
             <input
-              type='password'
-              name='password'
-              placeholder='Set password'
-              className={`w-100 ${errors.password ? 'border-danger' : ''}`}
-              {...register('password', {
+              type='text'
+              autocomplete='new-password'
+              name='projectTag'
+              placeholder='Project tag'
+              className={`w-100 ${errors.projectTag ? 'border-danger' : ''}`}
+              {...register('projectTag', {
                 required: true
               })}
             />
 
-            <div className='pt-2 pb-3'>
+            <div className='pt-2 pb-5'>
               <button
                 className='w-100 btn-primary btn'
                 type='submit'
