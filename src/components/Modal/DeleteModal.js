@@ -5,15 +5,11 @@ import ErrorIcon from "../../assets/img/error.svg";
 
 const DeleteModal = (props) => {
   const { openModal, setOpenModal, deleteAction, deleteloading } = props;
-
-  const closeDeleteModal = () => {
-    setOpenModal(false);
-  };
   return (
     <CenteredModal
       modalState={openModal}
       setModalState={setOpenModal}
-      size="sm"  
+      size="sm"
     >
       <div className="delete-modal text-center">
         <img src={ErrorIcon} alt="error icons" width="100px" />
