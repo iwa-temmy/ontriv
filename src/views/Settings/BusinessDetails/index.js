@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
-import { Row, Col, Card, Button, Form } from "reactstrap";
+import { Row, Col, Card } from "reactstrap";
 import bluePlus from "../../../assets/img/blue-plus-bus-icon.svg";
 import { ThreeDots } from "react-loader-spinner";
 
@@ -121,7 +121,7 @@ const BusinessDetails = ({
           <div>
             <Card className="business-details-form-card">
               <h1 className="mb-5">Business Details</h1>
-              <Form onSubmit={handleSubmit(handleUpdateBusinessDetails)}>
+              <form onSubmit={handleSubmit(handleUpdateBusinessDetails)}>
                 <input
                   type="text"
                   placeholder="Business name"
@@ -159,8 +159,8 @@ const BusinessDetails = ({
                   //   errors.country ? "border-danger" : ""
                   // } mb-3`}
                 />
-                <Button
-                  className="w-50"
+                <button
+                  className="delete-btn w-50"
                   type="submit"
                   disabled={updatingStateLoading}
                 >
@@ -173,8 +173,8 @@ const BusinessDetails = ({
                   ) : (
                     "Update"
                   )}
-                </Button>
-              </Form>
+                </button>
+              </form>
             </Card>
           </div>
         </Col>

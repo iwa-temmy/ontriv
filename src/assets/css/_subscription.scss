@@ -491,6 +491,9 @@
 .list-client-delete-finance  {
   color: #ed2e7e;
   background-color: rgba(217, 87, 87, 0.15) !important;
+  border: none;
+  font-size: 14px;
+  padding: 0.5rem 0.8rem;
   border-radius: 10px !important;
 }
 .status-tag-circle {
@@ -506,13 +509,13 @@
   border-radius: 10px !important;
 }
 .list-client-tag-overdue {
-  background:  #FF215480 ;
+  background:  #f5ebed ;
   color: #FF2154;
   padding: 8px 12px;
   border-radius: 10px !important;
 }
 .list-client-tag-pending{
-  background-color: #ED800080;
+  background-color: #f9eee2;
   padding: 8px 12px;
   color: #ED8000;
   border-radius: 10px;
@@ -776,6 +779,15 @@
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: #6F6F84;
+  }
+  &__item {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: left;
+    letter-spacing: 0.05em;
+    color: #222234;
   }
   &__blue-section {
     background: #E8F7FF;

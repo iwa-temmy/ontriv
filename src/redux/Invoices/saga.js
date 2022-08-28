@@ -156,15 +156,13 @@ export function* DeleteInvoice({ payload }) {
 }
 
 export function* RequestPayout({ payload }) {
-  const { credentials } = payload;
   try {
     const response = yield Axios.post(
-      `/invoice/api/v1/invoice/create/`,
-      credentials
+      `/invoice/api/v1/payout/request/create/`,
+      payload
     );
     if (response?.status === 201) {
       yield put(requestPayoutSuccess());
-      yield call(GetAllInvoices);
     } else {
       yield put(requestPayoutError(response?.data?.message));
     }
@@ -203,7 +201,7 @@ export function* RequestPayout({ payload }) {
     } else if (error.message) {
       message = error.message;
     }
-    yield put(createNewInvoiceError(message));
+    yield put(requestPayoutError(message));
     yield put(clearMessages());
   }
 }

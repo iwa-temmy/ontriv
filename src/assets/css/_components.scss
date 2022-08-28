@@ -474,7 +474,24 @@ table {
 
   border: unset;
 }
-
+.modal-sm{
+  max-width: 380px !important;
+}
+.delete-modal{
+  margin-top: 4rem;
+}
+.delete-modal-subtext{
+  font-weight: 400;
+  font-size: 14px;
+}
+.delete-btn, .primary-btn{
+    background: linear-gradient(93.88deg, #49A8F8 6.88%, #0053F4 74.45%);
+    border-radius: 16px;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    width: 100%;
+}
 .cancel-btn{
   background-color: #ccc;
   color: #fff;
@@ -487,7 +504,9 @@ table {
 .dropdown-container{
   font-size: 14px !important;
   border-radius: 14px !important;
+  inset: 60% 0 auto auto !important;
   .dropdown-items{
    padding: 0.5rem 1rem !important;
   }
 }
+

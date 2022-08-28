@@ -123,7 +123,7 @@ const Finances = ({
                 <Card className="py-4 px-5 h-100 finances__top-cards">
                   <div md="7" sm="16" lg="8" xl="8" className="">
                     <h6 className="finances__top-cards__title my-auto mp-2">
-                      Payout
+                      Wallet Balance
                     </h6>
                     <h6 className="finances__top-cards__amount-big mt-3">
                       <span className="mr-2 finances__top-cards__currency">
@@ -205,7 +205,7 @@ const Finances = ({
               <div className="d-inline-flex white-button py-1 px-4">
                 <img src={BluePlus} alt="" />
                 <div className="btn-lg w-auto " onClick={openInvoiceModal}>
-                  <h6 className="mb-0 cursor-pointer">Create a new Invoice</h6>
+                  <h6 className="mb-0 cursor-pointer">Create New Invoice</h6>
                 </div>
               </div>
             </div>

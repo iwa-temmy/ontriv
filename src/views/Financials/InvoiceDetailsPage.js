@@ -1,7 +1,7 @@
 import { Row, Col } from "reactstrap";
 
 import React, { useEffect, useState } from "react";
-// import TitleModalLogoHere from "../../assets/img/TitleModalLogoHere.svg";
+import TitleModalLogoHere from "../../assets/img/businessLogo.svg";
 import { Bars } from "react-loader-spinner";
 import InvoiceSettingsModal from "./InvoiceActions/InvoiceSettingsModal";
 import RecordPaymentModal from "./InvoiceActions/RecordPaymentModal";
@@ -25,11 +25,13 @@ import {
   pdfWithPrintJs,
   copierHelper,
   calculateVat,
+  downloadPdf,
 } from "../../utils/helper";
 
 //react-router
 import { useLocation } from "react-router-dom";
 import CreateInvoiceModal from "./InvoiceActions/CreateInvoiceModal";
+import EditInvoiceModal from "./InvoiceActions/EditInvoiceModal";
 
 const InvoiceDetailsPage = (props) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -40,6 +42,7 @@ const InvoiceDetailsPage = (props) => {
     useState(false);
   const [showPreviewInvoiceModal, setShowPreviewInvoiceModal] = useState(false);
   const [showCreateInvoiceModal, setShowCreateInvoiceModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [pageData, setPageData] = useState({});
 
   //props
@@ -48,12 +51,18 @@ const InvoiceDetailsPage = (props) => {
     invoiceDetails,
     getOneInvoiceLoading,
     getInvoiceMessage,
+    logo
   } = props;
   const location = useLocation();
 
   const getPDF = () => {
     setShowOptions(false);
     pdfWithPrintJs("invoice", "invoice");
+  };
+
+  const DownloadInvoicePdf = () => {
+    downloadPdf("invoice");
+    setShowOptions(false);
   };
 
   const toggleInvoicePreview = () => {
@@ -68,25 +77,34 @@ const InvoiceDetailsPage = (props) => {
     setShowCreateInvoiceModal(false);
   };
 
+  const openEditInvoiceModal = () => {
+    setShowEditModal(true);
+  };
+  const closeEditInvoiceModal = () => {
+    setShowEditModal(false);
+  };
   useEffect(() => {
     getOneInvoice(location?.state?.id);
   }, [getOneInvoice, location?.state?.id]);
 
-  console.log({ getOneInvoiceLoading, getInvoiceMessage });
   useEffect(() => {
     if (!getOneInvoiceLoading && getInvoiceMessage?.length > 0) {
-      console.log("yes");
       setPageData(invoiceDetails);
     } else {
       setPageData({});
     }
-  }, [getInvoiceMessage, getOneInvoiceLoading, invoiceDetails]);
+  }, [getInvoiceMessage, getOneInvoiceLoading, invoiceDetails  ]);
   return (
     <>
       {showCreateInvoiceModal ? (
         <CreateInvoiceModal closeInvoiceModal={CloseCreateInvoiceModal} />
       ) : null}
-
+      {showEditModal ? (
+        <EditInvoiceModal
+          closeInvoiceModal={closeEditInvoiceModal}
+          payload={pageData}
+        />
+      ) : null}
       <div className="dashboard dashboard-wrapper px-2 position-relative">
         {getOneInvoiceLoading ? (
           <div className="position-fixed top-50 start-50">
@@ -96,15 +114,20 @@ const InvoiceDetailsPage = (props) => {
           <Row>
             <Col xl="8" className="">
               <div
-                className="bg-white rounded-2 py-4 px-5"
+                className="bg-white rounded-2"
                 style={{ borderRadius: "10px" }}
               >
-                <div id="invoice">
+                <div id="invoice" className="pt-4 px-5">
                   <div className="add-client-wrapper-2 text-center ">
                     <div className="d-inline-flex" style={{ width: "100%" }}>
                       <img
-                        className="me-auto mb-5"
-                        src={pageData?.extra_details?.business_logo}
+                        className="me-auto mb-3"
+                        src={
+                          logo
+                            ? logo
+                            : TitleModalLogoHere
+                        }
+                        width="120px"
                         alt="business logo"
                       />
                       <h6 className="invoice-modal__title">
@@ -119,17 +142,6 @@ const InvoiceDetailsPage = (props) => {
                         <h6 className="invoice-modal__light text-left mb-3">
                           {pageData?.extra_details?.business_address}
                         </h6>
-                        <h6 className="invoice-modal__bold text-left mb-3">
-                          {stringDateFormat(pageData?.issued_on)}
-                        </h6>
-                        <div className="">
-                          <h6 className="invoice-modal__light text-left">
-                            Due Date
-                          </h6>
-                          <h6 className="invoice-modal__bold text-left">
-                            {stringDateFormat(pageData?.due_date)}
-                          </h6>
-                        </div>
                       </Col>
                       <Col sm="6" lg="6" xl="6">
                         <div className="" style={{ textAlign: "right" }}>
@@ -145,23 +157,63 @@ const InvoiceDetailsPage = (props) => {
                           >
                             {pageData?.client?.fullname}
                           </h6>
+                          <h6
+                            className="invoice-modal__light text-right"
+                            style={{ textAlign: "right" }}
+                          >
+                            {pageData?.client?.client_email || "No Email"}
+                          </h6>
+                          <h6
+                            className="invoice-modal__light text-right"
+                            style={{ textAlign: "right" }}
+                          >
+                            {pageData?.client?.client_phone_number !== "Null"
+                              ? pageData?.client?.client_phone_number
+                              : ""}
+                          </h6>
                         </div>
                       </Col>
                     </Row>
-                    {invoicePaymentStatus(pageData?.status)}
+                    <Row className="align-items-end mt-3">
+                      <Col sm="6" lg="6" xl="6">
+                        <div className="mb-4">
+                          <h6 className="invoice-modal__light text-left">
+                            Issue Date
+                          </h6>
+                          <h6 className="invoice-modal__bold text-left mb-3">
+                            {stringDateFormat(pageData?.issued_on)}
+                          </h6>
+                        </div>
+                        <div className="">
+                          <h6 className="invoice-modal__light text-left">
+                            Due Date
+                          </h6>
+                          <h6 className="invoice-modal__bold text-left">
+                            {stringDateFormat(pageData?.due_date)}
+                          </h6>
+                        </div>
+                      </Col>
+                      <Col sm="6" lg="6" xl="6">
+                        {invoicePaymentStatus(pageData?.status)}
+                      </Col>
+                    </Row>
+
                     <img src={HrInvoice} className="w-100" alt="" />
                     <div className="mt-5 invoice-modal__grey-section w-100 py-4 px-4">
-                      <Row style={{ textAlign: "left" }}>
-                        <Col sm="2" lg="2">
-                          <h6 className="invoice-modal__qty ">QTY</h6>
-                        </Col>
+                      <Row
+                        style={{
+                          textAlign: "left",
+                          borderBottom: "2px solid #F2F2F2",
+                        }}
+                      >
                         <Col sm="5" lg="5">
-                          <h6 className="invoice-modal__qty">
-                            ITEM DESCRIPTION
-                          </h6>
+                          <h6 className="invoice-modal__qty">ITEM</h6>
                         </Col>
                         <Col sm="2" lg="2">
                           <h6 className="invoice-modal__qty">RATE</h6>
+                        </Col>
+                        <Col sm="2" lg="2">
+                          <h6 className="invoice-modal__qty ">QTY</h6>
                         </Col>
                         <Col sm="3" lg="3">
                           <h6 className="invoice-modal__qty">AMOUNT</h6>
@@ -169,24 +221,31 @@ const InvoiceDetailsPage = (props) => {
                       </Row>
                       {pageData?.items?.map((item) => {
                         return (
-                          <Row style={{ textAlign: "left" }} key={item?.id}>
-                            <Col sm="2" lg="2">
-                              <h6 className="invoice-modal__qty ">
-                                {item?.quantity}
-                              </h6>
-                            </Col>
+                          <Row
+                            style={{
+                              textAlign: "left",
+                              borderBottom: "2px solid #F2F2F2",
+                              padding: "1rem 0 0.5rem 0",
+                            }}
+                            key={item?.id}
+                          >
                             <Col sm="5" lg="5">
-                              <h6 className="invoice-modal__qty">
+                              <h6 className="invoice-modal__item">
                                 {item?.item_description}
                               </h6>
                             </Col>
                             <Col sm="2" lg="2">
-                              <h6 className="invoice-modal__qty">
+                              <h6 className="invoice-modal__item">
                                 {formatAmount(item?.rate)}
                               </h6>
                             </Col>
+                            <Col sm="2" lg="2">
+                              <h6 className="invoice-modal__item ">
+                                {item?.quantity}
+                              </h6>
+                            </Col>
                             <Col sm="3" lg="3">
-                              <h6 className="invoice-modal__qty">
+                              <h6 className="invoice-modal__item">
                                 {formatAmount(item?.amount)}
                               </h6>
                             </Col>
@@ -195,7 +254,7 @@ const InvoiceDetailsPage = (props) => {
                       })}
                     </div>
                     <Row>
-                      <Col className="ms-auto" xl="11">
+                      <Col className="ms-auto" xl="9">
                         <div className="mt-5 invoice-modal__grey-section py-4 px-4">
                           <Row>
                             <Col xl="6" lg="6" sm="6">
@@ -206,13 +265,13 @@ const InvoiceDetailsPage = (props) => {
                             </Col>
                             <Col xl="6" lg="6" sm="6">
                               <h6
-                                className="invoice-modal__qty "
+                                className="invoice-modal__item "
                                 style={{ textAlign: "right" }}
                               >
                                 {formatAmount(pageData?.sub_total)}
                               </h6>
                               <h6
-                                className="invoice-modal__qty"
+                                className="invoice-modal__item"
                                 style={{ textAlign: "right" }}
                               >
                                 $
@@ -248,7 +307,7 @@ const InvoiceDetailsPage = (props) => {
                     <h6 className="add-item mb-5">www.yourwebsiteurl.com</h6>
                   </div>
                 </div>
-                <div className="d-inline-flex mb-5 w-100">
+                <div className="d-inline-flex mb-5 w-100 px-5 pb-4">
                   <div className="me-auto">
                     <div className="d-inline-flex w-full">
                       <img src={PlusSign} className="" alt="" />
@@ -342,7 +401,10 @@ const InvoiceDetailsPage = (props) => {
             </Col>
             <Col xl="4" className="position-relative">
               <div className="d-inline-flex w-10t">
-                <button className="py-2 ms-3 px-4 me-2 send align-items-center ">
+                <button
+                  className="py-2 ms-3 px-4 me-2 send align-items-center"
+                  onClick={openEditInvoiceModal}
+                >
                   Edit Invoice
                 </button>
                 <button
@@ -386,7 +448,7 @@ const InvoiceDetailsPage = (props) => {
                   </h6>
                   <h6
                     className="px-4 slightly-black action-menu py-3"
-                    onClick={getPDF}
+                    onClick={DownloadInvoicePdf}
                   >
                     Download PDF
                   </h6>
@@ -485,6 +547,7 @@ const mapStateToProps = (state) => {
     invoiceDetails: state?.oneInvoice?.details,
     getOneInvoiceLoading: state?.oneInvoice?.getOneInvoiceLoading,
     getInvoiceMessage: state?.oneInvoice?.message?.getOneInvoice,
+    logo: state?.settings?.businessDetails?.logo,
   };
 };
 export default connect(mapStateToProps, { getOneInvoice })(InvoiceDetailsPage);

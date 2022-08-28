@@ -32,7 +32,7 @@ const PersonalDetailsForm = ({ handleUpdatePersonalDetails, userDetails, updateU
             defaultValue={userDetails?.phone || ""}
             {...register("phone")}
           />
-          <Button className="w-50" type="submit">
+          <button className="w-50 delete-btn" type="submit">
             {updateUserLoading ? (
               <div className="text-center w-100 align-items-center">
                 <ThreeDots
@@ -44,7 +44,7 @@ const PersonalDetailsForm = ({ handleUpdatePersonalDetails, userDetails, updateU
             ) : (
               "Update"
             )}
-          </Button>
+          </button>
         </Form>
       </Card>
     </div>
