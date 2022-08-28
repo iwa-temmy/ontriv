@@ -123,7 +123,7 @@ const Finances = ({
                 <Card className="py-4 px-5 h-100 finances__top-cards">
                   <div md="7" sm="16" lg="8" xl="8" className="">
                     <h6 className="finances__top-cards__title my-auto mp-2">
-                      Payout
+                      Wallet Balance
                     </h6>
                     <h6 className="finances__top-cards__amount-big mt-3">
                       <span className="mr-2 finances__top-cards__currency">
