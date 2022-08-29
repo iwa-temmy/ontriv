@@ -511,6 +511,39 @@
         width: 100%;
     }
 
+    .defineCaptionWrapper {
+        position: relative;
+
+        .baseCaption {
+            resize: none;
+            border: 1px solid #C0CCDA;
+            border-radius: 20px;
+            height: 200px;
+            width: 100%;
+            padding: 5px 20px;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .baseCaptionSocialIcon {
+            display: flex;
+            text-align: center;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+
+        .pickeremoji {
+            position: absolute;
+            right: -210px;
+
+            @media(max-width: 576px) {
+                right: 0px;
+            }
+        }
+    }
+
     .fileupload {
         // width: 150px;
         background: #EFF2F7;
@@ -628,4 +661,36 @@
             text-decoration-line: underline;
         }
     }
+}
+
+.createPost {
+    width: 400px;
+    margin: auto;
+    padding: 50px 0px 120px 0px;
+
+    @media(max-width: 576px) {
+        width: 100%;
+    }
+
+    .draftbtn {
+        background: #FFFFFF;
+        border: 1px solid #2062F4;
+        font-size: 14px;
+        color: #2062F4;
+
+        @media(max-width: 576px) {
+            font-size: 12px;
+        }
+    }
+
+    .submitbtn {
+        font-size: 14px;
+        color: #F7F7FC;
+
+        @media(max-width: 576px) {
+            font-size: 12px;
+            line-height: 15px;
+        }
+    }
+
 }

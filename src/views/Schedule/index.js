@@ -1,17 +1,7 @@
 import 'react-calendar/dist/Calendar.css';
 import searchChat from './../../assets/img/search-chat.svg'
 import forwardChat from './../../assets/img/forward-chat.svg'
-import FilterRound from './../../assets/img/post-filter-round-purple.svg'
-import CalenderPurple from './../../assets/img/post-filter-calender-purple.svg'
-import BlackArrow from './../../assets/img/black-arrow-down.svg'
-import SearchIcon from './../../assets/img/nav-icon-(search).svg'
-import ExamplePostImage from './../../assets/img/post-image.png'
-import PostUserImage from './../../assets/img/post-user-img.png'
-import MarkGreenPost from './../../assets/img/mark-green-post.svg'
-import PublishedGreenIndicator from './../../assets/img/published-green-indicator.svg'
-import PostBottomLine from './../../assets/img/post-bottom-line.svg'
 import { Button, Col, Input, Row } from "reactstrap";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import barChart from "../../assets/img/barchart.png"
 import ClientChart from './ClientChart';
@@ -21,7 +11,7 @@ import SocialChannels from './tabs';
 import NoPostSchedule from './NoPostSchedule';
 
 const Schedule = () => {
-  const [currentMenu, setCurrentMenu] = useState("all");
+
   return (
     <div className='dashboard dashboard-wrapper'>
       <Row>

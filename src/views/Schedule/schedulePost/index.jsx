@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import StepNavigation from './StepNavigation'
-import "./stepstyle.css"
 import CreatePost from './schedulePostStep/CreatePost'
 import SelectSocialChannels from './schedulePostStep/SelectSocialChannels'
 import FineTuneChannel from './schedulePostStep/FineTuneChannel'
@@ -54,7 +53,7 @@ const ScheduleSteps = () => {
     },
     {
       name: "Create Post",
-      content: <CreatePost prev={prev} next={next} />
+      content: <CreatePost />
     },
   ]
 
@@ -76,11 +75,6 @@ const ScheduleSteps = () => {
 
         </div>
       </Col>
-
-      {/* <button className='primaryButton' onClick={() => updateStep(currentStep - 1)}>Previous Step</button>
-      {currentStep === labelArray.length  ? <button className='primaryButton'>Submit</button> : <button className='primaryButton' onClick={() => next(currentStep)}>next Step</button>} */}
-
-      {/* <button className='primaryButton' onClick={() => prev(currentStep)}>next Step</button> */}
     </Row>
   )
 }

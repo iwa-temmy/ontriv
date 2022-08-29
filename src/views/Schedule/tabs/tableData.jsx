@@ -103,7 +103,7 @@ const SocialTableData = () => {
             <SocialChannelTopNav/>
             {/* {socialPost?.length ? (
             <Table
-                columns={cols1}
+                columns={cols}
                 data={socialPost}
                 divided
                 defaultPageSize={4}
