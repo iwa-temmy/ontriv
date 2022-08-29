@@ -181,204 +181,214 @@ const CreateInvoiceModal = ({
           />
         </div>
         <Form onSubmit={handleCreateInvoice}>
-          <div className="mt-4 mb-3">
-            <label className="text-left w-100" htmlFor="client">
-              Select Client
-            </label>
-            <Input
-              className="off-canvas-menu__input py-3 px-3"
-              type="select"
-              name="client"
-              id="client"
-              value={formData?.client || ""}
-              onChange={handleInputChange}
-            >
-              <option value="">Select Client</option>
-              {clients?.map((client) => {
-                return (
-                  <option value={client?.id} key={client?.id}>
-                    {client?.fullname}
-                  </option>
-                );
-              })}
-            </Input>
-          </div>
-
-          <div className="my-3">
-          <label className="text-left w-100">Project/Description</label>
-          <Input
-            type="text"
-            name="description"
-            onChange={handleInputChange}
-            value={formData?.description || ""}
-            placeholder="description"
-            className="off-canvas-menu__input py-3 px-3"
-          />
-          </div>
-          
-          <Row className="my-3">
-            <Col md="6">
-              <label className="text-left w-100">Issued on</label>
+          <div
+            style={{
+              height: "560px",
+              overflowY: "scroll",
+              overflowX: "hidden",
+              position: "relative",
+              padding: "0 1rem"
+            }}
+          >
+            <div className="mt-4 mb-3">
+              <label className="text-left w-100" htmlFor="client">
+                Select Client
+              </label>
               <Input
-                type="date"
-                name="issued_on"
+                className="off-canvas-menu__input py-3 px-3"
+                type="select"
+                name="client"
+                id="client"
+                value={formData?.client || ""}
                 onChange={handleInputChange}
-                value={formData?.issued_on || ""}
-                placeholder="Issued On"
+              >
+                <option value="">Select Client</option>
+                {clients?.map((client) => {
+                  return (
+                    <option value={client?.id} key={client?.id}>
+                      {client?.fullname}
+                    </option>
+                  );
+                })}
+              </Input>
+            </div>
+
+            <div className="my-3">
+              <label className="text-left w-100">Project/Description</label>
+              <Input
+                type="text"
+                name="description"
+                onChange={handleInputChange}
+                value={formData?.description || ""}
+                placeholder="description"
                 className="off-canvas-menu__input py-3 px-3"
               />
-            </Col>
-            <Col md="6">
-              <label className="text-left w-100">Due Date</label>
-              <Input
-                type="date"
-                name="due_date"
-                onChange={handleInputChange}
-                value={formData?.due_date || ""}
-                placeholder="Due Date"
-                className="off-canvas-menu__input py-3 px-3"
-              />
-            </Col>
-          </Row>
-          <div className="mt-2 d-inline-flex">
-            <input
-              type="checkbox"
-              name="recurring"
-              className="my-auto"
-              checked={recurring}
-              onChange={handleRecurringCheck}
-            />
-            <h6 className="fs-6 my-3 ms-2 fw-light">
-              This is a recurring invoice (monthly)
-            </h6>
-          </div>
-          {recurring && (
-            <>
-              <Row className="my-2">
-                <Col md="6">
-                  <label className="text-left w-100">Interval</label>
-                  <Select
-                    name="interval"
-                    value={schedule?.interval || ""}
-                    onChange={handleIntervalChange}
-                    options={intervalOptions}
-                  />
-                </Col>
-                <Col md="6">
-                  <label className="text-left w-100">Never Ending</label>
-                  <Select
-                    name="never_ending"
-                    value={schedule?.never_ending || ""}
-                    onChange={handleNeverEndingChange}
-                    options={neverEndingOptions}
-                  />
-                </Col>
-              </Row>
-              <Row className="mt-2">
-                <Col md="6">
-                  <label className="text-left w-100">Start Date</label>
-                  <Input
-                    type="date"
-                    name="start_date"
-                    value={schedule?.start_date || ""}
-                    onChange={handleDatesChange}
-                    placeholder="Start Date"
-                    className="off-canvas-menu__input py-3 px-3"
-                  />
-                </Col>
-                <Col md="6">
-                  <label className="text-left w-100">End Date</label>
-                  <Input
-                    type="date"
-                    name="end_date"
-                    value={schedule?.end_date || ""}
-                    onChange={handleDatesChange}
-                    placeholder="End Date"
-                    className="off-canvas-menu__input py-3 px-3"
-                  />
-                </Col>
-              </Row>
-            </>
-          )}
+            </div>
 
-          <Row className="mt-2">
-            <Col md="4">
-              <label className="text-left w-100">Item Description</label>
-            </Col>
-            <Col md="2">
-              <label className="text-left w-100">QTY</label>
-            </Col>
-            <Col md="3">
-              <label className="text-left w-100">Rate</label>
-            </Col>
-            <Col md="2">
-              <label className="text-left w-100">Amount</label>
-            </Col>
-            <Col md="1"></Col>
-          </Row>
-          <div style={{ height: "150px", overflowY: "scroll" }}>
-            {items?.map((item, index) => {
-              return (
-                <Row className="mt-2" key={item.id}>
-                  <Col md="4">
-                    <Input
-                      type="text"
-                      name="item_description"
-                      placeholder="Description"
-                      className="off-canvas-menu__input py-3 px-2"
-                      value={item?.item_description || ""}
-                      onChange={(e) => handleItemInputChange(e, index)}
+            <Row className="my-3">
+              <Col md="6">
+                <label className="text-left w-100">Issued on</label>
+                <Input
+                  type="date"
+                  name="issued_on"
+                  onChange={handleInputChange}
+                  value={formData?.issued_on || ""}
+                  placeholder="Issued On"
+                  className="off-canvas-menu__input py-3 px-3"
+                />
+              </Col>
+              <Col md="6">
+                <label className="text-left w-100">Due Date</label>
+                <Input
+                  type="date"
+                  name="due_date"
+                  onChange={handleInputChange}
+                  value={formData?.due_date || ""}
+                  placeholder="Due Date"
+                  className="off-canvas-menu__input py-3 px-3"
+                />
+              </Col>
+            </Row>
+            <div className="mt-2 d-inline-flex">
+              <input
+                type="checkbox"
+                name="recurring"
+                className="my-auto"
+                checked={recurring}
+                onChange={handleRecurringCheck}
+              />
+              <h6 className="fs-6 my-3 ms-2 fw-light">
+                This is a recurring invoice (monthly)
+              </h6>
+            </div>
+            {recurring && (
+              <>
+                <Row className="my-2">
+                  <Col md="6">
+                    <label className="text-left w-100">Interval</label>
+                    <Select
+                      name="interval"
+                      value={schedule?.interval || ""}
+                      onChange={handleIntervalChange}
+                      options={intervalOptions}
                     />
                   </Col>
-                  <Col md="2">
-                    <Input
-                      type="number"
-                      name="quantity"
-                      placeholder="QTY"
-                      value={item.quantity || ""}
-                      className="off-canvas-menu__input py-3 px-2"
-                      onChange={(e) => handleItemInputChange(e, index)}
+                  <Col md="6">
+                    <label className="text-left w-100">Never Ending</label>
+                    <Select
+                      name="never_ending"
+                      value={schedule?.never_ending || ""}
+                      onChange={handleNeverEndingChange}
+                      options={neverEndingOptions}
                     />
-                  </Col>
-                  <Col md="3">
-                    <Input
-                      type="number"
-                      name="rate"
-                      placeholder="Rate"
-                      value={item?.rate || ""}
-                      className="off-canvas-menu__input py-3 px-2"
-                      onChange={(e) => handleItemInputChange(e, index)}
-                    />
-                  </Col>
-                  <Col md="2">
-                    <h6 className="pt-3">
-                      ${item?.rate * item?.quantity || "0.00"}
-                    </h6>
-                  </Col>
-                  <Col md="1" className="pt-3">
-                    <span
-                      style={{ cursor: "pointer" }}
-                      onClick={() => removeItem(index)}
-                    >
-                      <AiOutlineDelete color="red" size="20px" />
-                    </span>
                   </Col>
                 </Row>
-              );
-            })}
-          </div>
+                <Row className="mt-2">
+                  <Col md="6">
+                    <label className="text-left w-100">Start Date</label>
+                    <Input
+                      type="date"
+                      name="start_date"
+                      value={schedule?.start_date || ""}
+                      onChange={handleDatesChange}
+                      placeholder="Start Date"
+                      className="off-canvas-menu__input py-3 px-3"
+                    />
+                  </Col>
+                  <Col md="6">
+                    <label className="text-left w-100">End Date</label>
+                    <Input
+                      type="date"
+                      name="end_date"
+                      value={schedule?.end_date || ""}
+                      onChange={handleDatesChange}
+                      placeholder="End Date"
+                      className="off-canvas-menu__input py-3 px-3"
+                    />
+                  </Col>
+                </Row>
+              </>
+            )}
 
-          <div className="d-inline-flex w-100">
-            <span className="add-item-btn me-auto" onClick={handleAddItem}>
-              <span>
-                <BiPlus />
-              </span>{" "}
-              ADD ITEM
-            </span>
-            <h6 className="fw-light ms-auto me-4 my-auto">Total</h6>
-            <h6 className="fw-bold ms-auto me-4 my-auto">
-              $ {calculateTotal(items) || "0.00"}
-            </h6>
+            <Row className="mt-2">
+              <Col md="4">
+                <label className="text-left w-100">Item </label>
+              </Col>
+              <Col md="2">
+                <label className="text-left w-100">QTY</label>
+              </Col>
+              <Col md="3">
+                <label className="text-left w-100">Unit Cost</label>
+              </Col>
+              <Col md="2">
+                <label className="text-left w-100">Amount</label>
+              </Col>
+              <Col md="1"></Col>
+            </Row>
+            <div>
+              {items?.map((item, index) => {
+                return (
+                  <Row className="mt-2" key={item.id}>
+                    <Col md="4">
+                      <Input
+                        type="text"
+                        name="item_description"
+                        placeholder="Description"
+                        className="off-canvas-menu__input py-3 px-2"
+                        value={item?.item_description || ""}
+                        onChange={(e) => handleItemInputChange(e, index)}
+                      />
+                    </Col>
+                    <Col md="2">
+                      <Input
+                        type="number"
+                        name="quantity"
+                        placeholder="QTY"
+                        value={item.quantity || ""}
+                        className="off-canvas-menu__input py-3 px-2"
+                        onChange={(e) => handleItemInputChange(e, index)}
+                      />
+                    </Col>
+                    <Col md="3">
+                      <Input
+                        type="number"
+                        name="rate"
+                        placeholder="Rate"
+                        value={item?.rate || ""}
+                        className="off-canvas-menu__input py-3 px-2"
+                        onChange={(e) => handleItemInputChange(e, index)}
+                      />
+                    </Col>
+                    <Col md="2">
+                      <h6 className="pt-3">
+                        ${item?.rate * item?.quantity || "0.00"}
+                      </h6>
+                    </Col>
+                    <Col md="1" className="pt-3">
+                      <span
+                        style={{ cursor: "pointer" }}
+                        onClick={() => removeItem(index)}
+                      >
+                        <AiOutlineDelete color="red" size="20px" />
+                      </span>
+                    </Col>
+                  </Row>
+                );
+              })}
+            </div>
+
+            <div className="d-inline-flex w-89 mt-4">
+              <span className="add-item-btn me-auto" onClick={handleAddItem}>
+                <span>
+                  <BiPlus />
+                </span>{" "}
+                ADD ITEM
+              </span>
+              <h6 className="fw-light ms-auto me-4 my-auto">Total</h6>
+              <h6 className="fw-bold ms-auto me-4 my-auto">
+                $ {calculateTotal(items) || "0.00"}
+              </h6>
+            </div>
           </div>
           <div className="d-inline-flex w-100 mt-4 justify-content-end">
             <button className="btn btn-primary px-4" disabled={loading}>
