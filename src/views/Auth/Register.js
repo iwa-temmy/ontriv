@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Container, Row, Card, Input, Form, Col, Button } from 'reactstrap'
+import { Container, Row, Card, Form, Col, Button } from 'reactstrap'
 import Steps, { Step } from 'rc-steps'
 import { ThreeDots } from 'react-loader-spinner'
 import 'rc-steps/assets/index.css'

@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col, Card, Button } from 'reactstrap'
 import { FiArrowRight } from 'react-icons/fi'
-import Table from '../../../components/Table'
+// import Table from '../../../components/Table'
 // import ontriv from '../../../assets/img/ontriv.png'
 import { connect } from 'react-redux'
-import { IoIosCheckmarkCircle } from 'react-icons/io'
+// import { IoIosCheckmarkCircle } from 'react-icons/io'
 import { MdAddCircle } from 'react-icons/md'
 
-import { GoPrimitiveDot } from 'react-icons/go'
+// import { GoPrimitiveDot } from 'react-icons/go'
 // import { HiPlus } from 'react-icons/hi'
 import facebook from '../../../assets/img/facebook.png'
 import twitter from '../../../assets/img/twitter.png'
 import instagram from '../../../assets/img/instagram.png'
 import linkedin from '../../../assets/img/linkedin.png'
-import cl from '../../../assets/img/cl.png'
+// import cl from '../../../assets/img/cl.png'
 
 // import Calendar from 'react-calendar';
 import Calendar from '../../../components/Calendar'
@@ -21,113 +21,113 @@ import { CenteredModal as Modal } from '../../../components/Modal'
 import { getClientDetails } from '../../../redux/actions'
 import { useParams } from 'react-router-dom'
 
-const clients = [
-  {
-    id: 1,
-    name: 'March Inoice',
-    invoiceNo: '#101',
-    createDate: '03/03/21',
-    amount: '$1000.00',
-    status: 'Paid'
-  },
-  {
-    id: 2,
-    name: 'March Inoice',
-    invoiceNo: '#101',
-    createDate: '03/03/21',
-    amount: '$1000.00',
-    status: 'Paid'
-  },
-  {
-    id: 3,
-    name: 'March Inoice',
-    invoiceNo: '#101',
-    createDate: '03/03/21',
-    amount: '$1000.00',
-    status: 'Paid'
-  },
-  {
-    id: 4,
-    name: 'March Inoice',
-    invoiceNo: '#101',
-    createDate: '03/03/21',
-    amount: '$1000.00',
-    status: 'Paid'
-  },
-  {
-    id: 5,
-    name: 'March Inoice',
-    invoiceNo: '#101',
-    createDate: '03/03/21',
-    amount: '$1000.00',
-    status: 'Paid'
-  },
-  {
-    id: 6,
-    name: 'March Inoice',
-    invoiceNo: '#101',
-    createDate: '03/03/21',
-    amount: '$1000.00',
-    status: 'Paid'
-  },
-  {
-    id: 7,
-    name: 'March Inoice',
-    invoiceNo: '#101',
-    createDate: '03/03/21',
-    amount: '$1000.00',
-    status: 'Paid'
-  },
-  {
-    id: 8,
-    name: 'March Inoice',
-    invoiceNo: '#101',
-    createDate: '03/03/21',
-    amount: '$1000.00',
-    status: 'Paid'
-  },
-  {
-    id: 9,
-    name: 'March Inoice',
-    invoiceNo: '#101',
-    createDate: '03/03/21',
-    amount: '$1000.00',
-    status: 'Paid'
-  },
-  {
-    id: 10,
-    name: 'March Inoice',
-    invoiceNo: '#101',
-    createDate: '03/03/21',
-    amount: '$1000.00',
-    status: 'Paid'
-  },
-  {
-    id: 11,
-    name: 'March Inoice',
-    invoiceNo: '#101',
-    createDate: '03/03/21',
-    amount: '$1000.00',
-    status: 'Paid'
-  },
+// const clients = [
+//   {
+//     id: 1,
+//     name: 'March Inoice',
+//     invoiceNo: '#101',
+//     createDate: '03/03/21',
+//     amount: '$1000.00',
+//     status: 'Paid'
+//   },
+//   {
+//     id: 2,
+//     name: 'March Inoice',
+//     invoiceNo: '#101',
+//     createDate: '03/03/21',
+//     amount: '$1000.00',
+//     status: 'Paid'
+//   },
+//   {
+//     id: 3,
+//     name: 'March Inoice',
+//     invoiceNo: '#101',
+//     createDate: '03/03/21',
+//     amount: '$1000.00',
+//     status: 'Paid'
+//   },
+//   {
+//     id: 4,
+//     name: 'March Inoice',
+//     invoiceNo: '#101',
+//     createDate: '03/03/21',
+//     amount: '$1000.00',
+//     status: 'Paid'
+//   },
+//   {
+//     id: 5,
+//     name: 'March Inoice',
+//     invoiceNo: '#101',
+//     createDate: '03/03/21',
+//     amount: '$1000.00',
+//     status: 'Paid'
+//   },
+//   {
+//     id: 6,
+//     name: 'March Inoice',
+//     invoiceNo: '#101',
+//     createDate: '03/03/21',
+//     amount: '$1000.00',
+//     status: 'Paid'
+//   },
+//   {
+//     id: 7,
+//     name: 'March Inoice',
+//     invoiceNo: '#101',
+//     createDate: '03/03/21',
+//     amount: '$1000.00',
+//     status: 'Paid'
+//   },
+//   {
+//     id: 8,
+//     name: 'March Inoice',
+//     invoiceNo: '#101',
+//     createDate: '03/03/21',
+//     amount: '$1000.00',
+//     status: 'Paid'
+//   },
+//   {
+//     id: 9,
+//     name: 'March Inoice',
+//     invoiceNo: '#101',
+//     createDate: '03/03/21',
+//     amount: '$1000.00',
+//     status: 'Paid'
+//   },
+//   {
+//     id: 10,
+//     name: 'March Inoice',
+//     invoiceNo: '#101',
+//     createDate: '03/03/21',
+//     amount: '$1000.00',
+//     status: 'Paid'
+//   },
+//   {
+//     id: 11,
+//     name: 'March Inoice',
+//     invoiceNo: '#101',
+//     createDate: '03/03/21',
+//     amount: '$1000.00',
+//     status: 'Paid'
+//   },
 
-  {
-    id: 13,
-    name: 'March Inoice',
-    invoiceNo: '#101',
-    createDate: '03/03/21',
-    amount: '$1000.00',
-    status: 'Paid'
-  },
-  {
-    id: 14,
-    name: 'March Inoice',
-    invoiceNo: '#101',
-    createDate: '03/03/21',
-    amount: '$1000.00',
-    status: 'Paid'
-  }
-]
+//   {
+//     id: 13,
+//     name: 'March Inoice',
+//     invoiceNo: '#101',
+//     createDate: '03/03/21',
+//     amount: '$1000.00',
+//     status: 'Paid'
+//   },
+//   {
+//     id: 14,
+//     name: 'March Inoice',
+//     invoiceNo: '#101',
+//     createDate: '03/03/21',
+//     amount: '$1000.00',
+//     status: 'Paid'
+//   }
+// ]
 
 const ClientDetails = ({ getClientDetails, clientDetails }) => {
   const [details, setClientDetails] = useState({})
@@ -150,46 +150,46 @@ const ClientDetails = ({ getClientDetails, clientDetails }) => {
   const [websiteState, setWebsiteState] = useState(false)
   const [hashtagState, setHashtagState] = useState(false)
 
-  const cols = React.useMemo(
-    () => [
-      {
-        Header: 'Invoice',
-        accessor: 'name',
-        cellClass: 'invoice-data-item pt-4',
-        Cell: props => <p>{props.value}</p>
-      },
-      {
-        Header: 'Date',
-        accessor: 'createDate',
-        cellClass: 'pt-4 invoice-data-item',
-        Cell: props => <p>{props.value}</p>
-      },
-      {
-        Header: 'Inv No',
-        accessor: 'invoiceNo',
-        cellClass: 'pt-4 invoice-data-item ',
-        Cell: props => <p>{props.value}</p>
-      },
-      {
-        Header: 'Amount',
-        accessor: 'amount',
-        cellClass: 'pt-4 invoice-data-item-bold ',
-        Cell: props => <p>{props.value}</p>
-      },
-      {
-        Header: 'Status',
-        accessor: 'status',
-        cellClass: 'pt-3 invoice-data-item text-center d-flex',
-        Cell: props => (
-          <div className='invoice-status  '>
-            <GoPrimitiveDot color='' className='mb-1 ml-2' />
-            {props.value}
-          </div>
-        )
-      }
-    ],
-    []
-  )
+  // const cols = React.useMemo(
+  //   () => [
+  //     {
+  //       Header: 'Invoice',
+  //       accessor: 'name',
+  //       cellClass: 'invoice-data-item pt-4',
+  //       Cell: props => <p>{props.value}</p>
+  //     },
+  //     {
+  //       Header: 'Date',
+  //       accessor: 'createDate',
+  //       cellClass: 'pt-4 invoice-data-item',
+  //       Cell: props => <p>{props.value}</p>
+  //     },
+  //     {
+  //       Header: 'Inv No',
+  //       accessor: 'invoiceNo',
+  //       cellClass: 'pt-4 invoice-data-item ',
+  //       Cell: props => <p>{props.value}</p>
+  //     },
+  //     {
+  //       Header: 'Amount',
+  //       accessor: 'amount',
+  //       cellClass: 'pt-4 invoice-data-item-bold ',
+  //       Cell: props => <p>{props.value}</p>
+  //     },
+  //     {
+  //       Header: 'Status',
+  //       accessor: 'status',
+  //       cellClass: 'pt-3 invoice-data-item text-center d-flex',
+  //       Cell: props => (
+  //         <div className='invoice-status  '>
+  //           <GoPrimitiveDot color='' className='mb-1 ml-2' />
+  //           {props.value}
+  //         </div>
+  //       )
+  //     }
+  //   ],
+  //   []
+  // )
 
   return (
     <div className='client-details'>
