@@ -5,7 +5,7 @@ import arrowRight from '../../assets/img/arrowRight.svg'
 // import ontriv from '../../assets/img/ontriv.png'
 import { Link } from 'react-router-dom'
 
-import DatatablePagination from '../../components/Pagination'
+// import DatatablePagination from '../../components/Pagination'
 
 const GridView = ({ clients }) => {
   return (

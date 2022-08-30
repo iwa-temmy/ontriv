@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 import { HiUser, HiPlusCircle } from 'react-icons/hi'
 import { CenteredModal as Modal } from '../../components/Modal'
 import { ThreeDots } from 'react-loader-spinner'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { connect } from 'react-redux'
 import { createClient, createTag } from '../../redux/actions'
 import createNotification from '../../utils/Notification'
-import Select from 'react-select'
-import countryList from 'react-select-country-list'
+// import Select from 'react-select'
+// import countryList from 'react-select-country-list'
 
 const businessCategory = [
   'Agriculture',
@@ -46,7 +46,7 @@ const AddNewClient = ({
   message,
   loading
 }) => {
-  const options = useMemo(() => countryList().getData(), [])
+  // const options = useMemo(() => countryList().getData(), [])
   const [uploadedImage, setUploadedImage] = useState(null)
   const [profile_image, setProfileImage] = useState(null)
   const [error, setError] = useState(null)
@@ -60,7 +60,7 @@ const AddNewClient = ({
   const {
     handleSubmit,
     register,
-    control,
+    // control,
     formState: { errors }
   } = useForm()
 

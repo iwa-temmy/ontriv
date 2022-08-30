@@ -15,7 +15,7 @@ import notification from '../../utils/Notification.js'
 import emptyStateImage from '../../assets/img/clientEmptyIcon.png'
 
 const ClientManagement = ({
-  getTag,
+  // getTag,
   tags,
   getTagError,
   clients,
