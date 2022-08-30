@@ -20,6 +20,7 @@ import SetUpBussiness from "./views/Bussiness";
 import Financials from "./views/Financials";
 import Messages from "./views/Messages";
 import InvoiceDetailsPage from "./views/Financials/InvoiceDetailsPage";
+import ExpenseDetailsPage from "./views/Financials/ExpenseDetailsPage";
 import Schedule from "./views/Schedule";
 import NewPost from "./views/Schedule/NewPost";
 import Test from "./components/Inputs/Test";
@@ -40,6 +41,11 @@ const RouterConfig = () => {
             exact
             path="/invoices-&-financials/invoice/:id"
             element={<InvoiceDetailsPage />}
+          />
+          <Route
+            exact
+            path="/invoices-&-financials/expense/:id"
+            element={<ExpenseDetailsPage />}
           />
           <Route exact path="/client-details/:id" element={<ClientDetails />} />
           <Route exact path="/report" element={<Report />} />

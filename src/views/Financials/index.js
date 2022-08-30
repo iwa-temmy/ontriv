@@ -60,6 +60,11 @@ const Finances = ({
     setShowPayoutModal(true);
   };
 
+  useEffect(() => {
+    if (show) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'visible';
+  }, [show]);
+
   return (
     <>
       {show ? (
