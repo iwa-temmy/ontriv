@@ -51,7 +51,7 @@ const InvoiceDetailsPage = (props) => {
     invoiceDetails,
     getOneInvoiceLoading,
     getInvoiceMessage,
-    logo
+    logo,
   } = props;
   const location = useLocation();
 
@@ -89,11 +89,16 @@ const InvoiceDetailsPage = (props) => {
 
   useEffect(() => {
     if (!getOneInvoiceLoading && getInvoiceMessage?.length > 0) {
-      setPageData(invoiceDetails);
+      setTimeout(() => setPageData(invoiceDetails), 1000);
     } else {
       setPageData({});
     }
-  }, [getInvoiceMessage, getOneInvoiceLoading, invoiceDetails  ]);
+  }, [getInvoiceMessage, getOneInvoiceLoading, invoiceDetails]);
+
+  useEffect(() => {
+    if (showEditModal) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "visible";
+  }, [showEditModal]);
   return (
     <>
       {showCreateInvoiceModal ? (
@@ -122,11 +127,7 @@ const InvoiceDetailsPage = (props) => {
                     <div className="d-inline-flex" style={{ width: "100%" }}>
                       <img
                         className="me-auto mb-3"
-                        src={
-                          logo
-                            ? logo
-                            : TitleModalLogoHere
-                        }
+                        src={logo ? logo : TitleModalLogoHere}
                         width="120px"
                         alt="business logo"
                       />
@@ -327,27 +328,27 @@ const InvoiceDetailsPage = (props) => {
                   </button>
                 </div>
               </div>
-              <div
-                className="bg-white rounded-2 py-4 px-5 mt-5"
-                style={{ borderRadius: "10px" }}
-              >
-                <h6 className="add-item fs-5">Invoice Payment</h6>
-                <Row className="mt-3">
-                  <Col sm="3" lg="3" md="3">
-                    <h6 className="fs-6 text-black-50">Client</h6>
-                  </Col>
-                  <Col sm="2" lg="2" md="2">
-                    <h6 className="fs-6 text-black-50">Amount</h6>
-                  </Col>
-                  <Col sm="3" lg="3" md="3">
-                    <h6 className="fs-6 text-black-50">Payment date</h6>
-                  </Col>
-                  <Col sm="4" lg="4" md="4">
-                    <h6 className="fs-6 text-black-50">Payment method</h6>
-                  </Col>
-                </Row>
-                {pageData?.payment_record?.length > 0 ? (
-                  pageData?.payment_record?.map((record) => {
+              {pageData?.payment_record?.length > 0 && (
+                <div
+                  className="bg-white rounded-2 py-4 px-5 mt-5"
+                  style={{ borderRadius: "10px" }}
+                >
+                  <h6 className="add-item fs-5">Invoice Payment</h6>
+                  <Row className="mt-3">
+                    <Col sm="3" lg="3" md="3">
+                      <h6 className="fs-6 text-black-50">Client</h6>
+                    </Col>
+                    <Col sm="2" lg="2" md="2">
+                      <h6 className="fs-6 text-black-50">Amount</h6>
+                    </Col>
+                    <Col sm="3" lg="3" md="3">
+                      <h6 className="fs-6 text-black-50">Payment date</h6>
+                    </Col>
+                    <Col sm="4" lg="4" md="4">
+                      <h6 className="fs-6 text-black-50">Payment method</h6>
+                    </Col>
+                  </Row>
+                  {pageData?.payment_record?.map((record) => {
                     return (
                       <Row
                         key={record?.id}
@@ -384,20 +385,9 @@ const InvoiceDetailsPage = (props) => {
                         </Col>
                       </Row>
                     );
-                  })
-                ) : (
-                  <Row>
-                    <Col sm="12" lg="12" md="12">
-                      <h6
-                        className="fw-light fs-6 mt-3"
-                        style={{ color: "#9DA8B6", textAlign: "center" }}
-                      >
-                        Not Available
-                      </h6>
-                    </Col>
-                  </Row>
-                )}
-              </div>
+                  })}
+                </div>
+              )}
             </Col>
             <Col xl="4" className="position-relative">
               <div className="d-inline-flex w-10t">

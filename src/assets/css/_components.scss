@@ -1,6 +1,15 @@
 .w-89{
   width: 89% !important;
 }
+.active-menu{
+  text-transform: capitalize;
+  font-weight: 700 !important;
+
+  @media (max-width: 500px) {
+    font-size: 18px !important;
+    font-weight: 500;
+  }
+}
 body::-webkit-scrollbar {
   width: 1em !important;
 }
