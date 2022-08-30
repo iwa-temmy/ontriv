@@ -1,9 +1,13 @@
 import React from "react";
-import { Card, Button, Form } from "reactstrap";
+import { Card, Form } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { ThreeDots } from "react-loader-spinner";
 
-const PersonalDetailsForm = ({ handleUpdatePersonalDetails, userDetails, updateUserLoading }) => {
+const PersonalDetailsForm = ({
+  handleUpdatePersonalDetails,
+  userDetails,
+  updateUserLoading,
+}) => {
   const { handleSubmit, register } = useForm();
   return (
     <div>
