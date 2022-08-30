@@ -9,12 +9,16 @@ import { Col, Row } from 'reactstrap'
 import Button from '../../../../components/Button'
 
 const SelectSocialChannels = ({next}) => {
-    const [inputValue, setInputValue] = useState("yes")
+    const [isChecked, setIsChecked] = useState(false)
     const [checkedValue, setCheckedValue] = useState([])
 
     const onCheckItem = (e) => {
+      console.log(e)
+      setIsChecked((checked) => !checked)
 let values = e.currentTarget.value
-setCheckedValue([...checkedValue,values])
+let items = [...checkedValue, values]
+let uniqueItems = [...new Set(items)];
+setCheckedValue(uniqueItems)
     }
 
   return (

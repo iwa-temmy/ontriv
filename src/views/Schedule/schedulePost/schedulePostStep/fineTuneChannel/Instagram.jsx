@@ -8,7 +8,7 @@ import InputField from '../../../../../components/Input'
 import TextArea from '../../../../../components/textArea/TextArea';
 import ToggleButton from '../../../../../components/toggleButton/ToggleButton';
 
-const FineTuneInstagram = ({socialchannel,setOpenModal}) => {
+const FineTuneInstagram = ({socialchannel,setOpenModal,activeTab,setActiveTab,index}) => {
   const [startDate, setStartDate] = useState();
   const [baseCaption, setBaseCaption] = useState('')
   const [firstComment, setFirstComment] = useState('')
@@ -43,12 +43,16 @@ const FineTuneInstagram = ({socialchannel,setOpenModal}) => {
       setIsOn(prev => !prev)
   }
 
-  const nextButton = () => {
-    if (socialchannel.length === 1) {
+  const nextButton = (tab) => {
+    console.log(activeTab, socialchannel.length)
+    if (socialchannel.length === activeTab ) {
       setOpenModal(true)
     }
     else{
-      console.log("more data")
+      // console.log("nnnnn")
+      if (activeTab !== tab) {
+        setActiveTab(tab)
+      }
     }
   }
   return (
@@ -70,7 +74,7 @@ const FineTuneInstagram = ({socialchannel,setOpenModal}) => {
      <TextArea maxLength="2200" value={firstComment} onChangeTextArea={onChangeFirstComment} count={firstCommentCount} style={{height:"97px"}}/>
 
 <ToggleButton isOn={isOn} handleToggle={handleToggle} title="Location" id="location" htmlFor="location"/>
-<Button text="Next" onButtonClick={nextButton} />
+<Button text="Next" onButtonClick={() => nextButton(activeTab + 1)} />
       </div>
       </Col>
         
