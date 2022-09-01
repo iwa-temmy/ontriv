@@ -52,6 +52,7 @@ const InvoiceDetailsPage = (props) => {
     getOneInvoiceLoading,
     getInvoiceMessage,
     logo,
+    website_url,
   } = props;
   const location = useLocation();
 
@@ -119,7 +120,7 @@ const InvoiceDetailsPage = (props) => {
           <Row>
             <Col xl="8" className="">
               <div
-                className="bg-white rounded-2"
+                className="bg-white rounded-5"
                 style={{ borderRadius: "10px" }}
               >
                 <div id="invoice" className="pt-4 px-5">
@@ -128,7 +129,7 @@ const InvoiceDetailsPage = (props) => {
                       <img
                         className="me-auto mb-3"
                         src={logo ? logo : TitleModalLogoHere}
-                        width="120px"
+                        width="100px"
                         alt="business logo"
                       />
                       <h6 className="invoice-modal__title">
@@ -305,7 +306,9 @@ const InvoiceDetailsPage = (props) => {
                       </Col>
                     </Row>
                     <img src={HrInvoice} className="my-5 w-100" alt="" />
-                    <h6 className="add-item mb-5">www.yourwebsiteurl.com</h6>
+                    <h6 className="add-item mb-5">
+                      {website_url || "www.yourwebsiteurl.com"}
+                    </h6>
                   </div>
                 </div>
                 <div className="d-inline-flex mb-5 w-100 px-5 pb-4">
@@ -316,7 +319,7 @@ const InvoiceDetailsPage = (props) => {
                         Dowload Invoice
                       </h6>
                     </div>
-                    <h6 className="text-left fw-light fs-6">
+                    <h6 className="text-left fw-light" style={{fontSize: "14px"}}>
                       You can update logo in Settings
                     </h6>
                   </div>
@@ -330,33 +333,35 @@ const InvoiceDetailsPage = (props) => {
               </div>
               {pageData?.payment_record?.length > 0 && (
                 <div
-                  className="bg-white rounded-2 py-4 px-5 mt-5"
-                  style={{ borderRadius: "10px" }}
+                  className="bg-white rounded-5 py-4 px-5 mt-5"
+                  style={{ borderRadius: "10px", fontSize: "12px" }}
                 >
-                  <h6 className="add-item fs-5">Invoice Payment</h6>
+                  <h6 className="payment-records-header fs-5">
+                    Invoice Payment
+                  </h6>
                   <Row className="mt-3">
                     <Col sm="3" lg="3" md="3">
-                      <h6 className="fs-6 text-black-50">Client</h6>
+                      <h6>Client</h6>
                     </Col>
                     <Col sm="2" lg="2" md="2">
-                      <h6 className="fs-6 text-black-50">Amount</h6>
+                      <h6>Amount</h6>
                     </Col>
                     <Col sm="3" lg="3" md="3">
-                      <h6 className="fs-6 text-black-50">Payment date</h6>
+                      <h6>Payment date</h6>
                     </Col>
                     <Col sm="4" lg="4" md="4">
-                      <h6 className="fs-6 text-black-50">Payment method</h6>
+                      <h6>Payment method</h6>
                     </Col>
                   </Row>
                   {pageData?.payment_record?.map((record) => {
                     return (
                       <Row
                         key={record?.id}
-                        className="align-items-center justify-content-center"
+                        className="align-items-center justify-content-center mt-4"
                       >
                         <Col sm="3" lg="3" md="3">
                           <h6
-                            className="fw-light fs-6"
+                            className="fw-light payment-records-item"
                             style={{ color: "#9DA8B6" }}
                           >
                             {invoiceDetails?.client?.fullname}
@@ -364,7 +369,7 @@ const InvoiceDetailsPage = (props) => {
                         </Col>
                         <Col sm="2" lg="2" md="2">
                           <h6
-                            className="fw-light fs-6"
+                            className="fw-light payment-records-item"
                             style={{ color: "#9DA8B6" }}
                           >
                             {formatAmount(record?.amount_paid)}
@@ -372,7 +377,7 @@ const InvoiceDetailsPage = (props) => {
                         </Col>
                         <Col sm="3" lg="3" md="3">
                           <h6
-                            className="fw-light fs-6"
+                            className="fw-light payment-records-item"
                             style={{ color: "#9DA8B6" }}
                           >
                             {record?.payment_date}
@@ -380,7 +385,9 @@ const InvoiceDetailsPage = (props) => {
                         </Col>
                         <Col sm="4" lg="4" md="4">
                           <div className="list-client-tag-paid fs-6 py-2 text-center w-75">
-                            {record?.payment_method}
+                            {record?.payment_method === "Bank Transfer"
+                              ? "Transfer"
+                              : record?.payment_method}
                           </div>
                         </Col>
                       </Row>
@@ -448,7 +455,7 @@ const InvoiceDetailsPage = (props) => {
                 </div>
               ) : null}
               <div className="my-4 py-5 px-4 bg-white">
-                <h6 className="text-center fs-6 fw-light slightly-black mb-2">
+                <h6 className="text-center fw-light slightly-black mb-2">
                   The invoice can be sent to any email besides the client's
                   registered email address.
                 </h6>
@@ -459,7 +466,7 @@ const InvoiceDetailsPage = (props) => {
                 </div>
               </div>
               <div className="my-4 py-5 px-4 bg-white">
-                <h6 className="text-center fs-6 fw-light slightly-black mb-2">
+                <h6 className="text-center fw-light slightly-black mb-2">
                   Did the Client make an offline payment? You can record your
                   payment by clicking the button below
                 </h6>
@@ -538,6 +545,7 @@ const mapStateToProps = (state) => {
     getOneInvoiceLoading: state?.oneInvoice?.getOneInvoiceLoading,
     getInvoiceMessage: state?.oneInvoice?.message?.getOneInvoice,
     logo: state?.settings?.businessDetails?.logo,
+    website_url: state?.settings?.businessDetails?.website,
   };
 };
 export default connect(mapStateToProps, { getOneInvoice })(InvoiceDetailsPage);
