@@ -202,6 +202,22 @@
     }
   }
 }
+.payment-records-header{
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 1.25px;
+  margin: 2rem 0 3rem 0;
+  background: linear-gradient(93.88deg, #49A8F8 6.88%, #0053F4 74.45%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-fill-color: transparent;
+}
+.payment-records-item{
+  font-size: 14px !important;
+}
 
 .client-management {
   position: relative;
@@ -1218,6 +1234,7 @@ label {
 
 .slightly-black {
   color: #17151E;
+  font-size: 14px !important;
   line-height: 24px;
 }
 

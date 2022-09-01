@@ -7,6 +7,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { calculateTotal } from "../../../utils/helper";
 import createNotification from "../../../utils/Notification";
 import Select from "react-select";
+import moment from "moment";
 
 //redux
 import { connect } from "react-redux";
@@ -27,6 +28,13 @@ const EditInvoiceModal = ({
   const [recurring, setRecurring] = useState(false);
 
   //functions
+  const getCurrentDate = () => {
+    const date = new Date();
+    return moment(date).format('YYYY-MM-DD');
+  }
+
+
+
   const handleAddItem = () => {
     let id = items.length + 1;
 
@@ -219,7 +227,7 @@ const EditInvoiceModal = ({
             </div>
 
             <div className="my-3">
-              <label className="text-left w-100">Project/Description</label>
+              <label className="text-left w-100">Invoice Name</label>
               <Input
                 type="text"
                 name="description"
@@ -238,6 +246,7 @@ const EditInvoiceModal = ({
                   name="issued_on"
                   onChange={handleInputChange}
                   value={formData?.issued_on || ""}
+                  disabled
                   placeholder="Issued On"
                   className="off-canvas-menu__input py-3 px-3"
                 />
@@ -249,6 +258,7 @@ const EditInvoiceModal = ({
                   name="due_date"
                   onChange={handleInputChange}
                   value={formData?.due_date || ""}
+                  min={getCurrentDate()}
                   placeholder="Due Date"
                   className="off-canvas-menu__input py-3 px-3"
                 />

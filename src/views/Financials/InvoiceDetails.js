@@ -100,7 +100,7 @@ const InvoiceDetails = ({
             </Col>
           </Row>
           <img src={HrInvoice} className="w-100" alt="" />
-          <div className="mt-5 invoice-modal__grey-section w-100 py-4 px-4">
+          <div className="mt-3 invoice-modal__grey-section w-100 py-4 px-4">
             <Row
               style={{
                 textAlign: "left",
@@ -153,8 +153,8 @@ const InvoiceDetails = ({
             })}
           </div>
           <Row>
-            <Col className="ms-auto" xl="11">
-              <div className="mt-5 invoice-modal__grey-section py-4 px-4">
+            <Col className="ms-auto" sm="9" md="9" xl="9">
+              <div className="mt-4 invoice-modal__grey-section py-4 px-4">
                 <Row>
                   <Col sm="6" lg="6" xl="6">
                     <h6 className="invoice-modal__qty ">Sub Total</h6>
