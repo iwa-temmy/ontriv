@@ -11,12 +11,13 @@ import moment from "moment";
 
 //redux
 import { connect } from "react-redux";
-import { createNewInvoice } from "../../../redux/actions";
+import { createNewInvoice, getClient } from "../../../redux/actions";
 
 const CreateInvoiceModal = ({
   clients,
   closeInvoiceModal,
   createNewInvoice,
+  getClient,
   loading,
   error,
   createInvoiceMessage,
@@ -30,11 +31,8 @@ const CreateInvoiceModal = ({
 
   const getCurrentDate = () => {
     const date = new Date();
-    return moment(date).format('YYYY-MM-DD');
-  }
-
-
-  console.log(getCurrentDate());
+    return moment(date).format("YYYY-MM-DD");
+  };
   const handleAddItem = () => {
     let id = items.length + 1;
 
@@ -175,6 +173,12 @@ const CreateInvoiceModal = ({
       closeInvoiceModal();
     }
   }, [loading, error, createInvoiceMessage, closeInvoiceModal]);
+
+  useEffect(() => {
+    getClient();
+  }, [getClient]);
+
+  console.log(clients);
   return (
     <div className="off-canvas-menu">
       <div className="off-canvas-menu__content px-4 py-4">
@@ -196,7 +200,7 @@ const CreateInvoiceModal = ({
               overflowY: "scroll",
               overflowX: "hidden",
               position: "relative",
-              padding: "0 1rem"
+              padding: "0 1rem",
             }}
           >
             <div className="mt-4 mb-3">
@@ -423,14 +427,14 @@ const CreateInvoiceModal = ({
 };
 
 const mapStateToProps = (state) => {
-  const { auth, invoice } = state;
+  const { invoice } = state;
   return {
-    clients: auth?.currentUser?.client_list,
+    clients: state?.client?.clients,
     loading: invoice?.loading?.createInvoice,
     error: invoice?.error?.createInvoice,
     createInvoiceMessage: invoice?.message?.createInvoice,
   };
 };
-export default connect(mapStateToProps, { createNewInvoice })(
+export default connect(mapStateToProps, { createNewInvoice, getClient })(
   CreateInvoiceModal
 );
