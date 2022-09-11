@@ -11,12 +11,13 @@ import moment from "moment";
 
 //redux
 import { connect } from "react-redux";
-import { createNewInvoice } from "../../../redux/actions";
+import { createNewInvoice, getClient } from "../../../redux/actions";
 
 const EditInvoiceModal = ({
   clients,
   closeInvoiceModal,
   createNewInvoice,
+  getClient,
   loading,
   error,
   payload,
@@ -30,10 +31,8 @@ const EditInvoiceModal = ({
   //functions
   const getCurrentDate = () => {
     const date = new Date();
-    return moment(date).format('YYYY-MM-DD');
-  }
-
-
+    return moment(date).format("YYYY-MM-DD");
+  };
 
   const handleAddItem = () => {
     let id = items.length + 1;
@@ -153,21 +152,21 @@ const EditInvoiceModal = ({
       label: <span>False</span>,
     },
   ];
-  
+
   //useEffect
   useEffect(() => {
-    if(payload){
-      setRecurring(payload?.recurring)
-        setFormData({
-          client: payload?.client?.id,
-          description: payload?.description,
-          issued_on: payload?.issued_on,
-          due_date: payload?.due_date,
-          sub_total: payload?.sub_total,
-          total: payload?.total,
-          vat: payload?.vat,
-        })
-        setItems(payload?.items);
+    if (payload) {
+      setRecurring(payload?.recurring);
+      setFormData({
+        client: payload?.client?.id,
+        description: payload?.description,
+        issued_on: payload?.issued_on,
+        due_date: payload?.due_date,
+        sub_total: payload?.sub_total,
+        total: payload?.total,
+        vat: payload?.vat,
+      });
+      setItems(payload?.items);
     }
   }, [payload]);
   useEffect(() => {
@@ -179,6 +178,9 @@ const EditInvoiceModal = ({
       closeInvoiceModal();
     }
   }, [loading, error, createInvoiceMessage, closeInvoiceModal]);
+  useEffect(() => {
+    getClient();
+  }, [getClient]);
   return (
     <div className="off-canvas-menu">
       <div className="off-canvas-menu__content px-4 py-4">
@@ -200,7 +202,7 @@ const EditInvoiceModal = ({
               overflowY: "scroll",
               overflowX: "hidden",
               position: "relative",
-              padding: "0 1rem"
+              padding: "0 1rem",
             }}
           >
             <div className="mt-4 mb-3">
@@ -429,12 +431,12 @@ const EditInvoiceModal = ({
 const mapStateToProps = (state) => {
   const { auth, invoice } = state;
   return {
-    clients: auth?.currentUser?.client_list,
+    clients: state?.client?.clients,
     loading: invoice?.loading?.createInvoice,
     error: invoice?.error?.createInvoice,
     createInvoiceMessage: invoice?.message?.createInvoice,
   };
 };
-export default connect(mapStateToProps, { createNewInvoice })(
+export default connect(mapStateToProps, { createNewInvoice, getClient })(
   EditInvoiceModal
 );
