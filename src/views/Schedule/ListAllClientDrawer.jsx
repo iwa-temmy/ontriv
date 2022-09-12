@@ -1,12 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaPlus, FaTimes } from 'react-icons/fa'
 import { Button } from 'reactstrap'
 import searchChat from './../../assets/img/search-chat.svg'
 import forwardChat from './../../assets/img/forward-chat.svg'
 import barChart from "../../assets/img/barchart.png"
 import ClientChartDrawer from './ClientChartDrawer'
+import { useEffect } from 'react'
 
-const ListAllClientDrawer = ({businessOwner,businessLogo, setShowClient,getAllClientDetails,activeId,setActiveId,getScheduledpost}) => {
+const ListAllClientDrawer = ({businessOwner,businessLogo, setShowClient,getAllClientDetails,activeId,setActiveId}) => {
+
+  const [searchValue, setSearchValue] = useState('')
+  const [allClient, setAllClient] = useState(getAllClientDetails)
+
+  const onChangeSearchValue = (e) => {
+    let value = e.target.value
+   setSearchValue(value)
+}
+
+useEffect(() => {
+  if(searchValue.length <= 0){
+      setAllClient(getAllClientDetails)
+  } else if(searchValue.length >= 4){
+      const results = getAllClientDetails.filter(o => o?.fullname.toLowerCase().includes(searchValue.toLowerCase()));
+      if(results.length > 0){
+      setAllClient(results)
+      } else {
+          setAllClient(getAllClientDetails)
+       }
+   } 
+}, [searchValue,getAllClientDetails]);
+
   return (
     <div className='clientlist-drawer'>
        <div className='cancel-drawer' onClick={()=>setShowClient(false)}>
@@ -18,6 +41,8 @@ const ListAllClientDrawer = ({businessOwner,businessLogo, setShowClient,getAllCl
         name="client"
         placeholder="Find View"
         type="text"
+        value={searchValue}
+        onChange={onChangeSearchValue}
         className='' />
       <img src={searchChat} className='ms-5' alt="" />
     </div>
@@ -44,7 +69,7 @@ const ListAllClientDrawer = ({businessOwner,businessLogo, setShowClient,getAllCl
         <h6 className='chat-titles mb-4'>
           Clients
         </h6>
-        {getAllClientDetails.length > 0 ? (<ClientChartDrawer item={getAllClientDetails} setShowClient={setShowClient} activeId={activeId} setActiveId={setActiveId} getScheduledpost={getScheduledpost} />) : (<div className='no-clients'>
+        {getAllClientDetails.length > 0 ? (<ClientChartDrawer item={allClient} setShowClient={setShowClient} activeId={activeId} setActiveId={setActiveId} />) : (<div className='no-clients'>
           <p>You have no clients. Please invite one to get started  </p>
           <div>
             <Button type="button" color='' className='drawer-addclient'>
