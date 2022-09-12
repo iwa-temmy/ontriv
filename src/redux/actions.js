@@ -103,6 +103,16 @@ export const DUPLICATE_ONE_INVOICE = "DUPLICATE_ONE_INVOICE";
 export const DUPLICATE_ONE_INVOICE_SUCCESS = "DUPLICATE_ONE_INVOICE_SUCCESS";
 export const DUPLICATE_ONE_INVOICE_ERROR = "DUPLICATE_ONE_INVOICE_ERROR";
 
+//Schedule
+
+export const GET_ALLCLIENT = "GET_ALLCLIENT";
+export const GET_ALLCLIENT_SUCCESS = "GET_ALLCLIENT_SUCCESS";
+export const GET_ALLCLIENT_ERROR = "GET_ALLCLIENT_ERROR";
+
+export const GET_ONECLIENTPOST = "GET_ONECLIENTPOST";
+export const GET_ONECLIENTPOST_SUCCESS = "GET_ONECLIENTPOST_SUCCESS";
+export const GET_ONECLIENTPOST_ERROR = "GET_ONECLIENTPOST_ERROR";
+
 //Expenses
 export const GET_EXPENSES = "GET_EXPENSES";
 export const GET_EXPENSES_SUCCESS = "GET_EXPENSES_SUCCESS";
@@ -128,3 +138,5 @@ export * from "./Invoices/action";
 export * from "./Expenses/action";
 export * from "./Invoices/OneInvoice/action";
 export * from "./Expenses/Vendor/action";
+export * from "./Schedule/action";
+export * from "./Schedule/oneClientPost/action";

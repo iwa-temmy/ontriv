@@ -9,19 +9,23 @@ import { Col, Row } from 'reactstrap'
 import Button from '../../../../components/Button'
 
 const SelectSocialChannels = ({next}) => {
-    const [isChecked, setIsChecked] = useState(false)
     const [checkedValue, setCheckedValue] = useState([])
 
     const onCheckItem = (e) => {
-      console.log(e)
-      setIsChecked((checked) => !checked)
+      if(e.target.checked && !checkedValue.includes(e.target.value)){
 let values = e.currentTarget.value
 let items = [...checkedValue, values]
 let uniqueItems = [...new Set(items)];
 setCheckedValue(uniqueItems)
+      } else if(!e.target.checked){
+        let targetItem = checkedValue.indexOf(e.target.value)
+        checkedValue.splice(targetItem,1)
+      }
     }
 
   return (
+    <>
+
     <div className='socialChannels'>
          <PostHeader title="Social channels"/>
          <Row>
@@ -67,6 +71,7 @@ setCheckedValue(uniqueItems)
          </Row>
          <Button text="Next" onButtonClick={() => next(checkedValue)} btnstyle={{width:"90%",margin:"auto",marginTop:"20px"}}/>
     </div>
+    </>
   )
 }
 

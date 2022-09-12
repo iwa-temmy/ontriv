@@ -1,17 +1,16 @@
 import React from 'react'
-import { Col, Row, Input } from 'reactstrap'
+import { Col, Row} from 'reactstrap'
 import mask from "../../../assets/img/Mask.png"
 import smallcircle from "../../../assets/img/smallcircle.png"
 import calendar from "../../../assets/img/calendaricon.png"
 import search from "../../../assets/img/search.png"
 
-const SocialChannelTopNav = () => {
+const SocialChannelTopNav = ({searchValue,onChange,selectedValue,OnSelectItem}) => {
     return (
-        <Row>
-            <Col xs="12"
-                md="8"
-                sm="6">
-                <div className='filterPost'>
+        <Row className='justify-content-between'>
+            <Col xs="12"md="8" sm="6">
+                <Row className='justify-content-between'>
+                    <Col xs="12"md="5" sm="6" className='mb-3'>
                     <div className='poststatus'>
                         <div className='smallcircle'>
                             <img src={smallcircle} alt="" />
@@ -21,22 +20,32 @@ const SocialChannelTopNav = () => {
                            <div className='selectholder'>
                            <select
                                 id="exampleSelect"
-                                // name="select"
-                                // type="select"
+                                value={selectedValue}
+                                onChange={OnSelectItem}
                                 className='selectpost'
                             >
-                                <option>
+                                <option value="All">
                                     All
                                 </option>
-                                <option>
-                                    2
+                                <option value="Scheduled">
+                                 Scheduled
+                                </option>
+                                <option value="Published">
+                                Published
+                                </option>
+                                <option value="Draft">
+                                Draft
+                                </option>
+                                <option value="Pending">
+                                Pending
                                 </option>
                             </select>
-                            <img src={mask} alt="" srcset="" className='mask'/>
                            </div>
                         </div>
+                        <img src={mask} alt="" srcset="" className='mask'/>
                     </div>
-
+                    </Col>
+                    <Col xs="12"md="7" sm="6">
                     <div className='postime'>
                         <div className='smallcalendar'>
                             <img src={calendar} alt="" />
@@ -56,20 +65,23 @@ const SocialChannelTopNav = () => {
                                 JAN 1, 2019 - APR 15, 2022
                             </option>
                         </select>
-                        <img src={mask} alt="" srcset="" className='calendar' />
                        </div>
                      
                         </div>
+                        <img src={mask} alt="" srcset="" className='calendar' /> 
                     </div>
-                </div>
+                    </Col>
+                </Row>
             </Col>
             <Col xs="12"
-                md="4"
+                md="3"
                 sm="6"
                 >
-                    <div className='inputholder'>
+ <div className='inputholder'>
   <input
   className='input'
+  value={searchValue}
+  onChange={onChange}
   />
   <img src={search} alt="search" />
 </div>

@@ -1,10 +1,12 @@
-import SocialTableData from "./tableData";
+import FacebookPost from "./socialChannel/Facebook";
+import InstagramPost from "./socialChannel/InstagramPost";
+import LinkedinPost from "./socialChannel/Linkedin";
 
 const socialChannelData = {
-    INSTAGRAM: (<SocialTableData/>),
-    FACEBOOK: <h1>Facebook</h1>,
+    INSTAGRAM: (<InstagramPost/>),
+    FACEBOOK: <FacebookPost/>,
     TWITTER: <h1>Twitter</h1>,
-    LINKEDIN: <h1>Linkedin</h1>,
+    LINKEDIN: <LinkedinPost/>
   };
   
   const socialChannelOptions = [

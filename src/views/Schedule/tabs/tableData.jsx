@@ -1,9 +1,13 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import Table from '../../../components/Table'
  import { socialPost } from "../data"
 import SocialChannelTopNav from "./SocialChannelTopNav"
 
 const SocialTableData = () => {
+
+    const {getOneClientPost,getOneClientPostLoading} = useSelector((state) => state.getClientPost);
+    console.log(getOneClientPost,"listsdfdf")
 
 
     const cols1 = React.useMemo(
@@ -99,17 +103,17 @@ const SocialTableData = () => {
         []
     );
     return (
-        <div>
+        <div style={{border:'solid red'}}>
             <SocialChannelTopNav/>
-            {/* {socialPost?.length ? (
+            {socialPost?.length ? (
             <Table
-                columns={cols}
+                columns={cols1}
                 data={socialPost}
                 divided
                 defaultPageSize={4}
                 pagePosition="left"
             />
-        ) : null} */}
+        ) : null}
         </div>
     )
 }

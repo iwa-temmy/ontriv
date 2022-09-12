@@ -11,9 +11,6 @@ const ScheduleSteps = () => {
   const [currentStep, UpdateCurrentStep] = useState(1)
   const [socialMedia, setSocialMedia] = useState()
 
-
-
-
   // function updateStep(step){
   //   console.log(step, "dfghjkl")
   //   if(currentStep === labelArray.length-1)(

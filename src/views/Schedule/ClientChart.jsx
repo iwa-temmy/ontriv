@@ -1,19 +1,37 @@
 import React,{useState} from 'react'
 import forwardChat from './../../assets/img/forward-chat.svg'
+import digitalCreator from "../../assets/img/digitalCreator.png"
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { getOneClientPost } from '../../redux/actions'
 
-const ClientChart = ({ item}) => {
-    const [activeId, setActiveId] = useState(1);
-    console.log(activeId)
+
+const ClientChart = ({ item, activeId, setActiveId}) => {
+
+    const [id, setId] = useState(item[0]?.id)
+
+    const dispatch = useDispatch()
+
+
+    useEffect(()=>{
+        dispatch(getOneClientPost(id))
+    },[id,dispatch])
+
+    const getClientPost = (id,clientId) => {
+        setActiveId(id)
+        setId(clientId)
+    }
+
     return (
         <ul>
-            {item.map(items => (
-                <li className={`client-chart ${activeId === items.id && "active"}`} onClick={()=>setActiveId(items.id)} active={activeId}>
+            {item.map((items,index) => (
+                <li className={`client-chart ${activeId === index && "active"}`} onClick={()=>getClientPost(index,items.id)} active={activeId}>
                     <div className='chartIconHolder'>
-                        <img src={items.image} alt={items.name} style={{width:"40px",paddingLeft:"5px"}}/>
+                        <img src={items.profile_image || digitalCreator} alt={items.fullname} style={{width:"40px",paddingLeft:"5px"}}/>
                     </div>
                     <div className='clientNameHolder'>
-                        <h6>{items.name}</h6>
-                        <p>{items.content}</p>
+                        <h6>{items?.fullname}</h6>
+                        <p>Content Calendar</p>
                     </div>
                     <div>
                         <img src={forwardChat} className='ms-auto' alt="" />
