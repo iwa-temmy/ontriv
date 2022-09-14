@@ -75,7 +75,7 @@ const ExpenseListView = ({
       {
         Header: "Action",
         accessor: "id",
-        cellClass: "pt-4",
+        cellClass: "",
         Cell: (props) => (
           <>
             <button

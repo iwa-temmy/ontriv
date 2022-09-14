@@ -11,6 +11,7 @@ function Table({
   shadow,
   defaultPageSize,
   pagePosition,
+  rowOnClick,
 }) {
   const {
     getTableProps,
@@ -35,7 +36,7 @@ function Table({
   );
 
   return (
-    <div style={{height:"50vh", position: "relative"}}>
+    <div style={{ height: "50vh", position: "relative" }}>
       <table
         {...getTableProps()}
         className={`r-table table  ${classnames({
@@ -73,7 +74,9 @@ function Table({
               // <div className='table-row'>
               <tr
                 {...row.getRowProps()}
+                onClick={(e) => rowOnClick(row?.original)}
                 className={`table-row ${shadow ? "table-row-shadow" : ""}`}
+                style={{ cursor: rowOnClick ? "pointer" : "" }}
               >
                 {row.cells.map((cell, cellIndex) => (
                   <td

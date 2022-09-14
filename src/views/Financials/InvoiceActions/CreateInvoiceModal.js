@@ -233,7 +233,7 @@ const CreateInvoiceModal = ({
                 name="description"
                 onChange={handleInputChange}
                 value={formData?.description || ""}
-                placeholder="description"
+                placeholder="Invoice Name"
                 className="off-canvas-menu__input py-3 px-3"
               />
             </div>

@@ -459,7 +459,6 @@ table {
     }
   }
 }
-
 .pagination-md .page-link {
   padding: 6px 12px !important;
   font-size: 14px;
@@ -524,7 +523,8 @@ table {
 .cancel-btn:focus{
   box-shadow: 0 0 0 0.25rem rgba(175, 177, 179, 0.25) !important;
 }
-
+.dropdown{
+  z-index: 9999999;
 .dropdown-container{
   font-size: 14px !important;
   border-radius: 14px !important;
@@ -533,4 +533,4 @@ table {
    padding: 0.5rem 1rem !important;
   }
 }
-
+}
