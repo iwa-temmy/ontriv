@@ -534,3 +534,28 @@ table {
   }
 }
 }
+
+
+.expense-details-card-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 650px;
+  .card{
+    width: 90%;
+    max-width: 900px;
+  .cardbody{
+    margin: 3rem 0;
+    padding: 1.5rem;
+    .title{
+      font-size: 16px;
+      font-weight: 400;
+    }
+    .content{
+      font-size: 14px;
+      color:#9DA8B6;
+
+    }
+  }
+}
+}

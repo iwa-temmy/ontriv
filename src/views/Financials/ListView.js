@@ -116,7 +116,6 @@ const ClientListView = ({
         accessor: "img",
         cellClass: "",
         Cell: (props) => {
-          console.log("props", props?.row?.original)
           let record = props?.row?.original;
           return (
             <TableDropdown

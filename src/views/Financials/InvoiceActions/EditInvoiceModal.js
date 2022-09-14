@@ -30,8 +30,7 @@ const EditInvoiceModal = ({
 
   //functions
   const getCurrentDate = () => {
-    const date = new Date();
-    return moment(date).format("YYYY-MM-DD");
+    return moment(formData?.issued_on).format("YYYY-MM-DD");
   };
 
   const handleAddItem = () => {
@@ -216,6 +215,7 @@ const EditInvoiceModal = ({
                 id="client"
                 value={formData?.client || ""}
                 onChange={handleInputChange}
+                disabled
               >
                 <option value="">Select Client</option>
                 {clients?.map((client) => {
@@ -237,6 +237,7 @@ const EditInvoiceModal = ({
                 value={formData?.description || ""}
                 placeholder="Invoice Name"
                 className="off-canvas-menu__input py-3 px-3"
+                disabled
               />
             </div>
 

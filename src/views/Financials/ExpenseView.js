@@ -3,6 +3,9 @@ import Table from "../../components/Table";
 import { Bars } from "react-loader-spinner";
 import EmptyTableData from "../../components/Table/EmptyTableData";
 
+//Navigation
+import { useNavigate } from "react-router-dom";
+
 //redux
 import { connect } from "react-redux";
 import {
@@ -31,6 +34,8 @@ const ExpenseListView = ({
   const [expenseID, setExpenseID] = useState(0);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
+  const navigate = useNavigate();
+
   //functions
   const openDeleteModal = (id) => {
     setShowDeleteModal(true);
@@ -43,6 +48,13 @@ const ExpenseListView = ({
 
   const handleDeleteExpense = () => {
     deleteExpense(expenseID);
+  };
+
+  const openFullExpensePage = (record) => {
+    console.log("record",record)
+    navigate(`/invoices-&-financials/expense/${record?.id}`, {
+      state: record,
+    });
   };
   const cols = React.useMemo(
     () => [
@@ -125,6 +137,7 @@ const ExpenseListView = ({
           divided
           defaultPageSize={6}
           pagePosition="left"
+          rowOnClick={openFullExpensePage}
         />
       ) : (
         <EmptyTableData
