@@ -178,7 +178,6 @@ const CreateInvoiceModal = ({
     getClient();
   }, [getClient]);
 
-  console.log(clients);
   return (
     <div className="off-canvas-menu">
       <div className="off-canvas-menu__content px-4 py-4">
@@ -233,7 +232,7 @@ const CreateInvoiceModal = ({
                 name="description"
                 onChange={handleInputChange}
                 value={formData?.description || ""}
-                placeholder="description"
+                placeholder="Invoice Name"
                 className="off-canvas-menu__input py-3 px-3"
               />
             </div>

@@ -43,12 +43,11 @@ const ClientListView = ({
   const navigate = useNavigate();
 
   const openInvoicePreview = (record) => {
-    setShowModal(true);
+    setShowModal(!showModal);
     setInvoiceDetails(record);
   };
   const closeInvoicePreview = () => {
     setShowModal(false);
-    setTimeout(() => setInvoiceDetails({}), 1000);
   };
   const openDeleteModal = (record) => {
     const invoiceData = record?.row?.original;
@@ -60,9 +59,8 @@ const ClientListView = ({
     setInvoiceID(0);
   };
   const openFullInvoicePage = (record) => {
-    const invoiceData = record?.row?.original;
-    navigate(`/invoices-&-financials/invoice/${invoiceData?.id}`, {
-      state: invoiceData,
+    navigate(`/invoices-&-financials/invoice/${record?.id}`, {
+      state: record,
     });
   };
   const handleDelete = () => {
@@ -116,13 +114,16 @@ const ClientListView = ({
         Header: "Action",
         accessor: "img",
         cellClass: "",
-        Cell: (props) => (
-          <TableDropdown
-            toggleInvoicePreview={() => openInvoicePreview(props)}
-            openFullInvoicePage={() => openFullInvoicePage(props)}
-            openDeleteModal={() => openDeleteModal(props)}
-          />
-        ),
+        Cell: (props) => {
+          let record = props?.row?.original;
+          return (
+            <TableDropdown
+              toggleInvoicePreview={() => openInvoicePreview(props)}
+              openFullInvoicePage={() => openFullInvoicePage(record)}
+              openDeleteModal={() => openDeleteModal(props)}
+            />
+          );
+        },
       },
     ],
     // eslint-disable-next-line
@@ -146,10 +147,10 @@ const ClientListView = ({
   }, [GetBusinessDetails]);
 
   useEffect(() => {
-    if(showModal === false){
+    if (showModal === false) {
       setTimeout(() => setInvoiceDetails({}), 1000);
     }
-  }, [showModal])
+  }, [showModal]);
   return (
     <div className="mb-0 mt-1 overflow-auto">
       {loading ? (
@@ -166,6 +167,7 @@ const ClientListView = ({
           divided
           defaultPageSize={6}
           pagePosition="left"
+          rowOnClick={openFullInvoicePage}
         />
       ) : (
         <EmptyTableData
@@ -174,6 +176,7 @@ const ClientListView = ({
           onClick={openInvoiceModal}
         />
       )}
+
       <InvoiceDetails
         toggleInvoicePreview={openInvoicePreview}
         showModal={showModal}

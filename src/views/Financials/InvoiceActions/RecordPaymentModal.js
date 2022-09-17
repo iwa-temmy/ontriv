@@ -11,6 +11,8 @@ import { recordOneInvoicePayment } from "../../../redux/actions";
 
 const RecordPaymentModal = ({
   id,
+  totalAmountPaid,
+  invoiceTotal,
   showRecordPayment,
   setShowRecordPayment,
   recordOneInvoicePayment,
@@ -79,6 +81,7 @@ const RecordPaymentModal = ({
             className="bank-select w-100 px-3 py-3 mb-2"
             name="amount_paid"
             onChange={handleInputChange}
+            max={invoiceTotal - totalAmountPaid}
             required
           />
           <div className="pt-2 pb-3">

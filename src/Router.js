@@ -23,7 +23,9 @@ import InvoiceDetailsPage from "./views/Financials/InvoiceDetailsPage";
 import ExpenseDetailsPage from "./views/Financials/ExpenseDetailsPage";
 import Schedule from "./views/Schedule";
 import NewPost from "./views/Schedule/NewPost";
-import Test from "./components/Inputs/Test";
+// import Test from "./components/Inputs/Test";
+import InvoicePage from "./views/InvoicePage";
+import Payouts from "./views/Financials/Payouts";
 
 const RouterConfig = () => {
   return (
@@ -47,6 +49,11 @@ const RouterConfig = () => {
             path="/invoices-&-financials/expense/:id"
             element={<ExpenseDetailsPage />}
           />
+          <Route
+            exact
+            path="/invoices-&-financials/payouts"
+            element={<Payouts />}
+          />
           <Route exact path="/client-details/:id" element={<ClientDetails />} />
           <Route exact path="/report" element={<Report />} />
           <Route exact path="/client-report" element={<ReportDetails />} />
@@ -65,7 +72,8 @@ const RouterConfig = () => {
 
         <Route exact path="/auth/register" element={<Signup />} />
         <Route exact path="/auth/login" element={<Signin />} />
-        <Route exact path="/test" element={<Test />} />
+        <Route exact path="/invoice/:id" element={<InvoicePage />} />
+
         <Route
           exact
           path="/auth/forgot-password"

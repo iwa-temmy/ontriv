@@ -459,7 +459,6 @@ table {
     }
   }
 }
-
 .pagination-md .page-link {
   padding: 6px 12px !important;
   font-size: 14px;
@@ -524,13 +523,40 @@ table {
 .cancel-btn:focus{
   box-shadow: 0 0 0 0.25rem rgba(175, 177, 179, 0.25) !important;
 }
-
+.dropdown{
+  background-color: #fff;
 .dropdown-container{
   font-size: 14px !important;
   border-radius: 14px !important;
   inset: 60% 0 auto auto !important;
+  
   .dropdown-items{
    padding: 0.5rem 1rem !important;
   }
 }
+}
 
+
+.expense-details-card-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 650px;
+  .card{
+    width: 90%;
+    max-width: 900px;
+  .cardbody{
+    margin: 3rem 0;
+    padding: 1.5rem;
+    .title{
+      font-size: 16px;
+      font-weight: 400;
+    }
+    .content{
+      font-size: 14px;
+      color:#9DA8B6;
+      text-decoration: none;
+    }
+  }
+}
+}

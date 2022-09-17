@@ -4,12 +4,14 @@ import { FaSearch, FaAward } from "react-icons/fa";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { IoMdSettings } from "react-icons/io";
 import { RiLogoutBoxRFill } from "react-icons/ri";
+import { GiSwipeCard } from "react-icons/gi";
 import Notification from "../../../../assets/img/notification.svg";
 import userProfilePic from "../../../../assets/img/userPic.png";
 import notificationIcon from "../../../../assets/img/icon.png";
 import { TopRightModal } from "../../../Modal";
 import ClientLog from "../../../../assets/img/clientlogo.png";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 export const TopNav = ({
   currentSection,
@@ -144,7 +146,15 @@ export const TopNav = ({
                 <AiFillQuestionCircle size="20px" className="user-menu-icon" />
                 <h5 className="pl-3 user-menu-text mb-0">Help</h5>
               </div>
-
+              <div className="d-flex user-menu-item align-items-center">
+                <GiSwipeCard size="20px" className="user-menu-icon" />
+                <Link
+                  to="/invoices-&-financials/payouts"
+                  className="pl-3 user-menu-text mb-0 text-decoration-none"
+                >
+                  Payouts
+                </Link>
+              </div>
               <div className="d-flex user-menu-item align-items-center">
                 <FaAward size="18px" className="user-menu-icon" />
                 <h5 className="pl-3 user-menu-text mb-0">Subscription</h5>
