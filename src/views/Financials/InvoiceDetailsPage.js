@@ -32,6 +32,7 @@ import {
 import { useLocation } from "react-router-dom";
 import CreateInvoiceModal from "./InvoiceActions/CreateInvoiceModal";
 import EditInvoiceModal from "./InvoiceActions/EditInvoiceModal";
+import SendInvoiceModal from "./InvoiceActions/SendInvoiceModal";
 
 const InvoiceDetailsPage = (props) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -43,7 +44,8 @@ const InvoiceDetailsPage = (props) => {
   const [showPreviewInvoiceModal, setShowPreviewInvoiceModal] = useState(false);
   const [showCreateInvoiceModal, setShowCreateInvoiceModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [pageData, setPageData] = useState({});
+  const [showSendInvoiceModal, setshowSendInvoiceModal] = useState(false);
+  const [pageData, setPageData] = useState(null);
 
   //props
   const {
@@ -55,6 +57,17 @@ const InvoiceDetailsPage = (props) => {
     website_url,
   } = props;
   const location = useLocation();
+
+  const getTotalAmountPaid = () => {
+    let total = 0;
+    pageData?.payment_record?.forEach((record) => {
+      total += parseInt(record?.amount_paid);
+    });
+    console.log("total", total);
+    return total;
+  };
+
+  console.log(getTotalAmountPaid());
 
   const getPDF = () => {
     setShowOptions(false);
@@ -84,6 +97,14 @@ const InvoiceDetailsPage = (props) => {
   const closeEditInvoiceModal = () => {
     setShowEditModal(false);
   };
+
+  const openSendInvoiceModal = () => {
+    setshowSendInvoiceModal(true);
+  };
+
+  useEffect(() => {
+    getTotalAmountPaid();
+  }, [pageData?.payment_record]);
   useEffect(() => {
     getOneInvoice(location?.state?.id);
   }, [getOneInvoice, location?.state?.id]);
@@ -92,7 +113,7 @@ const InvoiceDetailsPage = (props) => {
     if (!getOneInvoiceLoading && getInvoiceMessage?.length > 0) {
       setTimeout(() => setPageData(invoiceDetails), 1000);
     } else {
-      setPageData({});
+      setPageData(null);
     }
   }, [getInvoiceMessage, getOneInvoiceLoading, invoiceDetails]);
 
@@ -112,7 +133,7 @@ const InvoiceDetailsPage = (props) => {
         />
       ) : null}
       <div className="dashboard dashboard-wrapper px-2 position-relative">
-        {getOneInvoiceLoading ? (
+        {getOneInvoiceLoading || !pageData ? (
           <div className="position-fixed top-50 start-50">
             <Bars height="100" width="100" color="#2062F4" />
           </div>
@@ -319,7 +340,10 @@ const InvoiceDetailsPage = (props) => {
                         Dowload Invoice
                       </h6>
                     </div>
-                    <h6 className="text-left fw-light" style={{fontSize: "14px"}}>
+                    <h6
+                      className="text-left fw-light"
+                      style={{ fontSize: "14px" }}
+                    >
                       You can update logo in Settings
                     </h6>
                   </div>
@@ -460,9 +484,19 @@ const InvoiceDetailsPage = (props) => {
                   registered email address.
                 </h6>
                 <div className="d-inline-flex w-100">
-                  <h6 className="py-2 mx-auto mt-3 px-4 send align-items-center ">
-                    Send Receipt
-                  </h6>
+                  {pageData?.status === "Pending" ||
+                  pageData?.status === "Overdue" ? (
+                    <button
+                      className="py-2 mx-auto mt-3 px-4 send align-items-center"
+                      onClick={openSendInvoiceModal}
+                    >
+                      Send Invoice
+                    </button>
+                  ) : (
+                    <h6 className="py-2 mx-auto mt-3 px-4 send align-items-center ">
+                      Send Receipt
+                    </h6>
+                  )}
                 </div>
               </div>
               <div className="my-4 py-5 px-4 bg-white">
@@ -476,7 +510,9 @@ const InvoiceDetailsPage = (props) => {
                     onClick={() => {
                       setShowRecordPayment(true);
                     }}
-                    disabled={pageData?.status === "Paid"}
+                    disabled={
+                      parseInt(pageData?.total) === getTotalAmountPaid()
+                    }
                   >
                     Record Payment
                   </button>
@@ -489,7 +525,13 @@ const InvoiceDetailsPage = (props) => {
                   </h6>
                   <button
                     className="btn btn-link"
-                    onClick={() => copierHelper(window.location.href)}
+                    onClick={() =>
+                      copierHelper(
+                        `${window.location.href.split("/")?.[2]}/invoice/${
+                          window.location.href.split("/")?.[5]
+                        }`
+                      )
+                    }
                   >
                     <img src={LockKey} className="ms-auto" alt="" />
                   </button>
@@ -521,6 +563,8 @@ const InvoiceDetailsPage = (props) => {
         showRecordPayment={showRecordPayment}
         setShowRecordPayment={setShowRecordPayment}
         id={invoiceDetails?.id}
+        totalAmountPaid={getTotalAmountPaid}
+        invoiceTotal={parseInt(pageData?.total)}
       />
       <ScheduleModal
         showSchedule={showSchedule}
@@ -534,6 +578,10 @@ const InvoiceDetailsPage = (props) => {
         toggleInvoicePreview={toggleInvoicePreview}
         showModal={showPreviewInvoiceModal}
         details={location?.state}
+      />
+      <SendInvoiceModal
+        showSendInvoiceModal={showSendInvoiceModal}
+        setshowSendInvoiceModal={setshowSendInvoiceModal}
       />
     </>
   );

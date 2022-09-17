@@ -43,12 +43,11 @@ const ClientListView = ({
   const navigate = useNavigate();
 
   const openInvoicePreview = (record) => {
-    setShowModal(true);
+    setShowModal(!showModal);
     setInvoiceDetails(record);
   };
   const closeInvoicePreview = () => {
     setShowModal(false);
-    setTimeout(() => setInvoiceDetails({}), 1000);
   };
   const openDeleteModal = (record) => {
     const invoiceData = record?.row?.original;

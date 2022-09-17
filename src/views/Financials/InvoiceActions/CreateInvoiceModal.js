@@ -178,7 +178,6 @@ const CreateInvoiceModal = ({
     getClient();
   }, [getClient]);
 
-  console.log(clients);
   return (
     <div className="off-canvas-menu">
       <div className="off-canvas-menu__content px-4 py-4">
