@@ -12,6 +12,9 @@ import {
   REQUEST_PAYOUT,
   REQUEST_PAYOUT_SUCCESS,
   REQUEST_PAYOUT_ERROR,
+  GET_PAYOUT_REQUESTS,
+  GET_PAYOUT_REQUESTS_SUCCESS,
+  GET_PAYOUT_REQUESTS_ERROR,
 } from "../actions";
 
 const intialState = {
@@ -20,19 +23,23 @@ const intialState = {
     createInvoice: false,
     deleteInvoice: false,
     requestPayout: false,
+    getPayoutRequests: false,
   },
   error: {
     getInvoice: "",
     createInvoice: "",
     deleteInvoice: "",
     requestPayout: "",
+    getPayoutRequests: "",
   },
   message: {
     createInvoice: "",
     deleteInvoice: "",
     requestPayout: "",
+    getPayoutRequests: "",
   },
   invoices: [],
+  payoutRequests: [],
 };
 const invoicesReducer = (state = intialState, action) => {
   switch (action.type) {
@@ -104,17 +111,39 @@ const invoicesReducer = (state = intialState, action) => {
         loading: { ...state?.loading, requestPayout: false },
         error: { ...state?.error, requestPayout: action.payload },
       };
+    case GET_PAYOUT_REQUESTS:
+      return {
+        ...state,
+        loading: { ...state?.loading, getPayoutRequests: true },
+      };
+    case GET_PAYOUT_REQUESTS_SUCCESS:
+      return {
+        ...state,
+        loading: { ...state?.loading, getPayoutRequests: false },
+        payoutRequests: action.payload,
+      };
+    case GET_PAYOUT_REQUESTS_ERROR:
+      return {
+        ...state,
+        loading: { ...state?.loading, getPayoutRequests: false },
+        error: { ...state?.error, getPayoutRequests: action.payload },
+      };
 
     case RESET_MESSAGE:
       return {
         ...state,
-        getInvoiceError: "",
-        message: { createInvoice: "", deleteInvoice: "", requestPayout: "" },
+        message: {
+          createInvoice: "",
+          deleteInvoice: "",
+          requestPayout: "",
+          getPayoutRequests: "",
+        },
         error: {
           getInvoice: "",
           createInvoice: "",
           deleteInvoice: "",
           requestPayout: "",
+          getPayoutRequests: "",
         },
       };
     default:

@@ -4,6 +4,7 @@ import {
   CREATE_NEW_INVOICE,
   DELETE_INVOICE,
   REQUEST_PAYOUT,
+  GET_PAYOUT_REQUESTS,
   getAllInvoicesSuccess,
   getAllInvoicesError,
   createNewInvoiceSuccess,
@@ -12,6 +13,8 @@ import {
   deleteInvoiceError,
   requestPayoutSuccess,
   requestPayoutError,
+  getAllPayoutRequestsSuccess,
+  getAllPayoutRequestsError,
   clearMessages,
 } from "../actions";
 import Axios from "../../utils/Axios";
@@ -205,6 +208,46 @@ export function* RequestPayout({ payload }) {
     yield put(clearMessages());
   }
 }
+export function* GetAllPayoutRequests() {
+  try {
+    const response = yield Axios.get(
+      `/invoice/api/v1/payout/request/user/get/`
+    );
+    if (response?.status === 200) {
+      yield put(getAllPayoutRequestsSuccess(response?.data));
+    } else {
+      yield put(getAllPayoutRequestsError(response?.data?.message));
+    }
+    yield put(clearMessages());
+  } catch (error) {
+    let message;
+    if (error.response) {
+      const errorMessage = error.response.data.detail;
+
+      switch (error?.response?.status) {
+        case 500:
+          message = "Internal Server Error";
+          break;
+        case 404:
+          message = "Not found";
+          break;
+        case 401:
+          message = "Invalid credentials";
+          break;
+        case 400:
+          message = errorMessage;
+          break;
+        default:
+          message = error.response.statusText;
+      }
+    } else if (error.message) {
+      message = error.message;
+    }
+    yield put(getAllPayoutRequestsError(message));
+    yield put(clearMessages());
+  }
+}
+
 export function* watchGetAllInvoices() {
   yield takeEvery(GET_INVOICES, GetAllInvoices);
 }
@@ -216,6 +259,9 @@ export function* watchCreateNewInvoice() {
 export function* watchDeleteInvoice() {
   yield takeEvery(DELETE_INVOICE, DeleteInvoice);
 }
+export function* watchGetAllPayoutRequests(){
+  yield takeEvery(GET_PAYOUT_REQUESTS, GetAllPayoutRequests )
+}
 
 export function* watchRequestPayout() {
   yield takeEvery(REQUEST_PAYOUT, RequestPayout);
@@ -226,5 +272,6 @@ export default function* rootSaga() {
     fork(watchCreateNewInvoice),
     fork(watchDeleteInvoice),
     fork(watchRequestPayout),
+    fork(watchGetAllPayoutRequests),
   ]);
 }
