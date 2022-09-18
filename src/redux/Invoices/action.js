@@ -11,6 +11,9 @@ import {
   REQUEST_PAYOUT,
   REQUEST_PAYOUT_SUCCESS,
   REQUEST_PAYOUT_ERROR,
+  GET_PAYOUT_REQUESTS,
+  GET_PAYOUT_REQUESTS_SUCCESS,
+  GET_PAYOUT_REQUESTS_ERROR,
 } from "../actions";
 
 export const getAllInvoices = () => ({
@@ -70,4 +73,18 @@ export const requestPayoutSuccess = () => ({
 export const requestPayoutError = (error) => ({
   type: REQUEST_PAYOUT_ERROR,
   payload: error,
+});
+
+export const getAllPayoutRequests = () => ({
+  type: GET_PAYOUT_REQUESTS,
+});
+
+export const getAllPayoutRequestsSuccess = (requests) => ({
+  type: GET_PAYOUT_REQUESTS_SUCCESS,
+  payload: requests,
+});
+
+export const getAllPayoutRequestsError = (error) => ({
+  type: GET_PAYOUT_REQUESTS_ERROR,
+  payload: { error },
 });
