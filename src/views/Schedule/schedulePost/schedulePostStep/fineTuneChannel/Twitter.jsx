@@ -30,7 +30,6 @@ const FineTuneTwitter = ({socialchannel,setOpenModal,activeTab,setActiveTab,inde
       setOpenModal(true)
     }
     else{
-      // console.log("nnnnn")
       if (activeTab !== tab) {
         setActiveTab(tab)
       }

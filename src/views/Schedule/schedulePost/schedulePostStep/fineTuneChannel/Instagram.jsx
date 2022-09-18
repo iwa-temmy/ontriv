@@ -39,7 +39,6 @@ const FineTuneInstagram = ({socialchannel,setOpenModal,activeTab,setActiveTab,in
       console.log('⛔️ Checkbox is NOT checked');
     }
 
-    // let value = e.currentTarget.value
       setIsOn(prev => !prev)
   }
 

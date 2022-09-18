@@ -72,7 +72,7 @@ const FineTuneChannel = ({ socialMedia, next, prev }) => {
   return (
     <div>
       <CenteredModal modalState={isOpenCreatePost} setModalState={setIsOpenCreatePost}>
-        <GotItModal closeModal={setIsOpenCreatePost} />
+        <GotItModal closeModal={setIsOpenCreatePost} next={next}/>
       </CenteredModal>
 
 

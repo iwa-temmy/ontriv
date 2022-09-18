@@ -3,7 +3,10 @@ import { useSelector } from 'react-redux';
 import BarLoader from '../../../../components/Loaders/BarLoader';
 import Table from '../../../../components/Table';
 import { getDate, getTime } from '../../../../utils/func';
+import NoPostSchedule from '../../NoPostSchedule';
 import SocialChannelTopNav from '../SocialChannelTopNav'
+import { addDays } from 'date-fns'
+import format from 'date-fns/format'
 
 const FacebookPost = () => {
 
@@ -12,6 +15,13 @@ const FacebookPost = () => {
     const [searchValue, setSearchValue] = useState("")
     const [selectedValue, setSelectedValue] = useState("All")
     const [FacebookData, setFacebookData] = useState(clientPost?.getOneClientPost?.user_facebook_post)
+    const [range, setRange] = useState([
+        {
+          startDate: new Date(),
+          endDate: addDays(new Date(), 7),
+          key: 'selection'
+        }
+      ])
 
 
     const onChangeSearchValue = (e) => {
@@ -22,6 +32,19 @@ const FacebookPost = () => {
     const onSelectItem = (e) => {
      setSelectedValue(e.target.value)
     }
+
+    useEffect(()=>{
+        const handleFilter = clientPost?.getOneClientPost?.user_facebook_post.filter(
+            user => format(new Date(user.created_at),"dd/MM/yyyy") >= format(range[0].startDate, "dd/MM/yyyy")  && format(new Date(user.created_at),"dd/MM/yyyy") <= format(range[0].endDate, "dd/MM/yyyy")
+          )
+
+          if(handleFilter.length <=0){
+            setFacebookData(clientPost?.getOneClientPost?.user_facebook_post)
+          } else{
+            setFacebookData(handleFilter)
+          }
+
+    },[clientPost?.getOneClientPost?.user_facebook_post, range])
 
     useEffect(()=>{
         if(selectedValue === "All"){
@@ -120,8 +143,8 @@ const FacebookPost = () => {
     <div className='overflow-auto'>
         {clientPost?.getOneClientPostLoading ? <BarLoader/> : (
         <>
-            <SocialChannelTopNav searchValue={searchValue} onChange={onChangeSearchValue} selectedValue={selectedValue} OnSelectItem={onSelectItem}/><br/>
-      {clientPost?.getOneClientPost?.user_facebook_post?.length ? (
+            <SocialChannelTopNav searchValue={searchValue} onChange={onChangeSearchValue} selectedValue={selectedValue} OnSelectItem={onSelectItem} range={range} setRange={setRange}/><br/>
+      {clientPost?.getOneClientPost?.user_facebook_post?.length > 0 ? (
             <Table
                 columns={cols}
                 data={FacebookData}
@@ -129,7 +152,7 @@ const FacebookPost = () => {
                 defaultPageSize={4}
                 pagePosition="left"
             />
-        ) : null}
+        ) : <NoPostSchedule text={'There are no scheduled Facebook posts '}/>}
         </>
         )}
     

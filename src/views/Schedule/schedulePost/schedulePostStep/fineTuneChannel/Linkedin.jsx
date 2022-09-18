@@ -30,7 +30,6 @@ const FineTuneLinkedin = ({socialchannel,setOpenModal,activeTab,setActiveTab,ind
       setOpenModal(true)
     }
     else{
-      // console.log("nnnnn")
       if (activeTab !== tab) {
         setActiveTab(tab)
       }
