@@ -36,7 +36,7 @@ function Table({
   );
 
   return (
-    <div style={{ height: "50vh", position: "relative" }}>
+    <div style={{ height: "100%", position: "relative"}}>
       <table
         {...getTableProps()}
         className={`r-table table  ${classnames({

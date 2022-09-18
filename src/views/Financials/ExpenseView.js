@@ -122,7 +122,7 @@ const ExpenseListView = ({
     }
   }, [deleteExpenseLoading, deleteExpenseError, deleteExpenseMessage]);
   return (
-    <div className="mb-0 mt-2 overflow-auto">
+    <div className="mb-0 mt-2 overflow-auto" style={{height: "50vh"}}>
       {loading ? (
         <div
           className="d-flex justify-content-center align-items-center"

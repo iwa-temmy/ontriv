@@ -3,14 +3,20 @@ import React, { useEffect } from "react";
 //core components
 import { Row, Col, Card } from "reactstrap";
 import Table from "../../components/Table";
-import { paymentStatus } from "../../utils/helper";
+import {
+  paymentStatus,
+  formatInvoiceIssueDate,
+  formatAmount,
+} from "../../utils/helper";
+import createNotification from "../../utils/Notification";
+import { Bars } from "react-loader-spinner";
 
 //redux
 import { connect } from "react-redux";
 import { getAllPayoutRequests } from "../../redux/actions";
 
 const Payouts = (props) => {
-  const { getAllPayoutRequests } = props;
+  const { getAllPayoutRequests, loading, payoutRequests, error } = props;
   const cols = React.useMemo(
     () => [
       {
@@ -29,13 +35,13 @@ const Payouts = (props) => {
         Header: "Date",
         accessor: "created_at",
         cellClass: "pt-4 list-client-item-finance  ",
-        Cell: (props) => <>{props.value}</>,
+        Cell: (props) => <>{formatInvoiceIssueDate(props.value)}</>,
       },
       {
         Header: "Amount",
         accessor: "amount",
         cellClass: "pt-4 list-client-item-finance  ",
-        Cell: (props) => <>{props.value}</>,
+        Cell: (props) => <>{formatAmount(props.value)}</>,
       },
       {
         Header: "Status",
@@ -50,6 +56,11 @@ const Payouts = (props) => {
     []
   );
 
+  useEffect(() => {
+    if (!loading && error?.length > 0) {
+      createNotification("error", error);
+    }
+  }, [error, loading]);
   useEffect(() => {
     getAllPayoutRequests();
   }, [getAllPayoutRequests]);
@@ -97,21 +108,34 @@ const Payouts = (props) => {
         </Col>
       </Row>
 
-      <div className="mb-0 mt-1 overflow-auto">
-        <Table
-          columns={cols}
-          data={[]}
-          divided
-          defaultPageSize={6}
-          pagePosition="left"
-        />
+      <div className="mb-0 mt-1 overflow-auto" style={{height: "65vh"}}>
+        {loading ? (
+          <div
+            className="d-flex justify-content-center align-items-center"
+            style={{ marginTop: "6rem" }}
+          >
+            <Bars height="100" width="100" color="#2062F4" />
+          </div>
+        ) : (
+          <Table
+            columns={cols}
+            data={payoutRequests}
+            divided
+            defaultPageSize={6}
+            pagePosition="left"
+          />
+        )}
       </div>
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    loading: state?.invoice?.loading?.getAllPayoutRequests,
+    payoutRequests: state?.invoice?.payoutRequests,
+    error: state?.invoice?.error?.getAllPayoutRequests,
+  };
 };
 
 export default connect(mapStateToProps, { getAllPayoutRequests })(Payouts);

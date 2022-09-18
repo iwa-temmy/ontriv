@@ -1,6 +1,6 @@
 import { Row, Col } from "reactstrap";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import TitleModalLogoHere from "../../assets/img/businessLogo.svg";
 import { Bars } from "react-loader-spinner";
 import InvoiceSettingsModal from "./InvoiceActions/InvoiceSettingsModal";
@@ -58,16 +58,14 @@ const InvoiceDetailsPage = (props) => {
   } = props;
   const location = useLocation();
 
-  const getTotalAmountPaid = () => {
+  const getTotalAmountPaid = useCallback(() => {
     let total = 0;
     pageData?.payment_record?.forEach((record) => {
       total += parseInt(record?.amount_paid);
     });
     console.log("total", total);
     return total;
-  };
-
-  console.log(getTotalAmountPaid());
+  }, [pageData?.payment_record]);
 
   const getPDF = () => {
     setShowOptions(false);
@@ -104,7 +102,7 @@ const InvoiceDetailsPage = (props) => {
 
   useEffect(() => {
     getTotalAmountPaid();
-  }, [pageData?.payment_record]);
+  }, [pageData?.payment_record, getTotalAmountPaid]);
   useEffect(() => {
     getOneInvoice(location?.state?.id);
   }, [getOneInvoice, location?.state?.id]);
