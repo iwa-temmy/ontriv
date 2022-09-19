@@ -1,0 +1,39 @@
+.horizontalTabWrapper{
+    border-bottom: 1px solid #E5ECF2;
+    margin: 0 auto 40px auto;
+    width: 100%;
+    ul{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        color: black;
+        font-size: 14px;
+        font-weight: 500;
+        display: flex;
+        gap: 60px;
+        cursor: pointer;
+        overflow-x: auto;
+        @media(max-width: 576px) {
+          // overflow-x: scroll;
+          gap: 5px;
+          font-size: 10px;
+      }
+        ::-webkit-scrollbar {
+          visibility: hidden;
+        }
+        li{
+            list-style: none;
+            text-align: center;
+            padding: 10px;
+            &:hover {
+              color: #cacaca;
+            }
+          
+            &.activeTab {
+              margin: 0;
+              border-bottom: 3px solid #49A8F8;
+              color: #49a8f8;
+            }
+        }
+    }
+}

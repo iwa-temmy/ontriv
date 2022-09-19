@@ -1,0 +1,221 @@
+@mixin placeholder {
+    &::-webkit-input-placeholder {
+        @content
+    }
+
+    &:-moz-placeholder {
+        @content
+    }
+
+    &::-moz-placeholder {
+        @content
+    }
+
+    &:-ms-input-placeholder {
+        @content
+    }
+}
+
+
+.clientlist-drawer{
+    position: absolute;
+    padding:1rem 0.5rem;
+    width: 100%;
+    height: 100vh;
+    background:white;
+    z-index: 9999;
+    border-radius: 24px;
+
+    .cancel-drawer{
+        display: flex;
+        justify-content: flex-end;
+        .times{
+            font-size: 1rem;
+        }
+    }
+    
+    .drawer-scheduleInputWrapper {
+        position: relative;
+        padding-bottom: 10px;
+
+        input {
+            background-color: transparent;
+            border: none !important;
+            border-bottom: 1px solid #E5ECF2 !important;
+            padding: 5px 0px 5px 20px;
+            width: 70%;
+
+            &:focus {
+                outline: none !important;
+                border: none !important;
+                border-bottom: 1px solid #E5ECF2 !important;
+            }
+
+            @include placeholder {
+                font-size: 12px;
+            }
+        }
+
+        img {
+            position: absolute;
+            top: 8px;
+            left: 40px;
+        }
+    }
+
+    
+    .drawer-client-owner {
+        display: flex;
+        align-items: center;
+        border-radius: 24px;
+        list-style: none;
+        padding: 15px 10px;
+        justify-content: space-between;
+        background: #F9FAFC;
+
+        @media(max-width: 576px) {
+            width: 100%;
+        }
+
+        .drawer-clientowner-IconHolder {
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FFFFFF;
+            box-shadow: 0px 4px 44px rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+        }
+
+        .drawer-clientowner-NameHolder {
+            color: #04004D;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 10px;
+
+            h6 {
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 22px;
+                letter-spacing: 0.1px;
+                margin: 0;
+            }
+
+            p {
+                font-size: 14px;
+                line-height: 18px;
+                letter-spacing: 0.04px;
+            }
+        }
+    }
+
+    .drawer-clientsHolder {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        ul {
+            list-style: none;
+            padding: 0px;
+
+            .drawer-client-chart {
+                display: flex;
+                align-items: center;
+                border-radius: 24px;
+                list-style: none;
+                padding: 15px 10px;
+                justify-content: space-between;
+
+                &.active {
+                    background-color: #F9FAFC;
+                }
+
+
+                @media(max-width: 576px) {
+                    width: 100%;
+                }
+
+                .drawer-chartIconHolder {
+                    width: 55px;
+                    height: 55px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: #FFFFFF;
+                    box-shadow: 0px 4px 44px rgba(0, 0, 0, 0.05);
+                    border-radius: 16px;
+                }
+
+
+                .drawer-clientNameHolder {
+                    color: #04004D;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    margin-top: 10px;
+
+                    h6 {
+                        font-weight: 600;
+                        font-size: 14px;
+                        line-height: 22px;
+                        letter-spacing: 0.1px;
+                        margin: 0;
+                    }
+
+                    p {
+                        font-size: 14px;
+                        line-height: 18px;
+                        letter-spacing: 0.04px;
+                    }
+                }
+            }
+        }
+
+        .drawer-no-clients {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 30px;
+
+            p {
+                max-width: 184px;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 21px;
+                letter-spacing: 0.374px;
+                color: #000000;
+            }
+
+            .drawer-addclient {
+                margin-top: 40px;
+                border: none !important;
+                background: #2062F4 !important;
+                border-radius: 10px !important;
+                color: white !important;
+                font-weight: 700 !important;
+                font-size: 12px !important;
+                padding: 10px 30px 10px 20px !important;
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                cursor: pointer;
+
+                .drawer-plus {
+                    width: 20px;
+                    height: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: solid;
+                    background: #FFFFFF;
+                    border-Radius: 50%;
+                    color: #2062F4;
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+}

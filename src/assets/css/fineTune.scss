@@ -1,0 +1,139 @@
+@mixin placeholder {
+    &::-webkit-input-placeholder {
+        @content
+    }
+
+    &:-moz-placeholder {
+        @content
+    }
+
+    &::-moz-placeholder {
+        @content
+    }
+
+    &:-ms-input-placeholder {
+        @content
+    }
+}
+
+.datePickerStyle {
+    background-color: #FFFFFF;
+    border: 1px solid #49A8F8;
+    border-radius: 16px;
+    padding: 10px 20px;
+    width: 100%;
+
+    @include placeholder {
+        font-size: 14px;
+        color: #6E7191;
+    }
+}
+
+.caption {
+    resize: none;
+    border: 1px solid #49A8F8;
+    border-radius: 16px;
+    height: 200px;
+    width: 100%;
+    padding: 5px 20px;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.characters {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    letter-spacing: 0.25px;
+    color: #6E7191;
+}
+
+.toggleholder {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    .react-switch-checkbox {
+        height: 0;
+        width: 0;
+        visibility: hidden;
+    }
+
+    .react-switch-label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        width: 40px;
+        height: 20px;
+        background: rgba(73, 168, 248, 0.7);
+        border-radius: 100px;
+        position: relative;
+        transition: background-color .2s;
+    }
+
+    .react-switch-label {
+        & .react-switch-button {
+            content: '';
+            position: absolute;
+            top: 0px;
+            left: -2px;
+            //   right: -7px;
+            width: 20px;
+            height: 20px;
+            border-radius: 45px;
+            transition: 0.2s;
+            background: #49A8F8;
+            box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+        }
+    }
+
+    .react-switch-checkbox:checked {
+        +.react-switch-label {
+            & .react-switch-button {
+                left: calc(100% - 0px);
+                transform: translateX(-100%);
+            }
+        }
+    }
+
+    .react-switch-label:active {
+        & .react-switch-button {
+            width: 60px;
+        }
+    }
+
+    p {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 22px;
+        margin-top: 13px;
+        letter-spacing: 0.25px;
+        color: #6E7191;
+    }
+}
+
+.schedulePost-modalWrapper {
+    font-weight: 400;
+        font-size: 13px;
+        line-height: 20px;
+        letter-spacing: 0.374px;
+        color: #000000;
+    .modalHeader {
+        margin: 45px 0px;
+        text-align: center;
+    }
+
+    h5{
+      font-weight: 600;  
+      font-size: 13px;
+      line-height: 20px;
+      letter-spacing: 0.374px;
+      color: #000000;
+    }
+}

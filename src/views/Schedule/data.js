@@ -1,0 +1,393 @@
+import digitalCreator from "../../assets/img/digitalCreator.png"
+import socialImage from "../../assets/img/socialpost.png"
+import socialUser from "../../assets/img/socialuser.png"
+
+ export const clients = [
+    {
+        id:1,
+        image: digitalCreator,
+        name: "Digital Seed1",
+    },
+    {
+        id:2,
+        image: digitalCreator,
+        name: "Digital Seed2",
+    },
+    {
+        id:3,
+        image: digitalCreator,
+        name: "Digital Seed3",
+    },
+    {
+        id:4,
+        image: digitalCreator,
+        name: "Digital Seed4",
+    },
+    {
+        id:5,
+        image: digitalCreator,
+        name: "Digital Seed5",
+    }
+]
+
+export const socialPost = [
+    {
+        id:1,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"John Dan",
+        postType:"Video",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Published",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:2,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"John Mike",
+        postType:"Carousel",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Draft",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:3,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"John Dan",
+        postType:"Single Image",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Pending",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:4,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"Johb Ada",
+        postType:"Reel",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Scheduled",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:5,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"John Dan",
+        postType:"Video",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Published",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:6,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        postType:"Carousel",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Draft",
+      
+    },
+    {
+        id:7,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"John Dan",
+        postType:"Single Image",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Pending",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:8,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"Johb Ada",
+        postType:"Reel",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Scheduled",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:9,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"John Dan",
+        postType:"Video",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Published",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:10,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"John Mike",
+        postType:"Carousel",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Draft",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:11,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"John Dan",
+        postType:"Single Image",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Pending",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:12,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"Johb Ada",
+        postType:"Reel",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Scheduled",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:13,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"John Dan",
+        postType:"Video",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Published",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:14,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"John Mike",
+        postType:"Carousel",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Draft",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:15,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"John Dan",
+        postType:"Single Image",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Pending",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:16,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"Johb Ada",
+        postType:"Reel",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Scheduled",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:17,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"John Dan",
+        postType:"Video",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Published",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:18,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"John Mike",
+        postType:"Carousel",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Draft",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:19,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"John Dan",
+        postType:"Single Image",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Pending",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+    {
+        id:20,
+        postDetails: {
+            image:socialImage,
+            title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+            name:"John Mike",
+            user: socialUser,
+        },
+        user: socialUser,
+        name:"Johb Ada",
+        postType:"Reel",
+        postDate:{
+            date:"14/04/2021",
+        time:"06:00pm",
+        },
+        postStatus:"Scheduled",
+        title: "Lorem ipsum dolor sit amet, ectetur adipiscing elit, sed ",
+    },
+]
+
