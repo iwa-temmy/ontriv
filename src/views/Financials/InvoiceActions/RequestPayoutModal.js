@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Input } from "reactstrap";
 import { CenteredModal as Modal } from "../../../components/Modal";
 
-const RequestPayoutModal = ({ showRequestPayout, setShowRequestPayout }) => {
+//redux
+import {connect} from "react-redux";
+import { requestPayout } from "../../../redux/actions";
+
+const RequestPayoutModal = ({ showRequestPayout, setShowRequestPayout, requestPayout }) => {
   const [formData, setFormData] = useState({});
 
   const handleInputChange = (e) => {
@@ -12,8 +16,9 @@ const RequestPayoutModal = ({ showRequestPayout, setShowRequestPayout }) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-  }
+    requestPayout(formData);
+  };
+
   return (
     <Modal modalState={showRequestPayout} setModalState={setShowRequestPayout}>
       <div className="add-client-wrapper text-center ">
@@ -27,14 +32,11 @@ const RequestPayoutModal = ({ showRequestPayout, setShowRequestPayout }) => {
           </div>
           <div>
             <label className="text-left w-100">Bank Name</label>
-            <select
+            <Input
               name="bank_name"
               className="bank-select w-100 px-3 py-3 mb-2"
               onChange={handleInputChange}
-            >
-              <option value="">Select bank</option>
-              <option value="zenith bank">Zenith</option>
-            </select>
+            />
           </div>
           <div>
             <label className="text-left w-100">Account Number</label>
@@ -54,7 +56,9 @@ const RequestPayoutModal = ({ showRequestPayout, setShowRequestPayout }) => {
           </div>
 
           <div className="pt-2 pb-3">
-            <button className="px-5" type="submit">Submit</button>
+            <button className="px-5" type="submit">
+              Submit
+            </button>
           </div>
         </form>
       </div>
@@ -62,4 +66,9 @@ const RequestPayoutModal = ({ showRequestPayout, setShowRequestPayout }) => {
   );
 };
 
-export default RequestPayoutModal;
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  }
+}
+export default connect(mapStateToProps, {requestPayout})(RequestPayoutModal);

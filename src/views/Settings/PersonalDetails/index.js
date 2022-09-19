@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Row, Col, Card, Button, Form } from "reactstrap";
+import { Row, Col, Card, Form } from "reactstrap";
 import { ThreeDots } from "react-loader-spinner";
 import bluePlus from "../../../assets/img/blue-plus-bus-icon.svg";
 import { TiEye } from "react-icons/ti";
@@ -214,7 +214,7 @@ const PersonalDetails = ({
                     </span>
                   )}
                 </div>
-                <Button className="w-50" type="submit" disabled={loading}>
+                <button className="w-50 delete-btn" type="submit" disabled={loading}>
                   {loading ? (
                     <div className="text-center w-100 align-items-center">
                       <ThreeDots
@@ -226,7 +226,7 @@ const PersonalDetails = ({
                   ) : (
                     "Update"
                   )}
-                </Button>
+                </button>
               </Form>
             </Card>
           </div>

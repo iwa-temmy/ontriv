@@ -16,8 +16,14 @@ import CreateInvoiceModal from "./InvoiceActions/CreateInvoiceModal";
 import RequestPayoutModal from "./InvoiceActions/RequestPayoutModal";
 import AddVendor from "./ExpenseActions/AddVendor";
 import AddExpenseModal from "./ExpenseActions/AddExpenseModal";
+import createNotification from "../../utils/Notification";
 
-const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
+const Finances = ({
+  getAllInvoices,
+  invoices,
+  getInvoiceLoading,
+  getInvoiceError,
+}) => {
   const [view] = useState("list");
   const [addClient, setAddClient] = useState(false);
   const [showPayoutModal, setShowPayoutModal] = useState(false);
@@ -31,6 +37,11 @@ const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
     getAllInvoices();
   }, [getAllInvoices]);
 
+  useEffect(() => {
+    if (!getInvoiceLoading && getInvoiceError?.length > 0) {
+      createNotification("error", getInvoiceError);
+    }
+  }, [getInvoiceLoading, getInvoiceError]);
   //Modal Toggle Handlers
   const openInvoiceModal = () => {
     setShow(true);
@@ -48,6 +59,11 @@ const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
   const openRequestPayoutModal = () => {
     setShowPayoutModal(true);
   };
+
+  useEffect(() => {
+    if (show) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'visible';
+  }, [show]);
 
   return (
     <>
@@ -112,7 +128,7 @@ const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
                 <Card className="py-4 px-5 h-100 finances__top-cards">
                   <div md="7" sm="16" lg="8" xl="8" className="">
                     <h6 className="finances__top-cards__title my-auto mp-2">
-                      Payout
+                      Wallet Balance
                     </h6>
                     <h6 className="finances__top-cards__amount-big mt-3">
                       <span className="mr-2 finances__top-cards__currency">
@@ -194,7 +210,7 @@ const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
               <div className="d-inline-flex white-button py-1 px-4">
                 <img src={BluePlus} alt="" />
                 <div className="btn-lg w-auto " onClick={openInvoiceModal}>
-                  <h6 className="mb-0 cursor-pointer">Create a new Invoice</h6>
+                  <h6 className="mb-0 cursor-pointer">Create New Invoice</h6>
                 </div>
               </div>
             </div>
@@ -254,7 +270,7 @@ const Finances = ({ getAllInvoices, invoices, getInvoiceLoading }) => {
             </div>
           )
         ) : view === "list" ? (
-          <ExpenseListView />
+          <ExpenseListView openExpenseModal={openExpenseModal} />
         ) : (
           <div className="client-inactive-state text-center">
             <Card className="client-inactive-state-card mx-auto">
@@ -294,7 +310,8 @@ const mapStateToProps = (state) => {
   const { invoice } = state;
   return {
     invoices: invoice?.invoices,
-    getInvoiceLoading: invoice?.getInvoiceLoading,
+    getInvoiceLoading: invoice?.loading?.getInvoice,
+    getInvoiceError: invoice?.error?.getInvoice,
   };
 };
 export default connect(mapStateToProps, { getAllInvoices })(Finances);

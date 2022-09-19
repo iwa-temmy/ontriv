@@ -12,9 +12,10 @@ import { connect } from 'react-redux'
 import createNotification from '../../utils/Notification'
 import axios from '../../utils/Axios.js'
 import notification from '../../utils/Notification.js'
+import emptyStateImage from '../../assets/img/clientEmptyIcon.png'
 
 const ClientManagement = ({
-  getTag,
+  // getTag,
   tags,
   getTagError,
   clients,
@@ -132,30 +133,34 @@ const ClientManagement = ({
               </div>
             </div>
           </div>
-          {clients.length > 0 && view === 'grid' ? (
+          {clients.length > 0 && view === 'grid'  ? (
             <GridView clients={clients} deleteClient={deleteClient} />
           ) : clients.length > 0 && view === 'list' ? (
             <ListView clients={clients} deleteClient={deleteClient} />
           ) : (
             <div className='client-inactive-state text-center'>
-              <Card className='client-inactive-state-card mx-auto'>
-                <h3 className='client-inactive-header-text mx-auto'>
-                  You currently have no client
-                </h3>
-                <h3 className='client-inactive-header-text mx-auto'>
-                  you can add a new client.
-                </h3>
-                <p className='client-inactive-subhead-text mx-auto'>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                </p>
-                <div
-                  className=' client-create-button '
-                  role='button'
-                  onClick={() => {
-                    setAddClient(true)
-                  }}
-                >
-                  <h6 className='mb-0'>ADD A NEW CLIENT</h6>
+              <Card className='client-inactive-state-card empty-state mx-auto'>
+                <div>
+                  <div>
+                    <img src={emptyStateImage} alt='...' />
+                  </div>
+                  <div className='client-inactive-subhead-text-wrapper'>
+                    <p className='client-inactive-subhead-text mx-auto mb-0'>
+                      Welcome onboard,
+                    </p>
+                    <p className='client-inactive-subhead-text mx-auto mb-0'>
+                      you can add a new client to get started
+                    </p>
+                  </div>
+                  <div
+                    className=' client-create-button '
+                    role='button'
+                    onClick={() => {
+                      setAddClient(true)
+                    }}
+                  >
+                    <h6 className='mb-0'>ADD A NEW CLIENT</h6>
+                  </div>
                 </div>
               </Card>
             </div>

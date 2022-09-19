@@ -11,6 +11,7 @@ function Table({
   shadow,
   defaultPageSize,
   pagePosition,
+  rowOnClick,
 }) {
   const {
     getTableProps,
@@ -35,10 +36,10 @@ function Table({
   );
 
   return (
-    <>
+    <div style={{ height: "100%", position: "relative"}}>
       <table
         {...getTableProps()}
-        className={`r-table table ${classnames({
+        className={`r-table table  ${classnames({
           "table-divided": divided,
           "table-divided-row": dividedRow,
         })}`}
@@ -73,7 +74,9 @@ function Table({
               // <div className='table-row'>
               <tr
                 {...row.getRowProps()}
+                onClick={(e) => rowOnClick(row?.original)}
                 className={`table-row ${shadow ? "table-row-shadow" : ""}`}
+                style={{ cursor: rowOnClick ? "pointer" : "" }}
               >
                 {row.cells.map((cell, cellIndex) => (
                   <td
@@ -108,7 +111,7 @@ function Table({
           paginationMaxSize={pageCount}
         />
       )}
-    </>
+    </div>
   );
 }
 

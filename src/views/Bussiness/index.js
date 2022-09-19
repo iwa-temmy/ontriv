@@ -91,9 +91,9 @@ const SetUpBussiness = () => {
     updateDurationState(newDuration)
   }
 
-  const togglePostState = () => {
-    updatePostState(!postState)
-  }
+  // const togglePostState = () => {
+  //   updatePostState(!postState)
+  // }
 
   const handlePictureUpload = e => {
     setLogo(e.target.files[0])

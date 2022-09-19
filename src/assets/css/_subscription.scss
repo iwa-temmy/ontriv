@@ -202,6 +202,22 @@
     }
   }
 }
+.payment-records-header{
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 1.25px;
+  margin: 2rem 0 3rem 0;
+  background: linear-gradient(93.88deg, #49A8F8 6.88%, #0053F4 74.45%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-fill-color: transparent;
+}
+.payment-records-item{
+  font-size: 14px !important;
+}
 
 .client-management {
   position: relative;
@@ -491,6 +507,9 @@
 .list-client-delete-finance  {
   color: #ed2e7e;
   background-color: rgba(217, 87, 87, 0.15) !important;
+  border: none;
+  font-size: 14px;
+  padding: 0.5rem 0.8rem;
   border-radius: 10px !important;
 }
 .status-tag-circle {
@@ -506,13 +525,13 @@
   border-radius: 10px !important;
 }
 .list-client-tag-overdue {
-  background:  #FF215480 ;
+  background:  #f5ebed ;
   color: #FF2154;
   padding: 8px 12px;
   border-radius: 10px !important;
 }
 .list-client-tag-pending{
-  background-color: #ED800080;
+  background-color: #f9eee2;
   padding: 8px 12px;
   color: #ED8000;
   border-radius: 10px;
@@ -776,6 +795,15 @@
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: #6F6F84;
+  }
+  &__item {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: left;
+    letter-spacing: 0.05em;
+    color: #222234;
   }
   &__blue-section {
     background: #E8F7FF;
@@ -1073,10 +1101,11 @@ label {
 
 .off-canvas-menu {
   position: fixed;
+  // background-color: rgba(0,0,0,.75);
   z-index: 200;
   right: 0;
   height: 100vh;
-  width: 83vw;
+  width: 85vw;
   background: rgba(29, 30, 44, 0.32);
   backdrop-filter: blur(10px);
   border-top-left-radius: 30px;
@@ -1206,6 +1235,7 @@ label {
 
 .slightly-black {
   color: #17151E;
+  font-size: 14px !important;
   line-height: 24px;
 }
 

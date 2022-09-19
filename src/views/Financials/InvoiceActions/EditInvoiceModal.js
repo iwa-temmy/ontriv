@@ -13,13 +13,14 @@ import moment from "moment";
 import { connect } from "react-redux";
 import { createNewInvoice, getClient } from "../../../redux/actions";
 
-const CreateInvoiceModal = ({
+const EditInvoiceModal = ({
   clients,
   closeInvoiceModal,
   createNewInvoice,
   getClient,
   loading,
   error,
+  payload,
   createInvoiceMessage,
 }) => {
   const [schedule, setSchedule] = useState({});
@@ -28,11 +29,10 @@ const CreateInvoiceModal = ({
   const [recurring, setRecurring] = useState(false);
 
   //functions
-
   const getCurrentDate = () => {
-    const date = new Date();
-    return moment(date).format("YYYY-MM-DD");
+    return moment(formData?.issued_on).format("YYYY-MM-DD");
   };
+
   const handleAddItem = () => {
     let id = items.length + 1;
 
@@ -124,7 +124,7 @@ const CreateInvoiceModal = ({
         sub_total: calculateTotal(items) || null,
       };
     }
-    createNewInvoice(payload);
+    console.log(payload);
   };
 
   const intervalOptions = [
@@ -154,16 +154,20 @@ const CreateInvoiceModal = ({
 
   //useEffect
   useEffect(() => {
-    setItems([
-      {
-        id: 1,
-        item_description: "",
-        quantity: "",
-        rate: "",
-        amount: "",
-      },
-    ]);
-  }, []);
+    if (payload) {
+      setRecurring(payload?.recurring);
+      setFormData({
+        client: payload?.client?.id,
+        description: payload?.description,
+        issued_on: payload?.issued_on,
+        due_date: payload?.due_date,
+        sub_total: payload?.sub_total,
+        total: payload?.total,
+        vat: payload?.vat,
+      });
+      setItems(payload?.items);
+    }
+  }, [payload]);
   useEffect(() => {
     if (error?.length > 0 && !loading) {
       createNotification("error", error);
@@ -173,23 +177,21 @@ const CreateInvoiceModal = ({
       closeInvoiceModal();
     }
   }, [loading, error, createInvoiceMessage, closeInvoiceModal]);
-
   useEffect(() => {
     getClient();
   }, [getClient]);
-
   return (
     <div className="off-canvas-menu">
       <div className="off-canvas-menu__content px-4 py-4">
         <div className="d-inline-flex w-100">
           <div className="add-client-text text-center">
-            <h5>Create new invoice</h5>
+            <h5>Edit invoice</h5>
           </div>
           <img
             onClick={handleCloseInvoiceModal}
             className="ms-auto"
             src={XCancel}
-            alt=""
+            alt="cancel icon"
           />
         </div>
         <Form onSubmit={handleCreateInvoice}>
@@ -213,6 +215,7 @@ const CreateInvoiceModal = ({
                 id="client"
                 value={formData?.client || ""}
                 onChange={handleInputChange}
+                disabled
               >
                 <option value="">Select Client</option>
                 {clients?.map((client) => {
@@ -229,11 +232,12 @@ const CreateInvoiceModal = ({
               <label className="text-left w-100">Invoice Name</label>
               <Input
                 type="text"
-                name="description"
+                name="Invoice Name"
                 onChange={handleInputChange}
                 value={formData?.description || ""}
                 placeholder="Invoice Name"
                 className="off-canvas-menu__input py-3 px-3"
+                disabled
               />
             </div>
 
@@ -245,7 +249,7 @@ const CreateInvoiceModal = ({
                   name="issued_on"
                   onChange={handleInputChange}
                   value={formData?.issued_on || ""}
-                  min={getCurrentDate()}
+                  disabled
                   placeholder="Issued On"
                   className="off-canvas-menu__input py-3 px-3"
                 />
@@ -435,5 +439,5 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps, { createNewInvoice, getClient })(
-  CreateInvoiceModal
+  EditInvoiceModal
 );

@@ -1,22 +1,61 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "../../components/Table";
 import { Bars } from "react-loader-spinner";
 import EmptyTableData from "../../components/Table/EmptyTableData";
 
+//Navigation
+import { useNavigate } from "react-router-dom";
+
 //redux
 import { connect } from "react-redux";
-import { setCurrentSection, getAllExpenses } from "../../redux/actions";
+import {
+  setCurrentSection,
+  getAllExpenses,
+  deleteExpense,
+} from "../../redux/actions";
 //utils
 import { formatAmount, formatInvoiceIssueDate } from "../../utils/helper";
 
 import { MdDelete } from "react-icons/md";
+import createNotification from "../../utils/Notification";
+import DeleteModal from "../../components/Modal/DeleteModal";
 
 const ExpenseListView = ({
   setCurrentSection,
+  openExpenseModal,
   getAllExpenses,
+  deleteExpense,
   expenses,
   loading,
+  deleteExpenseLoading,
+  deleteExpenseMessage,
+  deleteExpenseError,
 }) => {
+  const [expenseID, setExpenseID] = useState(0);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const navigate = useNavigate();
+
+  //functions
+  const openDeleteModal = (id) => {
+    setShowDeleteModal(true);
+    setExpenseID(id);
+  };
+  const closeDeleteModal = () => {
+    setShowDeleteModal(false);
+    setExpenseID(0);
+  };
+
+  const handleDeleteExpense = () => {
+    deleteExpense(expenseID);
+  };
+
+  const openFullExpensePage = (record) => {
+    console.log("record",record)
+    navigate(`/invoices-&-financials/expense/${record?.id}`, {
+      state: record,
+    });
+  };
   const cols = React.useMemo(
     () => [
       {
@@ -24,7 +63,7 @@ const ExpenseListView = ({
         accessor: "vendor",
         cellClass: "pt-4 list-client-item-finance ",
         Cell: (props) => {
-          return (<>{props?.value?.name}</>)
+          return <>{props?.value?.name}</>;
         },
       },
       {
@@ -48,21 +87,20 @@ const ExpenseListView = ({
       {
         Header: "Action",
         accessor: "id",
-        cellClass: "pt-4 list-client-item",
+        cellClass: "",
         Cell: (props) => (
           <>
-            <div className="d-flex">
-              <div className="list-client-delete-finance px-3 py-1">
-                <MdDelete
-                  size="14px"
-                  className="pt-0"
-                  onClick={() => {
-                    console.log(props.value);
-                  }}
-                />
-                <span className="pt-2 mb-0 text-underline">Delete</span>
-              </div>
-            </div>
+            <button
+              className="d-flex justify-content-center align-items-center list-client-delete-finance "
+              onClick={() => {
+                openDeleteModal(props.value);
+              }}
+            >
+              <MdDelete size="14px" />
+              <span className="text-underline" style={{ marginLeft: "0.2rem" }}>
+                Delete
+              </span>
+            </button>
           </>
         ),
       },
@@ -74,8 +112,17 @@ const ExpenseListView = ({
   useEffect(() => {
     getAllExpenses();
   }, [getAllExpenses]);
+
+  useEffect(() => {
+    if (!deleteExpenseLoading && deleteExpenseMessage?.length > 0) {
+      createNotification("success", deleteExpenseMessage);
+      closeDeleteModal();
+    } else if (!deleteExpenseLoading && deleteExpenseError?.length > 0) {
+      createNotification("error", deleteExpenseError);
+    }
+  }, [deleteExpenseLoading, deleteExpenseError, deleteExpenseMessage]);
   return (
-    <div className="mb-0 mt-2 overflow-auto">
+    <div className="mb-0 mt-2 overflow-auto" style={{height: "50vh"}}>
       {loading ? (
         <div
           className="d-flex justify-content-center align-items-center"
@@ -90,14 +137,22 @@ const ExpenseListView = ({
           divided
           defaultPageSize={6}
           pagePosition="left"
+          rowOnClick={openFullExpensePage}
         />
       ) : (
         <EmptyTableData
           subHeaderText="Start tracking your expenses"
           buttonText="Create New Expense"
-          // onClick={openInvoiceModal}
+          onClick={openExpenseModal}
         />
       )}
+
+      <DeleteModal
+        openModal={showDeleteModal}
+        setOpenModal={setShowDeleteModal}
+        deleteAction={handleDeleteExpense}
+        deleteloading={deleteExpenseLoading}
+      />
     </div>
   );
 };
@@ -105,10 +160,15 @@ const ExpenseListView = ({
 const mapStateToProps = (state) => {
   return {
     expenses: state?.expense?.expenses,
-    loading: state?.expense?.getExpensesLoading,
+    loading: state?.expense?.loading?.getExpense,
+    deleteExpenseLoading: state?.expense?.loading?.deleteExpense,
+    deleteExpenseMessage: state?.expense?.message?.deleteExpense,
+    deleteExpenseError: state?.expense?.error?.deleteExpense,
   };
 };
 
-export default connect(mapStateToProps, { setCurrentSection, getAllExpenses })(
-  ExpenseListView
-);
+export default connect(mapStateToProps, {
+  setCurrentSection,
+  getAllExpenses,
+  deleteExpense,
+})(ExpenseListView);

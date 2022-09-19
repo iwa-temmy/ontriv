@@ -63,22 +63,23 @@ const ClientListView = ({ setCurrentSection, clients, deleteClient }) => {
       //   Cell: props => <>{props.value}</>
       // },
       {
-        Header: 'Date Created',
+        Header: 'Business category',
         accessor: 'date_joined',
         cellClass: 'pt-4 list-client-item ',
-        Cell: props => <>{props.value.split('T')[0].replace(/-/g, '/')}</>
+        Cell: props => <>{''}</>
       },
-      // {
-      //   Header: 'Project Tag',
-      //   accessor: 'projectTag',
-      //   cellClass: 'pt-3  list-client-item',
-      //   Cell: props => (
-      //     <div className='list-client-tag text-center'>
-      //       <img src={tag} alt='project-tag' className='mr-2' />
-      //       {props.value}
-      //     </div>
-      //   )
-      // },
+      {
+        Header: 'Project Tag',
+        accessor: 'projectTag',
+        cellClass: 'pt-3  list-client-item',
+        Cell: props => (
+          // <div className='list-client-tag text-center'>
+          //   {/* <img src={tag} alt='project-tag' className='mr-2' />
+          //   {'Content Calendar'} */}
+          // </div>
+          <> {''}</>
+        )
+      },
 
       {
         Header: 'Action',
@@ -112,19 +113,57 @@ const ClientListView = ({ setCurrentSection, clients, deleteClient }) => {
         pagePosition='center'
       />
       <Modal modalState={showDelete} setModalState={toggleShowDelete}>
-        <div className='add-client-wrapper text-center '>
+        <div className='delete-client-wrapper text-center '>
           {/* <div className='text-center user-icon-container '>
             <HiUser className=' text-center' color='#49A8F8' size='45px' />
           </div> */}
           <div className='add-client-text text-center'>
-            <h3 className='mt-2'>Are you sure?</h3>
-            <p className='my-4'>
-              You’ll be removing all information and access to their social
-              accounts
-            </p>
+            <h3
+              className='mt-2'
+              style={{
+                fontWeight: '700',
+                fontSize: '30px'
+              }}
+            >
+              Are you sure?
+            </h3>
+            <div className='my-4'>
+              <p
+                className='mb-0 w-100'
+                style={{
+                  fontWeight: '400',
+                  fontSize: '13px',
+                  lineHeight: '24px',
+
+                  textAlign: 'center',
+
+                  color: '#17151E',
+
+                  opacity: '0.8'
+                }}
+              >
+                You’ll be removing all information and access to their
+              </p>
+              <p
+                className='mb-0 w-100'
+                style={{
+                  fontWeight: '400',
+                  fontSize: '13px',
+                  lineHeight: '24px',
+
+                  textAlign: 'center',
+
+                  color: '#17151E',
+
+                  opacity: '0.8'
+                }}
+              >
+                social accounts
+              </p>
+            </div>
           </div>
 
-          <div>
+          <div className='px-5'>
             <div className='pt-2 pb-2 '>
               <button
                 className='w-100 btn-primary btn'
@@ -135,7 +174,13 @@ const ClientListView = ({ setCurrentSection, clients, deleteClient }) => {
             </div>
             <div className=' pb-2'>
               <button
-                className='w-100 text-danger bg-transparent fw-bold'
+                className='w-100 bg-white '
+                style={{
+                  background: 'white',
+                  fontSize: '16px',
+                  letterSpacing: '0.75px',
+                  color: '#FF2154'
+                }}
                 onClick={() => {
                   handleDelete(clientId)
                 }}

@@ -19,11 +19,11 @@ import {
   createClientSuccess,
   createClientError,
   getClientDetailsSuccess,
-  getClientDetailsError
+  // getClientDetailsError
 } from '../actions'
 
 function * getClient () {
-  console.log('------------------------------')
+  // console.log('------------------------------')
   try {
     const response = yield Axios.get(`/business/api/v1/list-all-client/`)
     console.log(response)
@@ -74,9 +74,7 @@ function * getClient () {
   }
 }
 
-function * getClientDetails ({ payload }) {
-  console.log('------------------------------', payload)
-  const { id } = payload
+function * getClientDetails () {
   try {
     const response = yield Axios.get(`/business/api/v1/list-all-client/`)
     console.log(response)

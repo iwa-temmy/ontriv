@@ -3,7 +3,9 @@ import { Card, Row, Col } from 'reactstrap'
 import Tag from '../../assets/img/Tag.svg'
 import arrowRight from '../../assets/img/arrowRight.svg'
 // import ontriv from '../../assets/img/ontriv.png'
-import DatatablePagination from '../../components/Pagination'
+import { Link } from 'react-router-dom'
+
+// import DatatablePagination from '../../components/Pagination'
 
 const GridView = ({ clients }) => {
   return (
@@ -11,38 +13,65 @@ const GridView = ({ clients }) => {
       <Row>
         {clients.map(el => (
           <Col xs='12' sm='6' md='4' xl='3' className='mb-4'>
-            <Card className='grid-view-card'>
+            <Card className='grid-view-card pb-4'>
               <div className='client-details d-flex  align-items-center'>
-                <div className='client-logo-wrapper'>
-                  <img
-                    src={el.profile_image}
-                    alt='logo'
+                <Link to={`/client-details/${el.id}`}>
+                  <div
+                    className='client-logo-wrapper'
                     style={{
                       width: '40px',
                       height: '40px'
                     }}
-                  />
-                </div>
+                  >
+                    <img
+                      src={el.profile_image}
+                      alt='logo'
+                      style={{
+                        width: '40px',
+                        height: '40px'
+                      }}
+                    />
+                  </div>
+                </Link>
                 <div>
                   <h1 className='client-name mb-0'>{el.fullname}</h1>
                   <p className='client-project mb-0'>{el.project}</p>
                 </div>
               </div>
+
               <div className='d-flex justify-content-between project-details align-items-center'>
                 {/* <div>
                   <h1 className='project-timeline-header'>Project Timeline</h1>
                   <p className='project-timeline'>{el.projectTimeline}</p>
                 </div> */}
                 <div>
-                  <h3 className='date-created-header'>Date Created:</h3>
-                  <p className='date-created'>{el.date}</p>
+                  <h3
+                    className='date-created-header'
+                    style={{
+                      fontWeight: '600',
+                      fontSize: '12px',
+                      lineHeight: '18px',
+                      letterSpacing: '0.04px',
+                      color: '#04004D'
+                    }}
+                  >
+                    Business Category
+                  </h3>
+                  <p
+                    className='date-created'
+                    style={{
+                      marginBottom: '28px'
+                    }}
+                  ></p>
                 </div>
               </div>
               <div></div>
               <div className='d-flex justify-content-between align-items-center'>
                 <div className='tag-container d-flex'>
                   <img src={Tag} alt='tag-icon' />
-                  <p className='tag-container-text mb-0'>{el.calendar}</p>
+                  <p className='tag-container-text mb-0'>
+                    {'Content Calendar'}
+                  </p>
                 </div>
                 <div>
                   <img src={arrowRight} alt='tag-icon' />
@@ -53,7 +82,7 @@ const GridView = ({ clients }) => {
         ))}
       </Row>
 
-      <DatatablePagination
+      {/* <DatatablePagination
         position='center'
         page={0}
         pages={5}
@@ -66,7 +95,7 @@ const GridView = ({ clients }) => {
         onPageChange={p => console.log(p)}
         onPageSizeChange={s => console.log(s)}
         paginationMaxSize={clients.length}
-      />
+      /> */}
     </div>
   )
 }

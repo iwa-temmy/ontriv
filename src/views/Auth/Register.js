@@ -1,13 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import {
-  Container,
-  Row,
-  Card,
-  // Input,
-  Form,
-  Col,
-  Button
-} from 'reactstrap'
+import { Container, Row, Card, Form, Col, Button } from 'reactstrap'
 import Steps, { Step } from 'rc-steps'
 import { ThreeDots } from 'react-loader-spinner'
 import 'rc-steps/assets/index.css'
@@ -20,6 +12,7 @@ import { useForm } from 'react-hook-form'
 import { registerUser } from '../../redux/actions'
 import createNotification from '../../utils/Notification'
 import Select from 'react-select'
+import selectIcon from '../../assets/img/select.png'
 import countryList from 'react-select-country-list'
 
 const Signup = ({ registerUser, registrationError, message, loading }) => {
@@ -108,7 +101,6 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
 
   const handleBusinessDetails = values => {
     console.log('-------------->>>', registrationForm)
-    
 
     const { business_name, referral_code, website } = values
 
@@ -134,7 +126,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
 
   const handleRegistrationForm = data => {
     // console.log(data)
-    registerUser(data);
+    registerUser(data)
   }
 
   useEffect(() => {
@@ -165,12 +157,20 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
         <Col lg='9' sm='12' className='pl-0'>
           <div className='signup-right'>
             <div className='signup-form-wrapper mx-auto'>
-              {/* <div className='mx-auto w-75 d-flex'> */}
-              <div className='signin-logo text-center mb-5 mt-5'>
-                <img src={logo} alt='ontriv-logo' />
+              {/* <div className=' ex'> */}
+              <div className='signin-logo text-center my-2 mb-4'>
+                <img src={logo} alt='ontriv-logo' width='200px' />
               </div>
-              <Row className='gx-0'>
-                <Col sm='12' md='6'>
+              <Row className='gx-0 px-md-6 '>
+                <Col sm='12' md='4'>
+                  <div
+                    className='d-md-block d-none my-2 mb-4'
+                    style={{
+                      marginLeft: '-30px'
+                    }}
+                  >
+                    <img src={logo} alt='ontriv-logo' width='200px' />
+                  </div>
                   <Card className='card-1'>
                     <Steps direction='vertical' current={activeState}>
                       <Step
@@ -185,7 +185,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                     </Steps>
                   </Card>
                 </Col>
-                <Col sm='12' md='6'>
+                <Col sm='12' md='8'>
                   <Card className='p-5 signup-form-card '>
                     {/* <div >
                                             <Steps direction='horizontal' current={activeState} className='signup-step text-center mb-4'>
@@ -195,6 +195,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                                         </div> */}
                     {activeState === 0 ? (
                       <Form
+                        className='mx-auto pt-3'
                         onSubmit={handleSubmit(handlePersonalDetails)}
                         autoComplete='off'
                       >
@@ -205,11 +206,11 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                         )}
                         <input
                           type='text'
-                          placeholder='Full Name'
+                          placeholder='Full name'
                           name='fullname'
                           autoComplete='none'
                           id='fullname'
-                          className={`w-100 ${
+                          className={`py-3 mb- w-100 ${
                             errors.fullname ? 'border-danger' : ''
                           }`}
                           {...register('fullname', {
@@ -229,8 +230,8 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                           name='email'
                           autoComplete='none'
                           id='email'
-                          placeholder='Email Address'
-                          className={`w-100 ${
+                          placeholder='Email address'
+                          className={`w-100 py-3 mb-0  ${
                             errors.email ? 'border-danger' : ''
                           }`}
                           onChange={e => {
@@ -251,26 +252,42 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                             Select Country
                           </span>
                         )}
-                        <Select
-                          options={options}
-                          value={value}
-                          onChange={e => {
-                            changeHandler(e)
-                            setCountry(e.value)
-                          }}
-                          name='country'
-                          placeholder='Select Country'
-                          className={`w-100 ${
-                            errors.country ? 'border-danger' : ''
-                          } mb-3`}
+                        <div className='position-relative'>
+                          <Select
+                            options={options}
+                            value={value}
+                            onChange={e => {
+                              changeHandler(e)
+                              setCountry(e.value)
+                            }}
+                            name='country'
+                            placeholder='Select country'
+                            className={`w-100 py-3  ${
+                              errors.country ? 'border-danger' : ''
+                            } `}
 
-                          // {...register('country'
-                          //     , {
-                          //         required: true,
+                            // {...register('country'
+                            //     , {
+                            //         required: true,
 
-                          //     }
-                          // )}
-                        />
+                            //     }
+                            // )}
+                          />
+                          <div
+                            className='position-absolute'
+                            style={{
+                              top: '40%',
+                              right: '23px'
+                            }}
+                          >
+                            <img
+                              width='20'
+                              height='20'
+                              src={selectIcon}
+                              alt='---'
+                            />
+                          </div>
+                        </div>
                         {/* <input
                                                         name='country'
                                                         placeholder='Select Country'
@@ -315,7 +332,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                             {...register('password', {
                               required: true
                             })}
-                            className={`w-100 ${
+                            className={`py-3 mb- w-100 ${
                               errors.password ? 'border-danger' : ''
                             }`}
                             onChange={e => {
@@ -353,7 +370,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                             type={inputType2}
                             name='confirmPassword'
                             placeholder='Confirm password'
-                            className={`w-100 ${
+                            className={`py-3  w-100 ${
                               errors.confirmPassword ? 'border-danger' : ''
                             }`}
                             {...register('confirmPassword', {
@@ -421,7 +438,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                       </Form>
                     ) : (
                       <Form
-                        className='business-form'
+                        className='business-form  '
                         onSubmit={handleSubmit(handleBusinessDetails)}
                         autoComplete='off'
                         key='100'
@@ -433,11 +450,11 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                         )}
                         <input
                           type='text'
-                          placeholder='Business Name'
+                          placeholder='Business name'
                           name='business_name'
                           autocomplete='new_password'
                           id='business_name'
-                          className={`w-100 ${
+                          className={`py-3  w-100 ${
                             errors.business_name ? 'border-danger' : ''
                           }`}
                           {...register('business_name', {
@@ -452,11 +469,11 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                         )}
                         <input
                           type='text'
-                          placeholder='Business Website'
+                          placeholder='Business website'
                           name='website'
                           autocomplete='new_password'
                           id='website'
-                          className={`w-100 ${
+                          className={`py-3  w-100 ${
                             errors.website ? 'border-danger' : ''
                           }`}
                           {...register('website', {
@@ -476,7 +493,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                           value={roleValue}
                           onChange={e => handleRoleChange(e)}
                           // name='country'
-                          placeholder='role'
+                          placeholder='Role'
                           className={`w-100 ${
                             errors.role ? 'border-danger' : ''
                           } mb-3`}
@@ -510,7 +527,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                           placeholder='Referral Code'
                           name='referral_code'
                           autocomplete='new_password'
-                          className={`w-100 ${
+                          className={`py-3 mb-0 w-100 ${
                             errors.referral_code ? 'border-danger' : ''
                           }`}
                           {...register(
@@ -535,9 +552,9 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                           onChange={e => handleInformationChange(e)}
                           // name='country'
                           placeholder='How do you hear about us?'
-                          className={`w-100 ${
+                          className={`py-3 w-100 ${
                             errors.information ? 'border-danger' : ''
-                          } mb-3`}
+                          } `}
 
                           // {...register('country'
                           //     , {
@@ -567,8 +584,54 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                         {/* <div>
                                                         <Input type='password' placeholder='How do you hear about us?' />
                                                     </div> */}
+                        <div className='d-flex  align-items-center mb-3 '>
+                          <div className='input-check'>
+                            <input
+                              type='checkbox'
+                              id='forgotPassword'
+                              name='forgotPassword'
+                              value='forgotPassword'
+                              className='mb-0 border-dark'
+                              style={{
+                                marginRight: '10px'
+                              }}
+                            />
+                          </div>
+                          <div className='ml-3 '>
+                            <p className='mb-0' style={{ fontSize: '12px' }}>
+                              I agree to Ontriv’s
+                              <span className='register-link'>
+                                <a
+                                  href='https://ontriv.com/terms-of-service/'
+                                  style={{
+                                    textDecoration: 'none',
+                                    fontWeight: 500,
+                                    color: '#032041'
+                                  }}
+                                >
+                                  {' '}
+                                  Terms of use
+                                </a>
+                              </span>
+                              {` and `}
+                              <span className='register-link'>
+                                <a
+                                  href='https://ontriv.com/privacy-policy/'
+                                  style={{
+                                    textDecoration: 'none',
+                                    fontWeight: 500,
+                                    color: '#032041'
+                                  }}
+                                >
+                                  {' '}
+                                  Privacy Policy
+                                </a>
+                              </span>
+                            </p>
+                          </div>
+                        </div>
                         <div className='pt-2 pb-3'>
-                          <Button className='w-100' type='submit'>
+                          <Button className='w-100' type='submit '>
                             {loading ? (
                               <div className='text-center w-100 align-items-center'>
                                 <ThreeDots
@@ -585,7 +648,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                       </Form>
                     )}
                   </Card>
-                  <div className='no-account mt-4 py-4 text-center'>
+                  <div className='no-account mt-4 py-3 text-center'>
                     <p className='mb-0'>
                       Already have an account yet?
                       <span className='register-link'>
