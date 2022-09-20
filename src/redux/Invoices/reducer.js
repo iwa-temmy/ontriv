@@ -15,28 +15,34 @@ import {
   GET_PAYOUT_REQUESTS,
   GET_PAYOUT_REQUESTS_SUCCESS,
   GET_PAYOUT_REQUESTS_ERROR,
+  GET_INVOICE,
+  GET_INVOICE_SUCCESS,
+  GET_INVOICE_ERROR,
 } from "../actions";
 
 const intialState = {
   loading: {
-    getInvoice: false,
+    getInvoices: false,
     createInvoice: false,
     deleteInvoice: false,
     requestPayout: false,
     getPayoutRequests: false,
+    getInvoice: false,
   },
   error: {
-    getInvoice: "",
+    getInvoices: "",
     createInvoice: "",
     deleteInvoice: "",
     requestPayout: "",
     getPayoutRequests: "",
+    getInvoice: "",
   },
   message: {
     createInvoice: "",
     deleteInvoice: "",
     requestPayout: "",
     getPayoutRequests: "",
+    getInvoice: "",
   },
   invoices: [],
   payoutRequests: [],
@@ -46,19 +52,19 @@ const invoicesReducer = (state = intialState, action) => {
     case GET_INVOICES:
       return {
         ...state,
-        getInvoiceLoading: true,
+        loading: { ...state?.loading, getInvoices: true },
       };
     case GET_INVOICES_SUCCESS:
       return {
         ...state,
-        getInvoiceLoading: false,
+        loading: { ...state?.loading, getInvoices: false },
         invoices: action.payload,
       };
     case GET_INVOICES_ERROR:
       return {
         ...state,
-        getInvoiceLoading: false,
-        error: { ...state?.error, getInvoice: action.payload.error },
+        loading: { ...state?.loading, getInvoices: false },
+        error: { ...state?.error, getInvoices: action.payload.error },
       };
     case CREATE_NEW_INVOICE:
       return {
@@ -128,6 +134,24 @@ const invoicesReducer = (state = intialState, action) => {
         loading: { ...state?.loading, getPayoutRequests: false },
         error: { ...state?.error, getPayoutRequests: action.payload },
       };
+    case GET_INVOICE:
+      return {
+        ...state,
+        loading: { ...state?.loading, getInvoice: true },
+      };
+    case GET_INVOICE_SUCCESS:
+      return {
+        ...state,
+        loading: { ...state?.loading, getInvoice: false },
+        invoice: action.payload.details,
+        message: { ...state?.message, getInvoice: action.payload.message },
+      };
+    case GET_INVOICE_ERROR:
+      return {
+        ...state,
+        loading: { ...state?.loading, getInvoice: false },
+        error: { ...state?.error, getInvoice: action.payload },
+      };
 
     case RESET_MESSAGE:
       return {
@@ -137,13 +161,15 @@ const invoicesReducer = (state = intialState, action) => {
           deleteInvoice: "",
           requestPayout: "",
           getPayoutRequests: "",
+          getInvoice: "",
         },
         error: {
-          getInvoice: "",
+          getInvoices: "",
           createInvoice: "",
           deleteInvoice: "",
           requestPayout: "",
           getPayoutRequests: "",
+          getInvoice: "",
         },
       };
     default:

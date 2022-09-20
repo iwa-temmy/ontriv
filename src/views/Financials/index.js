@@ -310,8 +310,8 @@ const mapStateToProps = (state) => {
   const { invoice } = state;
   return {
     invoices: invoice?.invoices,
-    getInvoiceLoading: invoice?.loading?.getInvoice,
-    getInvoiceError: invoice?.error?.getInvoice,
+    getInvoiceLoading: invoice?.loading?.getInvoices,
+    getInvoiceError: invoice?.error?.getInvoices,
   };
 };
 export default connect(mapStateToProps, { getAllInvoices })(Finances);
