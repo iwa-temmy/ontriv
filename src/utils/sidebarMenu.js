@@ -1,17 +1,17 @@
-import React from "react"
-import {BsFillGridFill,BsCalendar2MinusFill} from "react-icons/bs"
-import { IoSettingsSharp } from "react-icons/io5"
-import {  FaAward,FaUserFriends } from "react-icons/fa"
-import {AiFillFileText} from "react-icons/ai"
-import {RiPieChartFill,RiBookFill} from 'react-icons/ri'
+import React from "react";
+import { BsFillGridFill, BsCalendar2MinusFill } from "react-icons/bs";
+import { IoSettingsSharp } from "react-icons/io5";
+import { FaAward, FaUserFriends } from "react-icons/fa";
+import { AiFillFileText } from "react-icons/ai";
+import { RiPieChartFill, RiBookFill } from "react-icons/ri";
 
 export const sideBarMenu = [
   {
     id: "Overview",
-    title: "Overview",
+    title: "Dashboard",
     type: "item",
     icon: <BsFillGridFill size={20} />,
-    navLink: "/overview"
+    navLink: "/overview",
   },
 
   {
@@ -19,8 +19,7 @@ export const sideBarMenu = [
     title: "Clients",
     type: "item",
     icon: <FaUserFriends size={20} />,
-    navLink: "/client-management"
-
+    navLink: "/client-management",
   },
 
   {
@@ -28,7 +27,7 @@ export const sideBarMenu = [
     title: "Post Scheduling",
     type: "item",
     icon: <BsCalendar2MinusFill size={17} />,
-    navLink:"/Schedule"
+    navLink: "/Schedule",
   },
 
   {
@@ -44,7 +43,7 @@ export const sideBarMenu = [
     title: "Reports",
     type: "item",
     icon: <AiFillFileText size={20} />,
-    navLink:'/report'
+    navLink: "/report",
   },
 
   {
@@ -52,17 +51,15 @@ export const sideBarMenu = [
     title: "Messages",
     type: "item",
     icon: <RiBookFill size={20} />,
-    navLink:'/Chat'
-
+    navLink: "/Chat",
   },
-
 
   {
     id: "Rewards",
     type: "item",
     title: "Rewards",
     icon: <FaAward size={18} />,
-    navLink:'/Subscriptions'
+    navLink: "/Subscriptions",
   },
 
   // {
@@ -87,16 +84,14 @@ export const sideBarMenu = [
   //   icon: <FaAward size={20} />,
   //   navLink:'/Subscriptions'
   // },
- 
-]
+];
 
-
-export const bottomSideBarMenu=[
+export const bottomSideBarMenu = [
   {
     id: "Settings",
     title: "Settings",
     type: "item",
-    navLink:'/Settings',
+    navLink: "/Settings",
     icon: <IoSettingsSharp size={20} />,
   },
 
@@ -105,6 +100,6 @@ export const bottomSideBarMenu=[
     type: "item",
     title: "Help & Support",
     icon: <FaAward size={18} />,
-    navLink:'/help'
+    navLink: "/help",
   },
-]
+];

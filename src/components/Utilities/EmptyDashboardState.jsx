@@ -1,14 +1,14 @@
 import React from "react";
-import noInvoice from "../../assets/img/no-invoice.svg";
+import emptyState from "../../assets/img/emptyDashboardIcon.svg";
 
-const EmptyTableData = ({ subHeaderText, buttonText, onClick }) => {
+const EmptyDashboardState = ({ subHeaderText, buttonText, onClick }) => {
   return (
     <div className="bg-white p-5 " style={{ borderRadius: "10px" }}>
       <div
         className="d-flex flex-column justify-content-center align-items-center"
         // style={{ marginTop: "4.6rem" }}
       >
-        <img src={noInvoice} alt="empty invoice icon" width={140} />
+        <img src={emptyState} alt="empty invoice icon" width={140} />
         <span className="text-center my-4" style={{ whiteSpace: "nowrap" }}>
           {subHeaderText}
         </span>
@@ -24,4 +24,4 @@ const EmptyTableData = ({ subHeaderText, buttonText, onClick }) => {
   );
 };
 
-export default EmptyTableData;
+export default EmptyDashboardState;
