@@ -1,11 +1,12 @@
 import React from "react";
 import emptyState from "../../assets/img/emptyDashboardIcon.svg";
+import {HiPlus} from "react-icons/hi";
 
 const EmptyDashboardState = ({ subHeaderText, buttonText, onClick }) => {
   return (
-    <div className="bg-white p-5 " style={{ borderRadius: "10px" }}>
+
       <div
-        className="d-flex flex-column justify-content-center align-items-center"
+        className="d-flex flex-column justify-content-center align-items-center h-100"
         // style={{ marginTop: "4.6rem" }}
       >
         <img src={emptyState} alt="empty invoice icon" width={140} />
@@ -17,10 +18,9 @@ const EmptyDashboardState = ({ subHeaderText, buttonText, onClick }) => {
           style={{ whiteSpace: "nowrap" }}
           onClick={onClick}
         >
-          {buttonText}
+         <HiPlus color="#2465ec" className="create-icon" /> {buttonText}
         </button>
       </div>
-    </div>
   );
 };
 

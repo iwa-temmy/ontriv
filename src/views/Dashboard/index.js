@@ -3,6 +3,7 @@ import { Row, Col, Card, Button } from "reactstrap";
 import EmptyDashboardState from "../../components/Utilities/EmptyDashboardState";
 import Select from "react-select";
 import { HiChevronRight, HiPlus, HiArrowRight } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
 // import Calendar from 'react-calendar';
 import Calendar from "../../components/Calendar";
 import { CenteredModal } from "../../components/Modal";
@@ -16,12 +17,22 @@ const Dashboard = () => {
   const [eventState, updateEventState] = useState(false);
   const [postState, updatePostState] = useState(false);
 
+  const navigate = useNavigate();
+
   const toggleEventState = () => {
     updateEventState(!eventState);
   };
 
   const togglePostState = () => {
     updatePostState(!postState);
+  };
+
+  const handleAddClient = () => {
+    navigate("/client-management");
+  };
+
+  const handleAddInvoice = () => {
+    navigate("/invoices-&-financials");
   };
 
   return (
@@ -90,17 +101,29 @@ const Dashboard = () => {
                       </p>
                     </div>
                   </div>
+                  <div
+                    className="d-flex flex-column justify-content-center align-items-center h-100"
+                    style={{ margin: "1.5rem 0" }}
+                  >
+                    <div
+                      className="text-center pt-3"
+                      style={{ whiteSpace: "nowrap" }}
+                    >
+                      <p>Get started by creating your first invoice</p>
+                    </div>
 
-                  <div className="mx-auto text-center invoice-inactive-state py-3">
-                    <h5>Create your first invoice</h5>
-                    <p className="py-2 pb-3">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    </p>
-                  </div>
-
-                  <div className="py-3 btn-lg  create-button align-items-center ">
-                    <HiPlus color="#2465ec" className="create-icon" />
-                    <h6 className="mb-0">Create Invoice</h6>
+                    <button
+                      className="btn btn-primary send px-5 py-2"
+                      style={{ whiteSpace: "nowrap" }}
+                      onClick={handleAddInvoice}
+                    >
+                      <HiPlus color="#2465ec" className="create-icon" /> Create
+                      Invoice
+                    </button>
+                    {/* <button className="py-3 create-button  align-items-center ">
+                      <HiPlus color="#2465ec" className="create-icon" />
+                      <h6 className="mb-0"></h6>
+                    </button> */}
                   </div>
                 </Card>
               </Col>
@@ -124,13 +147,14 @@ const Dashboard = () => {
                   <EmptyDashboardState
                     subHeaderText="Add a new client to get started"
                     buttonText="Add a New client"
+                    onClick={handleAddClient}
                   />
                 </Card>
               </Col>
             </Row>
           </div>
         </Col>
-        <Col md="5" lg="5" sm="12" xxl="4" className="mb-3">
+        <Col md="12" lg="5" sm="12" xxl="4" className="mb-3">
           <Card className="calendar-card overflow-auto">
             <div className="d-flex align-items-center calendar-header">
               <img src={icon1} width="16px" alt="calendar" className="mb-0" />
