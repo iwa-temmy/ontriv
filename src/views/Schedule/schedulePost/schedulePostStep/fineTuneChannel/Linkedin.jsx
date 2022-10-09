@@ -7,18 +7,17 @@ import Button from '../../../../../components/Button';
 import TextArea from '../../../../../components/textArea/TextArea';
 import ToggleButton from '../../../../../components/toggleButton/ToggleButton';
 
-const FineTuneLinkedin = ({socialchannel,setOpenModal,activeTab,setActiveTab,index}) => {
-  const [startDate, setStartDate] = useState();
-  const [baseCaption, setBaseCaption] = useState('')
+const FineTuneLinkedin = ({socialchannel,setOpenModal,activeTab,setActiveTab,postDate,caption,linkedinData}) => {
+  const [linkedinStartDate, setLinkedinStartDate] = useState(postDate);
+  const [linkedinCaption, setLinkedinCaption] = useState(caption)
   const [count, setCount] = useState(2200)
   const [isOn, setIsOn] = useState(false);
 
   const onChangeTextArea = (e)=>{
     const value = e.target.value
     const valueLength = e.target.value.length
-    setBaseCaption(value)
+    setLinkedinCaption(value)
     setCount(2200 - valueLength)
-    console.log(baseCaption, count)
   }
 
   const handleToggle = (e) => {
@@ -27,10 +26,12 @@ const FineTuneLinkedin = ({socialchannel,setOpenModal,activeTab,setActiveTab,ind
 
   const nextButton = (tab) => {
     if (socialchannel.length === activeTab) {
+      linkedinData(linkedinCaption,linkedinStartDate)
       setOpenModal(true)
     }
     else{
       if (activeTab !== tab) {
+        linkedinData(linkedinCaption,linkedinStartDate)
         setActiveTab(tab)
       }
     }
@@ -47,8 +48,8 @@ const FineTuneLinkedin = ({socialchannel,setOpenModal,activeTab,setActiveTab,ind
           md="5"
           sm="12">
       <div>
-      <DatePicker className='datePickerStyle' placeholderText="Linkedin date & time  " selected={startDate} onChange={(date) => setStartDate(date)} /><br/><br/>
-      <TextArea maxLength="2200" placeholder='Caption' value={baseCaption} onChangeTextArea={onChangeTextArea} count={count}/>
+      <DatePicker className='datePickerStyle' minDate={new Date()} placeholderText="Linkedin date & time  " selected={linkedinStartDate} onChange={(date) => setLinkedinStartDate(date)} /><br/><br/>
+      <TextArea maxLength="2200" placeholder='Caption' value={linkedinCaption} onChangeTextArea={onChangeTextArea} count={count}/>
 
 <ToggleButton isOn={isOn} handleToggle={handleToggle} title="Location" id="location" htmlFor="location"/>
 <Button text="Next" onButtonClick={() => nextButton(activeTab + 1)} />

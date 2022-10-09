@@ -544,6 +544,19 @@
         }
     }
 
+    .postType {
+        select {
+            background-color: transparent;
+            border: 1px solid #C0CCDA;
+            border-radius: 10px;
+            padding: 8px 16px;
+            width: 50%;
+            &:focus {
+                outline: none !important;
+            }
+        }
+    }
+
     .fileupload {
         // width: 150px;
         background: #EFF2F7;

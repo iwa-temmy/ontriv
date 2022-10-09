@@ -34,15 +34,18 @@ const FacebookPost = () => {
     }
 
     useEffect(()=>{
-        const handleFilter = clientPost?.getOneClientPost?.user_facebook_post.filter(
-            user => format(new Date(user.created_at),"dd/MM/yyyy") >= format(range[0].startDate, "dd/MM/yyyy")  && format(new Date(user.created_at),"dd/MM/yyyy") <= format(range[0].endDate, "dd/MM/yyyy")
-          )
 
-          if(handleFilter.length <=0){
-            setFacebookData(clientPost?.getOneClientPost?.user_facebook_post)
-          } else{
-            setFacebookData(handleFilter)
-          }
+        if(clientPost?.getOneClientPost?.user_facebook_post){
+            const handleFilter = clientPost?.getOneClientPost?.user_facebook_post.filter(
+                user => format(new Date(user.created_at),"dd/MM/yyyy") >= format(range[0].startDate, "dd/MM/yyyy")  && format(new Date(user.created_at),"dd/MM/yyyy") <= format(range[0].endDate, "dd/MM/yyyy")
+              )
+    
+              if(handleFilter.length <=0){
+                setFacebookData(clientPost?.getOneClientPost?.user_facebook_post)
+              } else{
+                setFacebookData(handleFilter)
+              }
+        }
 
     },[clientPost?.getOneClientPost?.user_facebook_post, range])
 

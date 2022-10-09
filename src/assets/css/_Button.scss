@@ -30,6 +30,10 @@
     line-height: 28px;
     letter-spacing: 0.75px;
     color: #F7F7FC;
+    cursor: pointer;
+    &:disabled{
+        background: #dddddd;
+    }
 }
 
 .inputField_Wrap {

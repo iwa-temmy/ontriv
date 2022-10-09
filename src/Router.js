@@ -60,7 +60,7 @@ const RouterConfig = () => {
           <Route exact path="/Subscriptions" element={<Subscription />} />
           <Route exact path="/Chat" element={<Messages />} />
           <Route exact path="/Schedule" element={<Schedule />} />
-          <Route exact path="/NewPost" element={<NewPost />} />
+          <Route exact path="/NewPost/:id" element={<NewPost />} />
           <Route exact path="/business" element={<SetUpBussiness />} />
           <Route exact path="/settings" element={<Settings />} />
         </Route>

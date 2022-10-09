@@ -9,6 +9,7 @@ import expense from "./Expenses/saga";
 import vendor from "./Expenses/Vendor/saga"
 import schedule from "./Schedule/saga"
 import getOneClient from "./Schedule/oneClientPost/saga"
+import schedulePost from "./Schedule/schedulePost/saga"
 
 export default function* rootSaga() {
   yield all([
@@ -22,5 +23,6 @@ export default function* rootSaga() {
     vendor(),
     schedule(),
     getOneClient(),
+    schedulePost(),
   ]);
 }

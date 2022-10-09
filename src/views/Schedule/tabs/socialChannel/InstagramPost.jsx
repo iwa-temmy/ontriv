@@ -32,15 +32,18 @@ const InstagramPost = () => {
     }
 
     useEffect(()=>{
-        const handleFilter = clientPost?.getOneClientPost?.user_instagram_post.filter(
-            user => format(new Date(user.created_at),"dd/MM/yyyy") >= format(range[0].startDate, "dd/MM/yyyy")  && format(new Date(user.created_at),"dd/MM/yyyy") <= format(range[0].endDate, "dd/MM/yyyy")
-          )
-
-          if(handleFilter.length <=0){
-            setInstagramData(clientPost?.getOneClientPost?.user_instagram_post)
-          } else{
-            setInstagramData(handleFilter)
-          }
+        if(clientPost?.getOneClientPost?.user_instagram_post){
+            const handleFilter = clientPost?.getOneClientPost?.user_instagram_post.filter(
+                user => format(new Date(user.created_at),"dd/MM/yyyy") >= format(range[0].startDate, "dd/MM/yyyy")  && format(new Date(user.created_at),"dd/MM/yyyy") <= format(range[0].endDate, "dd/MM/yyyy")
+              )
+    
+              if(handleFilter.length <=0){
+                setInstagramData(clientPost?.getOneClientPost?.user_instagram_post)
+              } else{
+                setInstagramData(handleFilter)
+              }
+        }
+       
 
     },[clientPost?.getOneClientPost?.user_instagram_post, range])
 

@@ -12,21 +12,26 @@ import facebook from "../../../../assets/img/facebook.png";
 import linkedin from "../../../../assets/img/linkedin.png";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-const FineTuneChannel = ({ socialMedia, next, prev }) => {
+const FineTuneChannel = ({ socialMedia, next, prev ,postDate, baseCaption}) => {
 
   const [isOpenCreatePost, setIsOpenCreatePost] = useState(false)
+  const [iGText, setiGText] = useState()
+  const [iGDate, setiGDate] = useState()
+  const [facebookText, setFacebookText] = useState()
+  const [facebookDate, setFacebookDate] = useState()
+  const [linkedinText, setlinkedinText] = useState()
+  const [linkedinDate, setlinkedinDate] = useState()
   const [activeTab, setActiveTab] = useState(1)
 
-  // toggle(tab) {
-  //   if (this.state.activeTab !== tab) {
-  //     this.setState({
-  //       activeTab: tab
-  //     });
-  //   }
-  // }
+  const navigate = useNavigate()
 
-  { console.log(socialMedia) }
+  if(!socialMedia.length) {
+    alert('No social Channel selected')
+    navigate('/Schedule')
+  }
+
 
   const toggle = (tab) => {
     if (activeTab !== tab) {
@@ -34,45 +39,28 @@ const FineTuneChannel = ({ socialMedia, next, prev }) => {
     }
   }
 
-  // const [socialChannel, setSocialChannel] =
-  //   useState(socialMedia[0]?.toUpperCase());
+  const InstagramData = (iGCaption,iGDate) => {
+    setiGText(iGCaption)
+    setiGDate(iGDate)
+    console.log(iGCaption,iGDate,'igg')
+  }
 
-  // const onChangeWalletTransaction = (value) => {
-  //   console.log(value)
-  //   const selectedValue = value;
-  //   setSocialChannel(selectedValue);
-  // };
+  const facebookData = (fbCaption,fbDate) => {
+    setFacebookText(fbCaption)
+    setFacebookDate(fbDate)
+    console.log(fbCaption,fbDate,'igg')
+  }
 
-  // const socialChannelData = {
-  //   INSTAGRAM: (<FineTuneInstagram socialchannel={socialMedia} setOpenModal={setIsOpenCreatePost} />),
-  //   FACEBOOK: (<FineTuneFacebook />),
-  //   TWITTER: (<FineTuneTwitter />),
-  //   LINKEDIN: (<FineTuneLinkedin />),
-  // };
-
-  // const socialChannelData1 = {
-  //   instagram: (<FineTuneInstagram />),
-  //   facebook: <h1>facebook</h1>,
-  //   twitter: <h1>twitter</h1>,
-  //   linkedin: <h1>linkedin</h1>
-  // };
-
-  // const socialChannelLabel = socialMedia.map((item, index) => {
-  //   return {
-  //     label: item,
-  //     value: item?.toUpperCase()
-  //   }
-  // })
-
-  // const onOpenCreatPost = () => {
-  //   setIsOpenCreatePost(true)
-  // }
+  const linkedinData = (lnCaption,lnDate) => {
+    setlinkedinText(lnCaption)
+    setlinkedinDate(lnDate)
+  }
 
 
   return (
     <div>
       <CenteredModal modalState={isOpenCreatePost} setModalState={setIsOpenCreatePost}>
-        <GotItModal closeModal={setIsOpenCreatePost} next={next}/>
+        <GotItModal closeModal={setIsOpenCreatePost} next={() => next(iGText,iGDate,facebookText,facebookDate,linkedinText,linkedinDate)}/>
       </CenteredModal>
 
 
@@ -80,14 +68,14 @@ const FineTuneChannel = ({ socialMedia, next, prev }) => {
         <Nav tabs>
           {
             socialMedia.map((item, index) => (<>
-              <NavItem>
+              <NavItem key={index}>
                 <NavLink
                   className={classnames({ active: activeTab === index + 1 })}
                   onClick={() => toggle(index + 1)}
                 >
                  <div className='socialTab'>
                  
-                  {item === "instagram" ? <img src={instagram} alt="" /> : item === "twitter" ? <img src={twitter} /> : item === "facebook" ? <img src={facebook} /> : item === "linkedin" ? <img src={linkedin} alt="" />:null}
+                  {item === "instagram" ? <img src={instagram} alt="instagram" /> : item === "twitter" ? <img src={twitter} alt={'twitter'} /> : item === "facebook" ? <img src={facebook} alt={'facebook'} /> : item === "linkedin" ? <img src={linkedin} alt="linkedin" />:null}
                   <p> {item}</p>
                  </div>
                 </NavLink>
@@ -97,10 +85,8 @@ const FineTuneChannel = ({ socialMedia, next, prev }) => {
         </Nav>
         <TabContent activeTab={activeTab}>
           {socialMedia.map((item, index) => (<>
-            <TabPane tabId={index + 1}>
-              {item === "instagram" ? <FineTuneInstagram socialchannel={socialMedia} setOpenModal={setIsOpenCreatePost} activeTab={activeTab} setActiveTab={setActiveTab}/> : item === "facebook" ? <FineTuneFacebook socialchannel={socialMedia} setOpenModal={setIsOpenCreatePost} activeTab={activeTab} setActiveTab={setActiveTab}/> : item === "twitter" ? <FineTuneTwitter socialchannel={socialMedia} setOpenModal={setIsOpenCreatePost} activeTab={activeTab} setActiveTab={setActiveTab}/> : item === "linkedin" ? <FineTuneLinkedin socialchannel={socialMedia} setOpenModal={setIsOpenCreatePost} activeTab={activeTab} setActiveTab={setActiveTab}/> : ""}
-              {/* {socialChannelData1[item]} */}
-
+            <TabPane tabId={index + 1} key={index}>
+              {item === "instagram" ? <FineTuneInstagram postDate={postDate} caption={baseCaption} socialchannel={socialMedia} setOpenModal={setIsOpenCreatePost} activeTab={activeTab} setActiveTab={setActiveTab} instagramData={InstagramData}/> : item === "facebook" ? <FineTuneFacebook socialchannel={socialMedia} setOpenModal={setIsOpenCreatePost} activeTab={activeTab} setActiveTab={setActiveTab} facebookData={facebookData} postDate={postDate} caption={baseCaption}/> : item === "twitter" ? <FineTuneTwitter socialchannel={socialMedia} setOpenModal={setIsOpenCreatePost} activeTab={activeTab} setActiveTab={setActiveTab}/> : item === "linkedin" ? <FineTuneLinkedin socialchannel={socialMedia} setOpenModal={setIsOpenCreatePost} activeTab={activeTab} setActiveTab={setActiveTab} linkedinData={linkedinData} postDate={postDate} caption={baseCaption}/> : ""}
             </TabPane>
           </>))}
         </TabContent>

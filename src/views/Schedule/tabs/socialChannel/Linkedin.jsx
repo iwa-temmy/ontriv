@@ -35,15 +35,17 @@ const LinkedinPost = () => {
     }
 
     useEffect(()=>{
-        const handleFilter = clientPost?.getOneClientPost?.user_linkedin_post.filter(
-            user => format(new Date(user.created_at),"dd/MM/yyyy") >= format(range[0].startDate, "dd/MM/yyyy")  && format(new Date(user.created_at),"dd/MM/yyyy") <= format(range[0].endDate, "dd/MM/yyyy")
-          )
-
-          if(handleFilter.length <=0){
-            setLinkedinData(clientPost?.getOneClientPost?.user_linkedin_post)
-          } else{
-            setLinkedinData(handleFilter)
-          }
+        if(clientPost?.getOneClientPost?.user_linkedin_post){
+            const handleFilter = clientPost?.getOneClientPost?.user_linkedin_post.filter(
+                user => format(new Date(user.created_at),"dd/MM/yyyy") >= format(range[0].startDate, "dd/MM/yyyy")  && format(new Date(user.created_at),"dd/MM/yyyy") <= format(range[0].endDate, "dd/MM/yyyy")
+              )
+    
+              if(handleFilter.length <=0){
+                setLinkedinData(clientPost?.getOneClientPost?.user_linkedin_post)
+              } else{
+                setLinkedinData(handleFilter)
+              }
+        }
 
     },[clientPost?.getOneClientPost?.user_linkedin_post, range])
 
