@@ -5,6 +5,7 @@ import {
   DELETE_INVOICE,
   REQUEST_PAYOUT,
   GET_PAYOUT_REQUESTS,
+  GET_INVOICE,
   getAllInvoicesSuccess,
   getAllInvoicesError,
   createNewInvoiceSuccess,
@@ -15,6 +16,8 @@ import {
   requestPayoutError,
   getAllPayoutRequestsSuccess,
   getAllPayoutRequestsError,
+  getInvoiceSuccess,
+  getInvoiceError,
   clearMessages,
 } from "../actions";
 import Axios from "../../utils/Axios";
@@ -248,6 +251,47 @@ export function* GetAllPayoutRequests() {
   }
 }
 
+export function* GetInvoice({ payload }) {
+  console.log(payload);
+  try {
+    const response = yield Axios.get(
+      `/invoice/api/v1/invoice/full/${payload}/anon/`
+    );
+    if (response?.status === 200) {
+      yield put(getInvoiceSuccess(response?.data));
+    } else {
+      yield put(getInvoiceError(response?.data?.message));
+    }
+    yield put(clearMessages());
+  } catch (error) {
+    let message;
+    if (error.response) {
+      const errorMessage = error.response.data.detail;
+
+      switch (error?.response?.status) {
+        case 500:
+          message = "Internal Server Error";
+          break;
+        case 404:
+          message = "Not found";
+          break;
+        case 401:
+          message = "Invalid credentials";
+          break;
+        case 400:
+          message = errorMessage;
+          break;
+        default:
+          message = error.response.statusText;
+      }
+    } else if (error.message) {
+      message = error.message;
+    }
+    yield put(getInvoiceError(message));
+    yield put(clearMessages());
+  }
+}
+
 export function* watchGetAllInvoices() {
   yield takeEvery(GET_INVOICES, GetAllInvoices);
 }
@@ -259,12 +303,16 @@ export function* watchCreateNewInvoice() {
 export function* watchDeleteInvoice() {
   yield takeEvery(DELETE_INVOICE, DeleteInvoice);
 }
-export function* watchGetAllPayoutRequests(){
-  yield takeEvery(GET_PAYOUT_REQUESTS, GetAllPayoutRequests )
+export function* watchGetAllPayoutRequests() {
+  yield takeEvery(GET_PAYOUT_REQUESTS, GetAllPayoutRequests);
 }
 
 export function* watchRequestPayout() {
   yield takeEvery(REQUEST_PAYOUT, RequestPayout);
+}
+
+export function* watchGetInvoice() {
+  yield takeEvery(GET_INVOICE, GetInvoice);
 }
 export default function* rootSaga() {
   yield all([
@@ -273,5 +321,6 @@ export default function* rootSaga() {
     fork(watchDeleteInvoice),
     fork(watchRequestPayout),
     fork(watchGetAllPayoutRequests),
+    fork(watchGetInvoice),
   ]);
 }
