@@ -9,7 +9,7 @@ import { addDays } from 'date-fns'
 import format from 'date-fns/format'
 
 const InstagramPost = () => {
-    const clientPost = useSelector((state) => state?.getClientPost);
+    const clientPost = useSelector((state) => state?.postSchedule);
     
     const [searchValue, setSearchValue] = useState("")
     const [selectedValue, setSelectedValue] = useState("All")
@@ -118,16 +118,16 @@ const InstagramPost = () => {
             Header: "Post Status",
             accessor: "post_status",
             Cell: (props) => <div>
-                {props.value === "Pending" ? (<div className='post-status pending'>
+                {props.value === "Pending" || props.value === "PENDING" ? (<div className='post-status pending'>
                     <div></div>
                     <p>{props.value}</p>
-                    </div>) : props.value === "Scheduled" ? (<div className='post-status scheduled'>
+                    </div>) : props.value === "SCHEDULED" || props.value === 'Scheduled' ? (<div className='post-status scheduled'>
                     <div></div>
                     <p>{props.value}</p>
-                    </div>) : props.value === "Published" ? (<div className='post-status published'>
+                    </div>) : props.value === "Published" || props.value === 'PUBLISHED' ? (<div className='post-status published'>
                     <div></div>
                     <p>{props.value}</p>
-                    </div>) : props.value === "Draft" ? (<div className='post-status draft'>
+                    </div>) : props.value === "Draft" || props.value === "DRAFT" ? (<div className='post-status draft'>
                     <div></div>
                     <p>{props.value}</p>
                     </div>) : null}

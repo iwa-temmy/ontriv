@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import HorizontalTab from '../../../../components/horizontaltab';
 import { CenteredModal } from '../../../../components/Modal';
 import GotItModal from '../schedulePostModal';
 import FineTuneFacebook from './fineTuneChannel/Facebook';
@@ -12,7 +11,7 @@ import facebook from "../../../../assets/img/facebook.png";
 import linkedin from "../../../../assets/img/linkedin.png";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const FineTuneChannel = ({ socialMedia, next, prev ,postDate, baseCaption}) => {
 
@@ -42,13 +41,11 @@ const FineTuneChannel = ({ socialMedia, next, prev ,postDate, baseCaption}) => {
   const InstagramData = (iGCaption,iGDate) => {
     setiGText(iGCaption)
     setiGDate(iGDate)
-    console.log(iGCaption,iGDate,'igg')
   }
 
   const facebookData = (fbCaption,fbDate) => {
     setFacebookText(fbCaption)
     setFacebookDate(fbDate)
-    console.log(fbCaption,fbDate,'igg')
   }
 
   const linkedinData = (lnCaption,lnDate) => {
@@ -67,7 +64,7 @@ const FineTuneChannel = ({ socialMedia, next, prev ,postDate, baseCaption}) => {
       <div>
         <Nav tabs>
           {
-            socialMedia.map((item, index) => (<>
+            socialMedia.map((item, index) => (
               <NavItem key={index}>
                 <NavLink
                   className={classnames({ active: activeTab === index + 1 })}
@@ -80,31 +77,17 @@ const FineTuneChannel = ({ socialMedia, next, prev ,postDate, baseCaption}) => {
                  </div>
                 </NavLink>
               </NavItem>
-            </>))
+            ))
           }
         </Nav>
         <TabContent activeTab={activeTab}>
-          {socialMedia.map((item, index) => (<>
+          {socialMedia.map((item, index) => (
             <TabPane tabId={index + 1} key={index}>
               {item === "instagram" ? <FineTuneInstagram postDate={postDate} caption={baseCaption} socialchannel={socialMedia} setOpenModal={setIsOpenCreatePost} activeTab={activeTab} setActiveTab={setActiveTab} instagramData={InstagramData}/> : item === "facebook" ? <FineTuneFacebook socialchannel={socialMedia} setOpenModal={setIsOpenCreatePost} activeTab={activeTab} setActiveTab={setActiveTab} facebookData={facebookData} postDate={postDate} caption={baseCaption}/> : item === "twitter" ? <FineTuneTwitter socialchannel={socialMedia} setOpenModal={setIsOpenCreatePost} activeTab={activeTab} setActiveTab={setActiveTab}/> : item === "linkedin" ? <FineTuneLinkedin socialchannel={socialMedia} setOpenModal={setIsOpenCreatePost} activeTab={activeTab} setActiveTab={setActiveTab} linkedinData={linkedinData} postDate={postDate} caption={baseCaption}/> : ""}
             </TabPane>
-          </>))}
+          ))}
         </TabContent>
       </div>
-
-
-      {/* <div>
-        <HorizontalTab
-         options={socialChannelLabel}
-         onChange={onChangeWalletTransaction}
-         defaultValue="NODOCUMENTAPPROVED"
-       />
-            <div>{socialChannelData[socialChannel]}</div>
-        </div> */}
-      {/* {socialMedia[0]}hj
-        <button onClick={prev}>prev</button>
-        <button onClick={next}>next</button>
-        <button onClick={onOpenCreatPost}>open modal</button> */}
     </div>
   )
 }

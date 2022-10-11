@@ -25,8 +25,7 @@ const Schedule = ({ getAllClient, getAllClientDetails, getAllClientLoading,}) =>
 
   let navigate = useNavigate()
 
-
-  let clientPost = useSelector((state) => state?.getClientPost?.getOneClientPost);
+  let clientPost = useSelector((state) => state?.postSchedule?.getOneClientPost);
 
   const newPost = () => {
     navigate(`/NewPost/${id}`)
@@ -67,7 +66,7 @@ const Schedule = ({ getAllClient, getAllClientDetails, getAllClientLoading,}) =>
 </div>
             </div>
             <div className='socialChannelWrapper'>
-              {clientPost.user_instagram_post?.length <= 0 && clientPost.user_facebook_post?.length <= 0 && clientPost.user_linkedin_post?.length <= 0 ? (<NoPostSchedule text={'Get started by scheduling a post'} button buttonProps={<><button>
+              {clientPost?.user_instagram_post?.length <= 0 && clientPost?.user_facebook_post?.length <= 0 && clientPost?.user_linkedin_post?.length <= 0 ? (<NoPostSchedule text={'Get started by scheduling a post'} button buttonProps={<><button>
                 <Link to="/NewPost">
                   Create Post
                 </Link>

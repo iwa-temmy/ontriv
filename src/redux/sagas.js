@@ -8,7 +8,7 @@ import oneInvoice from "./Invoices/OneInvoice/saga";
 import expense from "./Expenses/saga";
 import vendor from "./Expenses/Vendor/saga"
 import schedule from "./Schedule/saga"
-import getOneClient from "./Schedule/oneClientPost/saga"
+//import getOneClient from "./Schedule/oneClientPost/saga"
 import schedulePost from "./Schedule/schedulePost/saga"
 
 export default function* rootSaga() {
@@ -22,7 +22,6 @@ export default function* rootSaga() {
     expense(),
     vendor(),
     schedule(),
-    getOneClient(),
     schedulePost(),
   ]);
 }

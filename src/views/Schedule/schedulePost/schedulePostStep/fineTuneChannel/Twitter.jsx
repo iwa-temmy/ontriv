@@ -36,6 +36,7 @@ const FineTuneTwitter = ({ socialchannel, setOpenModal, activeTab, setActiveTab 
   }
 
   return (
+    <div style={{padding:'1.5rem'}}>
     <Row>
       <Col xs="12"
         md="7"
@@ -48,13 +49,14 @@ const FineTuneTwitter = ({ socialchannel, setOpenModal, activeTab, setActiveTab 
         <div>
           <DatePicker className='datePickerStyle' minDate={new Date()} placeholderText="Twitter date & time" selected={startDate} onChange={(date) => setStartDate(date)} /><br /><br />
           <TextArea maxLength="2200" placeholder='Caption' value={baseCaption} onChangeTextArea={onChangeTextArea} count={count} />
-
-          <ToggleButton isOn={isOn} handleToggle={handleToggle} title="Location" id="location" htmlFor="location" />
+{/* 
+          <ToggleButton isOn={isOn} handleToggle={handleToggle} title="Location" id="location" htmlFor="location" /> */}
           <Button text="Next" onButtonClick={() => nextButton(activeTab + 1)} />
         </div>
       </Col>
 
     </Row>
+    </div>
   )
 }
 

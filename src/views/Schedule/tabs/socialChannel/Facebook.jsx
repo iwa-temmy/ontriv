@@ -10,7 +10,7 @@ import format from 'date-fns/format'
 
 const FacebookPost = () => {
 
-    const clientPost = useSelector((state) => state?.getClientPost);
+    const clientPost = useSelector((state) => state?.postSchedule);
 
     const [searchValue, setSearchValue] = useState("")
     const [selectedValue, setSelectedValue] = useState("All")

@@ -38,6 +38,7 @@ const FineTuneFacebook = ({ socialchannel, setOpenModal, activeTab, setActiveTab
   }
 
   return (
+    <div style={{padding:'1.5rem'}}>
     <Row>
       <Col xs="12"
         md="7"
@@ -51,12 +52,13 @@ const FineTuneFacebook = ({ socialchannel, setOpenModal, activeTab, setActiveTab
           <DatePicker className='datePickerStyle' minDate={new Date()} placeholderText="Facebook date & time  " selected={facebookStartDate} onChange={(date) => setFacebookStartDate(date)} /><br /><br />
           <TextArea maxLength="2200" placeholder='Caption' value={facebookCaption} onChangeTextArea={onChangeTextArea} count={count} />
 
-          <ToggleButton isOn={isOn} handleToggle={handleToggle} title="Location" id="location" htmlFor="location" />
+          {/* <ToggleButton isOn={isOn} handleToggle={handleToggle} title="Location" id="location" htmlFor="location" /> */}
           <Button text="Next" onButtonClick={() => nextButton(activeTab + 1)} />
         </div>
       </Col>
 
     </Row>
+    </div>
   )
 }
 

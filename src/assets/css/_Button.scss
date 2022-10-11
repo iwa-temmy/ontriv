@@ -48,6 +48,9 @@
     width: 100%;
     padding: 10px 20px;
     color: #333;
+    &:disabled{
+        border:1px solid #dddddd;
+    }
 
     @include placeholder {
         font-size: 14px;

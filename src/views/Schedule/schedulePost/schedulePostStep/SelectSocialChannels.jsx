@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import InputField from '../../../../components/Input'
 import PostHeader from '../PostHeader'
 import facebook from "../../../../assets/img/facebook.png"
 import instagram from "../../../../assets/img/instagram.png"

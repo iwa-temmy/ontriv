@@ -1,16 +1,13 @@
-import React,{useState} from 'react'
+import React from 'react'
 import forwardChat from './../../assets/img/forward-chat.svg'
 import digitalCreator from "../../assets/img/digitalCreator.png"
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { getOneClientPost } from '../../redux/actions'
 import { truncateText } from '../../utils/helper'
+import { getOneClientPost } from '../../redux/actions'
 
 
 const ClientChart = ({ item, activeId, setActiveId,id,setId}) => {
-
-    // const [id, setId] = useState(item[0]?.client)
-     console.log(item,'item,',id,'idd')
 
     const dispatch = useDispatch()
 
@@ -20,7 +17,6 @@ const ClientChart = ({ item, activeId, setActiveId,id,setId}) => {
     },[id,dispatch])
 
     const getClientPost = (id,clientId) => {
-        console.log({id,clientId})
         setActiveId(id)
         setId(clientId)
     }

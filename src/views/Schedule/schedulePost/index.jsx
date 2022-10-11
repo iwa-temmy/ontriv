@@ -9,15 +9,17 @@ import { Col, Row } from 'reactstrap'
 import { useParams } from 'react-router-dom'
 import { scheduledPost } from '../../../redux/actions'
 import { connect, useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
-const ScheduleSteps = () => {
+const ScheduleSteps = (props) => {
   const [currentStep, UpdateCurrentStep] = useState(1)
   const [socialMedia, setSocialMedia] = useState([])
   const [postDate, setPostDate] = useState()
   const [captions, setCaptions] = useState()
-  const [postStatus, setPostStatus] = useState('')
 
-  console.log(postStatus)
+  const { scheduledPost,postScheduleLoading, postScheduleData,postScheduleError } = props
+
+  console.log(postScheduleLoading, postScheduleData,postScheduleError,'111')
 
   const [postType, setPostType] = useState()
   const [igDate, setIgDate] = useState()
@@ -27,16 +29,12 @@ const ScheduleSteps = () => {
   const [linkedinDate, setLinkedinDate] = useState()
   const [linkedincaptions, setLinkedinCaptions] = useState()
   const [url, setUrl] = useState()
-  // console.log(postDate,'indexxx',captions,url,'urlll',postType)
 
-  const {id} = useParams()
 
-  console.log(id)
+  const { id } = useParams()
 
-  const result = useSelector((state) => state?.postSchedule?.postScheduleData);
-  console.log(result) 
-
-  // console.log(igDate,igcaptions,'insta', fbDate,fbcaptions,'faceee',linkedinDate,linkedincaptions,'linkeddd')
+  const result = useSelector((state) => state?.postSchedule);
+  console.log(result,'ddd')
 
   const postToSocial = socialMedia.length ? {
     facebook: socialMedia.includes('facebook') ? true : false,
@@ -46,32 +44,30 @@ const ScheduleSteps = () => {
   } : null
 
 
-  const onHandleSubmit = (e) => {
-    e.preventDefault()
-    // setPostStatus(text)
-console.log('fireee call')
+  const onHandleSubmit = (type) => {
     const payload = {
-      user:id,
-      "Linkedin caption": linkedincaptions === undefined ? '' : linkedincaptions,
-      "Linkedin date time": linkedinDate === undefined ? '' : linkedinDate,
-      "Facebook caption": fbcaptions === undefined ? '' : fbcaptions,
-      "Facebook date time": fbDate === undefined ? '' : fbDate,
-     "Instagram caption": igcaptions === undefined ? '' : igcaptions,
-     "Instagram date time": igDate === undefined ? '' : igDate,
-      Media:url,
-     "Media type":postType,
-     "Post status":'schedule',
-     "Post to facebook":postToSocial?.facebook,
-     "Post to linkedin":postToSocial?.linkedin,
-     "Post to instagram":postToSocial?.instagram,
-     "Is carousel":'',
+      "user": id,
+      "linkedin_caption": linkedincaptions === undefined ? '' : linkedincaptions,
+      "linkedin_date_time": linkedinDate === undefined ? '' : linkedinDate,
+      "facebook_caption": fbcaptions === undefined ? '' : fbcaptions,
+      "facebook_date_time": fbDate === undefined ? '' : fbDate,
+      "instagram_caption": igcaptions === undefined ? '' : igcaptions,
+      "instagram_date_time": igDate === undefined ? '' : igDate,
+      "media": url,
+      "media_type": postType,
+      "post_status": type,
+      "post_to_facebook": postToSocial?.facebook,
+      "post_to_linkedin": postToSocial?.linkedin,
+      "post_to_instagram": postToSocial?.instagram,
+      "is_carousel": url?.length > 1 ? true : false,
     }
-  scheduledPost(payload)
+    // console.log(payload)
+    scheduledPost(payload)
+  }
 
-   // console.log(postData,'dfgh')
-}
+  useEffect(()=>{
 
-  
+  },[])
 
   function prev() {
     UpdateCurrentStep(currentStep - 1);
@@ -90,14 +86,14 @@ console.log('fireee call')
     UpdateCurrentStep(currentStep + 1);
   }
 
-  function nextGenericDetails(caption,url,postType) {
+  function nextGenericDetails(caption, url, postType) {
     setCaptions(caption);
     setUrl(url)
     setPostType(postType)
     UpdateCurrentStep(currentStep + 1);
   }
 
-  function nextGotItDetails(igText,igDate,fbText,fbDate,lnText,lnDate) {
+  function nextGotItDetails(igText, igDate, fbText, fbDate, lnText, lnDate) {
     setIgCaptions(igText)
     setIgDate(igDate)
     setfbCaptions(fbText)
@@ -125,7 +121,7 @@ console.log('fireee call')
     },
     {
       name: "Create Post",
-      content: <CreatePost onSubmit={onHandleSubmit}/>
+      content: <CreatePost onSubmit={onHandleSubmit} />
     },
   ]
 
@@ -135,7 +131,7 @@ console.log('fireee call')
         md="3"
         sm="12">
         <div className='stepHolder'>
-        <StepNavigation labelArray={labelArray} currentStep={currentStep} />
+          <StepNavigation labelArray={labelArray} currentStep={currentStep} />
         </div>
       </Col>
 
@@ -152,11 +148,10 @@ console.log('fireee call')
 }
 
 const mapStateToProps = (state) => {
-const {postSchedule} = state
-console.log(postSchedule  ,'map state')
-return {
-  ...state
-}
+  const {postSchedule} = state
+  const {postScheduleLoading, postScheduleData,postScheduleError  } = postSchedule
+  console.log(postScheduleLoading, postScheduleData,postScheduleError)
+  return { postScheduleLoading, postScheduleData,postScheduleError}
 }
 
-export default connect(mapStateToProps,{scheduledPost})(ScheduleSteps)
+export default connect(mapStateToProps, { scheduledPost })(ScheduleSteps)

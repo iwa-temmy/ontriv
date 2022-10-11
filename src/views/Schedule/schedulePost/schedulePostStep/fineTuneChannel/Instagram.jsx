@@ -21,7 +21,6 @@ const FineTuneInstagram = ({ socialchannel, setOpenModal, activeTab, setActiveTa
     const valueLength = e.target.value.length
     setInstagramCaption(value)
     setCount(2200 - valueLength)
-    console.log(instagramCaption, count)
   }
 
   const onChangeFirstComment = (e) => {
@@ -29,7 +28,6 @@ const FineTuneInstagram = ({ socialchannel, setOpenModal, activeTab, setActiveTa
     const valueLength = e.target.value.length
     setFirstComment(value)
     setFirstCommentCount(2200 - valueLength)
-    console.log(instagramCaption, count)
   }
 
   const nextButton = (tab) => {
@@ -45,7 +43,8 @@ const FineTuneInstagram = ({ socialchannel, setOpenModal, activeTab, setActiveTa
     }
   }
   return (
-    <Row>
+    <div style={{padding:'1.5rem'}}>
+      <Row>
       <Col xs="12"
         md="7"
         sm="12">
@@ -68,6 +67,7 @@ const FineTuneInstagram = ({ socialchannel, setOpenModal, activeTab, setActiveTa
       </Col>
 
     </Row>
+    </div>
   )
 }
 

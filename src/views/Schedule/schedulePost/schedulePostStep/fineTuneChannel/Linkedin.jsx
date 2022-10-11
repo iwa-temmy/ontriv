@@ -38,6 +38,7 @@ const FineTuneLinkedin = ({socialchannel,setOpenModal,activeTab,setActiveTab,pos
   }
 
   return (
+    <div style={{padding:'1.5rem'}}>
     <Row>
       <Col  xs="12"
           md="7"
@@ -51,12 +52,12 @@ const FineTuneLinkedin = ({socialchannel,setOpenModal,activeTab,setActiveTab,pos
       <DatePicker className='datePickerStyle' minDate={new Date()} placeholderText="Linkedin date & time  " selected={linkedinStartDate} onChange={(date) => setLinkedinStartDate(date)} /><br/><br/>
       <TextArea maxLength="2200" placeholder='Caption' value={linkedinCaption} onChangeTextArea={onChangeTextArea} count={count}/>
 
-<ToggleButton isOn={isOn} handleToggle={handleToggle} title="Location" id="location" htmlFor="location"/>
+{/* <ToggleButton isOn={isOn} handleToggle={handleToggle} title="Location" id="location" htmlFor="location"/> */}
 <Button text="Next" onButtonClick={() => nextButton(activeTab + 1)} />
       </div>
       </Col>
-        
     </Row>
+    </div>
   )
 }
 

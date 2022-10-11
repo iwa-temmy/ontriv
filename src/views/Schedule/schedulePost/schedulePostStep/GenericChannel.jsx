@@ -7,6 +7,7 @@ import Picker from 'emoji-picker-react';
 import fireBaseStorage from '../../../../lib/firebase'
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import { v4 } from "uuid"
+import createNotification from '../../../../utils/Notification'
 
 const GenericChannel = ({ prev, next }) => {
 
@@ -15,8 +16,6 @@ const GenericChannel = ({ prev, next }) => {
   const [urls, setUrls] = useState([]);
   const [progress, setProgress] = useState(0);
   const [postType, setPostType] = useState("")
-
-  console.log(urls.length,'fgg')
 
   const [baseCaption, setBaseCaption] = useState('')
   const [ShowEmoji, setShowEmoji] = useState(false)
@@ -30,16 +29,12 @@ const GenericChannel = ({ prev, next }) => {
 
   const deleteItem = (id) => {
     const filterData = images.filter((_, index) => index !== id)
-    // console.log(filterData)
     setImages(filterData)
   }
 
   const onEmojiClick = (e, emojiObject) => {
-    // console.log(inputRef)
     const cursorStart = inputRef.current.selectionStart;
-    // const cursorEnd = inputRef.current.selectionStart;
     const text = baseCaption.slice(0, cursorStart) + emojiObject.emoji + baseCaption.slice(cursorStart);
-    // console.log(text)
     setBaseCaption(text);
 
   }
@@ -47,14 +42,11 @@ const GenericChannel = ({ prev, next }) => {
   const OnSHow = () => {
     const cursorStart = inputRef.current.selectionStart;
     const cursorEnd = inputRef.current.selectionEnd;
-    console.log(cursorStart, cursorEnd)
 
     let selectedText = baseCaption.substring(cursorStart, cursorEnd)
-    console.log(selectedText)
     setAddHashTag(selectedText)
   }
 
-  // console.log(baseCaption)
 
   const onFileUpload = (e) => {
     e.preventDefault();
@@ -99,19 +91,20 @@ const GenericChannel = ({ prev, next }) => {
     })
 
     Promise.all(promises)
-      .then(() => {
+      .then((res) => {
         setLoading(false)
-        alert('All images uploaded')
-        // setImages([])
+          createNotification("success", 'Images uploaded successfully')
       })
-      .then(err => console.log(err))
+      .catch(err => {
+        createNotification("error", 'Image Upload Failed');
+      }
+        )
   }
 
 
   const uploadFile = () => {
     uploadImages(images)
   }
-  console.log(urls)
 
   return (
     <div className='genericChannel'>

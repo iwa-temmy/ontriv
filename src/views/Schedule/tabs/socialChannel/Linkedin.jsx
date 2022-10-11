@@ -12,7 +12,7 @@ import format from 'date-fns/format'
 
 const LinkedinPost = () => {
 
-    const clientPost = useSelector((state) => state?.getClientPost);
+    const clientPost = useSelector((state) => state?.postSchedule);
 
     const [searchValue, setSearchValue] = useState("")
     const [selectedValue, setSelectedValue] = useState("All")
@@ -92,7 +92,7 @@ const LinkedinPost = () => {
             accessor: "post_details",
             Cell: (props) => <div className='row-post'>
                 <div className='post-image'>
-                    <img src={props?.value?.file} alt="" />
+                    <img src={props?.value?.media} alt="" />
                 </div>
                 <div className='post-title-name'>
                 <h2>{props?.value?.text}</h2>
