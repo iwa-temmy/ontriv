@@ -7,7 +7,6 @@ const SocialChannels = () => {
     useState("INSTAGRAM");
 
   const onChangeWalletTransaction = (value) => {
-    console.log(value)
     const selectedValue = value;
     setSocialChannel(selectedValue);
   };

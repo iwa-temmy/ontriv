@@ -7,10 +7,10 @@ import barChart from "../../assets/img/barchart.png"
 import ClientChartDrawer from './ClientChartDrawer'
 import { useEffect } from 'react'
 
-const ListAllClientDrawer = ({businessOwner,businessLogo, setShowClient,getAllClientDetails,activeId,setActiveId}) => {
+const ListAllClientDrawer = ({businessOwner,businessLogo, setShowClient,getAllClientDetails,activeId,setActiveId,allClient, setAllClient}) => {
 
   const [searchValue, setSearchValue] = useState('')
-  const [allClient, setAllClient] = useState(getAllClientDetails)
+  // const [allClient, setAllClient] = useState(getAllClientDetails)
 
   const onChangeSearchValue = (e) => {
     let value = e.target.value
@@ -28,7 +28,7 @@ useEffect(() => {
           setAllClient(getAllClientDetails)
        }
    } 
-}, [searchValue,getAllClientDetails]);
+}, [searchValue,getAllClientDetails,setAllClient]);
 
   return (
     <div className='clientlist-drawer'>

@@ -7,10 +7,9 @@ import barChart from "../../assets/img/barchart.png"
 import ClientChart from './ClientChart'
 import { useEffect } from 'react'
 
-const ListAllClient = ({businessOwner,businessLogo,getAllClientDetails,activeId,setActiveId,getScheduledpost}) => {
+const ListAllClient = ({businessOwner,businessLogo,getAllClientDetails,activeId,setActiveId,getScheduledpost,allClient,setAllClient,id,setId}) => {
 
   const [searchValue, setSearchValue] = useState('')
-  const [allClient, setAllClient] = useState(getAllClientDetails)
 
   const onChangeSearchValue = (e) => {
     let value = e.target.value
@@ -28,7 +27,7 @@ useEffect(() => {
           setAllClient(getAllClientDetails)
        }
    } 
-}, [searchValue,getAllClientDetails]);
+}, [searchValue,getAllClientDetails,setAllClient]);
 
   return (
     <div className='clientWrapper'>
@@ -66,7 +65,7 @@ useEffect(() => {
         <h6 className='chat-titles mb-4'>
           Clients
         </h6>
-        {getAllClientDetails.length > 0 ? (<ClientChart item={allClient} activeId={activeId} setActiveId={setActiveId} />) : (<div className='no-clients'>
+        {getAllClientDetails.length > 0 ? (<ClientChart item={allClient} activeId={activeId} setActiveId={setActiveId} id={id} setId={setId}/>) : (<div className='no-clients'>
           <p>You have no clients. Please invite one to get started  </p>
           <div>
             <Button type="button" color='' className='addclient'>

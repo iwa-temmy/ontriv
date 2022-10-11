@@ -2,7 +2,12 @@ import React from 'react'
 import Button from '../../../../components/Button'
 import PostHeader from '../PostHeader'
 
-const GotItModal = ({closeModal}) => {
+const GotItModal = ({closeModal,next}) => {
+
+    const handleClose = () => {
+        closeModal(true)
+        next()
+    }
   return (
     <div className='schedulePost-modalWrapper'>
         <div className='modalHeader'>
@@ -26,7 +31,7 @@ const GotItModal = ({closeModal}) => {
             <h5>Publish Now</h5>
             <p>Ready to publish your post right now? Select this option to have Loomly publish it immediately for you.</p>
         </div>
-        <Button text="Got It" onButtonClick={() => closeModal(false)}/>
+        <Button text="Got It" onButtonClick={handleClose}/>
     </div>
   )
 }

@@ -121,6 +121,12 @@ export const GET_ONECLIENTPOST = "GET_ONECLIENTPOST";
 export const GET_ONECLIENTPOST_SUCCESS = "GET_ONECLIENTPOST_SUCCESS";
 export const GET_ONECLIENTPOST_ERROR = "GET_ONECLIENTPOST_ERROR";
 
+//schedulePost
+
+export const SCHEDULEPOST = "SCHEDULEPOST";
+export const SCHEDULEPOST_SUCCESS = "SCHEDULEPOST_SUCCESS";
+export const SCHEDULEPOST_ERROR = "SCHEDULEPOST_ERROR";
+
 //Expenses
 export const GET_EXPENSES = "GET_EXPENSES";
 export const GET_EXPENSES_SUCCESS = "GET_EXPENSES_SUCCESS";
@@ -151,3 +157,4 @@ export * from "./Invoices/OneInvoice/action";
 export * from "./Expenses/Vendor/action";
 export * from "./Schedule/action";
 export * from "./Schedule/oneClientPost/action";
+export * from "./Schedule/schedulePost/action";

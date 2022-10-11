@@ -213,3 +213,12 @@ export const copierHelper = (text) => {
 export const calculateVat = (total, vat) => {
   return (vat / 100) * total;
 };
+
+export const truncateText = (string = "", length = "30", ending = "...") => {
+  if (!(string && length)) {
+    return;
+  }
+  return length > string.length
+    ? string
+    : string.substring(0, length - ending.length) + ending;
+};

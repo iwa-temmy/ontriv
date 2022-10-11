@@ -7,30 +7,28 @@ import Button from '../../../../../components/Button';
 import TextArea from '../../../../../components/textArea/TextArea';
 import ToggleButton from '../../../../../components/toggleButton/ToggleButton';
 
-const FineTuneTwitter = ({socialchannel,setOpenModal,activeTab,setActiveTab,index}) => {
+const FineTuneTwitter = ({ socialchannel, setOpenModal, activeTab, setActiveTab }) => {
   const [startDate, setStartDate] = useState();
   const [baseCaption, setBaseCaption] = useState('')
   const [count, setCount] = useState(2200)
   const [isOn, setIsOn] = useState(false);
 
-  const onChangeTextArea = (e)=>{
+  const onChangeTextArea = (e) => {
     const value = e.target.value
     const valueLength = e.target.value.length
     setBaseCaption(value)
     setCount(2200 - valueLength)
-    console.log(baseCaption, count)
   }
 
   const handleToggle = (e) => {
-      setIsOn(prev => !prev)
+    setIsOn(prev => !prev)
   }
 
   const nextButton = (tab) => {
     if (socialchannel.length === activeTab) {
       setOpenModal(true)
     }
-    else{
-      // console.log("nnnnn")
+    else {
       if (activeTab !== tab) {
         setActiveTab(tab)
       }
@@ -38,25 +36,27 @@ const FineTuneTwitter = ({socialchannel,setOpenModal,activeTab,setActiveTab,inde
   }
 
   return (
+    <div style={{padding:'1.5rem'}}>
     <Row>
-      <Col  xs="12"
-          md="7"
-          sm="12">
-      FineTuneTwitter Image
+      <Col xs="12"
+        md="7"
+        sm="12">
+        FineTuneTwitter Image
       </Col>
-      <Col  xs="12"
-          md="5"
-          sm="12">
-      <div>
-      <DatePicker className='datePickerStyle' placeholderText="Twitter date & time" selected={startDate} onChange={(date) => setStartDate(date)} /><br/><br/>
-      <TextArea maxLength="2200" placeholder='Caption' value={baseCaption} onChangeTextArea={onChangeTextArea} count={count}/>
+      <Col xs="12"
+        md="5"
+        sm="12">
+        <div>
+          <DatePicker className='datePickerStyle' minDate={new Date()} placeholderText="Twitter date & time" selected={startDate} onChange={(date) => setStartDate(date)} /><br /><br />
+          <TextArea maxLength="2200" placeholder='Caption' value={baseCaption} onChangeTextArea={onChangeTextArea} count={count} />
+{/* 
+          <ToggleButton isOn={isOn} handleToggle={handleToggle} title="Location" id="location" htmlFor="location" /> */}
+          <Button text="Next" onButtonClick={() => nextButton(activeTab + 1)} />
+        </div>
+      </Col>
 
-<ToggleButton isOn={isOn} handleToggle={handleToggle} title="Location" id="location" htmlFor="location"/>
-<Button text="Next" onButtonClick={() => nextButton(activeTab + 1)} />
-      </div>
-      </Col>
-        
     </Row>
+    </div>
   )
 }
 

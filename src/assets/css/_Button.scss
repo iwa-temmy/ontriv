@@ -30,6 +30,10 @@
     line-height: 28px;
     letter-spacing: 0.75px;
     color: #F7F7FC;
+    cursor: pointer;
+    &:disabled{
+        background: #dddddd;
+    }
 }
 
 .inputField_Wrap {
@@ -44,6 +48,9 @@
     width: 100%;
     padding: 10px 20px;
     color: #333;
+    &:disabled{
+        border:1px solid #dddddd;
+    }
 
     @include placeholder {
         font-size: 14px;

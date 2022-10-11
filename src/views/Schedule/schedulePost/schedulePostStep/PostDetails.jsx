@@ -13,9 +13,9 @@ const PostDetails = ({next}) => {
   return (
     <div className='postDetails'>
       <PostHeader title="Post Details"/>
-          <DatePicker className='scheduleDateInput' placeholderText="Scheduled date & time" selected={startDate} onChange={(date) => setStartDate(date)} /><br/><br/>
-          <InputField type="text" id="postsubject" name="postsubject" placeholder="Subject (For Ontriv reference)"/><br/><br/><br/>
-          <Button text="Next" onButtonClick={next}/>
+          <DatePicker className='scheduleDateInput' minDate={new Date()} placeholderText="Scheduled date & time" selected={startDate} onChange={(date) => setStartDate(date)} /><br/><br/>
+          <InputField type="text" id="postsubject" name="postsubject" placeholder="Subject (For Ontriv reference)" disabled/><br/><br/><br/>
+          <Button text="Next" onButtonClick={()=>next(startDate)} disabled={!startDate}/>
     </div>
   )
 }
