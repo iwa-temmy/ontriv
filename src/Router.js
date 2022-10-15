@@ -27,6 +27,7 @@ import NewPost from "./views/Schedule/NewPost";
 import InvoicePage from "./views/InvoicePage";
 import Payouts from "./views/Financials/Payouts";
 import ChangePassword from "./views/Auth/ChangePassword";
+import ForgotPasswordSuccess from "./views/Auth/ForgotPasswordSuccess";
 
 const RouterConfig = () => {
   return (
@@ -75,15 +76,20 @@ const RouterConfig = () => {
         <Route exact path="/auth/login" element={<Signin />} />
         <Route
           exact
+          path="/auth/forgot-password"
+          element={<ForgotPassword />}
+        />
+        <Route
+          exact
+          path="/auth/forgot-password/success"
+          element={<ForgotPasswordSuccess />}
+        />
+        <Route
+          exact
           path="/auth/change-password"
           element={<ChangePassword />}
         />
         <Route exact path="/invoice/:id" element={<InvoicePage />} />
-        <Route
-          exact
-          path="/auth/forgot-password"
-          element={<ForgotPassword />}
-        />
       </Routes>
     </BrowserRouter>
   );

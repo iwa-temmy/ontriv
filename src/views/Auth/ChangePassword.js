@@ -17,7 +17,7 @@ import { connect } from "react-redux";
 import { forgotPassword } from "../../redux/actions";
 // import createNotification from '../../utils/Notification'
 
-const ForgotPassword = ({ loading, forgotPassword }) => {
+const ChangePassword = ({ loading, forgotPassword }) => {
   const [inputType1, setInputType1] = useState("password");
   const [inputType2, setInputType2] = useState("password");
   const [password, setPassword] = useState("");
@@ -29,10 +29,10 @@ const ForgotPassword = ({ loading, forgotPassword }) => {
     formState: { errors },
   } = useForm();
 
-  const handlePasswordReset = (values) => {
+  const handleChangePassword = (values) => {
     // const token = localStorage.getItem('ontrivUserToken')
     // const uid = JSON.parse(localStorage.getItem('ontrivCurrentUser')).pk
-    forgotPassword(values);
+    console.log(values);
   };
 
   return (
@@ -46,10 +46,6 @@ const ForgotPassword = ({ loading, forgotPassword }) => {
             <div className="text-center reset-password-text">
               <h3
                 className="mb-0"
-                style={{
-                  fontSize: "34px",
-                  opacity: "0.8",
-                }}
               >
                 Change Password
               </h3>
@@ -67,12 +63,7 @@ const ForgotPassword = ({ loading, forgotPassword }) => {
               </div>
             </div>
             <Card className="p-5 signin-form-card ">
-              <Form onSubmit={handleSubmit(handlePasswordReset)}>
-                {errors.email && (
-                  <span className="text-danger text-left">
-                    Enter a valid email addres
-                  </span>
-                )}
+              <Form onSubmit={handleSubmit(handleChangePassword)}>
                 <div className="password-container">
                   <div className="row">
                     {errors.password && (
@@ -102,7 +93,7 @@ const ForgotPassword = ({ loading, forgotPassword }) => {
                       </div>
                       <input
                         type={inputType1}
-                        placeholder="Create password"
+                        placeholder="Create new password"
                         name="password"
                         {...register("password", {
                           required: true,
@@ -212,4 +203,4 @@ const mapStateToProps = ({ auth }) => {
   const { forgotPasswordError, message, loading } = auth;
   return { forgotPasswordError, message, loading };
 };
-export default connect(mapStateToProps, { forgotPassword })(ForgotPassword);
+export default connect(mapStateToProps, { forgotPassword })(ChangePassword);
