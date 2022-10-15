@@ -14,7 +14,7 @@ const SideMenuContent = (props) => {
         let renderItem = (
             <li
                 className={classnames("nav-item", {
-                    activeNav: props.hoverIndex === item.navLink
+                    activeNav: props.hoverIndex === item?.navLink
                 })}
                 key={item.id}
             >
