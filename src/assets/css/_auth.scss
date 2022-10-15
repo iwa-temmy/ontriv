@@ -285,12 +285,12 @@
     position: fixed;
     width: 25%;
     padding: 68px 20px;
-    background: url("../img/register1.svg") left 0px top -55px no-repeat,
-      url("../img/register2.svg") right 20px top 0px no-repeat,
-      url("../img/register3.svg") left -110px bottom -30px no-repeat,
-      linear-gradient(170.87deg, #008aff 6.93%, #1791f9 42.4%, #00a6ff 61.41%),
-      linear-gradient(93.88deg, #49a8f8 6.88%, #0053f4 74.45%);
-
+    // background: url("../img/register1.svg") left 0px top -55px no-repeat,
+    //   url("../img/register2.svg") right 20px top 0px no-repeat,
+    //   url("../img/register3.svg") left -110px bottom -30px no-repeat,
+    //   linear-gradient(170.87deg, #008aff 6.93%, #1791f9 42.4%, #00a6ff 61.41%),
+    //   linear-gradient(93.88deg, #49a8f8 6.88%, #0053f4 74.45%);
+    background: url("../img/register.svg");
     @media (max-width: 991px) {
       display: none;
     }
@@ -403,9 +403,20 @@
         box-shadow: -20px 4px 30px rgba(0, 0, 0, 0.03);
       }
       .wizard-control-buttons {
+        button{
+          font-size: 14px;
+        padding: 6px 12px;
+        border-radius: 3px;
+      }
+      button:disabled{
+        border: 0;
+        background: rgba(9, 30, 66, 0.04);
+        mix-blend-mode: normal;
+      }
         .btn-primary {
           background: #2062f4;
           border: none;
+          
         }
       }
       .card-1 {
@@ -422,7 +433,7 @@
           padding: 55px 40px 0 26px;
         }
 
-        margin: 75px -40px 0 0;
+        margin: 66px -40px 0 0;
         padding: 75px 40px 0 26px;
         border-radius: 24px;
 
@@ -491,7 +502,7 @@
         margin: 0;
         border-radius: 24px;
         .wizard-control-buttons {
-          width: 70%;
+          width: 58%;
           @media (max-width: 450px) {
             width: 100%;
           }
@@ -499,8 +510,8 @@
         // .form {
 
         .dot {
-          height: 14px;
-          width: 14px;
+          height: 10px;
+          width: 10px;
           border-radius: 50%;
           background-color: #e5e9f2;
           cursor: pointer;
@@ -589,7 +600,11 @@
       padding: 142px 0 102px;
     }
     .reset-password-text {
-      h4 {
+      h3 {
+        color: #032041;
+        font-size: 2.2rem;
+        letter-spacing: 0.374px;
+        opacity: 0.8;
       }
       div {
         margin-top: 15px;

@@ -137,8 +137,8 @@ function * forgotPassword ({ payload }) {
     console.log(response)
 
     yield put(forgotPasswordSuccess(response.data.message))
-    createNotification('success', response.data.detail)
-    // window.location.href = '/auth/login'
+    // createNotification('success', response?.data?.detail)
+    window.location.href = '/auth/forgot-password/success'
   } catch (error) {
     console.log(error)
     console.log(error.response)

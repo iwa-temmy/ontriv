@@ -23,6 +23,7 @@
     "print-js": "^1.6.0",
     "rc-steps": "3.6.0",
     "react": "^17.0.2",
+    "react-apexcharts": "^1.4.0",
     "react-calendar": "^3.6.0",
     "react-date-range": "^1.4.0",
     "react-datepicker": "^4.8.0",
