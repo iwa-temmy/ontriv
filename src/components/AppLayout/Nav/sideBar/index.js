@@ -4,6 +4,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import SidebarHeader from "./SideBarHeader";
 import SideBar from "./SideBar";
 import DownSideBar from "./DownSideBar";
+import { sideBarMenu } from "../../../../utils/sidebarMenu";
 import { useLocation } from "react-router-dom";
 // import { useNav } from '../../../../utils/context';
 
@@ -41,8 +42,12 @@ const SideNav = ({
   };
 
   useEffect(() => {
-    if(location?.pathname){
-        setHoveredMenuItem(location?.pathname)
+    if (location?.pathname) {
+      const currentLocationObj = sideBarMenu?.find(
+        (item) => item.navLink === location?.pathname
+      );
+      setCurrentSection(currentLocationObj?.id);
+      setHoveredMenuItem(location?.pathname);
     }
   }, [location?.pathname]);
 
