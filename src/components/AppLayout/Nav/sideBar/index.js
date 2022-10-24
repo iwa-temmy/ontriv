@@ -4,7 +4,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import SidebarHeader from "./SideBarHeader";
 import SideBar from "./SideBar";
 import DownSideBar from "./DownSideBar";
-import { sideBarMenu } from "../../../../utils/sidebarMenu";
+import { sideBarMenu, bottomSideBarMenu } from "../../../../utils/sidebarMenu";
 import { useLocation } from "react-router-dom";
 // import { useNav } from '../../../../utils/context';
 
@@ -17,14 +17,17 @@ const SideNav = ({
   const [hoveredMenuItem, setHoveredMenuItem] = useState("");
   const [activeItem, setActiveItem] = useState("");
   const [menuShadow, setMenuShadow] = useState("");
+  const [menuSection, setMenuSection] = useState("sideBarMenu");
   // const [setSection] = useNav()
 
-  const handleSidebarMouseEnter = (id, url) => {
+  const handleSidebarMouseEnter = (id, url, type) => {
     if (id !== hoveredMenuItem) {
       setHoveredMenuItem(url);
       setActiveItem(url);
       setShowMobileSideBar(false);
+      setMenuSection(type);
 
+      console.log("id", id);
       setCurrentSection(id);
     } else {
       setHoveredMenuItem(null);
@@ -42,14 +45,20 @@ const SideNav = ({
   };
 
   useEffect(() => {
-    if (location?.pathname) {
-      const currentLocationObj = sideBarMenu?.find(
-        (item) => item.navLink === location?.pathname
-      );
+    if (location?.pathname && menuSection) {
+      console.log("menuSection", menuSection)
+      console.log(menuSection === "sideBarMenu");
+      const currentLocationObj =
+        menuSection === "sideBarMenu"
+          ? sideBarMenu?.find((item) => item?.navLink === location?.pathname)
+          : bottomSideBarMenu?.find(
+              (item) => item?.navLink === location?.pathname
+            );
+      console.log(currentLocationObj);
       setCurrentSection(currentLocationObj?.id);
       setHoveredMenuItem(location?.pathname);
     }
-  }, [location?.pathname]);
+  }, [location?.pathname, setCurrentSection, menuSection]);
 
   return (
     <React.Fragment>

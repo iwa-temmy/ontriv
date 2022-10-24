@@ -20,7 +20,7 @@ const SideMenuContent = (props) => {
           onClick={(e) => {
             e.stopPropagation();
 
-            props.handleSidebarMouseEnter(item.id, item.navLink);
+            props.handleSidebarMouseEnter(item.id, item.navLink, "sideBarMenu");
           }}
           href=""
           className={`d-flex justify-content-start align-items-center`}
