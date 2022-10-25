@@ -30,7 +30,7 @@ const ClientChart = ({ item, activeId, setActiveId,id,setId}) => {
                     </div>
                     <div className='clientNameHolder'>
                         <h6>{ truncateText(items?.client_business_name)}</h6>
-                        <p>Content Calendar</p>
+                        {/* <p>Content Calendar</p> */}
                     </div>
                     <div>
                         <img src={forwardChat} className='ms-auto' alt="" />

@@ -25,6 +25,8 @@
             list-style: none;
             text-align: center;
             padding: 10px;
+            font-weight: 400;
+            font-size: 14px;
             &:hover {
               color: #cacaca;
             }
@@ -33,6 +35,7 @@
               margin: 0;
               border-bottom: 3px solid #49A8F8;
               color: #49a8f8;
+              font-weight: 500;
             }
         }
     }

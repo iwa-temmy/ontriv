@@ -49,7 +49,6 @@
 
 .circleWrapper {
     padding-bottom: 10px;
-    border-bottom: 1px solid #E5ECF2;
     display: flex;
     align-items: center;
     gap: 9px;
@@ -89,9 +88,12 @@
     background: #FFFFFF;
     border-radius: 20px;
     padding: 50px 30px;
+    width:304px;
+    height: 100%;
 
     @media(max-width: 576px) {
         margin-bottom: 15px;
+        width:100%;
     }
 }
 
@@ -99,6 +101,7 @@
     background: #FFFFFF;
     border-radius: 20px;
     padding: 30px;
+    height: 100vh;
 }
 
 .postTitle {
@@ -125,10 +128,14 @@
         border-radius: 16px;
         padding: 10px 20px;
         width: 100%;
+        height: 64px;
 
         @include placeholder {
             font-size: 14px;
             color: #6E7191;
+        }
+        .scheduleTimeInput{
+          border:none;
         }
     }
 }
