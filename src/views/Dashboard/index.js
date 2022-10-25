@@ -11,10 +11,16 @@ import OverviewCards from "./DashboardCards/OverviewCards";
 import FinancialCard from "./DashboardCards/FinancialCard";
 import ClientCard from "./DashboardCards/ClientCard";
 import PostsCard from "./DashboardCards/PostsCard";
+import SetUpBussiness from "../Bussiness";
 
-const Dashboard = () => {
+//redux
+import { connect } from "react-redux";
+
+const Dashboard = (props) => {
   const [eventState, updateEventState] = useState(false);
   const [postState, updatePostState] = useState(false);
+
+  const { first_time_login } = props;
 
   const navigate = useNavigate();
 
@@ -36,24 +42,27 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard dashboard-wrapper">
-      <Row>
-        <Col md="12" sm="12" lg="12" xxl="8" className=" mb-3">
-          <div>
-            <OverviewCards />
+      {first_time_login ? (
+        <SetUpBussiness />
+      ) : (
+        <Row>
+          <Col md="12" sm="12" lg="12" xxl="8" className=" mb-3">
+            <div>
+              <OverviewCards />
 
-            <Row className="gx-3">
-              <FinancialCard handleAddInvoice={handleAddInvoice} />
+              <Row className="gx-3">
+                <FinancialCard handleAddInvoice={handleAddInvoice} />
 
-              <ClientCard handleAddClient={handleAddClient} />
-            </Row>
-          </div>
-        </Col>
-        <PostsCard
-          toggleEventState={toggleEventState}
-          togglePostState={togglePostState}
-        />
-      </Row>
-
+                <ClientCard handleAddClient={handleAddClient} />
+              </Row>
+            </div>
+          </Col>
+          <PostsCard
+            toggleEventState={toggleEventState}
+            togglePostState={togglePostState}
+          />
+        </Row>
+      )}
       <CenteredModal
         position="centered"
         modalState={postState}
@@ -206,4 +215,10 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+    first_time_login: state?.general?.userDetails?.first_login,
+  };
+};
+
+export default connect(mapStateToProps, {})(Dashboard);
