@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.react-time-picker__wrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  background: #FFFFFF !important;
+  border: 1px solid #49A8F8 !important;
+  border-radius: 16px !important;
+  padding: 10px 20px !important;
+  height: 64px !important;
+  width:340px !important;
+}

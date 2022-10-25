@@ -6,6 +6,7 @@ import forwardChat from './../../assets/img/forward-chat.svg'
 import barChart from "../../assets/img/barchart.png"
 import ClientChartDrawer from './ClientChartDrawer'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 const ListAllClientDrawer = ({businessOwner,businessLogo, setShowClient,getAllClientDetails,activeId,setActiveId,allClient, setAllClient}) => {
 
@@ -39,7 +40,7 @@ useEffect(() => {
       <input
         id="searchClient"
         name="client"
-        placeholder="Find View"
+        placeholder="Find Client"
         type="text"
         value={searchValue}
         onChange={onChangeSearchValue}
@@ -57,7 +58,7 @@ useEffect(() => {
           </div>
           <div className='drawer-clientowner-NameHolder'>
             <h6>{businessOwner}</h6>
-            <p>Content Calendar</p>
+            {/* <p>Content Calendar</p> */}
           </div>
           <div>
             <img src={forwardChat} className='ms-auto' alt="" />
@@ -71,14 +72,14 @@ useEffect(() => {
         </h6>
         {getAllClientDetails.length > 0 ? (<ClientChartDrawer item={allClient} setShowClient={setShowClient} activeId={activeId} setActiveId={setActiveId} />) : (<div className='no-clients'>
           <p>You have no clients. Please invite one to get started  </p>
-          <div>
+          <Link to='/client-management'>
             <Button type="button" color='' className='drawer-addclient'>
               <div className='drawer-plus'>
                 <FaPlus />
               </div>
               <span> Add new Client</span>
             </Button>
-          </div>
+            </Link>
         </div>)}
       </div>
     </div>

@@ -60,7 +60,7 @@ const SocialChannelTopNav = ({ searchValue, onChange, selectedValue, OnSelectIte
                     id="exampleSelect"
                     value={selectedValue}
                     onChange={OnSelectItem}
-                    className='selectpost'
+                    // className='selectpost'
                   >
                     <option value="All">
                       All

@@ -29,6 +29,7 @@
         background-color: #FFFFFF;
         border-radius: 20px;
         padding: 15px;
+        height: 100%;
 
         .scheduleInputWrapper {
             position: relative;
@@ -39,6 +40,7 @@
                 border: none !important;
                 border-bottom: 1px solid #E5ECF2 !important;
                 padding: 5px 0px 5px 20px;
+                padding-bottom: 1rem;
                 width: 100%;
 
                 &:focus {
@@ -48,13 +50,14 @@
                 }
 
                 @include placeholder {
-                    font-size: 12px;
+                    font-size: 14px;
+                    font-weight: 400;
                 }
             }
 
             img {
                 position: absolute;
-                top: 8px;
+                top: 4px;
                 left: -50px;
             }
         }
@@ -177,11 +180,13 @@
 
                 p {
                     max-width: 184px;
+                    margin: auto;
                     font-weight: 400;
                     font-size: 12px;
                     line-height: 21px;
                     letter-spacing: 0.374px;
                     color: #000000;
+                    text-align: center;
                 }
 
                 .addclient {
@@ -237,11 +242,13 @@
     }
 
     .postWrapper {
+        height: 100%;
         .topnav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: 10px;
+           
 
             h6 {
                 font-weight: 600;
@@ -428,6 +435,7 @@
         align-items: center;
         position: relative;
         gap: 16px;
+        height: 28px;
         background: #E8F7FF;
         border-radius: 5px;
         padding: 3px 10px;
@@ -441,6 +449,8 @@
             align-items: center;
             justify-content: center;
         }
+
+       
 
         .selectpost {
             display: flex;
@@ -474,6 +484,10 @@
                     }
                 }
 
+                // select::-ms-expand {
+                //     display: none;
+                // }
+
             }
 
         }
@@ -500,6 +514,8 @@
     
     .postime {
         display: flex;
+        width: 310px;
+        height: 28px;
         align-items: center;
         position: relative;
         background: #E5ECF2;
@@ -507,6 +523,9 @@
         gap: 16px;
         padding: 0px 7px;
         cursor: pointer;
+        @media(max-width: 576px) {
+            width: 100%;
+        }
 
         .smallcalendar {
             width: 25px;
@@ -567,9 +586,13 @@
         .input {
             border: 1px solid #C0CCDA !important;
             border-radius: 5px !important;
-            width: 100%;
+            width: 145px;
             height: 100%;
             padding: 5px 30px;
+
+            @media(max-width: 576px) {
+                width: 100%;
+            }
 
             &:focus {
                 outline: none !important;

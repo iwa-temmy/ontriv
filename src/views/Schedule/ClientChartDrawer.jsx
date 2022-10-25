@@ -25,7 +25,7 @@ const ClientChartDrawer = ({ item, activeId, setActiveId, setShowClient}) => {
                     </div>
                     <div className='drawer-clientNameHolder'>
                         <h6>{truncateText(items?.client_business_name)}</h6>
-                        <p>Content Calendar</p>
+                        {/* <p>Content Calendar</p> */}
                     </div>
                     <div>
                         <img src={forwardChat} className='ms-auto' alt="" />

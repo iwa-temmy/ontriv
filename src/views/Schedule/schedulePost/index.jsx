@@ -22,6 +22,7 @@ const ScheduleSteps = (props) => {
   console.log(postScheduleLoading, postScheduleData,postScheduleError,'111')
 
   const [postType, setPostType] = useState()
+  const [postTime, setPostTime] = useState()
   const [igDate, setIgDate] = useState()
   const [igcaptions, setIgCaptions] = useState()
   const [fbDate, setfbDate] = useState()
@@ -81,8 +82,9 @@ const ScheduleSteps = (props) => {
     UpdateCurrentStep(currentStep + 1);
   }
 
-  function nextPostDetails(date) {
+  function nextPostDetails(date,time) {
     setPostDate(date);
+    setPostTime(time);
     UpdateCurrentStep(currentStep + 1);
   }
 
@@ -104,7 +106,7 @@ const ScheduleSteps = (props) => {
   }
   const labelArray = [
     {
-      name: "Set Post Details",
+      name: "Set Post Timing",
       content: <PostDetails next={nextPostDetails} />
     },
     {

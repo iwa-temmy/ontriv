@@ -62,7 +62,7 @@ const Schedule = ({ getAllClient, getAllClientDetails, getAllClientLoading,}) =>
                 Posts
               </h6>
 <div>
-<Button text={'Create Post'} className={"Button_Wrap"} btnstyle={{background:'#2062F4',fontSize:'14px',width:'180px'}} onButtonClick={newPost}/>
+<Button text={'Create Post'} className={"Button_Wrap"} btnstyle={{background:'#2062F4',fontSize:'14px',width:'180px',height:'45px'}} onButtonClick={newPost}/>
 </div>
             </div>
             <div className='socialChannelWrapper'>
