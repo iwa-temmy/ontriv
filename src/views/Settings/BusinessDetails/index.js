@@ -1,6 +1,11 @@
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { Row, Col, Card } from "reactstrap";
 import bluePlus from "../../../assets/img/blue-plus-bus-icon.svg";
+import facebook from "../../../assets/img/facebook.svg";
+import twitter from "../../../assets/img/twitter.svg";
+import instagram from "../../../assets/img/instagram.svg";
+import linkedin from "../../../assets/img/linkedin.svg";
+import blueArrow from "../../../assets/img/forward-blue-arrow.svg";
 import { ThreeDots } from "react-loader-spinner";
 
 //Notification
@@ -69,7 +74,7 @@ const BusinessDetails = ({
     };
     if (values.business_name !== "") {
       updateBusinessDetails(payload);
-    }else {
+    } else {
       createNotification("error", "Field cannot be Empty");
     }
   };
@@ -178,7 +183,7 @@ const BusinessDetails = ({
             </Card>
           </div>
         </Col>
-        <Col xl="6">
+        <Col xl="6" className="bg-white">
           <div>
             <Card className="upload-picture-container mb-4 w-100">
               <h1>Business Logo</h1>
@@ -218,6 +223,69 @@ const BusinessDetails = ({
                 </div>
               </div>
             </Card>
+          </div>
+          <div className="px-3 py-2">
+            <h1 className="my-4 business__accounts-title ">
+              Your Connected Accounts
+            </h1>
+            <Row className="business">
+              <Col md="6">
+                <div className="business__left-section__social-container d-flex px-3 py-3">
+                  <img src={instagram} alt="" />
+                  <h6 className="business__left-section__social-container__text ms-2 mt-2">
+                    Instagram
+                  </h6>
+                  <img
+                    src={blueArrow}
+                    style={{ width: "14px" }}
+                    className="ms-auto"
+                    alt=""
+                  />
+                </div>
+              </Col>
+              <Col md="6">
+                <div className="business__left-section__social-container d-flex px-3 py-3">
+                  <img src={facebook} alt="" />
+                  <h6 className="business__left-section__social-container__text ms-2 mt-2">
+                    Facebook
+                  </h6>
+                  <img
+                    src={blueArrow}
+                    style={{ width: "14px" }}
+                    className="ms-auto"
+                    alt=""
+                  />
+                </div>
+              </Col>
+              <Col md="6">
+                <div className="business__left-section__social-container d-flex px-3 py-3 mt-4">
+                  <img src={twitter} alt="" />
+                  <h6 className="business__left-section__social-container__text ms-2 mt-2">
+                    Twitter
+                  </h6>
+                  <img
+                    src={blueArrow}
+                    style={{ width: "14px" }}
+                    className="ms-auto"
+                    alt=""
+                  />
+                </div>
+              </Col>
+              <Col md="6">
+                <div className="business__left-section__social-container d-flex px-3 py-3 mt-4">
+                  <img src={linkedin} alt="" />
+                  <h6 className="business__left-section__social-container__text ms-2 mt-2">
+                    Linkedin
+                  </h6>
+                  <img
+                    src={blueArrow}
+                    style={{ width: "14px" }}
+                    className="ms-auto"
+                    alt=""
+                  />
+                </div>
+              </Col>
+            </Row>
           </div>
         </Col>
       </Row>
