@@ -109,12 +109,12 @@ const DataTablePagination = ({
     <>
       <div
         className={`text-${position}`}
-        style={{
-          marginTop: "-1.5rem",
-          marginLeft: "-0.8rem",
-          position: "absolute",
-          bottom: "0px",
-        }}
+        // style={{
+        //   marginTop: "-1.5rem",
+        //   marginLeft: "-0.8rem",
+        //   position: "absolute",
+        //   bottom: "0px",
+        // }}
       >
         {showPageJump && (
           <div className="float-left pt-2">

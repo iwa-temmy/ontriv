@@ -114,7 +114,7 @@ const Team = () => {
         divided
         shadow
         defaultPageSize={6}
-        pagePosition="center"
+        pagePosition="left"
       />
       <NewTeamMember addState={addState} setAddState={setAddState} />
     </div>
