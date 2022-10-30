@@ -6,11 +6,11 @@ import forwardChat from './../../assets/img/forward-chat.svg'
 import barChart from "../../assets/img/barchart.png"
 import ClientChart from './ClientChart'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
-const ListAllClient = ({businessOwner,businessLogo,getAllClientDetails,activeId,setActiveId,getScheduledpost}) => {
+const ListAllClient = ({businessOwner,businessLogo,getAllClientDetails,activeId,setActiveId,getScheduledpost,allClient,setAllClient,id,setId}) => {
 
   const [searchValue, setSearchValue] = useState('')
-  const [allClient, setAllClient] = useState(getAllClientDetails)
 
   const onChangeSearchValue = (e) => {
     let value = e.target.value
@@ -28,7 +28,7 @@ useEffect(() => {
           setAllClient(getAllClientDetails)
        }
    } 
-}, [searchValue,getAllClientDetails]);
+}, [searchValue,getAllClientDetails,setAllClient]);
 
   return (
     <div className='clientWrapper'>
@@ -36,7 +36,7 @@ useEffect(() => {
       <input
         id="searchClient"
         name="client"
-        placeholder="Find View"
+        placeholder="Find Client"
         type="text"
         value={searchValue}
         onChange={onChangeSearchValue}
@@ -54,7 +54,7 @@ useEffect(() => {
           </div>
           <div className='clientowner-NameHolder'>
             <h6>{businessOwner}</h6>
-            <p>Content Calendar</p>
+            {/* <p>Content Calendar</p> */}
           </div>
           <div>
             <img src={forwardChat} className='ms-auto' alt="" /></div>
@@ -66,16 +66,16 @@ useEffect(() => {
         <h6 className='chat-titles mb-4'>
           Clients
         </h6>
-        {getAllClientDetails.length > 0 ? (<ClientChart item={allClient} activeId={activeId} setActiveId={setActiveId} />) : (<div className='no-clients'>
+        {getAllClientDetails.length < 0 ? (<ClientChart item={allClient} activeId={activeId} setActiveId={setActiveId} id={id} setId={setId}/>) : (<div className='no-clients'>
           <p>You have no clients. Please invite one to get started  </p>
-          <div>
+          <Link to='/client-management'>
             <Button type="button" color='' className='addclient'>
               <div className='plus'>
                 <FaPlus />
               </div>
-              <span> Add new Client</span>
+              <span> Add New Client</span>
             </Button>
-          </div>
+          </Link>
         </div>)}
       </div>
     </div>

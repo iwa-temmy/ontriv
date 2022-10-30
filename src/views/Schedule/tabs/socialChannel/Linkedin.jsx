@@ -5,26 +5,49 @@ import { useSelector } from 'react-redux';
 import BarLoader from '../../../../components/Loaders/BarLoader';
 import Table from '../../../../components/Table';
 import { getDate, getTime } from '../../../../utils/func';
+import NoPostSchedule from '../../NoPostSchedule';
 import SocialChannelTopNav from '../SocialChannelTopNav'
+import { addDays } from 'date-fns'
+import format from 'date-fns/format'
 
 const LinkedinPost = () => {
 
-    const clientPost = useSelector((state) => state?.getClientPost);
+    const clientPost = useSelector((state) => state?.postSchedule);
 
     const [searchValue, setSearchValue] = useState("")
     const [selectedValue, setSelectedValue] = useState("All")
+    const [range, setRange] = useState([
+        {
+          startDate: new Date(),
+          endDate: addDays(new Date(), 7),
+          key: 'selection'
+        }
+      ])
     const [linkedinData, setLinkedinData] = useState(clientPost?.getOneClientPost?.user_linkedin_post)
 
     const onChangeSearchValue = (e) => {
         let value = e.target.value
-        console.log(value,"vall")
        setSearchValue(value)
-       console.log(searchValue)
     }
     
     const onSelectItem = (e) => {
      setSelectedValue(e.target.value)
     }
+
+    useEffect(()=>{
+        if(clientPost?.getOneClientPost?.user_linkedin_post){
+            const handleFilter = clientPost?.getOneClientPost?.user_linkedin_post.filter(
+                user => format(new Date(user.created_at),"dd/MM/yyyy") >= format(range[0].startDate, "dd/MM/yyyy")  && format(new Date(user.created_at),"dd/MM/yyyy") <= format(range[0].endDate, "dd/MM/yyyy")
+              )
+    
+              if(handleFilter.length <=0){
+                setLinkedinData(clientPost?.getOneClientPost?.user_linkedin_post)
+              } else{
+                setLinkedinData(handleFilter)
+              }
+        }
+
+    },[clientPost?.getOneClientPost?.user_linkedin_post, range])
 
     useEffect(()=>{
         if(selectedValue === "All"){
@@ -69,7 +92,7 @@ const LinkedinPost = () => {
             accessor: "post_details",
             Cell: (props) => <div className='row-post'>
                 <div className='post-image'>
-                    <img src={props?.value?.file} alt="" />
+                    <img src={props?.value?.media} alt="" />
                 </div>
                 <div className='post-title-name'>
                 <h2>{props?.value?.text}</h2>
@@ -123,8 +146,8 @@ const LinkedinPost = () => {
     <div className='overflow-auto'>
         {clientPost?.getOneClientPostLoading ? <BarLoader/> : (
         <>
-            <SocialChannelTopNav searchValue={searchValue} onChange={onChangeSearchValue} selectedValue={selectedValue} OnSelectItem={onSelectItem}/><br/>
-      {clientPost?.getOneClientPost?.user_linkedin_post?.length ? (
+            <SocialChannelTopNav searchValue={searchValue} onChange={onChangeSearchValue} selectedValue={selectedValue} OnSelectItem={onSelectItem} range={range} setRange={setRange}/><br/>
+      {clientPost?.getOneClientPost?.user_linkedin_post?.length > 0 ? (
             <Table
                 columns={cols}
                 data={linkedinData}
@@ -132,7 +155,7 @@ const LinkedinPost = () => {
                 defaultPageSize={4}
                 pagePosition="left"
             />
-        ) : null}
+        ) : <NoPostSchedule text={'There are no scheduled Linkedin posts '}/>}
         </>
         )}
     
