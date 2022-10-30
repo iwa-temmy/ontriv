@@ -29,10 +29,16 @@
       border-radius: 20px;
       border: solid 1px #D3DCE6;
       max-width: 320px;
+      min-height: 493px;
+      display: flex;
+      flex-direction: column;
       cursor: pointer;
       margin-bottom: 2.5rem;
       &__plan {
         border-radius: 20px;
+      }
+      div:last-of-type{
+        margin-top: auto !important;
       }
       &__active {
         border: solid 1px #7337FD;
@@ -56,12 +62,14 @@
         letter-spacing: 1.25px;
         border-style: none;
         color: #FFFFFF;
+        align-self: flex-end;
+        border-radius: 10px !important;
       }
       &__btn1{
-        background: linear-gradient(164.82deg, #2062F4 3.9%, #7337FD 100%);
+        background: linear-gradient(164.82deg, #6AD5ED 3.9%, #49A8F8 100%);
       }
       &__btn2 {
-        background: linear-gradient(180deg, #6AD5ED 0%, #49A8F8 100%);
+        background: linear-gradient(164.82deg, #2062F4 3.9%, #7337FD 100%);;
       }
       &__btn3 {
         background: linear-gradient(93.88deg, #49A8F8 6.88%, #0053F4 74.45%);
@@ -99,6 +107,9 @@
           line-height: 28px;
           letter-spacing: 0.35px;
           color: #032041;
+          &-active{
+            color: #00D67D;
+          }
         }
       }
       &__payment-button {
@@ -163,6 +174,10 @@
   }
 }
 
+//Save Credit Cards card for payment
+.payment-intiation-card{
+  background-color: #f8f8f8 !important;
+}
 
 .finances {
   &__top-cards {
