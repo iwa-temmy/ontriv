@@ -1,10 +1,5 @@
 import { useState } from "react";
-import {
-  Row,
-  Col,
-  Card,
-  // Button
-} from "reactstrap";
+import { Row, Col, Card } from "reactstrap";
 import "react-calendar/dist/Calendar.css";
 import { CenteredModal } from "../../components/Modal";
 import greenMark from "../../assets/img/green-icon.svg";
@@ -92,8 +87,24 @@ const Subscription = () => {
                     <div className="d-flex flex-column align-items-center my-4 subscription__header__text">
                       <h1>Affordable plans that grow with your business</h1>
                       <p>Get started with a 14-day free trial</p>
+                      <div className="form-check form-switch p-0">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          role="switch"
+                          id="flexSwitchCheckDefault"
+                          style={{ width: "3em", padding: "0.5rem" }}
+                        />
+                        <label
+                          className="form-check-label ms-2"
+                          for="flexSwitchCheckDefault"
+                          style={{ verticalAlign: "super" }}
+                        >
+                          <strong>Annual</strong> (Get 2 months Free)
+                        </label>
+                      </div>
                     </div>
-                    <Row className="px-4">
+                    <Row className="subscription__plans-container">
                       <Col
                         onClick={() => {
                           togglePlanState("basic");
@@ -109,30 +120,38 @@ const Subscription = () => {
                                 : ""
                             }`}
                           >
-                            <div className="d-flex justify-content-between align-items-center">
+                            <div
+                              className="d-flex justify-content-between align-items-center"
+                              style={{ maxHeight: "47px" }}
+                            >
                               <div>
-                                <h4 className="">Basic</h4>
-                                <span className="subscription__card__content__price-text">
-                                  Free
-                                </span>
+                                <h4 className="subscription__card__content__plan-type">
+                                  Basic
+                                </h4>
                               </div>
 
                               {planState === "basic" ? (
                                 <img
                                   src={greenMark}
-                                  style={{ height: "50px" }}
+                                  style={{ height: "60px" }}
                                   className="my-auto"
                                   alt=""
                                 />
                               ) : (
                                 <img
                                   src={greyMark}
-                                  style={{ height: "50px" }}
+                                  style={{ height: "*60px" }}
                                   className="my-auto"
                                   alt=""
                                 />
                               )}
                             </div>
+                            <p className="subscription__card__content__price-text">
+                              ${(pricing.plan[planState] * 12 * 0.8).toFixed(2)}
+                              <span className="subscription__card__content__price-text__duration">
+                                / Year
+                              </span>
+                            </p>
                             <h6 className="subscription__card__content__regular-text mt-4">
                               1 user
                             </h6>
@@ -154,9 +173,6 @@ const Subscription = () => {
                             <h6 className="subscription__card__content__regular-text mt-1">
                               100 Scheduled posts
                             </h6>
-                            <h6 className="subscription__card__content__price-text mt-4">
-                              Free
-                            </h6>
                           </div>
                         </div>
                       </Col>
@@ -175,10 +191,13 @@ const Subscription = () => {
                                 : ""
                             }`}
                           >
-                            <div className="d-flex" style={{ width: "100%" }}>
-                              <button className="subscription__card__content__btn subscription__card__content__btn2 px-5 me-auto py-2">
+                            <div
+                              className="d-flex justify-content-between align-items-center"
+                              style={{ width: "100%" }}
+                            >
+                              <h4 className="subscription__card__content__plan-type">
                                 Pro
-                              </button>
+                              </h4>
                               {planState === "pro" ? (
                                 <img
                                   src={greenMark}
@@ -240,10 +259,13 @@ const Subscription = () => {
                                 : ""
                             }`}
                           >
-                            <div className="d-flex" style={{ width: "100%" }}>
-                              <button className="subscription__card__content__btn subscription__card__content__btn3 px-5 me-auto py-2">
+                            <div
+                              className="d-flex justify-content-between align-items-center"
+                              style={{ width: "100%" }}
+                            >
+                              <h4 className="subscription__card__content__plan-type">
                                 Team
-                              </button>
+                              </h4>
                               {planState === "team" ? (
                                 <img
                                   src={greenMark}
