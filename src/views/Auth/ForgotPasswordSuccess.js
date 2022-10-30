@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Container,
-  // Row,
-  Card,
-  // Input,
-  Form,
-  // Col,
-  Button,
-} from "reactstrap";
+import { Container } from "reactstrap";
 import logo from "../../assets/img/logo.png";
 
 const ForgotPasswordSuccess = () => {
@@ -49,7 +41,7 @@ const ForgotPasswordSuccess = () => {
                     fontSize: "14px",
                     color: "#0B6BFF",
                     opacity: "0.8",
-                    fontWeight: 500
+                    fontWeight: 500,
                   }}
                 >
                   contact support

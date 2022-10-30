@@ -10,7 +10,7 @@ const SideMenuContent = (props) => {
   const menuItems = sideBarMenu.map((item, i) => {
     let renderItem = (
       <li
-        className={classnames("nav-item", {
+        className={classnames("nav-item my-3", {
           activeNav: props.hoverIndex === item?.navLink,
         })}
         key={item.id}

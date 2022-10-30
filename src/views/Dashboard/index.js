@@ -11,7 +11,6 @@ import OverviewCards from "./DashboardCards/OverviewCards";
 import FinancialCard from "./DashboardCards/FinancialCard";
 import ClientCard from "./DashboardCards/ClientCard";
 import PostsCard from "./DashboardCards/PostsCard";
-import SetUpBussiness from "../Bussiness";
 
 //redux
 import { connect } from "react-redux";
@@ -19,8 +18,6 @@ import { connect } from "react-redux";
 const Dashboard = (props) => {
   const [eventState, updateEventState] = useState(false);
   const [postState, updatePostState] = useState(false);
-
-  const { first_time_login } = props;
 
   const navigate = useNavigate();
 
@@ -42,27 +39,23 @@ const Dashboard = (props) => {
 
   return (
     <div className="dashboard dashboard-wrapper">
-      {first_time_login ? (
-        <SetUpBussiness />
-      ) : (
-        <Row>
-          <Col md="12" sm="12" lg="12" xxl="8" className=" mb-3">
-            <div>
-              <OverviewCards />
+      <Row>
+        <Col md="12" sm="12" lg="12" xxl="8" className=" mb-3">
+          <div>
+            <OverviewCards />
 
-              <Row className="gx-3">
-                <FinancialCard handleAddInvoice={handleAddInvoice} />
+            <Row className="gx-3">
+              <FinancialCard handleAddInvoice={handleAddInvoice} />
 
-                <ClientCard handleAddClient={handleAddClient} />
-              </Row>
-            </div>
-          </Col>
-          <PostsCard
-            toggleEventState={toggleEventState}
-            togglePostState={togglePostState}
-          />
-        </Row>
-      )}
+              <ClientCard handleAddClient={handleAddClient} />
+            </Row>
+          </div>
+        </Col>
+        <PostsCard
+          toggleEventState={toggleEventState}
+          togglePostState={togglePostState}
+        />
+      </Row>
       <CenteredModal
         position="centered"
         modalState={postState}
@@ -217,7 +210,7 @@ const Dashboard = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    first_time_login: state?.general?.userDetails?.first_login,
+    ...state,
   };
 };
 

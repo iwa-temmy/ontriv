@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  Container,
-  // Row,
-  Card,
-  // Input,
-  Form,
-  // Col,
-  Button,
-} from "reactstrap";
+import { Container, Card, Form, Button } from "reactstrap";
 import { TiEye } from "react-icons/ti";
 import { IoMdEyeOff } from "react-icons/io";
 import logo from "../../assets/img/logo.png";
@@ -44,11 +36,7 @@ const ChangePassword = ({ loading, forgotPassword }) => {
         <Container>
           <div className="mx-auto reset-password-wrapper">
             <div className="text-center reset-password-text">
-              <h3
-                className="mb-0"
-              >
-                Change Password
-              </h3>
+              <h3 className="mb-0">Change Password</h3>
               <div className="mt-4 mb-5">
                 <p
                   className="mb-0"

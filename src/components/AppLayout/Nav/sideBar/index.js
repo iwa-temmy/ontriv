@@ -3,7 +3,6 @@ import classnames from "classnames";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import SidebarHeader from "./SideBarHeader";
 import SideBar from "./SideBar";
-import DownSideBar from "./DownSideBar";
 import { sideBarMenu, bottomSideBarMenu } from "../../../../utils/sidebarMenu";
 import { useLocation } from "react-router-dom";
 // import { useNav } from '../../../../utils/context';
@@ -46,20 +45,27 @@ const SideNav = ({
 
   useEffect(() => {
     if (location?.pathname && menuSection) {
-      console.log("menuSection", menuSection)
-      console.log(menuSection === "sideBarMenu");
       const currentLocationObj =
         menuSection === "sideBarMenu"
           ? sideBarMenu?.find((item) => item?.navLink === location?.pathname)
           : bottomSideBarMenu?.find(
               (item) => item?.navLink === location?.pathname
             );
-      console.log(currentLocationObj);
       setCurrentSection(currentLocationObj?.id);
       setHoveredMenuItem(location?.pathname);
     }
   }, [location?.pathname, setCurrentSection, menuSection]);
 
+  useEffect(() => {
+    console.log(sideBarMenu?.includes(location?.pathname));
+    if (location?.pathname) {
+      if (sideBarMenu?.some((menu) => menu?.navLink === location?.pathname)) {
+        setMenuSection("sideBarMenu");
+      } else {
+        setMenuSection("bottomSideBarMenu");
+      }
+    }
+  }, [location?.pathname]);
   return (
     <React.Fragment>
       <div
@@ -89,13 +95,6 @@ const SideNav = ({
         >
           <ul className="navigation navigation-main mt-3 ">
             <SideBar
-              hoverIndex={hoveredMenuItem}
-              activeItem={activeItem}
-              handleSidebarMouseEnter={handleSidebarMouseEnter}
-            />
-          </ul>
-          <ul className="navigation navigation-main mt-3 mb-4 fixed-bottom">
-            <DownSideBar
               hoverIndex={hoveredMenuItem}
               activeItem={activeItem}
               handleSidebarMouseEnter={handleSidebarMouseEnter}

@@ -2,8 +2,9 @@ import React from "react";
 import { BsFillGridFill, BsCalendar2MinusFill } from "react-icons/bs";
 import { IoSettingsSharp } from "react-icons/io5";
 import { FaAward, FaUserFriends } from "react-icons/fa";
-import { AiFillFileText } from "react-icons/ai";
-import { RiPieChartFill, RiBookFill } from "react-icons/ri";
+// import { AiFillFileText } from "react-icons/ai";
+import { RiPieChartFill } from "react-icons/ri";
+import { HiCalendar } from "react-icons/hi";
 
 export const sideBarMenu = [
   {
@@ -24,7 +25,7 @@ export const sideBarMenu = [
 
   {
     id: "Post Scheduling",
-    title: "Post Scheduling",
+    title: "Schedule Posts",
     type: "item",
     icon: <BsCalendar2MinusFill size={17} />,
     navLink: "/Schedule",
@@ -32,58 +33,48 @@ export const sideBarMenu = [
 
   {
     id: "Invoices & Financials",
-    title: "Finances",
+    title: "Finance",
     icon: <RiPieChartFill size={20} />,
     type: "item",
     navLink: "/invoices-&-financials",
   },
 
-  {
-    id: "Reports",
-    title: "Reports",
-    type: "item",
-    icon: <AiFillFileText size={20} />,
-    navLink: "/report",
-  },
+  // {
+  //   id: "Reports",
+  //   title: "Reports",
+  //   type: "item",
+  //   icon: <AiFillFileText size={20} />,
+  //   navLink: "/report",
+  // },
 
+  // {
+  //   id: "Messages",
+  //   title: "Messages",
+  //   type: "item",
+  //   icon: <RiBookFill size={20} />,
+  //   navLink: "/Chat",
+  // },
   {
-    id: "Messages",
-    title: "Messages",
+    id: "Post Ideas",
+    title: "Post Ideas",
     type: "item",
-    icon: <RiBookFill size={20} />,
+    icon: <HiCalendar size={20} />,
     navLink: "/Chat",
   },
-
   {
-    id: "Rewards",
+    id: "Settings",
+    title: "Settings",
     type: "item",
-    title: "Rewards",
+    navLink: "/Settings",
+    icon: <IoSettingsSharp size={20} />,
+  },
+  {
+    id: "Subscription",
+    type: "item",
+    title: "Subscription",
     icon: <FaAward size={18} />,
     navLink: "/Subscriptions",
   },
-
-  // {
-  //   id: "Schedule Post",
-  //   title: "Schedule Post",
-  //   type: "item",
-  //   navLink:'/Schedule',
-  //   icon: <IoSettingsSharp size={20} />,
-  // },
-  // {
-  //   id: "Settings",
-  //   title: "Settings",
-  //   type: "item",
-  //   navLink:'/Settings',
-  //   icon: <IoSettingsSharp size={20} />,
-  // },
-
-  // {
-  //   id: "Subscriptions",
-  //   type: "item",
-  //   title: "Subscriptions",
-  //   icon: <FaAward size={20} />,
-  //   navLink:'/Subscriptions'
-  // },
 ];
 
 export const bottomSideBarMenu = [
