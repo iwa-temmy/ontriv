@@ -1,40 +1,55 @@
 .subscription {
-  &__step {
-    &__number {
-      background: linear-gradient(180deg, #6AD5ED 0%, #49A8F8 100%);
-      border: 3px solid #FFFFFF;
-      border-radius: 100%;
-      height: 29px;
-      width: 29px;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 13px;
-      line-height: 24px;
-      align-items: center;
-      color: #FFFFFF;
-    }
+  padding: 0 2rem;
+  &__header {
     &__text {
       font-style: normal;
-      font-weight: 600;
-      font-size: 20px;
       line-height: 28px;
       letter-spacing: 0.35px;
       color: #111317;
       margin-left: 10px;
+      h1{
+        font-size: 26px;
+        font-weight: 600;
+      }
+      p{
+        font-size: 1rem;
+        font-weight: 500;
+      }
+    }
+  }
+  &__plans-container{
+    padding:0 1.5rem;
+    @media (max-width: 745px)  {
+      padding: 0
     }
   }
   &__card {
     &__content {
       background: #FFFFFF;
-      border-radius: 10px;
+      border-radius: 20px;
       border: solid 1px #D3DCE6;
+      max-width: 320px;
+      min-height: 493px;
+      display: flex;
+      flex-direction: column;
       cursor: pointer;
+      margin-bottom: 2.5rem;
       &__plan {
         border-radius: 20px;
+      }
+      div:last-of-type{
+        margin-top: auto !important;
       }
       &__active {
         border: solid 1px #7337FD;
         box-shadow: 0 4px 44px rgba(0, 0, 0, 0.16);
+      }
+      &__plan-type{
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 28px;
+        letter-spacing: 0.35px;
+        color: #032041;
       }
       &__btn {
         border-radius: 10px;
@@ -47,12 +62,14 @@
         letter-spacing: 1.25px;
         border-style: none;
         color: #FFFFFF;
+        align-self: flex-end;
+        border-radius: 10px !important;
       }
       &__btn1{
-        background: linear-gradient(164.82deg, #2062F4 3.9%, #7337FD 100%);
+        background: linear-gradient(164.82deg, #6AD5ED 3.9%, #49A8F8 100%);
       }
       &__btn2 {
-        background: linear-gradient(180deg, #6AD5ED 0%, #49A8F8 100%);
+        background: linear-gradient(164.82deg, #2062F4 3.9%, #7337FD 100%);;
       }
       &__btn3 {
         background: linear-gradient(93.88deg, #49A8F8 6.88%, #0053F4 74.45%);
@@ -68,11 +85,12 @@
       }
       &__price-text {
         font-style: normal;
-        font-weight: bold;
-        font-size: 24px;
-        line-height: 36px;
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 48px;
         letter-spacing: 0.36px;
-        color: #17151E;
+        color: #032041;
+        margin-top: -14px;
         &__subscript {
           font-style: normal;
           font-weight: 600;
@@ -84,8 +102,14 @@
           color: #00D67D;
         }
         &__duration {
-          font-weight: 300;
-          font-size: 20px;
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 28px;
+          letter-spacing: 0.35px;
+          color: #032041;
+          &-active{
+            color: #00D67D;
+          }
         }
       }
       &__payment-button {
@@ -150,6 +174,10 @@
   }
 }
 
+//Save Credit Cards card for payment
+.payment-intiation-card{
+  background-color: #f8f8f8 !important;
+}
 
 .finances {
   &__top-cards {
@@ -353,7 +381,6 @@ text-fill-color: transparent;
 //   }
 .create-button {
   background: #2062f4 !important;
-  margin: auto;
   border-radius: 10px;
   padding: 10px 15px;
   // width: 213px;
@@ -919,9 +946,9 @@ label {
   border-radius: 24px;
   color: rgba(4, 0, 77, 1) !important;
 }
-.active{
-  background-color: #F9FAFC;
-}
+// .active{
+//   background-color: #F9FAFC;
+// }
 .user_img{
   width: 55px;
   height: 60px;

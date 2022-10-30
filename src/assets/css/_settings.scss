@@ -131,11 +131,9 @@
   }
   .account-setup-card {
     padding: 51px 37px 110px 37px;
-    background: #f9f9f9;
-    border: 1px solid #c0ccdad8;
+    background: #E0E0E040 !important;
+    border: none;
     border-radius: 20px;
-    // background: #E0E0E0;
-    // opacity: 0.2;
     button {
       margin-top: 20px;
       border-radius: 10px;
@@ -212,7 +210,7 @@
         margin-top: 40px;
       }
       .subscription-details-card {
-        background: #f9fafc;
+        background: #f9fafc !important;
         border-radius: 20px;
         padding: 54px 27px;
         border: none;
@@ -229,7 +227,10 @@
           h1 {
             font-size: 71px;
           }
-
+          .subcription-plan-name{
+            font-size: 20px;
+            font-weight: 700;
+          }
           .subscription-price {
             font-size: 130px;
             color: #2062f4;
@@ -237,16 +238,34 @@
           }
         }
         button {
+          border-radius: 10px;
+          border: none;
+          padding: 10px;
+          margin: auto;
+          width: 50% !important;
+          margin-top: 17px;
+          cursor: pointer;
+          background: #fff;
+          color: #414146 !important;
+          &:focus {
+            box-shadow: none;
+
+          }
+        }
+        a{
           background: #2062f4;
           border-radius: 10px;
           border: none;
           padding: 10px;
           margin: auto;
-          width: 70%;
-          margin-top: 43px;
-          &:focus {
-            box-shadow: none;
-          }
+          width: 80 !important;
+          margin-top: 17px;
+          text-decoration: none;
+          text-align: center;
+          cursor: pointer;
+        }
+        a:hover{
+          color: #fff,
         }
       }
     }

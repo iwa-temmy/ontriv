@@ -110,7 +110,7 @@ const ClientListView = ({ setCurrentSection, clients, deleteClient }) => {
         data={clients}
         divided
         defaultPageSize={6}
-        pagePosition='center'
+        pagePosition='left'
       />
       <Modal modalState={showDelete} setModalState={toggleShowDelete}>
         <div className='delete-client-wrapper text-center '>

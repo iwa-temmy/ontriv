@@ -5,6 +5,11 @@ import { HiChevronRight } from "react-icons/hi";
 
 const ClientCard = (props) => {
   const { handleAddClient } = props;
+  // const clients = [
+  //   {
+  //       id: 
+  //   }
+  // ]
   return (
     <Col lg="12" md="5" xl="5" className="mb-3 col-cstm-xl-4">
       <Card className="client-card">

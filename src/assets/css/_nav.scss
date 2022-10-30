@@ -36,7 +36,7 @@
   display: table-cell;
   height: 100%;
   overflow: hidden;
-  width: 211px;
+  max-width: 212px;
   background-color: #fff;
   border-radius: 0 30px 30px 0 !important;
 
@@ -102,7 +102,7 @@
   }
 
   &:hover {
-    padding-left: 0.8em;
+    padding-left: 0.3em;
   }
 }
 

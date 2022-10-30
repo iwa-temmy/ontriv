@@ -12,7 +12,10 @@ import FinancialCard from "./DashboardCards/FinancialCard";
 import ClientCard from "./DashboardCards/ClientCard";
 import PostsCard from "./DashboardCards/PostsCard";
 
-const Dashboard = () => {
+//redux
+import { connect } from "react-redux";
+
+const Dashboard = (props) => {
   const [eventState, updateEventState] = useState(false);
   const [postState, updatePostState] = useState(false);
 
@@ -53,7 +56,6 @@ const Dashboard = () => {
           togglePostState={togglePostState}
         />
       </Row>
-
       <CenteredModal
         position="centered"
         modalState={postState}
@@ -206,4 +208,10 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
+
+export default connect(mapStateToProps, {})(Dashboard);
