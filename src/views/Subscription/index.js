@@ -31,7 +31,7 @@ const Subscription = () => {
     e.stopPropagation();
     setView("payment");
     const activePlanDetails = plans.find((plan) => {
-      let planObj = plan === planState;
+      let planObj = plan.name === planState;
       return planObj; 
     });
     setPlanDetails(activePlanDetails);
