@@ -11,7 +11,6 @@ import { plans } from "../../utils/Plans";
 import PaymentScreen from "./PaymentScreen";
 
 const Subscription = () => {
-  const [postState, updatePostState] = useState(false);
   const [planState, updatePlanState] = useState("Basic");
   const [planDetails, setPlanDetails] = useState({});
   const [durationState, updateDurationState] = useState(false);
@@ -45,7 +44,7 @@ const Subscription = () => {
             <Row>
               <Col md="16">
                 <div className="dashboard-analytics">
-                  <Card className="analytics-card px-5 pt-3 pb-5">
+                  <Card className="analytics-card pt-3 pb-5">
                     {view === "plans" ? <div>
                       <div className="d-flex flex-column align-items-center my-4 subscription__header__text">
                         <h1>Affordable plans that grow with your business</h1>

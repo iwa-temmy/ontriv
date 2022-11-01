@@ -577,3 +577,32 @@ table {
     color: #fff;
   }
 }
+
+.accordion-button{
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  line-height: 28px !important;
+  padding-left: 0 !important;
+  color: #17151E !important;
+  &:focus{
+    box-shadow: none !important;
+  }
+  &:not(.collapsed){
+    background-color: unset !important;
+  }
+  &::after{
+    background-image: url("../img/plus.svg") !important;
+    background-size: unset !important;
+  }
+  &:not(.collapsed)::after{
+    background-image: url("../img/minus.svg") !important;
+    height: 5px !important;
+    -webkit-transform:unset !important;
+    transform:unset !important;
+  }
+  
+}
+
+.accordion-body{
+  padding-left: 0rem !important
+}

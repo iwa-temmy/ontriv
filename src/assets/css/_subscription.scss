@@ -175,8 +175,59 @@
 }
 
 //Save Credit Cards card for payment
+.faq-section{
+  width: 85% !important;
+  .main-header{
+    text-transform: uppercase;
+    color:  #0B6BFF;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 28px;
+  }
+  .subheader{
+    font-weight: 600;
+    font-size: 1.75rem;
+    line-height: 28px;
+    color: #17151E;
+    line-height: 28px;
+    letter-spacing: 0.35px;
+    margin-bottom: 2.5rem;
+  }
+  @media (max-width: 425px) {
+    width: 100% !important;
+  }
+}
 .payment-intiation-card{
+  width: 90% !important;
   background-color: #f8f8f8 !important;
+  border-radius: 20px;
+  border: 1px solid #C0CCDA;
+  .header{
+    border-bottom : 1px solid #E5ECF2;
+    h1{
+      font-size: 1.1rem;
+      line-height: 28px;
+      align-items: center;
+      letter-spacing: 0.35px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #032041;
+    }
+  }
+ 
+  button {
+    background: linear-gradient(93.88deg, #49A8F8 6.88%, #0053F4 74.45%);
+    border-radius: 16px;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    width: 100%;
+  }
+  @media (max-width: 425px) {
+    width: 100% !important;
+    margin-top: 2rem;
+  }
 }
 
 .finances {
