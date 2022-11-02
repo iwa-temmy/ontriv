@@ -65,7 +65,7 @@ const Subscription = () => {
                               for="flexSwitchCheckDefault"
                               style={{
                                 verticalAlign: "super",
-                                fontSize: "22px",
+                                fontSize: "20px",
                                 lineHeight: "33px",
                                 color: "#032041",
                               }}
