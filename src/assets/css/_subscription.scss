@@ -44,12 +44,21 @@
         border: solid 1px #7337FD;
         box-shadow: 0 4px 44px rgba(0, 0, 0, 0.16);
       }
+      &__description{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 28px;
+        letter-spacing: 0.35px;
+        color: #17151E;
+      }
       &__plan-type{
         font-size: 20px;
         font-weight: 600;
         line-height: 28px;
         letter-spacing: 0.35px;
         color: #032041;
+        
       }
       &__btn {
         border-radius: 10px;
