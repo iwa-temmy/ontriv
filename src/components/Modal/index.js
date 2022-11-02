@@ -3,7 +3,7 @@ import { Modal } from 'reactstrap';
 import { TiTimes } from 'react-icons/ti'
 
 
-export const CenteredModal = ({ className, modalState, setModalState, size, children }) => {
+export const CenteredModal = ({ className, modalState, setModalState, size, children, title }) => {
     // const [modalState, setModalState] = useState(true);
     const toggle = () => {
         setModalState(!modalState);
@@ -21,6 +21,7 @@ export const CenteredModal = ({ className, modalState, setModalState, size, chil
                 <div className='modal-cstm-button text-center' onClick={toggle}>
                     <TiTimes size='25px' />
                 </div>
+                <h1>{title}</h1>
                 {children}
             </Modal>
         </div>
