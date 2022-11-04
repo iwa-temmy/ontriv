@@ -77,7 +77,7 @@ outline: 1px solid slategrey !important;
 }
 .modal-content {
   border-radius: 40px !important;
-  padding: 32px 49px;
+  // padding: 32px 49px;
   border: none !important;
 }
 .modal-cstm-button {
@@ -588,7 +588,7 @@ table {
     box-shadow: none !important;
   }
   &:not(.collapsed){
-    background-color: unset !important;
+   padding-left: 0.8px !important;
   }
   &::after{
     background-image: url("../img/plus.svg") !important;
