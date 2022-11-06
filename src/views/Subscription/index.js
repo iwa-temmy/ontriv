@@ -11,7 +11,6 @@ import { plans } from "../../utils/Plans";
 import PaymentScreen from "./PaymentScreen";
 
 const Subscription = () => {
-  const [postState, updatePostState] = useState(false);
   const [planState, updatePlanState] = useState("Basic");
   const [planDetails, setPlanDetails] = useState({});
   const [durationState, updateDurationState] = useState(false);
@@ -32,132 +31,144 @@ const Subscription = () => {
     e.stopPropagation();
     setView("payment");
     const activePlanDetails = plans.find((plan) => {
-      let planObj = plan === planState;
-      return planObj; 
+      let planObj = plan.name === planState;
+      return planObj;
     });
     setPlanDetails(activePlanDetails);
   };
   return (
     <div className="dashboard dashboard-wrapper">
       <Row>
-        <Col md="16" sm="16" lg="16" xxl="16" className="mb-3">
+        <Col md="12" sm="12" lg="12" xxl="12" className="mb-3">
           <div>
             <Row>
-              <Col md="16">
+              <Col md="12">
                 <div className="dashboard-analytics">
-                  <Card className="analytics-card px-5 pt-3 pb-5">
-                    {view === "plans" ? <div>
-                      <div className="d-flex flex-column align-items-center my-4 subscription__header__text">
-                        <h1>Affordable plans that grow with your business</h1>
-                        <p>Get started with a 14-day free trial</p>
-                        <div className="form-check form-switch p-0">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            role="switch"
-                            value={durationState}
-                            id="flexSwitchCheckDefault"
-                            style={{ width: "3em", padding: "0.5rem" }}
-                            onChange={toggleDurationState}
-                          />
-                          <label
-                            className="form-check-label ms-2"
-                            for="flexSwitchCheckDefault"
-                            style={{ verticalAlign: "super" }}
-                          >
-                            <strong>Annual</strong> (Get 2 months Free)
-                          </label>
-                        </div>
-                      </div>
-                      <Row className="subscription__plans-container">
-                        {plans?.map((plan) => {
-                          return (
-                            <Col
-                              onClick={() => {
-                                togglePlanState(plan.name);
+                  <Card className="analytics-card pt-3 pb-5">
+                    {view === "plans" ? (
+                      <div>
+                        <div className="d-flex flex-column align-items-center my-4 subscription__header__text">
+                          <h1>Affordable plans that grow with your business</h1>
+                          <p>Get started with a 14-day free trial</p>
+                          <div className="form-check form-switch p-0 mt-5">
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              role="switch"
+                              value={durationState}
+                              id="flexSwitchCheckDefault"
+                              style={{ width: "3em", padding: "0.5rem" }}
+                              onChange={toggleDurationState}
+                            />
+                            <label
+                              className="form-check-label ms-2"
+                              for="flexSwitchCheckDefault"
+                              style={{
+                                verticalAlign: "super",
+                                fontSize: "20px",
+                                lineHeight: "33px",
+                                color: "#032041",
                               }}
-                              md="4"
-                              className="sub"
-                              key={plan.id}
                             >
-                              <div className="subscription__card__border">
-                                <div
-                                  className={`subscription__card__content px-4 py-4 ${
-                                    planState === plan.name
-                                      ? "subscription__card__content__active"
-                                      : ""
-                                  }`}
-                                >
+                              <strong>Annual</strong> (Get 2 months Free)
+                            </label>
+                          </div>
+                        </div>
+                        <Row className="subscription__plans-container">
+                          {plans?.map((plan) => {
+                            return (
+                              <Col
+                                onClick={() => {
+                                  togglePlanState(plan.name);
+                                }}
+                                md="6"
+                                sm="12"
+                                lg="6"
+                                xl="4"
+                                className="sub"
+                                key={plan.id}
+                              >
+                                <div className="subscription__card__border">
                                   <div
-                                    className="d-flex justify-content-between align-items-center"
-                                    style={{ maxHeight: "47px" }}
+                                    className={`subscription__card__content px-4 py-4 ${
+                                      planState === plan.name
+                                        ? "subscription__card__content__active"
+                                        : ""
+                                    }`}
                                   >
-                                    <div>
-                                      <h4 className="subscription__card__content__plan-type">
-                                        {plan.name}
-                                      </h4>
-                                    </div>
+                                    <div
+                                      className="d-flex justify-content-between align-items-center"
+                                      style={{ maxHeight: "47px" }}
+                                    >
+                                      <div>
+                                        <h4 className="subscription__card__content__plan-type">
+                                          {plan.name}
+                                        </h4>
+                                      </div>
 
-                                    {planState === plan.name ? (
-                                      <img
-                                        src={greenMark}
-                                        style={{ height: "60px" }}
-                                        className="my-auto"
-                                        alt=""
-                                      />
-                                    ) : (
-                                      <img
-                                        src={greyMark}
-                                        style={{ height: "*60px" }}
-                                        className="my-auto"
-                                        alt=""
-                                      />
-                                    )}
-                                  </div>
-                                  <p className="subscription__card__content__price-text">
-                                    $
-                                    {durationState
-                                      ? plan.price * 10
-                                      : plan.price}
-                                    <span
-                                      className={`subscription__card__content__price-text__duration ${
-                                        planState === plan.name
-                                          ? "subscription__card__content__price-text__duration-active"
-                                          : ""
-                                      }`}
-                                    >
-                                      / {durationState ? "Year" : "Month"}
-                                    </span>
-                                  </p>
-                                  <div className="mt-3">
-                                    {plan.features?.map((feature) => {
-                                      return (
-                                        <h6
-                                          className="subscription__card__content__regular-text mt-1"
-                                          key={feature}
-                                        >
-                                          {feature}
-                                        </h6>
-                                      );
-                                    })}
-                                  </div>
-                                  <div className="mt-5 mb-4 d-flex justify-content-center">
-                                    <Button
-                                      className={`subscription__card__content__btn subscription__card__content__btn${plan.id}`}
-                                      onClick={handleStartTrial}
-                                      disabled={planState !== plan.name}
-                                    >
-                                      Start Free Trial
-                                    </Button>
+                                      {planState === plan.name ? (
+                                        <img
+                                          src={greenMark}
+                                          style={{ height: "60px" }}
+                                          className="my-auto"
+                                          alt=""
+                                        />
+                                      ) : (
+                                        <img
+                                          src={greyMark}
+                                          style={{ height: "*60px" }}
+                                          className="my-auto"
+                                          alt=""
+                                        />
+                                      )}
+                                    </div>
+                                    <p className="subscription__card__content__price-text">
+                                      $
+                                      {durationState
+                                        ? plan.price * 10
+                                        : plan.price}
+                                      <span
+                                        className={`subscription__card__content__price-text__duration ${
+                                          planState === plan.name
+                                            ? "subscription__card__content__price-text__duration-active"
+                                            : ""
+                                        }`}
+                                      >
+                                        / {durationState ? "Year" : "Month"}
+                                      </span>
+                                    </p>
+                                    <p className="subscription__card__content__description">{plan.description}</p>
+                                    <div className="mt-2">
+                                      {plan.features?.map((feature) => {
+                                        return (
+                                          <h6
+                                            className="subscription__card__content__regular-text mt-1"
+                                            key={feature}
+                                          >
+                                            {feature}
+                                          </h6>
+                                        );
+                                      })}
+                                    </div>
+                                    <div className="mt-5 mb-4 d-flex justify-content-center">
+                                      <Button
+                                        className={`subscription__card__content__btn subscription__card__content__btn${plan.id}`}
+                                        onClick={handleStartTrial}
+                                        disabled={planState !== plan.name}
+                                      >
+                                        Start Free Trial
+                                      </Button>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </Col>
-                          );
-                        })}
-                      </Row>
-                    </div> : <PaymentScreen planDetails={planDetails}/> }
-                    
+                              </Col>
+                            );
+                          })}
+                        </Row>
+                      </div>
+                    ) : (
+                      <PaymentScreen planDetails={planDetails} />
+                    )}
                   </Card>
                 </div>
               </Col>

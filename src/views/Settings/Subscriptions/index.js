@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "../../../components/Table";
 import { Card, Col, Row } from "reactstrap";
 import { GoPrimitiveDot } from "react-icons/go";
 import { Link } from "react-router-dom";
+import CancelPlanModal from "./Components/CancelPlanModal";
 
 const Billing = () => {
+  const [ModalOpen, setModalOpen] = useState(false);
   const clients = [
     {
       id: 1,
@@ -149,6 +151,11 @@ const Billing = () => {
     ],
     []
   );
+
+  const toggleCancelSubscriptionModal = () => {
+    setModalOpen(!ModalOpen);
+  };
+
   return (
     <div className="subscription-section">
       <Row>
@@ -169,7 +176,12 @@ const Billing = () => {
               <Link to="/Subscriptions" className="w-50 delete-btn">
                 Change Plan
               </Link>
-              <button className="w-50 delete-btn">Cancel Plan</button>
+              <button
+                className="w-50 delete-btn"
+                onClick={toggleCancelSubscriptionModal}
+              >
+                Cancel Plan
+              </button>
             </Card>
           </div>
         </Col>
@@ -188,6 +200,11 @@ const Billing = () => {
           </div>
         </Col>
       </Row>
+      <CancelPlanModal
+        open={ModalOpen}
+        setModalState={setModalOpen}
+        toggleCancelSubscriptionModal={toggleCancelSubscriptionModal}
+      />
     </div>
   );
 };

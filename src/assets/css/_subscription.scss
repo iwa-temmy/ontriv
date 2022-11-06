@@ -8,7 +8,7 @@
       color: #111317;
       margin-left: 10px;
       h1{
-        font-size: 26px;
+        font-size: 28px;
         font-weight: 600;
       }
       p{
@@ -44,35 +44,42 @@
         border: solid 1px #7337FD;
         box-shadow: 0 4px 44px rgba(0, 0, 0, 0.16);
       }
+      &__description{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 28px;
+        letter-spacing: 0.35px;
+        color: #17151E;
+      }
       &__plan-type{
         font-size: 20px;
         font-weight: 600;
         line-height: 28px;
         letter-spacing: 0.35px;
         color: #032041;
+        
       }
       &__btn {
         border-radius: 10px;
         font-style: normal;
-        font-weight: bold;
+        font-weight: 500;
         font-size: 14px;
         line-height: 21px;
         align-items: center;
         text-align: center;
         letter-spacing: 1.25px;
-        border-style: none;
-        color: #FFFFFF;
         align-self: flex-end;
         border-radius: 10px !important;
       }
-      &__btn1{
-        background: linear-gradient(164.82deg, #6AD5ED 3.9%, #49A8F8 100%);
-      }
       &__btn2 {
-        background: linear-gradient(164.82deg, #2062F4 3.9%, #7337FD 100%);;
+        background: linear-gradient(164.82deg, #2062F4 3.9%, #7337FD 100%);
+        color: #FFFFFF;
       }
-      &__btn3 {
-        background: linear-gradient(93.88deg, #49A8F8 6.88%, #0053F4 74.45%);
+      &__btn3, &__btn1 {
+        background: linear-gradient(164.82deg, #F9FAFC 3.9%, #F9FAFC 100%);
+        color: #032041 !important;
+        border: 1px solid #D3DCE6 !important;
       }
       &__regular-text {
         font-weight: normal;
@@ -173,10 +180,90 @@
     }
   }
 }
+.cancel-subcription-modal{
+  h3{
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 54px;
+  }
+  p{
+    font-size: 0.78rem;
+    font-weight: 400;
+  }
+  .button{    
+    letter-spacing: 1.25px !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    line-height: 21px !important;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    &__action-button1{
+      color: #F7F7FC !important;
+      background-color: #2062F4 !important;
+    }
+    &__action-button2{
+      color: #2062F4 !important;
+      background-color: #fff !important;
+    }
+  }
+ 
+}
 
 //Save Credit Cards card for payment
+.faq-section{
+  width: 85% !important;
+  .main-header{
+    text-transform: uppercase;
+    color:  #0B6BFF;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 28px;
+  }
+  .subheader{
+    font-weight: 600;
+    font-size: 1.75rem;
+    line-height: 28px;
+    color: #17151E;
+    line-height: 28px;
+    letter-spacing: 0.35px;
+    margin-bottom: 2.5rem;
+  }
+  @media (max-width: 425px) {
+    width: 100% !important;
+  }
+}
 .payment-intiation-card{
+  width: 90% !important;
   background-color: #f8f8f8 !important;
+  border-radius: 20px;
+  border: 1px solid #C0CCDA;
+  .header{
+    border-bottom : 1px solid #E5ECF2;
+    h1{
+      font-size: 1.1rem;
+      line-height: 28px;
+      align-items: center;
+      letter-spacing: 0.35px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #032041;
+    }
+  }
+ 
+  button {
+    background: linear-gradient(93.88deg, #49A8F8 6.88%, #0053F4 74.45%);
+    border-radius: 16px;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    width: 100%;
+  }
+  @media (max-width: 425px) {
+    width: 100% !important;
+    margin-top: 2rem;
+  }
 }
 
 .finances {
@@ -1592,7 +1679,7 @@ label {
 
 .btn-secondary{
   background-color: transparent !important;
-  border-color: transparent !important;
+  // border-color: transparent !important;
 }
 .btn-secondary:focus{
   outline: none !important;
