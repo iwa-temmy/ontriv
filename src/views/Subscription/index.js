@@ -39,10 +39,10 @@ const Subscription = () => {
   return (
     <div className="dashboard dashboard-wrapper">
       <Row>
-        <Col md="16" sm="16" lg="16" xxl="16" className="mb-3">
+        <Col md="12" sm="12" lg="12" xxl="12" className="mb-3">
           <div>
             <Row>
-              <Col md="16">
+              <Col md="12">
                 <div className="dashboard-analytics">
                   <Card className="analytics-card pt-3 pb-5">
                     {view === "plans" ? (
@@ -81,7 +81,10 @@ const Subscription = () => {
                                 onClick={() => {
                                   togglePlanState(plan.name);
                                 }}
-                                md="4"
+                                md="6"
+                                sm="12"
+                                lg="6"
+                                xl="4"
                                 className="sub"
                                 key={plan.id}
                               >

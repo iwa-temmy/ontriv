@@ -63,25 +63,23 @@
       &__btn {
         border-radius: 10px;
         font-style: normal;
-        font-weight: bold;
+        font-weight: 500;
         font-size: 14px;
         line-height: 21px;
         align-items: center;
         text-align: center;
         letter-spacing: 1.25px;
-        border-style: none;
-        color: #FFFFFF;
         align-self: flex-end;
         border-radius: 10px !important;
       }
-      &__btn1{
-        background: linear-gradient(164.82deg, #6AD5ED 3.9%, #49A8F8 100%);
-      }
       &__btn2 {
-        background: linear-gradient(164.82deg, #2062F4 3.9%, #7337FD 100%);;
+        background: linear-gradient(164.82deg, #2062F4 3.9%, #7337FD 100%);
+        color: #FFFFFF;
       }
-      &__btn3 {
-        background: linear-gradient(93.88deg, #49A8F8 6.88%, #0053F4 74.45%);
+      &__btn3, &__btn1 {
+        background: linear-gradient(164.82deg, #F9FAFC 3.9%, #F9FAFC 100%);
+        color: #032041 !important;
+        border: 1px solid #D3DCE6 !important;
       }
       &__regular-text {
         font-weight: normal;
@@ -181,6 +179,35 @@
       }
     }
   }
+}
+.cancel-subcription-modal{
+  h3{
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 54px;
+  }
+  p{
+    font-size: 0.78rem;
+    font-weight: 400;
+  }
+  .button{    
+    letter-spacing: 1.25px !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    line-height: 21px !important;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    &__action-button1{
+      color: #F7F7FC !important;
+      background-color: #2062F4 !important;
+    }
+    &__action-button2{
+      color: #2062F4 !important;
+      background-color: #fff !important;
+    }
+  }
+ 
 }
 
 //Save Credit Cards card for payment
@@ -1652,7 +1679,7 @@ label {
 
 .btn-secondary{
   background-color: transparent !important;
-  border-color: transparent !important;
+  // border-color: transparent !important;
 }
 .btn-secondary:focus{
   outline: none !important;
