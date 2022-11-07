@@ -7,7 +7,7 @@ import { Form, Input, Col, Row } from "reactstrap";
 const AddCardModal = (props) => {
   const [values, setValues] = useState({});
 
-  const {open, setModalState} = props;
+  const { open, setModalState } = props;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -28,7 +28,13 @@ const AddCardModal = (props) => {
     console.log("payload", payload);
   };
   return (
-    <Modal modalState={open} setModalState={setModalState} title="Add new Card" className="px-0">
+    <Modal
+      modalState={open}
+      setModalState={setModalState}
+      title="Add new Card"
+      contentPadding="8px"
+      showClosebtn={false}
+    >
       <Form className="px-4 pt-4" onSubmit={handleSubmit}>
         <Row>
           <Col sm="12" md="12" lg="12" className="my-3">

@@ -71,16 +71,16 @@
         letter-spacing: 1.25px;
         align-self: flex-end;
         border-radius: 10px !important;
-      }
-      &__btn2 {
-        background: linear-gradient(164.82deg, #2062F4 3.9%, #7337FD 100%);
-        color: #FFFFFF;
-      }
-      &__btn3, &__btn1 {
         background: linear-gradient(164.82deg, #F9FAFC 3.9%, #F9FAFC 100%);
         color: #032041 !important;
         border: 1px solid #D3DCE6 !important;
+        &__active {
+          color: #FFFFFF !important;
+          background: linear-gradient(164.82deg, #2062F4 3.9%, #7337FD 100%);
+          transition: all 0.5s;
+        }
       }
+      
       &__regular-text {
         font-weight: normal;
         font-size: 14px;
