@@ -6,10 +6,11 @@ import general from "./General/saga";
 import invoice from "./Invoices/saga";
 import oneInvoice from "./Invoices/OneInvoice/saga";
 import expense from "./Expenses/saga";
-import vendor from "./Expenses/Vendor/saga"
-import schedule from "./Schedule/saga"
+import vendor from "./Expenses/Vendor/saga";
+import schedule from "./Schedule/saga";
 //import getOneClient from "./Schedule/oneClientPost/saga"
-import schedulePost from "./Schedule/schedulePost/saga"
+import schedulePost from "./Schedule/schedulePost/saga";
+import subscription from "./Subscription/saga";
 
 export default function* rootSaga() {
   yield all([
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     vendor(),
     schedule(),
     schedulePost(),
+    subscription(),
   ]);
 }

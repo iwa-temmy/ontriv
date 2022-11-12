@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Card } from "reactstrap";
 import billing from "../../../assets/img/billingIcon.png";
 import MasterCard from "../../../assets/img/Mastercard.svg";
@@ -6,7 +6,11 @@ import Visa from "../../../assets/img/visa-logo.svg";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import AddCardModal from "./AddCardModal";
 
-const Billing = () => {
+//redux
+import { connect } from "react-redux";
+import { getAllCards } from "../../../redux/actions";
+
+const Billing = (props) => {
   const cards = [
     {
       number: "5200828282828210",
@@ -22,9 +26,15 @@ const Billing = () => {
 
   const [modalOpen, setModalOpen] = useState(false);
 
+  const { getAllCards } = props;
+
   const openAddCardModal = () => {
     setModalOpen(true);
   };
+
+  useEffect(() => {
+    getAllCards();
+  }, [getAllCards]);
   return (
     <>
       <div className="billing-section mt-5">
@@ -86,4 +96,9 @@ const Billing = () => {
     </>
   );
 };
-export default Billing;
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
+export default connect(mapStateToProps, { getAllCards })(Billing);
