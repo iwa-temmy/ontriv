@@ -11,6 +11,9 @@ import {
   CHANGE_SUBSCRIPTION_PLAN,
   CHANGE_SUBSCRIPTION_PLAN_SUCCESS,
   CHANGE_SUBSCRIPTION_PLAN_ERROR,
+  GET_ALL_CARDS,
+  GET_ALL_CARDS_SUCCESS,
+  GET_ALL_CARDS_ERROR,
 } from "../actions";
 
 export const getAllSubscriptions = () => ({
@@ -69,4 +72,17 @@ export const changeSubscriptionPlanSucess = () => ({
 export const chnageSubscriptionPlanError = (error) => ({
   type: CHANGE_SUBSCRIPTION_PLAN_ERROR,
   payload: { error },
+});
+export const getAllCards = () => ({
+  type: GET_ALL_CARDS,
+});
+
+export const getAllCardsSuccess = (cards) => ({
+  type: GET_ALL_CARDS_SUCCESS,
+  payload: cards,
+});
+
+export const getAllCardsError = (error) => ({
+  type: GET_ALL_CARDS_ERROR,
+  payload: error,
 });

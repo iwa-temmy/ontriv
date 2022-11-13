@@ -9,6 +9,8 @@ export const CenteredModal = ({
   size,
   children,
   title,
+  contentPadding,
+  showClosebtn,
 }) => {
   // const [modalState, setModalState] = useState(true);
   const toggle = () => {
@@ -22,13 +24,17 @@ export const CenteredModal = ({
       modalClassName="cstm-modal"
       size={size}
       className={`${className} modal-dialog-centered`}
-      cssModule={{padding: "32px 49px !important"}}
     >
-      <div className="modal-cstm-button text-center" onClick={toggle}>
-        <TiTimes size="25px" />
+      <div style={{ padding: contentPadding ? contentPadding : "32px 49px" }}>
+        {!showClosebtn && (
+          <div className="modal-cstm-button text-center" onClick={toggle}>
+            <TiTimes size="25px" />
+          </div>
+        )}
+
+        <h1>{title}</h1>
+        {children}
       </div>
-      <h1>{title}</h1>
-      {children}
     </Modal>
   );
 };

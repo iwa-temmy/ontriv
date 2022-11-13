@@ -16,7 +16,6 @@ import {
   GET_PAYOUT_REQUESTS_ERROR,
   GET_INVOICE,
   GET_INVOICE_SUCCESS,
-  GET_INVOICE_ERROR,
 } from "../actions";
 
 export const getAllInvoices = () => ({

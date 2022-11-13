@@ -152,7 +152,7 @@ const Subscription = () => {
                                     </div>
                                     <div className="mt-5 mb-4 d-flex justify-content-center">
                                       <Button
-                                        className={`subscription__card__content__btn subscription__card__content__btn${plan.id}`}
+                                        className={`subscription__card__content__btn ${planState === plan.name ? "subscription__card__content__btn__active" : ""}`}
                                         onClick={handleStartTrial}
                                         disabled={planState !== plan.name}
                                       >
