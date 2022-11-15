@@ -26,13 +26,13 @@ export const CenteredModal = ({
       className={`${className} modal-dialog-centered`}
     >
       <div style={{ padding: contentPadding ? contentPadding : "32px 49px" }}>
-        {!showClosebtn && (
+        {!showClosebtn ? null : (
           <div className="modal-cstm-button text-center" onClick={toggle}>
             <TiTimes size="25px" />
           </div>
         )}
 
-        <h1>{title}</h1>
+        <p className="text-uppercase px-4 py-3 modal-title">{title}</p>
         {children}
       </div>
     </Modal>

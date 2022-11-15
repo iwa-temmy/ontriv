@@ -32,10 +32,10 @@ const AddCardModal = (props) => {
       modalState={open}
       setModalState={setModalState}
       title="Add new Card"
-      contentPadding="8px"
+      contentPadding="0px"
       showClosebtn={false}
     >
-      <Form className="px-4 pt-4" onSubmit={handleSubmit}>
+      <Form className="px-4 pt-2 pb-4" onSubmit={handleSubmit}>
         <Row>
           <Col sm="12" md="12" lg="12" className="my-3">
             <label className="text-left w-100">Card Number</label>
@@ -73,8 +73,10 @@ const AddCardModal = (props) => {
             />
           </Col>
         </Row>
-        <div>
-          <button type="submit">Add Card</button>
+        <div className="d-flex">
+          <button className="w-100 modal-button" type="submit">
+            Add Card
+          </button>
         </div>
       </Form>
     </Modal>

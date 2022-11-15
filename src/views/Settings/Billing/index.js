@@ -11,22 +11,22 @@ import { connect } from "react-redux";
 import { getAllCards } from "../../../redux/actions";
 
 const Billing = (props) => {
-  const cards = [
-    {
-      number: "5200828282828210",
-      type: "visa",
-      active: true,
-    },
-    {
-      number: "5555555555554444",
-      type: "mastercard",
-      active: false,
-    },
-  ];
+  // const cards = [
+  //   {
+  //     number: "5200828282828210",
+  //     type: "visa",
+  //     active: true,
+  //   },
+  //   {
+  //     number: "5555555555554444",
+  //     type: "mastercard",
+  //     active: false,
+  //   },
+  // ];
 
   const [modalOpen, setModalOpen] = useState(false);
 
-  const { getAllCards } = props;
+  const { getAllCards, cards } = props;
 
   const openAddCardModal = () => {
     setModalOpen(true);
@@ -35,12 +35,14 @@ const Billing = (props) => {
   useEffect(() => {
     getAllCards();
   }, [getAllCards]);
+
+  console.log(cards);
   return (
     <>
       <div className="billing-section mt-5">
         <Row>
           <Col xl="6" className="px-3 mb-2">
-            <div className="d-flex mt-5">
+            <div className="d-flex flex-sm-column align-items-sm-center flex-lg-row mt-5">
               <div className="">
                 <img src={billing} alt="bill" />
               </div>
@@ -57,21 +59,19 @@ const Billing = (props) => {
                   <div className="billing-info-card mb-3 d-flex align-items-center justify-content-evenly ">
                     <img
                       src={
-                        card?.type?.toLowerCase() === "mastercard"
+                        card?.brand?.toLowerCase() === "mastercard"
                           ? MasterCard
                           : Visa
                       }
-                      alt={`${card.type}`}
+                      alt={`${card?.brand}`}
                     />
                     <p className="card-info mb-0 semi-bold">
-                      {card?.type?.toLowerCase() === "mastercard"
+                      {card?.brand?.toLowerCase() === "mastercard"
                         ? "Master card"
                         : "Visa Card"}
                     </p>
-                    <p className="card-info mb-0 semi-bold">
-                      {card?.number.slice(0, 4)}
-                    </p>
-                    <p className="card-info mb-0">{card?.number.slice(-4)}</p>
+                    <p className="card-info mb-0 semi-bold">{card?.last}</p>
+                    <p className="card-info mb-0">{`${card?.exp_month}/${card?.exp_year}`}</p>
                     <div className="">
                       {card?.active && (
                         <IoIosCheckmarkCircle
@@ -98,7 +98,7 @@ const Billing = (props) => {
 };
 const mapStateToProps = (state) => {
   return {
-    ...state,
+    cards: state?.subscription?.cards,
   };
 };
 export default connect(mapStateToProps, { getAllCards })(Billing);
