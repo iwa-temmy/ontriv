@@ -63,14 +63,14 @@ export function* InitiateSubscription({ payload }) {
   } catch (error) {
     let message;
     if (error.response) {
-      const errorMessage = error.response.data?.amount_paid
-        ? `Amount: ${error.response.data?.amount_paid[0]}`
-        : error.response.data?.invoice
-        ? `Invoice: ${error.response.data?.invoice[0]}`
-        : error.response.data?.payment_method
-        ? `Payment Method: ${error.response.data?.payment_method[0]}`
-        : error.response.data?.payment_date
-        ? `Payment Date: ${error.response.data?.payment_date[0]}`
+      const errorMessage = error.response.data?.cvc
+        ? `CVC: ${error?.response.data?.cvc?.[0]}`
+        : error?.response?.data?.exp_month
+        ? `Expiration Month: ${error?.response?.data?.exp_month?.[0]}`
+        : error?.response.data?.exp_year
+        ? `Expiration Year: ${error?.response?.data?.exp_year?.[0]}`
+        : error?.response?.data?.number
+        ? `Card Number: ${error?.response?.data?.payment_date?.[0]}`
         : null;
 
       switch (error?.response?.status) {

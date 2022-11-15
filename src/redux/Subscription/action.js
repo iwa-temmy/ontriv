@@ -46,7 +46,7 @@ export const cancelSubscriptionError = (error) => ({
 
 export const initiateSubscription = (credentials) => ({
   type: INITIATE_SUBSCRIPTION,
-  payload: { credentials },
+  payload: credentials,
 });
 
 export const initiateSubscriptionSuccess = () => ({

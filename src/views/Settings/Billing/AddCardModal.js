@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 //core components
 import { CenteredModal as Modal } from "../../../components/Modal";
 import { Form, Input, Col, Row } from "reactstrap";
+import { ThreeDots } from "react-loader-spinner";
+
+//redux
+import { connect } from "react-redux";
+import { initiateSubscription } from "../../../redux/actions";
+
+//utils
+import createNotification from "../../../utils/Notification";
 
 const AddCardModal = (props) => {
   const [values, setValues] = useState({});
 
-  const { open, setModalState } = props;
+  const { open, setModalState, initiateSubscription, loading, error, message } =
+    props;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -16,7 +25,6 @@ const AddCardModal = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("formvalues", values);
     const exp_month = values.expiration_date?.split("-")?.[1];
     const exp_year = values.expiration_date?.split("-")?.[0];
     const payload = {
@@ -26,7 +34,18 @@ const AddCardModal = (props) => {
       cvc: values.cvc,
     };
     console.log("payload", payload);
+    initiateSubscription(payload);
   };
+
+  useEffect(() => {
+    if (!loading && message?.length > 0) {
+      createNotification("success", message);
+      setModalState(false);
+      setValues({});
+    } else if (!loading && error?.length > 0) {
+      createNotification("error", error);
+    }
+  }, [loading, message, setModalState, error]);
   return (
     <Modal
       modalState={open}
@@ -75,7 +94,15 @@ const AddCardModal = (props) => {
         </Row>
         <div className="d-flex">
           <button className="w-100 modal-button" type="submit">
-            Add Card
+            {loading ? (
+              <ThreeDots
+                color="white"
+                height={"12px"}
+                wrapperStyle={{ display: "block" }}
+              />
+            ) : (
+              "Add Card"
+            )}
           </button>
         </div>
       </Form>
@@ -83,4 +110,11 @@ const AddCardModal = (props) => {
   );
 };
 
-export default AddCardModal;
+const mapStateToProps = (state) => {
+  return {
+    error: state?.subscription?.error?.initiateSubscription,
+    loading: state?.subscription?.loading?.initiateSubscription,
+    message: state?.subscription?.message?.initiateSubscription,
+  };
+};
+export default connect(mapStateToProps, { initiateSubscription })(AddCardModal);
