@@ -66,23 +66,17 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
       value: "OTHER",
     },
   ];
-  // console.log(options);
-
-  
 
   const changeHandler = (value) => {
-    console.log(value);
     setValue(value);
     // setPassword(value.value)
   };
 
   const handleRoleChange = (value) => {
-    console.log(value);
     setRoleValue(value);
   };
 
   const handleInformationChange = (value) => {
-    console.log(value);
     setInformationValue(value);
   };
 
@@ -94,15 +88,11 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
   } = useForm();
 
   const handlePersonalDetails = (values) => {
-    console.log("-----------------------");
-    console.log(values);
     setRegistrationForm({ ...values, country: value.value });
     setActiveState(1);
   };
 
   const handleBusinessDetails = (values) => {
-    console.log("-------------->>>", registrationForm);
-
     const { business_name, referral_code, website } = values;
 
     const buz = [
@@ -122,17 +112,14 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
       password,
       buz,
     };
-    console.log(data);
     handleRegistrationForm(data);
   };
 
   const handleRegistrationForm = (data) => {
-    // console.log(data)
     registerUser(data);
   };
 
   useEffect(() => {
-    console.log(registrationError, message, loading);
     if (registrationError?.length > 0) {
       createNotification("error", registrationError);
     }
@@ -174,14 +161,16 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                     <img src={logo} alt="ontriv-logo" width="200px" />
                   </div>
                   <Card className="card-1">
-                    <Steps direction="vertical" current={activeState}>
+                    <Steps direction="vertical">
                       <Step
                         title="Personal Details"
                         description="It allows us to customize your experience"
+                        onClick={() => setActiveState(0)}
                       />
                       <Step
                         title="Business Details"
                         description="It allows you to use your business details on invoices and client portals"
+                        onClick={() => setActiveState(1)}
                       />
                     </Steps>
                   </Card>
@@ -236,7 +225,6 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                             errors.email ? "border-danger" : ""
                           }`}
                           onChange={(e) => {
-                            console.log(e.target.value);
                             setEmail(e.target.value);
                           }}
                           // {...register('email', {

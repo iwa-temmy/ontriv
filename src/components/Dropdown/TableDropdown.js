@@ -20,7 +20,7 @@ const TableDropdown = ({
   };
   return (
     <Dropdown isOpen={dropdownOpen} toggle={toggle} size="sm">
-      <DropdownToggle>
+      <DropdownToggle style={{ border: "none" }}>
         <AiOutlineMore color="#000" size="20px" />
       </DropdownToggle>
       <DropdownMenu left="true" className="dropdown-container">

@@ -689,6 +689,7 @@
 
 .rc-steps-item-process .rc-steps-item-icon {
   border: none !important;
+  cursor: pointer;
 }
 .rc-steps-item-icon {
   margin-right: 10px !important;
@@ -697,6 +698,7 @@
   border: none !important;
   color: white !important;
   background: linear-gradient(180deg, #9da8b6 0%, #9da8b6 100%) !important;
+  cursor: pointer;
 }
 .rc-steps-item-wait .rc-steps-item-icon > .rc-steps-icon {
   color: white !important;

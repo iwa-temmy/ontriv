@@ -22,8 +22,15 @@ const InvoiceDetails = ({
 }) => {
   return (
     <div>
-      <Modal modalState={showModal} toggleModalState={toggleInvoicePreview} handleClose={handleClose}>
-        <div className="add-client-wrapper-2 text-center ">
+      <Modal
+        modalState={showModal}
+        toggleModalState={toggleInvoicePreview}
+        handleClose={handleClose}
+      >
+        <div
+          className="add-client-wrapper-2 text-center "
+          style={{ padding: "32px 49px" }}
+        >
           <div className="d-inline-flex" style={{ width: "100%" }}>
             <img
               className="me-auto mb-2"

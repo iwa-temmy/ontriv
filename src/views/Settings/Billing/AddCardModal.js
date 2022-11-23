@@ -63,6 +63,7 @@ const AddCardModal = (props) => {
               name="number"
               onChange={handleInputChange}
               value={values.number || ""}
+              maxLength={16}
               placeholder="0000 0000 0000 0000"
               className="off-canvas-menu__input py-3 px-3"
             />
@@ -88,6 +89,7 @@ const AddCardModal = (props) => {
               onChange={handleInputChange}
               value={values.cvc || ""}
               placeholder="***"
+              maxLength={3}
               className="off-canvas-menu__input py-3"
             />
           </Col>

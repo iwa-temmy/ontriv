@@ -32,7 +32,6 @@ const INIT_STATE = {
 }
 
 const ClientReducer = (state = INIT_STATE, action) => {
-  console.log(action)
   switch (action.type) {
     case CREATE_CLIENT:
       return {

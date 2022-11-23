@@ -142,7 +142,7 @@ const CancelPlanModal = (props) => {
           </div>
         ) : view === 3 ? (
           <div className="d-flex flex-column align-items-center justify-content-center py-3">
-            <img src={checkedIcon} width="100px" />
+            <img src={checkedIcon} width="100px" alt="check icon" />
             <h3 className="my-3">Successful</h3>
           </div>
         ) : (

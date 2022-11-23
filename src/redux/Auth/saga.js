@@ -28,8 +28,6 @@ function* register({ payload }) {
       yield put(registerUserError(response.data.message));
     }
   } catch (error) {
-    console.log(error);
-    console.log(error.response);
     let message;
     if (error.response) {
       const errorMessage = error.response.data?.country
@@ -63,7 +61,6 @@ function* register({ payload }) {
     } else if (error.message) {
       message = error.message;
     }
-    console.log(message);
     yield put(registerUserError(message));
   }
 }
@@ -72,8 +69,7 @@ function* login({ payload }) {
     const response = yield Axios.post(
       "/accounts/api/v1/login/",
       payload.userDetails
-    );
-    console.log(response);
+    )
     if (response?.status === 200) {
       setAuthToken(response?.data?.access_token);
       setCurrentUser(response?.data);
@@ -102,11 +98,6 @@ function* login({ payload }) {
   } catch (error) {
     yield put(loginUserError(""));
 
-    console.log(error);
-    console.log(error?.response);
-
-    console.log(error?.response?.data);
-    console.log(error?.message);
     // const {message} = erroresponse.data;
     let message;
     if (error.response) {
@@ -133,28 +124,23 @@ function* login({ payload }) {
 }
 
 function* forgotPassword({ payload }) {
-  yield console.log(payload.data);
   const { email } = payload.data;
 
   try {
     const response = yield Axios.post(`/accounts/api/v1/password/reset/`, {
       email,
     });
-    console.log(response);
 
     yield put(forgotPasswordSuccess(response.data.message));
     // createNotification('success', response?.data?.detail)
     window.location.href = "/auth/forgot-password/success";
   } catch (error) {
-    console.log(error);
-    console.log(error.response);
     let message;
     if (error.response) {
       message = error.response.data.message;
     } else if (error.message) {
       message = error.message;
     }
-    console.log(message);
     createNotification("error", message);
     yield put(forgotPasswordError(message));
   }

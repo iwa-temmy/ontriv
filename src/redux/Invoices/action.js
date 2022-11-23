@@ -16,6 +16,9 @@ import {
   GET_PAYOUT_REQUESTS_ERROR,
   GET_INVOICE,
   GET_INVOICE_SUCCESS,
+  UPDATE_INVOICE,
+  UPDATE_INVOICE_SUCCESS,
+  UPDATE_INVOICE_ERROR,
 } from "../actions";
 
 export const getAllInvoices = () => ({
@@ -103,5 +106,20 @@ export const getInvoiceSuccess = (details) => ({
 
 export const getInvoiceError = (error) => ({
   type: GET_INVOICES_ERROR,
+  payload: error,
+});
+
+export const updateInvoice = (credentials) => ({
+  type: UPDATE_INVOICE,
+  payload: credentials,
+});
+
+export const updateInvoiceSuccess = () => ({
+  type: UPDATE_INVOICE_SUCCESS,
+  payload: "Invoice Updated Successfully",
+});
+
+export const updateInvoiceError = (error) => ({
+  type: UPDATE_INVOICE_ERROR,
   payload: error,
 });
