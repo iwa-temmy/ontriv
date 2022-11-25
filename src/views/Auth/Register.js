@@ -250,6 +250,7 @@ const Signup = ({ registerUser, registrationError, message, loading }) => {
                               setCountry(e.value);
                             }}
                             name="country"
+                            isSearchable={true}
                             placeholder="Select country"
                             className={`w-100 py-3  ${
                               errors.country ? "border-danger" : ""
