@@ -5,6 +5,7 @@ import './assets/css/index.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-notifications/lib/notifications.css';
+import "./assets/css/main.css"
 
 
 function App() {

@@ -74,7 +74,11 @@ function Table({
               // <div className='table-row'>
               <tr
                 {...row.getRowProps()}
-                onClick={(e) => rowOnClick(row?.original)}
+                onClick={
+                  rowOnClick
+                    ? (e) => rowOnClick(row?.original)
+                    : () => console.log("yes")
+                }
                 className={`table-row ${shadow ? "table-row-shadow" : ""}`}
                 style={{ cursor: rowOnClick ? "pointer" : "" }}
               >

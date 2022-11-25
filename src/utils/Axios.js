@@ -2,7 +2,6 @@ import axios from 'axios'
 
 const BASE_URL = 'https://ontriv.herokuapp.com'
 const token = localStorage.getItem('ontrivUserToken') ? localStorage.getItem('ontrivUserToken') : "";
-console.log(token)
 const Axios = axios.create({
   baseURL: BASE_URL,
   headers: {
