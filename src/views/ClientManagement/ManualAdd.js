@@ -213,7 +213,7 @@ const AddNewClient = ({
           </div>
           <div className="d-flex justify-content-start mt-1 mb-3">
             <span
-              style={{ fontSize: "13px" }}
+          className="text-5xl"
               onClick={() => copierHelper(password, "Password")}
             >
               <HiOutlineClipboardCopy />

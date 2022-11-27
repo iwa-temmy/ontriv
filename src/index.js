@@ -12,9 +12,9 @@ const configuredStore = configureStore();
 ReactDOM.render(
   <Provider store={configuredStore.store}>
     <PersistGate loading={null} persistor={configuredStore.persistor}>
-        <NavProvider>
-          <App />
-        </NavProvider>
+      <NavProvider>
+        <App />
+      </NavProvider>
     </PersistGate>
   </Provider>,
   document.getElementById("root")
