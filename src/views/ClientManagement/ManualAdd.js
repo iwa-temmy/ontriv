@@ -1,42 +1,46 @@
-import React, { useEffect, useState } from 'react'
-import { HiUser, HiPlusCircle } from 'react-icons/hi'
-import { CenteredModal as Modal } from '../../components/Modal'
-import { ThreeDots } from 'react-loader-spinner'
-import { useForm } from 'react-hook-form'
-import { connect } from 'react-redux'
-import { createClient, createTag } from '../../redux/actions'
-import createNotification from '../../utils/Notification'
-// import Select from 'react-select'
+import React, { useEffect, useState } from "react";
+import { HiUser, HiPlusCircle } from "react-icons/hi";
+import { CenteredModal as Modal } from "../../components/Modal";
+import { ThreeDots } from "react-loader-spinner";
+import { useForm } from "react-hook-form";
+import { connect } from "react-redux";
+import { createClient, createTag } from "../../redux/actions";
+import createNotification from "../../utils/Notification";
+
+import { HiOutlineClipboardCopy } from "react-icons/hi";
+// import Select from "react-select";
 // import countryList from 'react-select-country-list'
 
+import { GenerateString, copierHelper } from "../../utils/helper";
+
 const businessCategory = [
-  'Agriculture',
-  'Arts',
-  'Beauty & Lifestyle',
-  'Business services',
-  'Coaching',
-  'Construction',
-  'Consulting',
-  'Education',
-  'Engineering',
-  'Entertainment',
-  'Events',
-  'Financial services',
-  'Health & Fitness',
-  'Hotels & Hospitality',
-  'HR & Recruiting',
-  'Legal services',
-  'Manufacturing',
-  'Marketing',
-  'Non-profit',
-  'Pet services',
-  'Photography',
-  'Retail',
-  'Technology',
-  'Travel & Tourism',
-  'Real estate',
-  'Others'
-]
+  "Agriculture",
+  "Arts",
+  "Beauty & Lifestyle",
+  "Business services",
+  "Coaching",
+  "Construction",
+  "Consulting",
+  "Education",
+  "Engineering",
+  "Entertainment",
+  "Events",
+  "Financial services",
+  "Health & Fitness",
+  "Hotels & Hospitality",
+  "HR & Recruiting",
+  "Legal services",
+  "Manufacturing",
+  "Marketing",
+  "Non-profit",
+  "Pet services",
+  "Photography",
+  "Retail",
+  "Technology",
+  "Travel & Tourism",
+  "Real estate",
+  "Others",
+];
 
 const AddNewClient = ({
   addState,
@@ -44,100 +48,105 @@ const AddNewClient = ({
   setAddState,
   creationError,
   message,
-  loading
+  loading,
 }) => {
   // const options = useMemo(() => countryList().getData(), [])
-  const [uploadedImage, setUploadedImage] = useState(null)
-  const [profile_image, setProfileImage] = useState(null)
-  const [error, setError] = useState(null)
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const [profile_image, setProfileImage] = useState(null);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
-  const handlePictureUpload = e => {
-    console.log(e.target.files[0])
-    setProfileImage(e.target.files[0])
-    setUploadedImage(URL.createObjectURL(e.target.files[0]))
-  }
+  const handlePictureUpload = (e) => {
+    console.log(e.target.files[0]);
+    setProfileImage(e.target.files[0]);
+    setUploadedImage(URL.createObjectURL(e.target.files[0]));
+  };
 
   const {
     handleSubmit,
     register,
     // control,
-    formState: { errors }
-  } = useForm()
+    formState: { errors },
+  } = useForm();
 
-  const addClient = values => {
+  const handleGeneratePassword = () => {
+    let generatedString = GenerateString(7);
+    setPassword(generatedString);
+  };
+  const addClient = (values) => {
+    console.log({ ...values, logo: profile_image });
     if (profile_image) {
-      console.log(values)
-      const formData = new FormData()
-      formData.append('fullname', values.fullname)
-      formData.append('email', values.email)
-      formData.append('country', values.country)
-      formData.append('password', values.password)
-      formData.append('profile_image', profile_image)
+      const formData = new FormData();
+      formData.append("fullname", values?.fullname);
+      formData.append("email", values?.email);
+      formData.append("password", values.password);
+      formData.append("business_category", values?.business_category);
+      formData.append("logo", profile_image);
 
-      console.log(formData)
+      console.log(formData);
 
-      createClient(formData)
+      createClient(formData);
     } else {
-      setError('Upload client logo')
+      setError("Upload client logo");
     }
-  }
+  };
 
   useEffect(() => {
-    console.log(creationError, message, loading)
+    console.log(creationError, message, loading);
     if (creationError.length > 0) {
-      createNotification('error', creationError)
+      createNotification("error", creationError);
     }
     if (message.length > 0) {
-      createNotification('info', message)
+      createNotification("info", message);
     }
-  }, [creationError, message, loading])
+  }, [creationError, message, loading]);
 
   return (
     <Modal modalState={addState} setModalState={setAddState}>
-      <div className='add-client-wrapper text-center '>
-        <div className='text-center user-icon-container '>
-          <HiUser className=' text-center' color='#49A8F8' size='45px' />
+      <div className="add-client-wrapper text-center ">
+        <div className="text-center user-icon-container ">
+          <HiUser className=" text-center" color="#49A8F8" size="45px" />
         </div>
-        <div className='add-client-text text-center mb-4'>
+        <div className="add-client-text text-center mb-4">
           <h3>Add new client</h3>
         </div>
         <form
-          className='business-form text-left'
+          className="business-form text-left"
           onSubmit={handleSubmit(addClient)}
-          autocomplete='off'
+          autocomplete="off"
         >
           {errors.fullname && (
-            <span className='text-danger text-left'>Enter client name</span>
+            <span className="text-danger text-left">Enter client name</span>
           )}
           <input
-            type='text'
-            name='fullname'
-            placeholder='Client Name'
-            className={`w-100 ${errors.fullname ? 'border-danger' : ''}`}
-            {...register('fullname', {
-              required: true
+            type="text"
+            name="fullname"
+            placeholder="Client Name"
+            className={`w-100 ${errors.fullname ? "border-danger" : ""}`}
+            {...register("fullname", {
+              required: true,
             })}
           />
           {errors.email && (
-            <span className='text-danger text-left'>Enter a valid Email</span>
+            <span className="text-danger text-left">Enter a valid Email</span>
           )}
           <input
-            type='email'
-            name='email'
-            autocomplete='new-password'
-            placeholder='Email Address'
-            className={`w-100 ${errors.email ? 'border-danger' : ''}`}
-            {...register('email', {
+            type="email"
+            name="email"
+            autocomplete="new-password"
+            placeholder="Email Address"
+            className={`w-100 ${errors.email ? "border-danger" : ""}`}
+            {...register("email", {
               required: true,
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'invalid email'
-              }
+                message: "invalid email",
+              },
             })}
           />
 
           {errors.country && (
-            <span className='text-danger text-left'>
+            <span className="text-danger text-left">
               Select Business category
             </span>
           )}
@@ -166,13 +175,13 @@ const AddNewClient = ({
             })}
           /> */}
           <select
-            className='w-100'
-            {...register('category', {
-              required: true
+            className="w-100"
+            {...register("business_category", {
+              required: true,
             })}
           >
-            <option value=''>Business category</option>
-            {businessCategory.map(el => (
+            <option value="">Business category</option>
+            {businessCategory.map((el) => (
               <option value={el}>{el}</option>
             ))}
 
@@ -180,49 +189,68 @@ const AddNewClient = ({
           </select>
 
           {errors.password && (
-            <span className='text-danger text-left'>Enter password</span>
+            <span className="text-danger text-left">Enter password</span>
           )}
-          <input
-            type='password'
-            name='password'
-            autocomplete='new-password'
-            placeholder='Password'
-            className={`w-100 ${errors.password ? 'border-danger' : ''}`}
-            {...register('password', {
-              required: true
-            })}
-          />
+          <div
+            className="d-flex flex-row align-items-center justify-content-between"
+            style={{ flex: 1 }}
+          >
+            <input
+              type="text"
+              name="password"
+              placeholder="Password"
+              className="mb-0"
+              value={password}
+              disabled
+            />
+            <button
+              type="button"
+              onClick={handleGeneratePassword}
+              className="ml-2"
+            >
+              Generate
+            </button>
+          </div>
+          <div className="d-flex justify-content-start mt-1 mb-3">
+            <span
+              style={{ fontSize: "13px" }}
+              onClick={() => copierHelper(password, "Password")}
+            >
+              <HiOutlineClipboardCopy />
+              Copy Password
+            </span>
+          </div>
 
-          <div className='mb-2 d-flex justify-content-end'>
+          <div className="mb-2 d-flex justify-content-end">
             <div
-              className='img-holder'
+              className="img-holder"
               style={{
-                marginRight: '30px'
+                marginRight: "30px",
               }}
             >
               {uploadedImage && (
                 <img
                   src={uploadedImage}
-                  alt='client-logo'
-                  className='add-client-logo'
+                  alt="client-logo"
+                  className="add-client-logo"
                 />
               )}
             </div>
             <div>
               <div
-                className='d-flex justify-content-center align-items-center'
-                role='button'
+                className="d-flex justify-content-center align-items-center"
+                role="button"
               >
-                <HiPlusCircle color='#2062F4' size='20' />
-                <div role='button'>
+                <HiPlusCircle color="#2062F4" size="20" />
+                <div role="button">
                   <label
-                    role='button'
-                    for='client_logo'
-                    className='mb-0 cursor-pointer'
+                    role="button"
+                    for="logo"
+                    className="mb-0 cursor-pointer"
                     style={{
-                      fontWeight: ' 700',
-                      fontSize: '15px',
-                      color: '#2062F4'
+                      fontWeight: " 700",
+                      fontSize: "15px",
+                      color: "#2062F4",
                     }}
                   >
                     Upload Logo
@@ -230,17 +258,17 @@ const AddNewClient = ({
                 </div>
               </div>
               <input
-                type='file'
-                name='client_logo'
-                id='client_logo'
-                accept=''
-                className='d-none'
-                onChange={e => handlePictureUpload(e)}
+                type="file"
+                name="logo"
+                id="logo"
+                accept=""
+                className="d-none"
+                onChange={(e) => handlePictureUpload(e)}
               />
               <p
                 style={{
-                  fontWeight: '300',
-                  fontSize: '12px'
+                  fontWeight: "300",
+                  fontSize: "12px",
                 }}
               >
                 3MB max size (500 x500)
@@ -248,38 +276,38 @@ const AddNewClient = ({
             </div>
           </div>
           {error && (
-            <p className='text-danger text-center'>Please Upload client logo</p>
+            <p className="text-danger text-center">Please Upload client logo</p>
           )}
 
-          <div className='pt-2 pb-3'>
+          <div className="pt-2 pb-3">
             <button
-              className='w-100 btn-primary btn'
-              type='submit'
+              className="w-100 btn-primary btn"
+              type="submit"
               disabled={loading}
             >
               {loading ? (
-                <div className='text-center w-100 align-items-center'>
+                <div className="text-center w-100 align-items-center">
                   <ThreeDots
-                    color='white'
-                    height={'12px'}
-                    wrapperStyle={{ display: 'block' }}
+                    color="white"
+                    height={"12px"}
+                    wrapperStyle={{ display: "block" }}
                   />
                 </div>
               ) : (
-                'Add Client'
+                "Add Client"
               )}
             </button>
           </div>
         </form>
       </div>
     </Modal>
-  )
-}
+  );
+};
 
 const mapStateToProps = ({ client }) => {
-  const { creationError, message, loading } = client
-  return { creationError, message, loading }
-}
+  const { creationError, message, loading } = client;
+  return { creationError, message, loading };
+};
 export default connect(mapStateToProps, { createClient, createTag })(
   AddNewClient
-)
+);

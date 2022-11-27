@@ -11,18 +11,6 @@ import { connect } from "react-redux";
 import { getAllCards } from "../../../redux/actions";
 
 const Billing = (props) => {
-  // const cards = [
-  //   {
-  //     number: "5200828282828210",
-  //     type: "visa",
-  //     active: true,
-  //   },
-  //   {
-  //     number: "5555555555554444",
-  //     type: "mastercard",
-  //     active: false,
-  //   },
-  // ];
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -36,7 +24,6 @@ const Billing = (props) => {
     getAllCards();
   }, [getAllCards]);
 
-  console.log(cards);
   return (
     <>
       <div className="billing-section mt-5">
@@ -54,9 +41,13 @@ const Billing = (props) => {
           </Col>
           <Col xl="6">
             <Card className="account-setup-card">
-              {cards?.map((card) => {
+              {cards?.map((card, index) => {
+                console.log(index);
                 return (
-                  <div className="billing-info-card mb-3 d-flex align-items-center justify-content-evenly ">
+                  <div
+                    className="billing-info-card mb-3 d-flex align-items-center justify-content-evenly "
+                    key={card?.id}
+                  >
                     <img
                       src={
                         card?.brand?.toLowerCase() === "mastercard"
@@ -73,7 +64,7 @@ const Billing = (props) => {
                     <p className="card-info mb-0 semi-bold">{card?.last}</p>
                     <p className="card-info mb-0">{`${card?.exp_month}/${card?.exp_year}`}</p>
                     <div className="">
-                      {card?.active && (
+                      {cards?.length - 1 === index && (
                         <IoIosCheckmarkCircle
                           className="icon-wrapper"
                           size="20px"

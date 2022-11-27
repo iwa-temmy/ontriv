@@ -182,6 +182,14 @@ export const CANCEL_SUBSCRIPTION = "CANCEL_SUBSCRIPTION";
 export const CANCEL_SUBSCRIPTION_SUCCESS = "CANCEL_SUBSCRIPTION_SUCCESS";
 export const CANCEL_SUBSCRIPTION_ERROR = "CANCEL_SUBSCRIPTION_ERROR";
 
+//socials
+export const GET_BUSINESS_SOCIALS_CONNECTION_STATUS =
+  "GET_BUSINESS_SOCIALS_CONNECTION_STATUS";
+export const GET_BUSINESS_SOCIALS_CONNECTION_STATUS_SUCCESS =
+  "GET_BUSINESS_SOCIALS_CONNECTION_STATUS_SUCCESS";
+export const GET_BUSINESS_SOCIALS_CONNECTION_STATUS_ERROR =
+  "GET_BUSINESS_SOCIALS_CONNECTION_STATUS_ERROR";
+
 export * from "./Auth/action";
 export * from "./Nav/action";
 export * from "./Client/action";
@@ -195,3 +203,4 @@ export * from "./Schedule/action";
 export * from "./Schedule/oneClientPost/action";
 export * from "./Schedule/schedulePost/action";
 export * from "./Subscription/action";
+export * from "./Socials/action";

@@ -8,9 +8,9 @@ import oneInvoice from "./Invoices/OneInvoice/saga";
 import expense from "./Expenses/saga";
 import vendor from "./Expenses/Vendor/saga";
 import schedule from "./Schedule/saga";
-//import getOneClient from "./Schedule/oneClientPost/saga"
 import schedulePost from "./Schedule/schedulePost/saga";
 import subscription from "./Subscription/saga";
+import socials from "./Socials/saga";
 
 export default function* rootSaga() {
   yield all([
@@ -25,5 +25,6 @@ export default function* rootSaga() {
     schedule(),
     schedulePost(),
     subscription(),
+    socials(),
   ]);
 }

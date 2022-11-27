@@ -1,5 +1,5 @@
-import { all, fork, put, takeEvery, call } from 'redux-saga/effects'
-import Axios from '../../utils/Axios.js'
+import { all, fork, put, takeEvery, call } from "redux-saga/effects";
+import Axios from "../../utils/Axios.js";
 
 import {
   CREATE_CLIENT,
@@ -20,135 +20,95 @@ import {
   createClientError,
   getClientDetailsSuccess,
   // getClientDetailsError
-} from '../actions'
+} from "../actions";
 
-function * getClient () {
+function* getClient() {
   // console.log('------------------------------')
   try {
-    const response = yield Axios.get(`/business/api/v1/list-all-client/`)
-    console.log(response)
-    console.log(response.status)
-    console.log(response.statusText)
-    console.log(response.headers)
-    console.log(response.config)
-    if (response.status === 200) {
-      yield put(getClientSuccess(response.data))
+    const response = yield Axios.get(`/business/api/v1/list-all-client/`);
+    if (response?.status === 200) {
+      yield put(getClientSuccess(response.data));
       // window.location.reload();
     } else {
-      yield put(getClientError(response.data.message))
+      yield put(getClientError(response.data.message));
     }
   } catch (error) {
-    console.log(error)
-    console.log(error.response)
-    // console.log(error.response.data.proj[0].tags)
-    console.log(error.response.status)
-    console.log(error.response.statusText)
-    console.log(error.response.headers)
-    console.log(error.response.config)
-
-    let message
+    let message;
     if (error.response) {
-      const errorMessage = error.response.data?.detail
+      const errorMessage = error.response.data?.detail;
 
       switch (error.response.status) {
         case 500:
-          message = 'Internal Server Error'
-          break
+          message = "Internal Server Error";
+          break;
         case 404:
-          message = 'Not found'
-          break
+          message = "Not found";
+          break;
         case 401:
-          message = 'Unauthorized'
-          break
+          message = "Unauthorized";
+          break;
         case 400:
-          message = errorMessage
-          break
+          message = errorMessage;
+          break;
         default:
-          message = error.response.statusText
+          message = error.response.statusText;
       }
     } else if (error.message) {
-      message = error.message
+      message = error.message;
     }
-    console.log(message)
-    yield put(getTagError(message))
+    console.log(message);
+    yield put(getTagError(message));
   }
 }
 
-function * getClientDetails () {
+function* getClientDetails() {
   try {
-    const response = yield Axios.get(`/business/api/v1/list-all-client/`)
-    console.log(response)
-    console.log(response.status)
-    console.log(response.statusText)
-    console.log(response.headers)
-    console.log(response.config)
-    yield put(getClientDetailsSuccess(response.data))
+    const response = yield Axios.get(`/business/api/v1/list-all-client/`);
+    yield put(getClientDetailsSuccess(response?.data));
   } catch (error) {
-    console.log(error)
-    console.log(error.response)
-    // console.log(error.response.data.proj[0].tags)
-    console.log(error.response.status)
-    console.log(error.response.statusText)
-    console.log(error.response.headers)
-    console.log(error.response.config)
-
-    let message
+    let message;
     if (error.response) {
-      const errorMessage = error.response.data?.detail
+      const errorMessage = error.response.data?.detail;
 
       switch (error.response.status) {
         case 500:
-          message = 'Internal Server Error'
-          break
+          message = "Internal Server Error";
+          break;
         case 404:
-          message = 'Not found'
-          break
+          message = "Not found";
+          break;
         case 401:
-          message = 'Unauthorized'
-          break
+          message = "Unauthorized";
+          break;
         case 400:
-          message = errorMessage
-          break
+          message = errorMessage;
+          break;
         default:
-          message = error.response.statusText
+          message = error.response.statusText;
       }
     } else if (error.message) {
-      message = error.message
+      message = error.message;
     }
-    console.log(message)
-    yield put(getTagError(message))
+    yield put(getTagError(message));
   }
 }
 
-function * createClient ({ payload }) {
-  const { clientDetails } = payload
-  console.log(clientDetails)
+function* createClient({ payload }) {
+  const { clientDetails } = payload;
   try {
     const response = yield Axios.post(
       `/business/api/v1/client/no-invite/`,
       clientDetails
-    )
-    console.log(response)
-    console.log(response.status)
-    console.log(response.statusText)
-    console.log(response.headers)
-    console.log(response.config)
-    if (response.status === 201) {
-      yield put(createClientSuccess(response.data.detail))
+    );
+    if (response?.status === 201) {
+      yield put(createClientSuccess(response?.data?.detail));
       //
-      yield call(getClient)
+      yield call(getClient);
     } else {
-      yield put(createClientError(response.data.message))
+      yield put(createClientError(response.data.message));
     }
   } catch (error) {
-    console.log(error)
-    console.log(error.response)
-    console.log(error.response.status)
-    console.log(error.response.statusText)
-    console.log(error.response.headers)
-    console.log(error.response.config)
-
-    let message
+    let message;
     if (error.response) {
       const errorMessage = error.response.data?.detail
         ? error.response.data.detail
@@ -160,57 +120,47 @@ function * createClient ({ payload }) {
         ? error.response.data?.password[0]
         : error.response.data?.email
         ? error.response.data?.email[0]
-        : error.response.data
+        : error.response.data;
 
       switch (error.response.status) {
         case 500:
-          message = 'Internal Server Error'
-          break
+          message = "Internal Server Error";
+          break;
         case 404:
-          message = 'Not found'
-          break
+          message = "Not found";
+          break;
         case 401:
-          message = 'Invalid credentials'
-          break
+          message = "Invalid credentials";
+          break;
         case 400:
-          message = errorMessage
-          break
+          message = errorMessage;
+          break;
         default:
-          message = error.response.statusText
+          message = error.response.statusText;
       }
     } else if (error.message) {
-      message = error.message
+      message = error.message;
     }
-    console.log(message)
-    yield put(createClientError(message))
+    yield put(createClientError(message));
   }
 }
 
-function * inviteClient ({ payload }) {
-  const { clientDetails } = payload
-  console.log(clientDetails)
+function* inviteClient({ payload }) {
+  const { clientDetails } = payload;
+  console.log(clientDetails);
   try {
-    const response = yield Axios.post(`/business/api/v1/invite/`, clientDetails)
-    console.log(response)
-    console.log(response.status)
-    console.log(response.statusText)
-    console.log(response.headers)
-    console.log(response.config)
-    if (response.status === 201) {
-      yield put(inviteClientSuccess(response.data.msg))
+    const response = yield Axios.post(
+      `/business/api/v1/invite/`,
+      clientDetails
+    );
+
+    if (response?.status === 201) {
+      yield put(inviteClientSuccess(response?.data?.msg));
     } else {
-      yield put(inviteClientError(response.data.message))
+      yield put(inviteClientError(response.data.message));
     }
   } catch (error) {
-    console.log(error)
-    console.log(error.response)
-    // console.log(error.response.data.proj[0].tags)
-    console.log(error.response.status)
-    console.log(error.response.statusText)
-    console.log(error.response.headers)
-    console.log(error.response.config)
-
-    let message
+    let message;
     if (error.response) {
       const errorMessage = error.response.data?.detail
         ? error.response.data.detail
@@ -222,33 +172,32 @@ function * inviteClient ({ payload }) {
         ? error.response.data?.password[0]
         : error.response.data?.email
         ? error.response.data?.email[0]
-        : error.response.data
+        : error.response.data;
 
       switch (error.response.status) {
         case 500:
-          message = 'Internal Server Error'
-          break
+          message = "Internal Server Error";
+          break;
         case 404:
-          message = 'Not found'
-          break
+          message = "Not found";
+          break;
         case 401:
-          message = 'Invalid credentials'
-          break
+          message = "Invalid credentials";
+          break;
         case 400:
-          message = errorMessage
-          break
+          message = errorMessage;
+          break;
         default:
-          message = error.response.statusText
+          message = error.response.statusText;
       }
     } else if (error.message) {
-      message = error.message
+      message = error.message;
     }
-    console.log(message)
-    yield put(inviteClientError(message))
+    yield put(inviteClientError(message));
   }
 }
 
-function * getTag () {
+function* getTag() {
   try {
     const response = yield Axios.get(`/client/tag/user`, {
       //   auth: {
@@ -256,133 +205,106 @@ function * getTag () {
       //     Password: 'H1de&seek'
       //     // 'authorization': `Basic ${token}`
       //   }
-    })
-    console.log(response)
-    console.log(response.status)
-    console.log(response.statusText)
-    console.log(response.headers)
-    console.log(response.config)
+    });
     if (response.status === 200) {
-      yield put(getTagSuccess(response.data))
+      yield put(getTagSuccess(response.data));
       // window.location.reload();
     } else {
-      yield put(getTagError(response.data.message))
+      yield put(getTagError(response.data.message));
     }
   } catch (error) {
-    console.log(error)
-    console.log(error.response)
-    // console.log(error.response.data.proj[0].tags)
-    console.log(error.response.status)
-    console.log(error.response.statusText)
-    console.log(error.response.headers)
-    console.log(error.response.config)
-
-    let message
+    let message;
     if (error.response) {
-      const errorMessage = error.response.data?.detail
+      const errorMessage = error.response.data?.detail;
 
       switch (error.response.status) {
         case 500:
-          message = 'Internal Server Error'
-          break
+          message = "Internal Server Error";
+          break;
         case 404:
-          message = 'Not found'
-          break
+          message = "Not found";
+          break;
         case 401:
-          message = 'Unauthorized'
-          break
+          message = "Unauthorized";
+          break;
         case 400:
-          message = errorMessage
-          break
+          message = errorMessage;
+          break;
         default:
-          message = error.response.statusText
+          message = error.response.statusText;
       }
     } else if (error.message) {
-      message = error.message
+      message = error.message;
     }
-    console.log(message)
-    yield put(getTagError(message))
+    yield put(getTagError(message));
   }
 }
 
-function * createTag ({ payload }) {
-  const { tag } = payload
-  console.log(tag)
+function* createTag({ payload }) {
+  const { tag } = payload;
+  console.log(tag);
   try {
-    const response = yield Axios.post(`/client/tags/`, tag)
-    console.log(response)
-    console.log(response.status)
-    console.log(response.statusText)
-    console.log(response.headers)
-    console.log(response.config)
+    const response = yield Axios.post(`/client/tags/`, tag);
     if (response.status === 201) {
-      yield put(createTagSuccess('Tag Created'))
-      yield call(getTag)
+      yield put(createTagSuccess("Tag Created"));
+      yield call(getTag);
       // window.relocation.reload();
     } else {
-      yield put(createTagError(response.data.message))
+      yield put(createTagError(response.data.message));
     }
   } catch (error) {
-    console.log(error)
-    console.log(error.response)
-    console.log(error.response.status)
-    console.log(error.response.statusText)
-    console.log(error.response.headers)
-    console.log(error.response.config)
-
-    let message
+    let message;
     if (error.response) {
-      const errorMessage = error.response.data?.detail
+      const errorMessage = error.response.data?.detail;
 
       switch (error.response.status) {
         case 500:
-          message = 'Internal Server Error'
-          break
+          message = "Internal Server Error";
+          break;
         case 404:
-          message = 'Not found'
-          break
+          message = "Not found";
+          break;
         case 401:
-          message = 'Invalid credentials'
-          break
+          message = "Invalid credentials";
+          break;
         case 400:
-          message = errorMessage
-          break
+          message = errorMessage;
+          break;
         default:
-          message = error.response.statusText
+          message = error.response.statusText;
       }
     } else if (error.message) {
-      message = error.message
+      message = error.message;
     }
-    console.log(message)
-    yield put(createTagError(message))
+    yield put(createTagError(message));
   }
 }
 
-export function * watchCreateClient () {
-  yield takeEvery(CREATE_CLIENT, createClient)
+export function* watchCreateClient() {
+  yield takeEvery(CREATE_CLIENT, createClient);
 }
-export function * watchInviteClient () {
-  yield takeEvery(INVITE_CLIENT, inviteClient)
+export function* watchInviteClient() {
+  yield takeEvery(INVITE_CLIENT, inviteClient);
 }
-export function * watchGetTag () {
-  yield takeEvery(GET_TAG, getTag)
+export function* watchGetTag() {
+  yield takeEvery(GET_TAG, getTag);
 }
-export function * watchCreateTag () {
-  yield takeEvery(CREATE_TAG, createTag)
+export function* watchCreateTag() {
+  yield takeEvery(CREATE_TAG, createTag);
 }
-export function * watchGetClient () {
-  yield takeEvery(GET_CLIENT, getClient)
+export function* watchGetClient() {
+  yield takeEvery(GET_CLIENT, getClient);
 }
-export function * watchGetClientDetails () {
-  yield takeEvery(GET_CLIENT_DETAILS, getClientDetails)
+export function* watchGetClientDetails() {
+  yield takeEvery(GET_CLIENT_DETAILS, getClientDetails);
 }
-export default function * rootSaga () {
+export default function* rootSaga() {
   yield all([
     fork(watchCreateClient),
     fork(watchGetTag),
     fork(watchCreateTag),
     fork(watchInviteClient),
     fork(watchGetClient),
-    fork(watchGetClientDetails)
-  ])
+    fork(watchGetClientDetails),
+  ]);
 }

@@ -12,6 +12,7 @@ import schedule from "./Schedule/reducer";
 // import getClientPost from "./Schedule/oneClientPost/reducer"
 import postSchedule from "./Schedule/schedulePost/reducer";
 import subscription from "./Subscription/reducer";
+import socials from "./Socials/reducer";
 
 const Reducers = combineReducers({
   auth,
@@ -26,6 +27,7 @@ const Reducers = combineReducers({
   schedule,
   postSchedule,
   subscription,
+  socials,
 });
 
 export default Reducers;

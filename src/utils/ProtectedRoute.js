@@ -13,10 +13,6 @@ const PrivateRoute = ({ accessToken }) => {
     if (accessToken) {
         setAuthToken(accessToken);
         let decoded = jwt_decode(accessToken);
-        console.log(decoded);
-        console.log((decoded.iat)*1000)
-        console.log((decoded.exp)*1000)
-        console.log(Date.now());
         if( ((decoded.exp)*1000)< Date.now() ){
           authorized=false;
         }

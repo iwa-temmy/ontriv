@@ -1,4 +1,4 @@
-import { put, takeEvery, fork, all } from "redux-saga/effects";
+import { put, takeEvery, fork, all, call } from "redux-saga/effects";
 import {
   GET_ALL_SUBSCRIPTIONS,
   INITIATE_SUBSCRIPTION,
@@ -55,6 +55,7 @@ export function* InitiateSubscription({ payload }) {
     const response = yield Axios.post(`payment/api/v1/setup-intent/`, payload);
     if (response?.status === 201) {
       yield put(initiateSubscriptionSuccess());
+      yield call(GetAllSubcriptions);
     } else {
       yield put(initiateSubscriptionError(response?.data?.message));
     }

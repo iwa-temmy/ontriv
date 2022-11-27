@@ -200,11 +200,11 @@ export const downloadPdf = (printable) => {
   );
 };
 
-export const copierHelper = (text) => {
+export const copierHelper = (text, message) => {
   if (text) {
     navigator.clipboard.writeText(text);
 
-    createNotification("success", "Invoice Link copied");
+    createNotification("success", `${message} copied`);
   } else {
     createNotification("error", "Failed to copy to clipboard, try again later");
   }
@@ -221,4 +221,15 @@ export const truncateText = (string = "", length = "30", ending = "...") => {
   return length > string.length
     ? string
     : string.substring(0, length - ending.length) + ending;
+};
+
+export const GenerateString = (length) => {
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
 };

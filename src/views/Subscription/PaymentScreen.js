@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   Accordion,
@@ -16,8 +16,21 @@ import stripeSafelock from "../../assets/img/stripe-safelock-badge.svg";
 
 //utils
 import { faqQuestions } from "../../utils/faq";
+import createNotification from "../../utils/Notification";
 
-const PaymentScreen = ({ planDetails }) => {
+//redux
+import { connect } from "react-redux";
+import { initiateSubscription } from "../../redux/actions";
+
+//utils
+
+const PaymentScreen = ({
+  planDetails,
+  initiateSubscription,
+  error,
+  loading,
+  message,
+}) => {
   const [open, setOpen] = useState("1");
   const [values, setValues] = useState({});
   const toggle = (id) => {
@@ -43,9 +56,19 @@ const PaymentScreen = ({ planDetails }) => {
       exp_month,
       exp_year,
       cvc: values.cvc,
+      slug: planDetails?.name,
     };
-    console.log("payload", payload);
+    initiateSubscription(payload);
   };
+
+  useEffect(() => {
+    if (!loading && message?.length > 0) {
+      createNotification("success", message);
+      setValues({});
+    } else if (!loading && error?.length > 0) {
+      createNotification("error", error);
+    }
+  }, [loading, message, error]);
   return (
     <div style={{ height: "calc(100vh - 190px)" }}>
       <Row className="align-items-center h-100 px-3">
@@ -141,4 +164,13 @@ const PaymentScreen = ({ planDetails }) => {
   );
 };
 
-export default PaymentScreen;
+const mapStateToProps = (state) => {
+  return {
+    error: state?.subscription?.error?.initiateSubscription,
+    loading: state?.subscription?.loading?.initiateSubscription,
+    message: state?.subscription?.message?.initiateSubscription,
+  };
+};
+export default connect(mapStateToProps, { initiateSubscription })(
+  PaymentScreen
+);

@@ -25,8 +25,6 @@ const SideNav = ({
       setActiveItem(url);
       setShowMobileSideBar(false);
       setMenuSection(type);
-
-      console.log("id", id);
       setCurrentSection(id);
     } else {
       setHoveredMenuItem(null);
@@ -57,7 +55,6 @@ const SideNav = ({
   }, [location?.pathname, setCurrentSection, menuSection]);
 
   useEffect(() => {
-    console.log(sideBarMenu?.includes(location?.pathname));
     if (location?.pathname) {
       if (sideBarMenu?.some((menu) => menu?.navLink === location?.pathname)) {
         setMenuSection("sideBarMenu");

@@ -527,7 +527,8 @@ const InvoiceDetailsPage = (props) => {
                       copierHelper(
                         `${window.location.href.split("/")?.[2]}/invoice/${
                           window.location.href.split("/")?.[5]
-                        }`
+                        }`, 
+                        "Invoice Link"
                       )
                     }
                   >

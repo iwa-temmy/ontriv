@@ -144,7 +144,11 @@ const SetUpBussiness = (props) => {
                               <Row>
                                 <Col md="4" className="">
                                   {changeLogoloading ? (
-                                    <div>Loading!!!</div>
+                                    <ThreeDots
+                                      color="white"
+                                      height={"12px"}
+                                      wrapperStyle={{ display: "block" }}
+                                    />
                                   ) : businessDetails?.logo ? (
                                     <img
                                       src={businessDetails?.logo}
